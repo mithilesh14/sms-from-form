@@ -49,10 +49,3 @@ const App = () => (
 );
 
 export default App;
-        </BrowserRouter>
-      </TooltipProvider>
-    </AuthProvider>
-  </QueryClientProvider>
-);
-
-export default App;
