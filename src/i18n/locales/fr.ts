@@ -21,6 +21,17 @@ export default {
     subtitle: 'Découvrez des résidences exceptionnelles avec des équipements de classe mondiale au cœur de la ville',
     exploreResidences: 'Explorer les Résidences',
     bookTour: 'Réserver une Visite',
+
+    // Aliases used by some screens
+    exploreButton: 'Explorer les Résidences',
+    bookTourButton: 'Réserver une Visite',
+  },
+
+  // Propriétés / Résidences
+  properties: {
+    title: 'Nos Résidences',
+    subtitle: 'Des lieux d’exception pour courts séjours, baux longue durée et achat.',
+    viewDetails: 'Voir les Détails',
   },
 
   // Property Types
@@ -65,6 +76,7 @@ export default {
     loading: 'Chargement...',
     error: 'Une erreur est survenue',
     success: 'Succès !',
+    comingSoon: 'Bientôt disponible',
     required: 'Requis',
     optional: 'Facultatif',
   },

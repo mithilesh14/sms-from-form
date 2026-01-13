@@ -21,6 +21,17 @@ export default {
     subtitle: 'Experience exceptional residences with world-class amenities in the heart of the city',
     exploreResidences: 'Explore Residences',
     bookTour: 'Book a Tour',
+
+    // Aliases used by some screens
+    exploreButton: 'Explore Residences',
+    bookTourButton: 'Book a Tour',
+  },
+
+  // Properties / Residences
+  properties: {
+    title: 'Our Residences',
+    subtitle: 'Discover curated homes for short stays, long leases, and ownership.',
+    viewDetails: 'View Details',
   },
 
   // Property Types
@@ -65,6 +76,7 @@ export default {
     loading: 'Loading...',
     error: 'An error occurred',
     success: 'Success!',
+    comingSoon: 'Coming soon',
     required: 'Required',
     optional: 'Optional',
   },
