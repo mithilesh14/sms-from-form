@@ -139,13 +139,14 @@ export function Header() {
               </Link>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - Touch friendly */}
             <button
               className={cn(
-                "lg:hidden p-2 transition-colors duration-500",
+                "lg:hidden p-3 -mr-3 transition-colors duration-500 min-h-[48px] min-w-[48px] flex items-center justify-center",
                 isScrolled ? "text-foreground" : "text-white"
               )}
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
             >
               <AnimatePresence mode="wait">
                 {isOpen ? (
@@ -194,7 +195,7 @@ export function Header() {
             />
             
             {/* Content */}
-            <div className="relative h-full flex flex-col justify-center px-8">
+            <div className="relative h-full flex flex-col justify-center px-6 sm:px-8 safe-area-inset">
               <nav className="space-y-1">
                 {navLinks.map((link, index) => (
                   <motion.div
@@ -208,10 +209,10 @@ export function Header() {
                       to={link.href}
                       onClick={() => setIsOpen(false)}
                       className={cn(
-                        "block font-serif text-4xl md:text-5xl py-3 transition-colors duration-300",
+                        "block font-serif text-3xl sm:text-4xl md:text-5xl py-3 transition-colors duration-300 min-h-[52px]",
                         isActive(link.href) 
                           ? "text-primary-foreground" 
-                          : "text-primary-foreground/60 hover:text-primary-foreground"
+                          : "text-primary-foreground/60 hover:text-primary-foreground active:text-primary-foreground"
                       )}
                     >
                       {link.label}
@@ -225,11 +226,11 @@ export function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
-                className="mt-12 flex items-center gap-6"
+                className="mt-8 sm:mt-12 flex items-center gap-6"
               >
                 <button 
                   onClick={toggleLanguage} 
-                  className="flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                  className="flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground active:text-primary-foreground transition-colors min-h-[48px] py-2"
                 >
                   <Globe className="h-5 w-5" />
                   <span className="text-sm tracking-wider">{i18n.language === 'en' ? 'Français' : 'English'}</span>

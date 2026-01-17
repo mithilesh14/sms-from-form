@@ -108,13 +108,13 @@ const Units = () => {
       <Header />
 
       {/* Hero */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-secondary">
+      <section className="pt-28 pb-12 sm:pt-32 sm:pb-16 md:pt-40 md:pb-24 bg-secondary">
         <div className="container-editorial">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-caption text-accent mb-4 block"
+            className="text-caption text-accent mb-3 sm:mb-4 block"
           >
             {t('units.subtitle')}
           </motion.span>
@@ -122,27 +122,27 @@ const Units = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-serif text-5xl md:text-6xl lg:text-7xl text-foreground mb-8"
+            className="font-serif text-headline text-foreground mb-6 sm:mb-8"
           >
             {t('units.title')}
           </motion.h1>
 
-          {/* Filters */}
+          {/* Filters - Scrollable on mobile */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap gap-3"
+            className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 -mx-5 px-5 sm:mx-0 sm:px-0 sm:flex-wrap scrollbar-hide"
           >
             {filters.map((filter) => (
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
                 className={cn(
-                  "text-caption px-6 py-3 border transition-all duration-500",
+                  "text-caption px-4 sm:px-6 py-2.5 sm:py-3 border transition-all duration-500 whitespace-nowrap flex-shrink-0 min-h-[44px]",
                   activeFilter === filter.id
                     ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-transparent text-muted-foreground border-border hover:border-foreground hover:text-foreground"
+                    : "bg-transparent text-muted-foreground border-border hover:border-foreground hover:text-foreground active:bg-muted"
                 )}
               >
                 {filter.label}
@@ -157,7 +157,7 @@ const Units = () => {
         <div className="container-editorial">
           <motion.div 
             layout 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8"
           >
             <AnimatePresence mode="popLayout">
               {filteredUnits.map((unit, index) => (
@@ -169,7 +169,7 @@ const Units = () => {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ delay: index * 0.05, duration: 0.5 }}
                 >
-                  <Link to="/contact" className="group block bg-card hover:bg-secondary transition-colors duration-500">
+                  <Link to="/contact" className="group block bg-card hover:bg-secondary active:bg-secondary transition-colors duration-500">
                     <div className="relative overflow-hidden">
                       <div className="aspect-[4/3] img-zoom">
                         <img
@@ -178,32 +178,32 @@ const Units = () => {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <span className="absolute top-4 left-4 text-caption bg-accent text-accent-foreground px-3 py-1.5">
+                      <span className="absolute top-3 left-3 sm:top-4 sm:left-4 text-caption bg-accent text-accent-foreground px-2.5 py-1 sm:px-3 sm:py-1.5">
                         {unit.badge}
                       </span>
                     </div>
 
-                    <div className="p-6">
-                      <p className="text-sm text-muted-foreground mb-2">{unit.location}</p>
-                      <h3 className="font-serif text-xl text-foreground mb-3 group-hover:text-accent transition-colors duration-300">
+                    <div className="p-4 sm:p-6">
+                      <p className="text-xs sm:text-sm text-muted-foreground mb-1.5 sm:mb-2">{unit.location}</p>
+                      <h3 className="font-serif text-lg sm:text-xl text-foreground mb-2 sm:mb-3 group-hover:text-accent transition-colors duration-300">
                         {unit.name}
                       </h3>
-                      <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                      <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4 line-clamp-2">
                         {unit.description}
                       </p>
-                      <p className="font-serif text-xl text-accent mb-4">{unit.price}</p>
+                      <p className="font-serif text-lg sm:text-xl text-accent mb-3 sm:mb-4">{unit.price}</p>
 
-                      <div className="flex gap-6 text-sm text-muted-foreground pt-4 border-t border-border">
-                        <span className="flex items-center gap-2">
-                          <Bed className="h-4 w-4" />
+                      <div className="flex flex-wrap gap-3 sm:gap-6 text-xs sm:text-sm text-muted-foreground pt-3 sm:pt-4 border-t border-border">
+                        <span className="flex items-center gap-1.5 sm:gap-2">
+                          <Bed className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                           {unit.beds} {t('common.rooms')}
                         </span>
-                        <span className="flex items-center gap-2">
-                          <Bath className="h-4 w-4" />
+                        <span className="flex items-center gap-1.5 sm:gap-2">
+                          <Bath className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                           {unit.baths} {t('common.baths')}
                         </span>
-                        <span className="flex items-center gap-2">
-                          <Maximize className="h-4 w-4" />
+                        <span className="flex items-center gap-1.5 sm:gap-2">
+                          <Maximize className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                           {unit.sqft.toLocaleString()} {t('units.details.sqft')}
                         </span>
                       </div>
@@ -219,14 +219,14 @@ const Units = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mt-20"
+            className="text-center mt-12 sm:mt-16 md:mt-20"
           >
-            <p className="text-muted-foreground mb-6">
+            <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
               {t('contact.description')}
             </p>
             <Link 
               to="/contact"
-              className="btn-premium inline-flex items-center gap-3 px-10 py-5"
+              className="btn-premium inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 w-full sm:w-auto justify-center"
             >
               <span>{t('units.cta')}</span>
               <ArrowRight className="h-4 w-4" />
