@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Menu, X, Globe, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Menu, X, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -14,11 +13,16 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 80);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'fr' : 'en';
@@ -28,156 +32,213 @@ export function Header() {
 
   const navLinks = [
     { href: '/', label: t('nav.home') },
-    { href: '/residences', label: t('nav.residences') },
-    { href: '/short-term', label: t('nav.shortTerm') },
-    { href: '/long-term', label: t('nav.longTerm') },
-    { href: '/for-sale', label: t('nav.forSale') },
+    { href: '/residence', label: t('nav.residence') },
+    { href: '/units', label: t('nav.units') },
+    { href: '/gallery', label: t('nav.gallery') },
     { href: '/contact', label: t('nav.contact') },
   ];
 
   const isActive = (href: string) => location.pathname === href;
 
   return (
-    <header 
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        isScrolled 
-          ? "bg-background/95 backdrop-blur-lg border-b border-border/50 py-3" 
-          : "bg-transparent py-5"
-      )}
-    >
-      <div className="container-xl">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link 
-            to="/" 
-            className={cn(
-              "font-serif text-2xl md:text-3xl tracking-wide transition-colors duration-300",
-              isScrolled ? "text-foreground" : "text-white"
-            )}
-          >
-            <span className="font-light">Terra</span>
-            <span className="font-semibold">Luxe</span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-10">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
+    <>
+      <motion.header 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-700",
+          isScrolled 
+            ? "bg-background/95 backdrop-blur-xl py-4" 
+            : "bg-transparent py-6"
+        )}
+      >
+        <div className="container-editorial">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <Link 
+              to="/" 
+              className="group relative"
+            >
+              <motion.span 
                 className={cn(
-                  "text-sm tracking-widest uppercase transition-all duration-300 relative",
-                  isActive(link.href) 
-                    ? isScrolled ? "text-primary" : "text-white"
-                    : isScrolled 
-                      ? "text-foreground/70 hover:text-primary" 
-                      : "text-white/80 hover:text-white",
-                  isActive(link.href) && "after:absolute after:-bottom-1 after:left-0 after:w-full after:h-px after:bg-current"
+                  "font-serif text-2xl md:text-3xl tracking-tight transition-colors duration-500",
+                  isScrolled ? "text-foreground" : "text-white"
                 )}
               >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+                <span className="font-light italic">The</span>
+                {' '}
+                <span className="font-medium">Verso</span>
+              </motion.span>
+              <span className={cn(
+                "absolute -bottom-1 left-0 w-0 h-px transition-all duration-500 group-hover:w-full",
+                isScrolled ? "bg-accent" : "bg-white/50"
+              )} />
+            </Link>
 
-          {/* Actions */}
-          <div className="hidden lg:flex items-center gap-5">
-            <button
-              onClick={toggleLanguage}
-              className={cn(
-                "flex items-center gap-2 text-sm tracking-wide transition-colors",
-                isScrolled ? "text-foreground/70 hover:text-primary" : "text-white/80 hover:text-white"
-              )}
-            >
-              <Globe className="h-4 w-4" />
-              {i18n.language.toUpperCase()}
-            </button>
-            
-            <Button 
-              asChild 
-              className={cn(
-                "rounded-none px-6 transition-all duration-300",
-                isScrolled 
-                  ? "bg-primary text-primary-foreground hover:bg-primary/90" 
-                  : "bg-white text-earth-charcoal hover:bg-white/90"
-              )}
-            >
-              <Link to="/contact" className="flex items-center gap-2">
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-12">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className={cn(
+                    "text-caption relative py-2 transition-all duration-500",
+                    isActive(link.href) 
+                      ? isScrolled ? "text-foreground" : "text-white"
+                      : isScrolled 
+                        ? "text-muted-foreground hover:text-foreground" 
+                        : "text-white/70 hover:text-white"
+                  )}
+                >
+                  {link.label}
+                  <motion.span 
+                    className={cn(
+                      "absolute bottom-0 left-0 h-px",
+                      isScrolled ? "bg-accent" : "bg-white"
+                    )}
+                    initial={false}
+                    animate={{ width: isActive(link.href) ? '100%' : '0%' }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </Link>
+              ))}
+            </nav>
+
+            {/* Actions */}
+            <div className="hidden lg:flex items-center gap-8">
+              <button
+                onClick={toggleLanguage}
+                className={cn(
+                  "flex items-center gap-2 text-caption transition-all duration-500 group",
+                  isScrolled 
+                    ? "text-muted-foreground hover:text-foreground" 
+                    : "text-white/70 hover:text-white"
+                )}
+              >
+                <Globe className="h-4 w-4" />
+                <span className="relative">
+                  {i18n.language.toUpperCase()}
+                  <span className={cn(
+                    "absolute -bottom-0.5 left-0 w-0 h-px transition-all duration-300 group-hover:w-full",
+                    isScrolled ? "bg-foreground" : "bg-white"
+                  )} />
+                </span>
+              </button>
+              
+              <Link 
+                to="/contact"
+                className={cn(
+                  "btn-outline-premium px-6 py-3 transition-all duration-500",
+                  isScrolled 
+                    ? "text-foreground border-foreground/30 hover:bg-primary hover:text-primary-foreground hover:border-primary" 
+                    : "text-white border-white/40 hover:bg-white hover:text-foreground hover:border-white"
+                )}
+              >
                 {t('nav.bookTour')}
-                <ArrowRight className="h-4 w-4" />
               </Link>
-            </Button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              className={cn(
+                "lg:hidden p-2 transition-colors duration-500",
+                isScrolled ? "text-foreground" : "text-white"
+              )}
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <AnimatePresence mode="wait">
+                {isOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X className="h-6 w-6" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu className="h-6 w-6" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </button>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className={cn(
-              "lg:hidden p-2 transition-colors",
-              isScrolled ? "text-foreground" : "text-white"
-            )}
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
         </div>
-      </div>
+      </motion.header>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden bg-background border-t border-border"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="fixed inset-0 z-40 lg:hidden"
           >
-            <nav className="container-xl py-8 flex flex-col gap-6">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Link
-                    to={link.href}
-                    className={cn(
-                      "text-lg tracking-wide transition-colors",
-                      isActive(link.href) ? "text-primary" : "text-foreground/70 hover:text-primary"
-                    )}
-                    onClick={() => setIsOpen(false)}
+            {/* Backdrop */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-primary"
+            />
+            
+            {/* Content */}
+            <div className="relative h-full flex flex-col justify-center px-8">
+              <nav className="space-y-1">
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: -40 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -40 }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
                   >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-              
+                    <Link
+                      to={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className={cn(
+                        "block font-serif text-4xl md:text-5xl py-3 transition-colors duration-300",
+                        isActive(link.href) 
+                          ? "text-primary-foreground" 
+                          : "text-primary-foreground/60 hover:text-primary-foreground"
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </nav>
+
               <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navLinks.length * 0.1 }}
-                className="flex items-center gap-6 pt-6 border-t border-border"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="mt-12 flex items-center gap-6"
               >
                 <button 
                   onClick={toggleLanguage} 
-                  className="flex items-center gap-2 text-sm text-foreground/70"
+                  className="flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground transition-colors"
                 >
-                  <Globe className="h-4 w-4" />
-                  {i18n.language.toUpperCase()}
+                  <Globe className="h-5 w-5" />
+                  <span className="text-sm tracking-wider">{i18n.language === 'en' ? 'Français' : 'English'}</span>
                 </button>
-                
-                <Button asChild className="btn-terra rounded-none">
-                  <Link to="/contact" onClick={() => setIsOpen(false)}>
-                    {t('nav.bookTour')}
-                  </Link>
-                </Button>
               </motion.div>
-            </nav>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }

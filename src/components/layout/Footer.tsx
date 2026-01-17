@@ -1,92 +1,71 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Instagram, Linkedin } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export function Footer() {
   const { t } = useTranslation();
 
   const quickLinks = [
-    { href: '/residences', label: t('nav.residences') },
-    { href: '/short-term', label: t('nav.shortTerm') },
-    { href: '/long-term', label: t('nav.longTerm') },
-    { href: '/for-sale', label: t('nav.forSale') },
-  ];
-
-  const companyLinks = [
-    { href: '/about', label: t('common.about') || 'About Us' },
+    { href: '/residence', label: t('nav.residence') },
+    { href: '/units', label: t('nav.units') },
     { href: '/gallery', label: t('nav.gallery') },
     { href: '/contact', label: t('nav.contact') },
   ];
 
   return (
-    <footer className="bg-earth-charcoal text-earth-sand relative overflow-hidden">
-      {/* Decorative element */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+    <footer className="bg-primary text-primary-foreground relative overflow-hidden">
+      {/* Top decorative line */}
+      <div className="h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
       
-      {/* Main Footer */}
-      <div className="container-xl section-padding-sm">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+      {/* Main Footer Content */}
+      <div className="container-editorial py-20 md:py-28">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8">
           
           {/* Brand Column */}
-          <div className="lg:col-span-4">
-            <Link to="/" className="inline-block">
-              <h3 className="font-serif text-3xl mb-6">
-                <span className="font-light">Terra</span>
-                <span className="font-semibold">Luxe</span>
-              </h3>
+          <div className="lg:col-span-5">
+            <Link to="/" className="inline-block mb-8">
+              <span className="font-serif text-4xl">
+                <span className="font-light italic">The</span>
+                {' '}
+                <span className="font-medium">Verso</span>
+              </span>
             </Link>
-            <p className="text-earth-sand/70 text-sm leading-relaxed mb-8 max-w-sm">
-              Discover exceptional living spaces where natural beauty meets architectural excellence. 
-              Our residences are crafted for those who appreciate timeless design.
+            
+            <p className="text-primary-foreground/60 text-lg font-light leading-relaxed max-w-md mb-10">
+              {t('footer.tagline')}
             </p>
             
             {/* Social Links */}
             <div className="flex gap-4">
-              {[Instagram, Facebook, Linkedin].map((Icon, index) => (
+              {[
+                { icon: Instagram, href: '#' },
+                { icon: Linkedin, href: '#' },
+              ].map(({ icon: Icon, href }, index) => (
                 <motion.a
                   key={index}
-                  href="#"
+                  href={href}
                   whileHover={{ y: -3 }}
-                  className="w-10 h-10 rounded-full border border-earth-sand/20 flex items-center justify-center 
-                             text-earth-sand/60 hover:text-primary hover:border-primary transition-colors duration-300"
+                  transition={{ duration: 0.3 }}
+                  className="w-12 h-12 border border-primary-foreground/20 flex items-center justify-center 
+                             text-primary-foreground/60 hover:text-accent hover:border-accent transition-colors duration-500"
                 >
-                  <Icon className="h-4 w-4" />
+                  <Icon className="h-5 w-5" />
                 </motion.a>
               ))}
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="lg:col-span-2">
-            <h4 className="text-xs uppercase tracking-widest text-primary mb-6">Properties</h4>
-            <nav className="flex flex-col gap-3">
+          {/* Navigation */}
+          <div className="lg:col-span-3">
+            <h4 className="text-caption text-primary-foreground/40 mb-8">Navigation</h4>
+            <nav className="flex flex-col gap-4">
               {quickLinks.map((link) => (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="text-sm text-earth-sand/70 hover:text-earth-sand transition-colors duration-300 
-                             inline-flex items-center gap-1 group"
-                >
-                  {link.label}
-                  <ArrowUpRight className="h-3 w-3 opacity-0 -translate-y-1 translate-x-1 
-                                           group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 
-                                           transition-all duration-300" />
-                </Link>
-              ))}
-            </nav>
-          </div>
-
-          {/* Company Links */}
-          <div className="lg:col-span-2">
-            <h4 className="text-xs uppercase tracking-widest text-primary mb-6">Company</h4>
-            <nav className="flex flex-col gap-3">
-              {companyLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className="text-sm text-earth-sand/70 hover:text-earth-sand transition-colors duration-300 
-                             inline-flex items-center gap-1 group"
+                  className="text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300 
+                             inline-flex items-center gap-2 group text-sm"
                 >
                   {link.label}
                   <ArrowUpRight className="h-3 w-3 opacity-0 -translate-y-1 translate-x-1 
@@ -99,55 +78,42 @@ export function Footer() {
 
           {/* Contact Info */}
           <div className="lg:col-span-4">
-            <h4 className="text-xs uppercase tracking-widest text-primary mb-6">Get in Touch</h4>
-            <div className="flex flex-col gap-4">
-              <a 
-                href="mailto:hello@terraluxe.com" 
-                className="flex items-center gap-3 text-sm text-earth-sand/70 hover:text-earth-sand transition-colors group"
-              >
-                <div className="w-10 h-10 rounded-full border border-earth-sand/20 flex items-center justify-center 
-                                group-hover:border-primary group-hover:text-primary transition-colors">
-                  <Mail className="h-4 w-4" />
-                </div>
-                hello@terraluxe.com
-              </a>
-              
-              <a 
-                href="tel:+1234567890" 
-                className="flex items-center gap-3 text-sm text-earth-sand/70 hover:text-earth-sand transition-colors group"
-              >
-                <div className="w-10 h-10 rounded-full border border-earth-sand/20 flex items-center justify-center 
-                                group-hover:border-primary group-hover:text-primary transition-colors">
-                  <Phone className="h-4 w-4" />
-                </div>
-                +1 (234) 567-890
-              </a>
-              
-              <div className="flex items-start gap-3 text-sm text-earth-sand/70">
-                <div className="w-10 h-10 rounded-full border border-earth-sand/20 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="h-4 w-4" />
-                </div>
-                <span className="pt-2">
-                  123 Luxury Avenue<br />
-                  Minneapolis, MN 55401
-                </span>
+            <h4 className="text-caption text-primary-foreground/40 mb-8">{t('nav.contact')}</h4>
+            <div className="space-y-4 text-sm text-primary-foreground/70">
+              <p>{t('contact.info.address')}</p>
+              <p>{t('contact.info.city')}</p>
+              <div className="pt-4">
+                <a 
+                  href={`tel:${t('contact.info.phone')}`}
+                  className="block hover:text-primary-foreground transition-colors"
+                >
+                  {t('contact.info.phone')}
+                </a>
+                <a 
+                  href={`mailto:${t('contact.info.email')}`}
+                  className="block hover:text-primary-foreground transition-colors"
+                >
+                  {t('contact.info.email')}
+                </a>
               </div>
+              <p className="pt-4 text-primary-foreground/50">{t('contact.info.hours')}</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-earth-sand/10">
-        <div className="container-xl py-6 flex flex-col md:flex-row justify-between items-center gap-4 
-                        text-xs text-earth-sand/50">
-          <p>© {new Date().getFullYear()} TerraLuxe. All rights reserved.</p>
-          <div className="flex gap-6">
-            <Link to="/privacy" className="hover:text-earth-sand transition-colors">
-              {t('footer.privacyPolicy')}
+      <div className="border-t border-primary-foreground/10">
+        <div className="container-editorial py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-primary-foreground/40">
+            © {new Date().getFullYear()} The Verso. {t('footer.copyright')}
+          </p>
+          <div className="flex gap-8 text-xs text-primary-foreground/40">
+            <Link to="/privacy" className="hover:text-primary-foreground/70 transition-colors">
+              {t('footer.privacy')}
             </Link>
-            <Link to="/terms" className="hover:text-earth-sand transition-colors">
-              {t('footer.termsOfService')}
+            <Link to="/terms" className="hover:text-primary-foreground/70 transition-colors">
+              {t('footer.terms')}
             </Link>
           </div>
         </div>
