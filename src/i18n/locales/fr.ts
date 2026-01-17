@@ -1,242 +1,159 @@
 export default {
+  // Brand
+  brand: {
+    name: 'The Verso',
+    tagline: 'L\'Art de Vivre',
+    location: 'Minneapolis',
+  },
+
   // Navigation
   nav: {
     home: 'Accueil',
-    residences: 'Les Résidences',
+    residence: 'La Résidence',
+    units: 'Unités Disponibles',
     forSale: 'À Vendre',
-    rentals: 'Locations',
-    shortTerm: 'Court Terme',
-    longTerm: 'Long Terme',
-    availability: 'Disponibilité',
+    shortTerm: 'Court Séjour',
+    longTerm: 'Location Longue Durée',
+    amenities: 'Commodités',
     gallery: 'Galerie',
-    neighborhood: 'Quartier',
     contact: 'Contact',
-    bookTour: 'Réserver une Visite',
-    adminLogin: 'Admin',
+    bookTour: 'Planifier une Visite',
   },
 
-  // Hero Section
+  // Hero
   hero: {
-    title: 'Le Luxe Réinventé',
-    subtitle: 'Découvrez des résidences exceptionnelles avec des équipements de classe mondiale au cœur de la ville',
-    exploreResidences: 'Explorer les Résidences',
-    bookTour: 'Réserver une Visite',
-
-    // Aliases used by some screens
-    exploreButton: 'Explorer les Résidences',
-    bookTourButton: 'Réserver une Visite',
+    title: 'The Verso',
+    subtitle: 'Là où l\'architecture raffinée rencontre le rythme de la vie urbaine. Une adresse unique pour ceux qui exigent l\'excellence.',
+    explore: 'Découvrir les Résidences',
+    schedule: 'Planifier une Visite',
+    scrollText: 'Découvrir',
   },
 
-  // Propriétés / Résidences
-  properties: {
-    title: 'Nos Résidences',
-    subtitle: 'Des lieux d’exception pour courts séjours, baux longue durée et achat.',
-    viewDetails: 'Voir les Détails',
+  // Residence
+  residence: {
+    title: 'Un Nouveau Standard de Vie',
+    subtitle: 'La Résidence',
+    description: 'S\'élevant sur 32 étages au-dessus de la skyline de Minneapolis, The Verso représente l\'apogée du design résidentiel contemporain. Chaque détail a été considéré, chaque matériau soigneusement sélectionné.',
+    features: {
+      architecture: 'Architecture Primée',
+      architectureDesc: 'Conçu par un studio de renommée internationale',
+      views: 'Vues Panoramiques sur la Ville',
+      viewsDesc: 'Vistas à 270 degrés depuis des fenêtres du sol au plafond',
+      service: 'Service Premium',
+      serviceDesc: 'Conciergerie et services résidents 24h/24',
+    },
   },
 
-  // Property Types
-  propertyTypes: {
-    studio: 'Studio',
-    oneBedroom: '1 Chambre',
-    twoBedroom: '2 Chambres',
-    threeBedroom: '3 Chambres',
-    penthouse: 'Penthouse',
+  // Units/Properties
+  units: {
+    title: 'Résidences Disponibles',
+    subtitle: 'Sélectionnez votre mode de vie préféré',
+    forSale: 'Achat',
+    shortTerm: 'Court Séjour',
+    longTerm: 'Location Longue Durée',
+    types: {
+      studio: 'Studio',
+      oneBed: 'Une Chambre',
+      twoBed: 'Deux Chambres',
+      threeBed: 'Trois Chambres',
+      penthouse: 'Penthouse',
+    },
+    details: {
+      sqft: 'pi²',
+      floor: 'Étage',
+      available: 'Disponible',
+      price: 'Prix',
+      perNight: '/nuit',
+      perMonth: '/mois',
+      from: 'À partir de',
+    },
+    cta: 'Demander des Informations',
+    viewFloorPlan: 'Voir le Plan',
   },
 
-  // Listing Types
-  listingTypes: {
-    forSale: 'À Vendre',
-    shortTermRental: 'Location Court Terme',
-    longTermRental: 'Location Long Terme',
-    available: 'Disponible',
-    reserved: 'Réservé',
-    sold: 'Vendu',
-    rented: 'Loué',
+  // Amenities
+  amenities: {
+    title: 'Commodités Raffinées',
+    subtitle: 'Chaque confort, pensé avec soin',
+    list: {
+      fitness: 'Centre de Fitness 24h/24',
+      pool: 'Piscine à Débordement sur le Toit',
+      lounge: 'Salon des Résidents',
+      theater: 'Salle de Projection Privée',
+      business: 'Centre d\'Affaires',
+      parking: 'Stationnement Souterrain Sécurisé',
+      concierge: 'Conciergerie 24h/24',
+      pets: 'Accepte les Animaux avec Spa',
+    },
   },
 
-  // Common
-  common: {
-    perNight: '/nuit',
-    perMonth: '/mois',
-    from: 'À partir de',
-    to: 'Jusqu\'à',
-    bedrooms: 'Chambres',
-    bathrooms: 'Salles de bain',
-    sqft: 'pi²',
-    floor: 'Étage',
-    viewDetails: 'Voir les Détails',
-    inquireNow: 'Demander Maintenant',
-    bookNow: 'Réserver',
-    applyNow: 'Postuler',
-    submitInquiry: 'Envoyer la Demande',
-    scheduleViewing: 'Planifier une Visite',
-    learnMore: 'En Savoir Plus',
-    seeAll: 'Voir Tout',
-    close: 'Fermer',
-    loading: 'Chargement...',
-    error: 'Une erreur est survenue',
-    success: 'Succès !',
-    comingSoon: 'Bientôt disponible',
-    required: 'Requis',
-    optional: 'Facultatif',
-  },
-
-  // Booking
-  booking: {
-    checkIn: 'Arrivée',
-    checkOut: 'Départ',
-    guests: 'Voyageurs',
-    nights: 'nuits',
-    subtotal: 'Sous-total',
-    cleaningFee: 'Frais de Ménage',
-    total: 'Total',
-    priceEstimate: 'Estimation du Prix',
-    selectDates: 'Sélectionnez vos dates',
-    reservationRequest: 'Demande de Réservation',
-    reservationConfirmed: 'Votre demande de réservation a été reçue. Nous vous contacterons sous peu avec les instructions de paiement.',
-    specialRequests: 'Demandes Spéciales',
-    minStay: 'Séjour minimum',
-  },
-
-  // Rental Application
-  rental: {
-    monthlyRent: 'Loyer Mensuel',
-    leaseTerms: 'Conditions du Bail',
-    moveInDate: 'Date d\'Emménagement Souhaitée',
-    leaseDuration: 'Durée du Bail',
-    months: 'mois',
-    occupation: 'Profession',
-    monthlyIncome: 'Revenu Mensuel',
-    applicationSubmitted: 'Votre candidature a été soumise. Nous l\'examinerons et vous contacterons prochainement.',
-  },
-
-  // Sales
-  sales: {
-    askingPrice: 'Prix Demandé',
-    priceOnRequest: 'Prix sur Demande',
-    makeOffer: 'Faire une Offre',
-    scheduleViewing: 'Planifier une Visite',
-    inquirySubmitted: 'Votre demande a été soumise. Un représentant commercial vous contactera sous peu.',
-  },
-
-  // Reviews
-  reviews: {
-    title: 'Avis des Clients',
-    verifiedStay: 'Séjour Vérifié',
-    writeReview: 'Écrire un Avis',
-    bookingReference: 'Référence de Réservation',
-    yourRating: 'Votre Note',
-    reviewTitle: 'Titre de l\'Avis',
-    reviewContent: 'Votre Avis',
-    submitReview: 'Soumettre l\'Avis',
-    reviewSubmitted: 'Merci ! Votre avis sera publié après approbation.',
-    noReviews: 'Aucun avis pour le moment. Soyez le premier à partager votre expérience !',
-  },
-
-  // Forms
-  forms: {
-    firstName: 'Prénom',
-    lastName: 'Nom',
-    fullName: 'Nom Complet',
-    email: 'Adresse Email',
-    phone: 'Numéro de Téléphone',
-    country: 'Pays',
-    message: 'Message',
-    subject: 'Sujet',
-    preferredDate: 'Date Préférée',
-    preferredTime: 'Heure Préférée',
-    tourType: 'Type de Visite',
-    inPerson: 'En Personne',
-    virtual: 'Visite Virtuelle',
-    send: 'Envoyer',
-    submit: 'Soumettre',
-    sending: 'Envoi en cours...',
+  // Gallery
+  gallery: {
+    title: 'Voyage Visuel',
+    subtitle: 'Découvrez The Verso à travers notre objectif',
+    categories: {
+      all: 'Tout',
+      exterior: 'Extérieur',
+      interiors: 'Intérieurs',
+      amenities: 'Commodités',
+      views: 'Vues',
+    },
   },
 
   // Contact
   contact: {
-    title: 'Contactez-Nous',
-    subtitle: 'Nous serions ravis de vous entendre. Contactez notre équipe.',
-    address: 'Adresse',
-    emailUs: 'Écrivez-Nous',
-    callUs: 'Appelez-Nous',
-    officeHours: 'Heures d\'Ouverture',
-    messageSent: 'Votre message a été envoyé. Nous vous répondrons sous peu.',
-  },
-
-  // Tour
-  tour: {
-    title: 'Réserver une Visite',
-    subtitle: 'Découvrez nos résidences en personne ou via une visite virtuelle',
-    requestSubmitted: 'Votre demande de visite a été soumise. Nous confirmerons votre rendez-vous sous peu.',
+    title: 'Commencez Votre Parcours',
+    subtitle: 'Notre équipe est prête à vous aider à trouver votre résidence idéale',
+    form: {
+      name: 'Nom Complet',
+      email: 'Adresse Email',
+      phone: 'Numéro de Téléphone',
+      interest: 'Je suis intéressé(e) par',
+      interestOptions: {
+        purchase: 'L\'achat d\'une unité',
+        shortTerm: 'La location courte durée',
+        longTerm: 'La location longue durée',
+        tour: 'La planification d\'une visite',
+      },
+      message: 'Détails Supplémentaires',
+      submit: 'Envoyer la Demande',
+      sending: 'Envoi en cours...',
+    },
+    info: {
+      address: '1000 Verso Boulevard',
+      city: 'Minneapolis, MN 55401',
+      phone: '+1 (612) 555-0100',
+      email: 'residences@theverso.com',
+      hours: 'Heures de la Galerie : Lun–Sam, 10h–18h',
+    },
+    success: 'Merci pour votre demande. Notre équipe vous contactera dans les 24 heures.',
   },
 
   // Footer
   footer: {
-    aboutUs: 'À Propos',
-    quickLinks: 'Liens Rapides',
-    contactInfo: 'Coordonnées',
-    newsletter: 'Newsletter',
-    newsletterText: 'Abonnez-vous pour des mises à jour et offres exclusives',
-    subscribe: 'S\'abonner',
-    emailPlaceholder: 'Entrez votre email',
-    allRightsReserved: 'Tous droits réservés.',
-    privacyPolicy: 'Politique de Confidentialité',
-    termsOfService: 'Conditions d\'Utilisation',
+    tagline: 'Une nouvelle perspective sur la vie urbaine',
+    legal: 'Mentions Légales',
+    privacy: 'Politique de Confidentialité',
+    terms: 'Conditions d\'Utilisation',
+    accessibility: 'Accessibilité',
+    copyright: 'Tous droits réservés.',
+    newsletter: {
+      title: 'Restez Informé',
+      subtitle: 'Recevez des mises à jour sur les disponibilités et les événements exclusifs',
+      placeholder: 'Entrez votre email',
+      button: 'S\'abonner',
+    },
   },
 
-  // Admin
-  admin: {
-    dashboard: 'Tableau de Bord',
-    properties: 'Propriétés',
-    bookings: 'Réservations',
-    rentalApplications: 'Candidatures Location',
-    salesPipeline: 'Pipeline de Ventes',
-    tourRequests: 'Demandes de Visite',
-    reviews: 'Avis',
-    clients: 'Clients',
-    reports: 'Rapports',
-    settings: 'Paramètres',
-    logout: 'Déconnexion',
-    welcome: 'Bienvenue',
-    totalRevenue: 'Revenu Total',
-    occupancyRate: 'Taux d\'Occupation',
-    pendingBookings: 'Réservations en Attente',
-    newInquiries: 'Nouvelles Demandes',
-    recentActivity: 'Activité Récente',
-    upcomingCheckins: 'Arrivées à Venir',
-    pendingPayments: 'Paiements en Attente',
-    confirmPayment: 'Confirmer le Paiement',
-    markConfirmed: 'Marquer comme Confirmé',
-    cancel: 'Annuler',
+  // Common
+  common: {
+    learnMore: 'En Savoir Plus',
     viewAll: 'Voir Tout',
-    addProperty: 'Ajouter une Propriété',
-    editProperty: 'Modifier la Propriété',
-    deleteProperty: 'Supprimer la Propriété',
-    approveReview: 'Approuver',
-    hideReview: 'Masquer',
-    exportExcel: 'Exporter en Excel',
-    exportPdf: 'Exporter en PDF',
-  },
-
-  // Status
-  status: {
-    pendingPayment: 'En Attente de Paiement',
-    paymentReceived: 'Paiement Reçu',
-    confirmed: 'Confirmé',
-    cancelled: 'Annulé',
-    completed: 'Terminé',
-    pending: 'En Attente',
-    reviewing: 'En Cours d\'Examen',
-    approved: 'Approuvé',
-    rejected: 'Rejeté',
-    newInquiry: 'Nouvelle Demande',
-    qualified: 'Qualifié',
-    viewingScheduled: 'Visite Programmée',
-    offerMade: 'Offre Faite',
-    negotiation: 'Négociation',
-    closing: 'Clôture',
-    sold: 'Vendu',
-    lost: 'Perdu',
+    back: 'Retour',
+    close: 'Fermer',
+    loading: 'Chargement',
+    error: 'Une erreur est survenue',
+    beds: 'Chambres',
+    baths: 'Salles de Bain',
   },
 };

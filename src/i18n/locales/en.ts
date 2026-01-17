@@ -1,242 +1,159 @@
 export default {
+  // Brand
+  brand: {
+    name: 'The Verso',
+    tagline: 'Elevated Living',
+    location: 'Minneapolis',
+  },
+
   // Navigation
   nav: {
     home: 'Home',
-    residences: 'The Residences',
+    residence: 'The Residence',
+    units: 'Available Units',
     forSale: 'For Sale',
-    rentals: 'Rentals',
-    shortTerm: 'Short-Term',
-    longTerm: 'Long-Term',
-    availability: 'Availability',
+    shortTerm: 'Short Stay',
+    longTerm: 'Long Term',
+    amenities: 'Amenities',
     gallery: 'Gallery',
-    neighborhood: 'Neighborhood',
     contact: 'Contact',
-    bookTour: 'Book a Tour',
-    adminLogin: 'Admin',
+    bookTour: 'Schedule a Visit',
   },
 
-  // Hero Section
+  // Hero
   hero: {
-    title: 'Luxury Living Redefined',
-    subtitle: 'Experience exceptional residences with world-class amenities in the heart of the city',
-    exploreResidences: 'Explore Residences',
-    bookTour: 'Book a Tour',
-
-    // Aliases used by some screens
-    exploreButton: 'Explore Residences',
-    bookTourButton: 'Book a Tour',
+    title: 'The Verso',
+    subtitle: 'Where refined architecture meets the rhythm of urban life. A singular address for those who demand excellence.',
+    explore: 'Explore Residences',
+    schedule: 'Schedule a Visit',
+    scrollText: 'Discover',
   },
 
-  // Properties / Residences
-  properties: {
-    title: 'Our Residences',
-    subtitle: 'Discover curated homes for short stays, long leases, and ownership.',
-    viewDetails: 'View Details',
+  // Residence
+  residence: {
+    title: 'A New Standard of Living',
+    subtitle: 'The Residence',
+    description: 'Rising 32 stories above the Minneapolis skyline, The Verso represents the pinnacle of contemporary residential design. Every detail has been considered, every material thoughtfully selected.',
+    features: {
+      architecture: 'Award-Winning Architecture',
+      architectureDesc: 'Designed by internationally acclaimed studio',
+      views: 'Panoramic City Views',
+      viewsDesc: '270-degree vistas from floor-to-ceiling windows',
+      service: 'White-Glove Service',
+      serviceDesc: '24/7 concierge and resident services',
+    },
   },
 
-  // Property Types
-  propertyTypes: {
-    studio: 'Studio',
-    oneBedroom: '1 Bedroom',
-    twoBedroom: '2 Bedrooms',
-    threeBedroom: '3 Bedrooms',
-    penthouse: 'Penthouse',
+  // Units/Properties
+  units: {
+    title: 'Available Residences',
+    subtitle: 'Select your preferred living arrangement',
+    forSale: 'Purchase',
+    shortTerm: 'Short Stay',
+    longTerm: 'Long Term Lease',
+    types: {
+      studio: 'Studio',
+      oneBed: 'One Bedroom',
+      twoBed: 'Two Bedroom',
+      threeBed: 'Three Bedroom',
+      penthouse: 'Penthouse',
+    },
+    details: {
+      sqft: 'sq ft',
+      floor: 'Floor',
+      available: 'Available',
+      price: 'Price',
+      perNight: '/night',
+      perMonth: '/month',
+      from: 'From',
+    },
+    cta: 'Inquire Now',
+    viewFloorPlan: 'View Floor Plan',
   },
 
-  // Listing Types
-  listingTypes: {
-    forSale: 'For Sale',
-    shortTermRental: 'Short-Term Rental',
-    longTermRental: 'Long-Term Rental',
-    available: 'Available',
-    reserved: 'Reserved',
-    sold: 'Sold',
-    rented: 'Rented',
+  // Amenities
+  amenities: {
+    title: 'Curated Amenities',
+    subtitle: 'Every convenience, thoughtfully considered',
+    list: {
+      fitness: '24-Hour Fitness Center',
+      pool: 'Rooftop Infinity Pool',
+      lounge: 'Residents\' Lounge',
+      theater: 'Private Screening Room',
+      business: 'Business Center',
+      parking: 'Secure Underground Parking',
+      concierge: '24/7 Concierge',
+      pets: 'Pet-Friendly with Spa',
+    },
   },
 
-  // Common
-  common: {
-    perNight: '/night',
-    perMonth: '/month',
-    from: 'From',
-    to: 'To',
-    bedrooms: 'Bedrooms',
-    bathrooms: 'Bathrooms',
-    sqft: 'sq ft',
-    floor: 'Floor',
-    viewDetails: 'View Details',
-    inquireNow: 'Inquire Now',
-    bookNow: 'Book Now',
-    applyNow: 'Apply Now',
-    submitInquiry: 'Submit Inquiry',
-    scheduleViewing: 'Schedule Viewing',
-    learnMore: 'Learn More',
-    seeAll: 'See All',
-    close: 'Close',
-    loading: 'Loading...',
-    error: 'An error occurred',
-    success: 'Success!',
-    comingSoon: 'Coming soon',
-    required: 'Required',
-    optional: 'Optional',
-  },
-
-  // Booking
-  booking: {
-    checkIn: 'Check-in',
-    checkOut: 'Check-out',
-    guests: 'Guests',
-    nights: 'nights',
-    subtotal: 'Subtotal',
-    cleaningFee: 'Cleaning Fee',
-    total: 'Total',
-    priceEstimate: 'Price Estimate',
-    selectDates: 'Select your dates',
-    reservationRequest: 'Reservation Request',
-    reservationConfirmed: 'Your reservation request has been received. We will contact you shortly with payment instructions.',
-    specialRequests: 'Special Requests',
-    minStay: 'Minimum stay',
-  },
-
-  // Rental Application
-  rental: {
-    monthlyRent: 'Monthly Rent',
-    leaseTerms: 'Lease Terms',
-    moveInDate: 'Desired Move-in Date',
-    leaseDuration: 'Lease Duration',
-    months: 'months',
-    occupation: 'Occupation',
-    monthlyIncome: 'Monthly Income',
-    applicationSubmitted: 'Your application has been submitted. We will review it and contact you shortly.',
-  },
-
-  // Sales
-  sales: {
-    askingPrice: 'Asking Price',
-    priceOnRequest: 'Price on Request',
-    makeOffer: 'Make an Offer',
-    scheduleViewing: 'Schedule a Viewing',
-    inquirySubmitted: 'Your inquiry has been submitted. A sales representative will contact you shortly.',
-  },
-
-  // Reviews
-  reviews: {
-    title: 'Guest Reviews',
-    verifiedStay: 'Verified Stay',
-    writeReview: 'Write a Review',
-    bookingReference: 'Booking Reference',
-    yourRating: 'Your Rating',
-    reviewTitle: 'Review Title',
-    reviewContent: 'Your Review',
-    submitReview: 'Submit Review',
-    reviewSubmitted: 'Thank you! Your review will be published after approval.',
-    noReviews: 'No reviews yet. Be the first to share your experience!',
-  },
-
-  // Forms
-  forms: {
-    firstName: 'First Name',
-    lastName: 'Last Name',
-    fullName: 'Full Name',
-    email: 'Email Address',
-    phone: 'Phone Number',
-    country: 'Country',
-    message: 'Message',
-    subject: 'Subject',
-    preferredDate: 'Preferred Date',
-    preferredTime: 'Preferred Time',
-    tourType: 'Tour Type',
-    inPerson: 'In Person',
-    virtual: 'Virtual Tour',
-    send: 'Send',
-    submit: 'Submit',
-    sending: 'Sending...',
+  // Gallery
+  gallery: {
+    title: 'Visual Journey',
+    subtitle: 'Experience The Verso through our lens',
+    categories: {
+      all: 'All',
+      exterior: 'Exterior',
+      interiors: 'Interiors',
+      amenities: 'Amenities',
+      views: 'Views',
+    },
   },
 
   // Contact
   contact: {
-    title: 'Contact Us',
-    subtitle: 'We\'d love to hear from you. Get in touch with our team.',
-    address: 'Address',
-    emailUs: 'Email Us',
-    callUs: 'Call Us',
-    officeHours: 'Office Hours',
-    messageSent: 'Your message has been sent. We will respond shortly.',
-  },
-
-  // Tour
-  tour: {
-    title: 'Book a Tour',
-    subtitle: 'Experience our residences in person or through a virtual tour',
-    requestSubmitted: 'Your tour request has been submitted. We will confirm your appointment shortly.',
+    title: 'Begin Your Journey',
+    subtitle: 'Our team is ready to help you find your perfect residence',
+    form: {
+      name: 'Full Name',
+      email: 'Email Address',
+      phone: 'Phone Number',
+      interest: 'I\'m interested in',
+      interestOptions: {
+        purchase: 'Purchasing a unit',
+        shortTerm: 'Short-term rental',
+        longTerm: 'Long-term lease',
+        tour: 'Scheduling a tour',
+      },
+      message: 'Additional Details',
+      submit: 'Send Inquiry',
+      sending: 'Sending...',
+    },
+    info: {
+      address: '1000 Verso Boulevard',
+      city: 'Minneapolis, MN 55401',
+      phone: '+1 (612) 555-0100',
+      email: 'residences@theverso.com',
+      hours: 'Gallery Hours: Mon–Sat, 10am–6pm',
+    },
+    success: 'Thank you for your inquiry. Our team will be in touch within 24 hours.',
   },
 
   // Footer
   footer: {
-    aboutUs: 'About Us',
-    quickLinks: 'Quick Links',
-    contactInfo: 'Contact Info',
-    newsletter: 'Newsletter',
-    newsletterText: 'Subscribe for exclusive updates and offers',
-    subscribe: 'Subscribe',
-    emailPlaceholder: 'Enter your email',
-    allRightsReserved: 'All rights reserved.',
-    privacyPolicy: 'Privacy Policy',
-    termsOfService: 'Terms of Service',
+    tagline: 'A new perspective on urban living',
+    legal: 'Legal',
+    privacy: 'Privacy Policy',
+    terms: 'Terms of Service',
+    accessibility: 'Accessibility',
+    copyright: 'All rights reserved.',
+    newsletter: {
+      title: 'Stay Informed',
+      subtitle: 'Receive updates on availability and exclusive events',
+      placeholder: 'Enter your email',
+      button: 'Subscribe',
+    },
   },
 
-  // Admin
-  admin: {
-    dashboard: 'Dashboard',
-    properties: 'Properties',
-    bookings: 'Bookings',
-    rentalApplications: 'Rental Applications',
-    salesPipeline: 'Sales Pipeline',
-    tourRequests: 'Tour Requests',
-    reviews: 'Reviews',
-    clients: 'Clients',
-    reports: 'Reports',
-    settings: 'Settings',
-    logout: 'Logout',
-    welcome: 'Welcome back',
-    totalRevenue: 'Total Revenue',
-    occupancyRate: 'Occupancy Rate',
-    pendingBookings: 'Pending Bookings',
-    newInquiries: 'New Inquiries',
-    recentActivity: 'Recent Activity',
-    upcomingCheckins: 'Upcoming Check-ins',
-    pendingPayments: 'Pending Payments',
-    confirmPayment: 'Confirm Payment',
-    markConfirmed: 'Mark as Confirmed',
-    cancel: 'Cancel',
+  // Common
+  common: {
+    learnMore: 'Learn More',
     viewAll: 'View All',
-    addProperty: 'Add Property',
-    editProperty: 'Edit Property',
-    deleteProperty: 'Delete Property',
-    approveReview: 'Approve',
-    hideReview: 'Hide',
-    exportExcel: 'Export to Excel',
-    exportPdf: 'Export to PDF',
-  },
-
-  // Status
-  status: {
-    pendingPayment: 'Pending Payment',
-    paymentReceived: 'Payment Received',
-    confirmed: 'Confirmed',
-    cancelled: 'Cancelled',
-    completed: 'Completed',
-    pending: 'Pending',
-    reviewing: 'Under Review',
-    approved: 'Approved',
-    rejected: 'Rejected',
-    newInquiry: 'New Inquiry',
-    qualified: 'Qualified',
-    viewingScheduled: 'Viewing Scheduled',
-    offerMade: 'Offer Made',
-    negotiation: 'Negotiation',
-    closing: 'Closing',
-    sold: 'Sold',
-    lost: 'Lost',
+    back: 'Back',
+    close: 'Close',
+    loading: 'Loading',
+    error: 'An error occurred',
+    beds: 'Beds',
+    baths: 'Baths',
   },
 };

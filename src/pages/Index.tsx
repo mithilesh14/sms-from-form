@@ -1,8 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowDown, Calendar, Home, Building2, Star, MapPin, Sparkles } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ArrowRight, ArrowDown, Building2, Star, Shield, ChevronRight } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { useRef } from 'react';
@@ -15,135 +14,135 @@ const Index = () => {
     offset: ["start start", "end start"]
   });
   
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 100]);
 
-  const propertyTypes = [
+  const unitTypes = [
     {
-      icon: Calendar,
-      title: t('nav.shortTerm'),
-      description: 'Curated stays for memorable experiences. Perfect for discerning travelers.',
-      link: '/short-term',
-      image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format&fit=crop&q=80',
-      tag: 'From $250/night',
-    },
-    {
-      icon: Home,
-      title: t('nav.longTerm'),
-      description: 'Make our exceptional residences your sanctuary. Flexible lease terms.',
-      link: '/long-term',
+      type: t('units.forSale'),
+      title: 'Penthouse Collection',
+      subtitle: 'Own your sanctuary',
+      price: 'From $1.2M',
       image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&auto=format&fit=crop&q=80',
-      tag: 'From $3,500/mo',
+      link: '/units?type=sale',
     },
     {
-      icon: Building2,
-      title: t('nav.forSale'),
-      description: 'Own a piece of architectural excellence. Investment-grade properties.',
-      link: '/for-sale',
-      image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&auto=format&fit=crop&q=80',
-      tag: 'From $850K',
+      type: t('units.shortTerm'),
+      title: 'Furnished Suites',
+      subtitle: 'Flexible stays',
+      price: 'From $350/night',
+      image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format&fit=crop&q=80',
+      link: '/units?type=short',
+    },
+    {
+      type: t('units.longTerm'),
+      title: 'Signature Residences',
+      subtitle: 'Annual leases',
+      price: 'From $4,500/mo',
+      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80',
+      link: '/units?type=long',
     },
   ];
 
   const features = [
-    { icon: Sparkles, title: 'Premium Finishes', desc: 'Handcrafted details throughout' },
-    { icon: MapPin, title: 'Prime Locations', desc: 'Carefully selected neighborhoods' },
-    { icon: Star, title: 'White-Glove Service', desc: 'Concierge at your fingertips' },
-  ];
-
-  const galleryImages = [
-    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=600&auto=format&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=600&auto=format&fit=crop&q=80',
+    { 
+      icon: Building2, 
+      title: t('residence.features.architecture'),
+      desc: t('residence.features.architectureDesc')
+    },
+    { 
+      icon: Star, 
+      title: t('residence.features.views'),
+      desc: t('residence.features.viewsDesc')
+    },
+    { 
+      icon: Shield, 
+      title: t('residence.features.service'),
+      desc: t('residence.features.serviceDesc')
+    },
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen bg-background">
       <Header />
 
       {/* ═══════════════════════════════════════════════════════════════════
-          HERO SECTION
+          HERO SECTION - Full viewport cinematic opening
       ═══════════════════════════════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section ref={heroRef} className="relative h-screen overflow-hidden">
         <motion.div
-          style={{ y: heroY }}
+          style={{ scale: heroScale }}
           className="absolute inset-0"
         >
           <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
+            className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: 'url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&auto=format&fit=crop&q=80)',
+              backgroundImage: 'url(https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1920&auto=format&fit=crop&q=80)',
             }}
           />
         </motion.div>
         
-        <div className="hero-overlay absolute inset-0" />
+        <div className="overlay-cinematic absolute inset-0" />
         
         <motion.div 
-          style={{ opacity: heroOpacity }}
-          className="relative z-10 text-center px-5 max-w-5xl mx-auto"
+          style={{ opacity: heroOpacity, y: textY }}
+          className="relative z-10 h-full flex flex-col justify-end pb-24 md:pb-32"
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-6"
-          >
-            <span className="inline-block text-xs uppercase tracking-[0.3em] text-white/70 
-                           border border-white/20 px-4 py-2 rounded-full backdrop-blur-sm">
-              Luxury Residences
-            </span>
-          </motion.div>
-          
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white mb-8 leading-[0.95]"
-          >
-            {t('hero.title')}
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-xl text-white/80 mb-12 max-w-2xl mx-auto font-light leading-relaxed"
-          >
-            {t('hero.subtitle')}
-          </motion.p>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Button
-              asChild
-              size="lg"
-              className="bg-white text-earth-charcoal hover:bg-white/90 rounded-none px-10 py-7 text-sm 
-                         tracking-widest uppercase font-medium transition-all duration-300"
+          <div className="container-editorial">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="mb-6"
             >
-              <Link to="/residences" className="flex items-center gap-3">
-                {t('hero.exploreButton')}
+              <span className="text-caption text-white/60">
+                Minneapolis, Minnesota
+              </span>
+            </motion.div>
+            
+            <div className="overflow-hidden">
+              <motion.h1
+                initial={{ y: 120 }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                className="font-serif text-display text-white mb-8"
+              >
+                {t('hero.title')}
+              </motion.h1>
+            </div>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="text-lg md:text-xl text-white/70 max-w-xl font-light leading-relaxed mb-12"
+            >
+              {t('hero.subtitle')}
+            </motion.p>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <Link 
+                to="/units"
+                className="btn-premium inline-flex items-center justify-center gap-3 px-8 py-4"
+              >
+                <span>{t('hero.explore')}</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
-            </Button>
-            
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="bg-transparent border-white/40 text-white hover:bg-white/10 hover:border-white 
-                         rounded-none px-10 py-7 text-sm tracking-widest uppercase font-medium"
-            >
-              <Link to="/contact">
-                {t('hero.bookTourButton')}
+              
+              <Link 
+                to="/contact"
+                className="btn-outline-premium inline-flex items-center justify-center gap-3 px-8 py-4 text-white border-white/30 hover:bg-white hover:text-foreground"
+              >
+                <span>{t('hero.schedule')}</span>
               </Link>
-            </Button>
-          </motion.div>
+            </motion.div>
+          </div>
         </motion.div>
 
         {/* Scroll Indicator */}
@@ -151,84 +150,70 @@ const Index = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3"
         >
+          <span className="text-caption text-white/40">{t('hero.scrollText')}</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-3 text-white/60"
           >
-            <span className="text-xs uppercase tracking-widest">Scroll</span>
-            <ArrowDown className="h-4 w-4" />
+            <ArrowDown className="h-4 w-4 text-white/40" />
           </motion.div>
         </motion.div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          INTRO SECTION
+          BUILDING INTRODUCTION - Editorial text section
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="section-padding bg-background relative">
-        <div className="container-xl">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <section className="section-gap bg-background">
+        <div className="container-editorial">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
             >
-              <span className="text-xs uppercase tracking-[0.3em] text-primary mb-4 block">
-                About TerraLuxe
+              <span className="text-caption text-accent mb-6 block">
+                {t('residence.subtitle')}
               </span>
-              <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground mb-8 leading-[1.1]">
-                Where Nature Meets
-                <span className="text-primary"> Refined Living</span>
+              <h2 className="text-headline text-foreground mb-8">
+                {t('residence.title')}
               </h2>
-              <div className="space-y-6 text-muted-foreground leading-relaxed">
-                <p>
-                  We believe that extraordinary living spaces should harmonize with their 
-                  natural surroundings. Each TerraLuxe property is thoughtfully designed 
-                  to bring the outside in.
-                </p>
-                <p>
-                  Our collection of residences represents the pinnacle of sustainable luxury—
-                  where organic materials, natural light, and timeless architecture create 
-                  spaces that nurture both body and soul.
-                </p>
-              </div>
-              
-              <div className="mt-10 flex gap-8">
-                {features.map((feature, index) => (
-                  <motion.div
-                    key={feature.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 + 0.3 }}
-                    className="flex flex-col items-start"
-                  >
-                    <feature.icon className="h-5 w-5 text-primary mb-2" />
-                    <h4 className="text-sm font-medium text-foreground">{feature.title}</h4>
-                    <p className="text-xs text-muted-foreground">{feature.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
+              <div className="divider-editorial" />
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="lg:pt-8"
             >
-              <div className="aspect-[4/5] relative">
-                <img
-                  src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&auto=format&fit=crop&q=80"
-                  alt="Luxury interior"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-primary/10 -z-10" />
-                <div className="absolute -top-8 -right-8 w-32 h-32 border border-primary/20 -z-10" />
+              <p className="text-body-lg text-muted-foreground mb-12">
+                {t('residence.description')}
+              </p>
+              
+              <div className="space-y-8">
+                {features.map((feature, index) => (
+                  <motion.div
+                    key={feature.title}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15 + 0.3 }}
+                    className="flex items-start gap-5 group"
+                  >
+                    <div className="w-12 h-12 border border-border flex items-center justify-center 
+                                    group-hover:border-accent group-hover:bg-accent/5 transition-all duration-500">
+                      <feature.icon className="h-5 w-5 text-accent" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium text-foreground mb-1">{feature.title}</h4>
+                      <p className="text-sm text-muted-foreground">{feature.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           </div>
@@ -236,79 +221,94 @@ const Index = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          PROPERTY TYPES SECTION
+          BUILDING HERO IMAGE - Full bleed visual
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="section-padding bg-secondary/50 relative overflow-hidden">
-        <div className="absolute inset-0 grid-pattern opacity-30" />
-        
-        <div className="container-xl relative">
+      <section className="relative">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1 }}
+          className="aspect-[21/9] relative overflow-hidden"
+        >
+          <div className="img-zoom w-full h-full">
+            <img
+              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&auto=format&fit=crop&q=80"
+              alt="The Verso Building"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+        </motion.div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════
+          UNIT TYPES - Three pillars of offerings
+      ═══════════════════════════════════════════════════════════════════ */}
+      <section className="section-gap bg-background">
+        <div className="container-editorial">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16 md:mb-20"
+            transition={{ duration: 0.8 }}
+            className="text-center mb-20"
           >
-            <span className="text-xs uppercase tracking-[0.3em] text-primary mb-4 block">
-              Our Collection
+            <span className="text-caption text-accent mb-6 block">
+              {t('units.subtitle')}
             </span>
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-foreground mb-6">
-              {t('properties.title')}
+            <h2 className="text-headline text-foreground">
+              {t('units.title')}
             </h2>
-            <div className="divider-organic mb-6" />
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              {t('properties.subtitle')}
-            </p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-            {propertyTypes.map((type, index) => (
+            {unitTypes.map((unit, index) => (
               <motion.div
-                key={type.title}
+                key={unit.type}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
+                transition={{ delay: index * 0.15, duration: 0.8 }}
               >
-                <Link to={type.link} className="group block h-full">
-                  <div className="relative h-full bg-card overflow-hidden">
-                    {/* Image */}
-                    <div className="aspect-[3/4] relative overflow-hidden">
+                <Link to={unit.link} className="group block">
+                  <div className="relative overflow-hidden mb-6">
+                    <div className="aspect-editorial img-zoom">
                       <img
-                        src={type.image}
-                        alt={type.title}
-                        className="w-full h-full object-cover transition-transform duration-700 
-                                   group-hover:scale-105"
+                        src={unit.image}
+                        alt={unit.title}
+                        className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-earth-charcoal/80 
-                                      via-earth-charcoal/20 to-transparent" />
-                      
-                      {/* Tag */}
-                      <div className="absolute top-4 left-4">
-                        <span className="inline-block text-xs tracking-wider text-white/90 
-                                         bg-earth-charcoal/60 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                          {type.tag}
-                        </span>
-                      </div>
-                      
-                      {/* Content overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <div className="flex items-center gap-3 mb-3">
-                          <type.icon className="h-5 w-5 text-white/80" />
-                          <h3 className="font-serif text-2xl text-white">
-                            {type.title}
-                          </h3>
-                        </div>
-                        <p className="text-white/70 text-sm mb-4 line-clamp-2">
-                          {type.description}
-                        </p>
-                        <span className="inline-flex items-center text-sm text-white font-medium 
-                                         group-hover:text-primary transition-colors duration-300">
-                          {t('properties.viewDetails')}
-                          <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 
-                                                 group-hover:translate-x-2" />
-                        </span>
-                      </div>
                     </div>
+                    
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 
+                                    transition-colors duration-700 flex items-center justify-center">
+                      <motion.div
+                        initial={{ scale: 0, opacity: 0 }}
+                        whileHover={{ scale: 1, opacity: 1 }}
+                        className="w-16 h-16 border border-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      >
+                        <ArrowRight className="h-6 w-6 text-white" />
+                      </motion.div>
+                    </div>
+                  </div>
+                  
+                  <span className="text-caption text-accent mb-3 block">
+                    {unit.type}
+                  </span>
+                  <h3 className="font-serif text-2xl text-foreground mb-2 group-hover:text-accent transition-colors duration-500">
+                    {unit.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {unit.subtitle}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="font-serif text-lg text-foreground">
+                      {unit.price}
+                    </span>
+                    <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-accent 
+                                             group-hover:translate-x-1 transition-all duration-300" />
                   </div>
                 </Link>
               </motion.div>
@@ -318,21 +318,21 @@ const Index = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════
-          GALLERY PREVIEW
+          GALLERY TEASER
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="section-padding bg-background">
-        <div className="container-xl">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-12">
+      <section className="section-gap-sm bg-secondary">
+        <div className="container-editorial">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-12">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <span className="text-xs uppercase tracking-[0.3em] text-primary mb-4 block">
-                Visual Journey
+              <span className="text-caption text-accent mb-4 block">
+                {t('gallery.subtitle')}
               </span>
-              <h2 className="font-serif text-4xl md:text-5xl text-foreground">
-                Spaces That <span className="italic">Inspire</span>
+              <h2 className="text-title text-foreground">
+                {t('gallery.title')}
               </h2>
             </motion.div>
             
@@ -341,37 +341,35 @@ const Index = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
             >
-              <Button 
-                asChild 
-                variant="outline" 
-                className="rounded-none border-foreground/20 hover:border-primary hover:text-primary"
+              <Link 
+                to="/gallery" 
+                className="link-underline text-caption text-muted-foreground hover:text-foreground transition-colors"
               >
-                <Link to="/gallery" className="flex items-center gap-2">
-                  View Full Gallery
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </Button>
+                {t('common.viewAll')}
+              </Link>
             </motion.div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {galleryImages.map((image, index) => (
+            {[
+              'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&auto=format&fit=crop&q=80',
+              'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&auto=format&fit=crop&q=80',
+              'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=600&auto=format&fit=crop&q=80',
+              'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&auto=format&fit=crop&q=80',
+            ].map((image, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className={`image-zoom ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''}`}
+                className="img-zoom aspect-square"
               >
-                <div className={`relative ${index === 0 ? 'aspect-square' : 'aspect-square'} 
-                                 overflow-hidden bg-muted`}>
-                  <img
-                    src={image}
-                    alt={`Gallery ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <img
+                  src={image}
+                  alt={`Gallery ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
               </motion.div>
             ))}
           </div>
@@ -381,42 +379,38 @@ const Index = () => {
       {/* ═══════════════════════════════════════════════════════════════════
           CTA SECTION
       ═══════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative py-32 md:py-40 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1920&auto=format&fit=crop&q=80)',
+            backgroundImage: 'url(https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&auto=format&fit=crop&q=80)',
           }}
         />
-        <div className="absolute inset-0 bg-earth-charcoal/70" />
+        <div className="absolute inset-0 bg-primary/80" />
         
-        <div className="container-xl relative">
+        <div className="container-editorial relative">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center max-w-3xl mx-auto"
           >
-            <span className="text-xs uppercase tracking-[0.3em] text-primary mb-6 block">
-              Begin Your Journey
+            <span className="text-caption text-accent mb-6 block">
+              {t('nav.bookTour')}
             </span>
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-8 leading-tight">
-              {t('tour.title')}
+            <h2 className="text-headline text-primary-foreground mb-8">
+              {t('contact.title')}
             </h2>
-            <p className="text-white/70 text-lg mb-10 leading-relaxed">
-              {t('tour.subtitle')}
+            <p className="text-lg text-primary-foreground/70 mb-12 font-light">
+              {t('contact.subtitle')}
             </p>
-            <Button
-              asChild
-              size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none 
-                         px-12 py-7 text-sm tracking-widest uppercase"
+            <Link 
+              to="/contact"
+              className="btn-outline-premium inline-flex items-center gap-3 px-10 py-5 text-primary-foreground border-primary-foreground/30 hover:bg-primary-foreground hover:text-primary"
             >
-              <Link to="/contact" className="flex items-center gap-3">
-                {t('nav.bookTour')}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
+              <span>{t('hero.schedule')}</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </motion.div>
         </div>
       </section>
