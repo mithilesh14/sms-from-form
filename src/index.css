@@ -174,7 +174,7 @@
 
   /* Premium buttons */
   .btn-premium {
-    @apply relative overflow-hidden bg-foreground text-background font-light tracking-[0.12em] uppercase text-[11px];
+    @apply relative overflow-hidden bg-primary text-primary-foreground font-light tracking-[0.12em] uppercase text-[11px];
     @apply min-h-[48px] px-8;
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     -webkit-tap-highlight-color: transparent;
@@ -197,7 +197,7 @@
   }
 
   .btn-premium:hover {
-    color: hsl(var(--verso-charcoal));
+    color: hsl(var(--primary-foreground));
   }
 
   .btn-outline-premium {
