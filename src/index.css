@@ -164,7 +164,7 @@
     left: 0;
     right: 0;
     height: 8vh;
-    background: hsl(var(--verso-charcoal));
+    background: hsl(var(--background));
     z-index: 5;
     pointer-events: none;
   }
