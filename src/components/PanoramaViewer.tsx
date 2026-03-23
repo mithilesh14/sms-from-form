@@ -143,13 +143,13 @@ export function PanoramaViewer({ images }: PanoramaViewerProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className="relative w-full h-[60vh] md:h-[80vh] bg-primary/95 rounded-lg overflow-hidden">
+    <div className="relative w-full h-[60vh] md:h-[80vh] bg-muted rounded-lg overflow-hidden">
       {/* Loading overlay */}
       {isLoading && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center bg-primary/90">
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-muted">
           <div className="flex flex-col items-center gap-3">
-            <div className="w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-            <p className="text-white/60 text-sm">Loading panorama…</p>
+            <div className="w-8 h-8 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
+            <p className="text-muted-foreground text-sm">Loading panorama…</p>
           </div>
         </div>
       )}
@@ -164,9 +164,9 @@ export function PanoramaViewer({ images }: PanoramaViewerProps) {
       </Canvas>
 
       {/* Controls overlay */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-primary/80 backdrop-blur-sm px-4 py-2 rounded-full">
-        <Move className="w-4 h-4 text-white/50" />
-        <span className="text-white/60 text-xs hidden sm:inline">Drag to look around</span>
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
+        <Move className="w-4 h-4 text-primary/50" />
+        <span className="text-primary/60 text-xs hidden sm:inline">Drag to look around</span>
       </div>
 
       {/* Scene selector */}
@@ -176,10 +176,10 @@ export function PanoramaViewer({ images }: PanoramaViewerProps) {
             <button
               key={i}
               onClick={() => { setIsLoading(true); setActiveIndex(i); }}
-              className={`px-4 py-2 text-xs rounded-full transition-all min-h-[40px] ${
+              className={`px-4 py-2 text-xs rounded-full transition-all min-h-[40px] shadow-sm ${
                 i === activeIndex
                   ? "bg-accent text-accent-foreground"
-                  : "bg-primary/60 text-white/70 hover:bg-primary/80 hover:text-white backdrop-blur-sm"
+                  : "bg-white/70 text-primary/70 hover:bg-white hover:text-primary backdrop-blur-sm"
               }`}
             >
               {img.label}

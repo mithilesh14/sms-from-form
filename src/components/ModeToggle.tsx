@@ -14,13 +14,13 @@ export function ModeToggle() {
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 1.5, duration: 0.6 }}
-      className="fixed bottom-8 right-8 z-30 glass-panel px-1 py-1 flex gap-0.5"
+      className="fixed bottom-8 right-8 z-30 bg-white/80 backdrop-blur-xl shadow-lg border border-border px-1 py-1 flex gap-0.5"
     >
       <button
         onClick={() => setMode('escape')}
         className={cn(
           "text-caption px-4 py-2.5 transition-all duration-300",
-          !isInvest ? "bg-foreground/10 text-foreground" : "text-muted-foreground hover:text-foreground"
+          !isInvest ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-primary"
         )}
       >
         {t('mode.lifestyle', 'Lifestyle')}
@@ -29,7 +29,7 @@ export function ModeToggle() {
         onClick={() => setMode('invest')}
         className={cn(
           "text-caption px-4 py-2.5 transition-all duration-300",
-          isInvest ? "bg-foreground/10 text-foreground" : "text-muted-foreground hover:text-foreground"
+          isInvest ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-primary"
         )}
       >
         {t('mode.investment', 'Investment')}
