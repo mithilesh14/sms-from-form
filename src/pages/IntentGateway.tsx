@@ -6,9 +6,9 @@ import { Globe } from 'lucide-react';
 import { useState } from 'react';
 
 const intentImages: Record<string, string> = {
-  live: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&auto=format&fit=crop&q=80',
+  live: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&auto=format&fit=crop&q=80',
   invest: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&auto=format&fit=crop&q=80',
-  escape: 'https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1920&auto=format&fit=crop&q=80',
+  escape: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&auto=format&fit=crop&q=80',
 };
 
 export default function IntentGateway() {
@@ -29,9 +29,9 @@ export default function IntentGateway() {
   };
 
   const intents: { key: IntentMode; label: string; subtitle: string }[] = [
-    { key: 'live', label: t('gateway.live', 'Live'), subtitle: 'Find your home' },
-    { key: 'invest', label: t('gateway.invest', 'Invest'), subtitle: 'Build your portfolio' },
-    { key: 'escape', label: t('gateway.escape', 'Escape'), subtitle: 'Experience paradise' },
+    { key: 'live', label: t('gateway.live'), subtitle: t('gateway.liveSubtitle', 'Make it your home') },
+    { key: 'invest', label: t('gateway.invest'), subtitle: t('gateway.investSubtitle', 'Build your portfolio') },
+    { key: 'escape', label: t('gateway.escape'), subtitle: t('gateway.escapeSubtitle', 'Discover the lifestyle') },
   ];
 
   return (
@@ -57,7 +57,6 @@ export default function IntentGateway() {
         }}
       />
 
-      {/* Subtle warm overlay always */}
       <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/30" />
 
       {/* Language toggle */}
@@ -86,11 +85,11 @@ export default function IntentGateway() {
             <span className="font-medium">Verso</span>
           </span>
           <p className="text-caption text-foreground/35 mt-4 text-center tracking-[0.3em]">
-            {t('gateway.subtitle', 'Mauritius')}
+            {t('gateway.subtitle')}
           </p>
         </motion.div>
 
-        {/* Intent choices — editorial, generous spacing */}
+        {/* Intent choices */}
         <div className="flex flex-col sm:flex-row items-center gap-12 sm:gap-20 md:gap-28">
           {intents.map((intent, index) => (
             <motion.button
@@ -128,7 +127,7 @@ export default function IntentGateway() {
           onClick={() => handleSelect('escape')}
           className="absolute bottom-12 text-caption text-foreground/20 hover:text-foreground/50 transition-colors duration-500 tracking-[0.3em]"
         >
-          {t('gateway.skip', 'Enter Site')}
+          {t('gateway.skip')}
         </motion.button>
       </div>
     </div>

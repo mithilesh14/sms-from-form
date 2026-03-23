@@ -7,11 +7,14 @@ export default {
 
   // Gateway
   gateway: {
-    live: 'Live',
+    live: 'Reside',
     invest: 'Invest',
-    escape: 'Escape',
-    subtitle: 'Mauritius',
+    escape: 'Experience',
+    subtitle: 'Grand Baie · Mauritius',
     skip: 'Enter Site',
+    liveSubtitle: 'Make it your home',
+    investSubtitle: 'Build your portfolio',
+    escapeSubtitle: 'Discover the lifestyle',
   },
 
   // Mode
@@ -35,81 +38,81 @@ export default {
 
   // Hero
   hero: {
-    title: 'The Verso',
-    subtitle: 'A private collection of thirty-two residences on the coast of Mauritius. Where architecture dissolves into the Indian Ocean.',
-    explore: 'Explore Residences',
-    location: 'Île Maurice · Indian Ocean',
-    scrollText: 'Discover',
+    title: 'Live Above the Horizon',
+    subtitle: 'Thirty-two exceptional residences where contemporary architecture meets the Indian Ocean. Welcome to The Verso.',
+    explore: 'Discover Your Residence',
+    location: 'Grand Baie · Mauritius',
+    scrollText: 'Explore',
   },
 
-  // Chapter 1
+  // Chapter 1 — THE BUILDING
   chapter1: {
-    label: 'Chapter One',
-    title: 'Where the Indian Ocean whispers to the shore',
-    description: 'Mauritius is not merely an island — it is a feeling. A luminous fragment of paradise where turquoise lagoons meet volcanic peaks, and every sunset writes a new poem across the sky.',
+    label: 'The Building',
+    title: 'Designed to elevate every moment',
+    description: 'The Verso is not just a building — it is a statement. Eight floors of bold, contemporary architecture rising from the Grand Baie coastline, shaped by light, ocean breeze, and an unwavering commitment to craft.',
   },
 
   stats: {
-    sunnyDays: 'Days of Sunshine',
-    avgTemp: 'Average Temperature',
-    africaRank: 'In Africa for Quality of Life',
-    capitalGains: 'Capital Gains Tax',
+    residences: 'Exclusive Residences',
+    floors: 'Floors of Ocean Views',
+    terraceSize: 'sq ft avg. Terrace',
+    completion: 'Completion',
   },
 
-  // Chapter 2
+  // Chapter 2 — THE RESIDENCES
   chapter2: {
-    label: 'Chapter Two',
-    title: 'Architecture born from the landscape',
-    description: 'Thirty-two residences across eight floors, designed to frame the ocean and dissolve the boundary between interior and horizon. Every line, every material, responds to the light and air of the Indian Ocean.',
-    residences: 'Residences',
-    floors: 'Floors',
-    views: 'Ocean Views',
+    label: 'The Residences',
+    title: 'Spaces that breathe with the ocean',
+    description: 'Every residence is a masterpiece of proportion and light. Floor-to-ceiling glass, natural stone finishes, and private terraces that blur the line between indoors and the infinite blue. From 1-bedroom retreats to expansive 4-bedroom penthouses.',
+    bedrooms: '1–4 Bedrooms',
+    sizes: '850–3,200 sq ft',
+    views: 'Panoramic Ocean Views',
   },
 
-  // Chapter 3
+  // Chapter 3 — THE AMENITIES
   chapter3: {
-    label: 'Chapter Three',
-    title: 'Moments, not features',
-    description: 'Morning light flooding through floor-to-ceiling glass. The infinity pool merging with the horizon. A private terrace dinner as the Indian Ocean turns gold.',
-    moment1: 'Morning Light',
-    moment2: 'Infinity Edge',
-    moment3: 'Terrace Dining',
+    label: 'The Lifestyle',
+    title: 'Where luxury becomes everyday',
+    description: 'An infinity pool that dissolves into the ocean. A residents-only rooftop lounge with sunset views. A private fitness studio, concierge services, and curated experiences — all designed for those who expect the exceptional.',
+    moment1: 'Infinity Pool & Deck',
+    moment2: 'Rooftop Lounge',
+    moment3: 'Private Wellness Suite',
   },
 
   invest: {
     label: 'Investment Opportunity',
-    title: 'An asset class of its own',
-    yield: 'Annual Rental Yield',
-    appreciation: '5-Year Appreciation',
+    title: 'A rare asset in a prime market',
+    yield: 'Projected Rental Yield',
+    appreciation: 'Market Appreciation (5yr)',
     tax: 'Capital Gains Tax',
-    cta: 'Investment Details',
+    cta: 'View Investment Details',
   },
 
   lifestyle: {
-    label: 'A Life Unlike Any Other',
-    title: 'Where every day feels like the first',
-    description: 'Wake to the sound of waves. Spend afternoons between the pool and the reef. Watch the sun dissolve into the Indian Ocean from your private terrace. This is not a holiday — this is home.',
-    cta: 'Explore the Residences',
+    label: 'Your Life at The Verso',
+    title: 'Wake up to the life you deserve',
+    description: 'Imagine mornings on your private terrace, coffee in hand, watching the sun paint the lagoon. Afternoons by the infinity pool. Evenings on the rooftop as Grand Baie comes alive below. This is your everyday at The Verso.',
+    cta: 'Explore Residences',
   },
 
   cta: {
-    label: 'Your Island Awaits',
-    title: 'The Verso',
-    button: 'Schedule a Private Viewing',
+    label: 'Ready to Make It Yours?',
+    title: 'Your residence awaits',
+    button: 'Book a Private Viewing',
   },
 
   // Residence
   residence: {
     title: 'The Architectural Vision',
     subtitle: 'The Vision',
-    description: 'A dialogue between land and sea. The Verso rises with purpose, its architecture shaped by the rhythms of island life and the purity of natural light.',
+    description: 'Every angle of The Verso has been sculpted with intention. The facade plays with light and shadow, the materials echo the natural coast, and each residence is oriented to capture the most breathtaking views.',
   },
 
   // Explore
   explore: {
     title: 'Find Your Residence',
     subtitle: 'Interactive Explorer',
-    description: 'Navigate the building floor by floor. Click any floor to reveal available residences, then select a unit to explore its details, views, and sunlight.',
+    description: 'Navigate The Verso floor by floor. Click any floor to reveal available residences, then select a unit to explore its layout, views, and natural light.',
   },
 
   // Units
@@ -128,17 +131,17 @@ export default {
       perMonth: '/month',
       from: 'From',
     },
-    cta: 'Inquire',
+    cta: 'Inquire Now',
     viewFloorPlan: 'View Floor Plan',
   },
 
   // Gallery
   gallery: {
-    title: 'Visual Journey',
-    subtitle: 'Experience The Verso through our lens',
+    title: 'The Verso in Detail',
+    subtitle: 'Visual exploration of architecture, interiors, and lifestyle',
     categories: {
       all: 'All',
-      exterior: 'Exterior',
+      exterior: 'Architecture',
       interiors: 'Interiors',
       amenities: 'Amenities',
       views: 'Views',
@@ -147,42 +150,42 @@ export default {
 
   // Virtual Tour
   virtualTour: {
-    title: '360° Virtual Tour',
-    subtitle: 'Immersive Experience',
-    description: 'Step inside our residences. Drag to look around, scroll to zoom. Toggle ambient sound for the full experience.',
+    title: 'Step Inside The Verso',
+    subtitle: 'Immersive 360° Experience',
+    description: 'Explore our show residence as if you were there. Drag to look around, scroll to zoom. Experience the light, the space, the views.',
   },
 
   // Own in Mauritius
   own: {
-    title: 'Own in Mauritius',
+    title: 'Own at The Verso',
     subtitle: 'International Ownership',
-    intro: 'Mauritius offers one of the world\'s most attractive frameworks for international property ownership — combining freehold rights, tax efficiency, and a pathway to residency in paradise.',
+    intro: 'Mauritius offers one of the world\'s most attractive frameworks for international property ownership — and The Verso is your gateway to freehold rights, tax efficiency, and residency in paradise.',
     benefitsLabel: 'Key Advantages',
-    benefitsTitle: 'A jurisdiction designed for global citizens',
+    benefitsTitle: 'Designed for global citizens',
     investLabel: 'Investment Snapshot',
     investTitle: 'Numbers that speak for themselves',
-    investDescription: 'The Mauritius property market has demonstrated consistent growth, driven by political stability, a robust legal framework, and increasing demand from international buyers.',
+    investDescription: 'Grand Baie is Mauritius\' most sought-after address. The Verso sits at the heart of this growth, offering owners a premium asset with strong rental demand and consistent capital appreciation.',
     processLabel: 'The Journey',
     processTitle: 'From inquiry to ownership',
   },
 
   // Contact
   contact: {
-    title: 'Begin Your Journey',
+    title: 'Let\'s Talk',
     subtitle: 'Private Consultation',
-    description: 'Our team is available for private consultations, property viewings, and investment guidance. We look forward to welcoming you.',
+    description: 'Whether you\'re ready to purchase, interested in rental returns, or simply curious — our team is here for you. Book a private viewing or schedule a call.',
     form: {
       name: 'Full Name',
       email: 'Email Address',
       phone: 'Phone Number',
       interest: 'I\'m interested in',
       interestOptions: {
-        purchase: 'Purchase',
-        shortTerm: 'Short Stay',
-        longTerm: 'Long Lease',
+        purchase: 'Purchasing a Residence',
+        shortTerm: 'Short Stay Rental',
+        longTerm: 'Long Term Lease',
         tour: 'Private Viewing',
       },
-      message: 'Tell us about your vision',
+      message: 'Tell us what you\'re looking for',
       submit: 'Send Inquiry',
       sending: 'Sending...',
     },
@@ -198,13 +201,13 @@ export default {
 
   // Footer
   footer: {
-    tagline: 'A private address in paradise',
+    tagline: 'Exceptional living on the Mauritian coast',
     privacy: 'Privacy',
     terms: 'Terms',
     copyright: 'All rights reserved.',
-    ctaLabel: 'Private Consultation',
-    ctaTitle: 'Begin Your Journey',
-    ctaButton: 'Get in Touch',
+    ctaLabel: 'Your Next Step',
+    ctaTitle: 'Experience The Verso',
+    ctaButton: 'Book a Viewing',
   },
 
   // Common

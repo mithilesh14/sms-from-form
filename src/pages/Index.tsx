@@ -29,18 +29,17 @@ const Index = () => {
       <Header />
       <ModeToggle />
 
-      {/* ═══ CINEMATIC HERO ═══ */}
+      {/* ═══ CINEMATIC HERO — The Building ═══ */}
       <section ref={heroRef} className="relative h-screen overflow-hidden grain-overlay">
         <motion.div style={{ scale: heroScale }} className="absolute inset-0">
           <div
             className="absolute inset-0 bg-cover bg-center ken-burns"
             style={{
-              backgroundImage: 'url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&auto=format&fit=crop&q=80)',
+              backgroundImage: 'url(https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1920&auto=format&fit=crop&q=80)',
             }}
           />
         </motion.div>
 
-        {/* Warm letterbox bars */}
         <div className="absolute top-0 left-0 right-0 h-[5vh] bg-background z-10" />
         <div className="absolute bottom-0 left-0 right-0 h-[5vh] bg-background z-10" />
 
@@ -57,7 +56,7 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="text-caption text-white/40 mb-8"
             >
-              {t('hero.location', 'Île Maurice · Indian Ocean')}
+              {t('hero.location')}
             </motion.p>
 
             <div className="overflow-hidden">
@@ -90,20 +89,19 @@ const Index = () => {
                 className="btn-premium inline-flex items-center gap-3 py-4"
                 style={{ background: 'hsl(42 50% 96%)', color: 'hsl(20 25% 12%)' }}
               >
-                <span>{t('hero.explore', 'Explore Residences')}</span>
+                <span>{t('hero.explore')}</span>
                 <ArrowRight className="h-4 w-4 relative z-10" />
               </Link>
             </motion.div>
           </div>
 
-          {/* Scroll indicator */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 2.5 }}
             className="absolute bottom-[7vh] left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20"
           >
-            <span className="text-caption text-white/25">{t('hero.scrollText', 'Discover')}</span>
+            <span className="text-caption text-white/25">{t('hero.scrollText')}</span>
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2.5, repeat: Infinity }}
@@ -114,23 +112,22 @@ const Index = () => {
         </motion.div>
       </section>
 
-      {/* ═══ CHAPTER 1: THE ISLAND — Asymmetric editorial ═══ */}
+      {/* ═══ CHAPTER 1: THE BUILDING — Asymmetric editorial ═══ */}
       <section className="section-gap">
         <div className="container-editorial">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-0">
-            {/* Left column — text, offset downward */}
             <div className="lg:col-span-5 lg:pt-24">
               <FadeIn>
                 <p className="text-caption text-accent mb-8">
-                  {t('chapter1.label', 'Chapter One')}
+                  {t('chapter1.label')}
                 </p>
               </FadeIn>
               <TextReveal className="font-serif text-headline text-foreground mb-10">
-                {t('chapter1.title', 'Where the Indian Ocean whispers to the shore')}
+                {t('chapter1.title')}
               </TextReveal>
               <FadeIn delay={0.2}>
                 <p className="text-body-lg text-muted-foreground mb-12 max-w-md">
-                  {t('chapter1.description', 'Mauritius is not merely an island — it is a feeling. A luminous fragment of paradise where turquoise lagoons meet volcanic peaks, and every sunset writes a new poem across the sky.')}
+                  {t('chapter1.description')}
                 </p>
               </FadeIn>
               <FadeIn delay={0.3}>
@@ -138,13 +135,12 @@ const Index = () => {
               </FadeIn>
             </div>
 
-            {/* Right column — tall portrait image */}
             <div className="lg:col-span-6 lg:col-start-7">
               <FadeIn direction="left">
                 <div className="aspect-portrait overflow-hidden img-zoom">
                   <img
-                    src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=1000&auto=format&fit=crop&q=80"
-                    alt="Mauritius coastline"
+                    src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1000&auto=format&fit=crop&q=80"
+                    alt="The Verso exterior architecture"
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
@@ -154,15 +150,15 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Stats row — wide, with generous spacing */}
+        {/* Building stats */}
         <div className="container-editorial mt-24 sm:mt-32">
           <div className="hr-diamond" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-16">
             {[
-              { number: '330', label: t('stats.sunnyDays', 'Days of Sunshine') },
-              { number: '26°', label: t('stats.avgTemp', 'Average Temperature') },
-              { number: '#1', label: t('stats.africaRank', 'In Africa for Quality of Life') },
-              { number: '0%', label: t('stats.capitalGains', 'Capital Gains Tax') },
+              { number: '32', label: t('stats.residences') },
+              { number: '8', label: t('stats.floors') },
+              { number: '450+', label: t('stats.terraceSize') },
+              { number: '2026', label: t('stats.completion') },
             ].map((stat, i) => (
               <FadeIn key={i} delay={i * 0.1}>
                 <div className="text-center">
@@ -175,12 +171,12 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ═══ FULL-BLEED CINEMATIC IMAGE ═══ */}
+      {/* ═══ FULL-BLEED — Show Residence Interior ═══ */}
       <FadeIn>
         <div className="w-full aspect-cinema overflow-hidden grain-overlay relative">
           <img
-            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&auto=format&fit=crop&q=80"
-            alt="Interior vision"
+            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&auto=format&fit=crop&q=80"
+            alt="Verso residence interior"
             className="w-full h-full object-cover ken-burns"
             loading="lazy"
           />
@@ -188,33 +184,32 @@ const Index = () => {
           <div className="absolute bottom-8 sm:bottom-12 left-0 right-0 z-10">
             <div className="container-editorial">
               <p className="text-caption text-white/40">
-                {t('chapter2.label', 'Chapter Two')}
+                {t('chapter2.label')}
               </p>
             </div>
           </div>
         </div>
       </FadeIn>
 
-      {/* ═══ CHAPTER 2: THE ARCHITECTURE — Indented editorial ═══ */}
+      {/* ═══ CHAPTER 2: THE RESIDENCES ═══ */}
       <section className="section-gap">
         <div className="container-editorial">
           <div className="indent-editorial max-w-3xl">
             <TextReveal className="font-serif text-headline text-foreground mb-10">
-              {t('chapter2.title', 'Architecture born from the landscape')}
+              {t('chapter2.title')}
             </TextReveal>
             <FadeIn delay={0.2}>
               <p className="text-body-lg text-muted-foreground mb-12">
-                {t('chapter2.description', 'Thirty-two residences across eight floors, designed to frame the ocean and dissolve the boundary between interior and horizon. Every line, every material, responds to the light and air of the Indian Ocean.')}
+                {t('chapter2.description')}
               </p>
             </FadeIn>
 
-            {/* Architectural numbers — horizontal strip */}
             <FadeIn delay={0.3}>
               <div className="flex gap-16 border-t border-border pt-8">
                 {[
-                  { n: '32', l: t('chapter2.residences', 'Residences') },
-                  { n: '8', l: t('chapter2.floors', 'Floors') },
-                  { n: '∞', l: t('chapter2.views', 'Ocean Views') },
+                  { n: '1–4', l: t('chapter2.bedrooms') },
+                  { n: '850–3,200', l: t('chapter2.sizes') },
+                  { n: '∞', l: t('chapter2.views') },
                 ].map((item, i) => (
                   <div key={i}>
                     <span className="number-display text-4xl lg:text-5xl text-foreground">{item.n}</span>
@@ -227,42 +222,42 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ═══ CHAPTER 3: THE LIVING — Staggered 2-column image grid ═══ */}
+      {/* ═══ CHAPTER 3: THE LIFESTYLE / AMENITIES ═══ */}
       <section className="section-warm section-gap grain-overlay relative">
         <div className="container-editorial relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-16">
             <div>
               <FadeIn>
                 <p className="text-caption text-accent mb-8">
-                  {t('chapter3.label', 'Chapter Three')}
+                  {t('chapter3.label')}
                 </p>
               </FadeIn>
               <TextReveal className="font-serif text-headline text-foreground mb-8">
-                {t('chapter3.title', 'Moments, not features')}
+                {t('chapter3.title')}
               </TextReveal>
             </div>
             <div className="lg:pt-20">
               <FadeIn delay={0.2}>
                 <p className="text-body-lg text-muted-foreground">
-                  {t('chapter3.description', 'Morning light flooding through floor-to-ceiling glass. The infinity pool merging with the horizon. A private terrace dinner as the Indian Ocean turns gold.')}
+                  {t('chapter3.description')}
                 </p>
               </FadeIn>
             </div>
           </div>
 
-          {/* Staggered image grid — editorial magazine feel */}
+          {/* Amenity image grid */}
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
             <FadeIn>
               <div className="aspect-editorial overflow-hidden img-zoom">
                 <img
-                  src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&auto=format&fit=crop&q=80"
-                  alt={t('chapter3.moment1', 'Morning Light')}
+                  src="https://images.unsplash.com/photo-1572331165267-854da2b021b1?w=800&auto=format&fit=crop&q=80"
+                  alt={t('chapter3.moment1')}
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
               </div>
               <p className="text-caption text-muted-foreground mt-4">
-                {t('chapter3.moment1', 'Morning Light')}
+                {t('chapter3.moment1')}
               </p>
             </FadeIn>
 
@@ -270,14 +265,14 @@ const Index = () => {
               <div className="lg:mt-20">
                 <div className="aspect-editorial overflow-hidden img-zoom">
                   <img
-                    src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&auto=format&fit=crop&q=80"
-                    alt={t('chapter3.moment2', 'Infinity Edge')}
+                    src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&auto=format&fit=crop&q=80"
+                    alt={t('chapter3.moment2')}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
                 </div>
                 <p className="text-caption text-muted-foreground mt-4">
-                  {t('chapter3.moment2', 'Infinity Edge')}
+                  {t('chapter3.moment2')}
                 </p>
               </div>
             </FadeIn>
@@ -286,14 +281,14 @@ const Index = () => {
               <div className="col-span-2 lg:col-span-1 lg:-mt-8">
                 <div className="aspect-editorial overflow-hidden img-zoom">
                   <img
-                    src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&auto=format&fit=crop&q=80"
-                    alt={t('chapter3.moment3', 'Terrace Dining')}
+                    src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&auto=format&fit=crop&q=80"
+                    alt={t('chapter3.moment3')}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
                 </div>
                 <p className="text-caption text-muted-foreground mt-4">
-                  {t('chapter3.moment3', 'Terrace Dining')}
+                  {t('chapter3.moment3')}
                 </p>
               </div>
             </FadeIn>
@@ -301,30 +296,27 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ═══ INVESTMENT / LIFESTYLE ADAPTIVE SECTION ═══ */}
+      {/* ═══ INVESTMENT / LIFESTYLE ADAPTIVE ═══ */}
       <section className="section-gap">
         <div className="container-editorial">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7">
               <FadeIn>
                 <p className="text-caption text-accent mb-8">
-                  {isInvest ? t('invest.label', 'Investment Opportunity') : t('lifestyle.label', 'A Life Unlike Any Other')}
+                  {isInvest ? t('invest.label') : t('lifestyle.label')}
                 </p>
               </FadeIn>
               <TextReveal className="font-serif text-headline text-foreground mb-10">
-                {isInvest
-                  ? t('invest.title', 'An asset class of its own')
-                  : t('lifestyle.title', 'Where every day feels like the first')
-                }
+                {isInvest ? t('invest.title') : t('lifestyle.title')}
               </TextReveal>
 
               {isInvest ? (
                 <FadeIn delay={0.2}>
                   <div className="flex flex-wrap gap-12 mt-8">
                     {[
-                      { n: '7-9%', l: t('invest.yield', 'Annual Rental Yield') },
-                      { n: '15%', l: t('invest.appreciation', '5-Year Appreciation') },
-                      { n: '€0', l: t('invest.tax', 'Capital Gains Tax') },
+                      { n: '7-9%', l: t('invest.yield') },
+                      { n: '15%', l: t('invest.appreciation') },
+                      { n: '€0', l: t('invest.tax') },
                     ].map((stat, i) => (
                       <div key={i}>
                         <span className="number-display text-4xl sm:text-5xl text-accent">{stat.n}</span>
@@ -336,7 +328,7 @@ const Index = () => {
               ) : (
                 <FadeIn delay={0.2}>
                   <p className="text-body-lg text-muted-foreground max-w-xl">
-                    {t('lifestyle.description', 'Wake to the sound of waves. Spend afternoons between the pool and the reef. Watch the sun dissolve into the Indian Ocean from your private terrace. This is not a holiday — this is home.')}
+                    {t('lifestyle.description')}
                   </p>
                 </FadeIn>
               )}
@@ -347,20 +339,19 @@ const Index = () => {
                     to={isInvest ? '/own-in-mauritius' : '/explore'}
                     className="btn-outline-premium inline-flex items-center gap-3 py-4 text-foreground"
                   >
-                    <span>{isInvest ? t('invest.cta', 'Investment Details') : t('lifestyle.cta', 'Explore the Residences')}</span>
+                    <span>{isInvest ? t('invest.cta') : t('lifestyle.cta')}</span>
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               </FadeIn>
             </div>
 
-            {/* Side image */}
             <div className="lg:col-span-5">
               <FadeIn direction="left">
                 <div className="aspect-portrait overflow-hidden img-zoom">
                   <img
                     src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format&fit=crop&q=80"
-                    alt="Residence exterior"
+                    alt="The Verso residence"
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
@@ -376,18 +367,18 @@ const Index = () => {
         <div className="container-editorial text-center relative z-10">
           <FadeIn>
             <span className="text-caption text-accent mb-8 block">
-              {t('cta.label', 'Your Island Awaits')}
+              {t('cta.label')}
             </span>
           </FadeIn>
           <TextReveal className="font-serif text-display text-foreground mx-auto max-w-4xl mb-12">
-            {t('cta.title', 'The Verso')}
+            {t('cta.title')}
           </TextReveal>
           <FadeIn delay={0.3}>
             <Link
               to="/contact"
               className="btn-premium inline-flex items-center gap-3 px-14 py-5"
             >
-              <span>{t('cta.button', 'Schedule a Private Viewing')}</span>
+              <span>{t('cta.button')}</span>
             </Link>
           </FadeIn>
         </div>
