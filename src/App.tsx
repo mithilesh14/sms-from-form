@@ -13,6 +13,7 @@ import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import VirtualTour from "./pages/VirtualTour";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
