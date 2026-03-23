@@ -116,7 +116,7 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="fixed inset-0 z-40 bg-background"
+            className="fixed inset-0 z-40 bg-background/98 backdrop-blur-xl"
           >
             <div className="h-full flex flex-col justify-center container-editorial">
               <nav className="space-y-2 sm:space-y-3">
