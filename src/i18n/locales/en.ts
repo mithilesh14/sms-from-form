@@ -42,14 +42,13 @@ export default {
     scrollText: 'Discover',
   },
 
-  // Chapter 1 — The Island
+  // Chapter 1
   chapter1: {
     label: 'Chapter One',
     title: 'Where the Indian Ocean whispers to the shore',
     description: 'Mauritius is not merely an island — it is a feeling. A luminous fragment of paradise where turquoise lagoons meet volcanic peaks, and every sunset writes a new poem across the sky.',
   },
 
-  // Stats
   stats: {
     sunnyDays: 'Days of Sunshine',
     avgTemp: 'Average Temperature',
@@ -57,7 +56,7 @@ export default {
     capitalGains: 'Capital Gains Tax',
   },
 
-  // Chapter 2 — The Architecture
+  // Chapter 2
   chapter2: {
     label: 'Chapter Two',
     title: 'Architecture born from the landscape',
@@ -67,7 +66,7 @@ export default {
     views: 'Ocean Views',
   },
 
-  // Chapter 3 — The Living
+  // Chapter 3
   chapter3: {
     label: 'Chapter Three',
     title: 'Moments, not features',
@@ -77,7 +76,6 @@ export default {
     moment3: 'Terrace Dining',
   },
 
-  // Investment mode
   invest: {
     label: 'Investment Opportunity',
     title: 'An asset class of its own',
@@ -87,7 +85,6 @@ export default {
     cta: 'Investment Details',
   },
 
-  // Lifestyle mode
   lifestyle: {
     label: 'A Life Unlike Any Other',
     title: 'Where every day feels like the first',
@@ -95,18 +92,24 @@ export default {
     cta: 'Explore the Residences',
   },
 
-  // CTA
   cta: {
     label: 'Your Island Awaits',
     title: 'The Verso',
     button: 'Schedule a Private Viewing',
   },
 
-  // Residence / Vision
+  // Residence
   residence: {
     title: 'The Architectural Vision',
     subtitle: 'The Vision',
     description: 'A dialogue between land and sea. The Verso rises with purpose, its architecture shaped by the rhythms of island life and the purity of natural light.',
+  },
+
+  // Explore
+  explore: {
+    title: 'Find Your Residence',
+    subtitle: 'Interactive Explorer',
+    description: 'Navigate the building floor by floor. Click any floor to reveal available residences, then select a unit to explore its details, views, and sunlight.',
   },
 
   // Units
@@ -142,22 +145,44 @@ export default {
     },
   },
 
+  // Virtual Tour
+  virtualTour: {
+    title: '360° Virtual Tour',
+    subtitle: 'Immersive Experience',
+    description: 'Step inside our residences. Drag to look around, scroll to zoom. Toggle ambient sound for the full experience.',
+  },
+
+  // Own in Mauritius
+  own: {
+    title: 'Own in Mauritius',
+    subtitle: 'International Ownership',
+    intro: 'Mauritius offers one of the world\'s most attractive frameworks for international property ownership — combining freehold rights, tax efficiency, and a pathway to residency in paradise.',
+    benefitsLabel: 'Key Advantages',
+    benefitsTitle: 'A jurisdiction designed for global citizens',
+    investLabel: 'Investment Snapshot',
+    investTitle: 'Numbers that speak for themselves',
+    investDescription: 'The Mauritius property market has demonstrated consistent growth, driven by political stability, a robust legal framework, and increasing demand from international buyers.',
+    processLabel: 'The Journey',
+    processTitle: 'From inquiry to ownership',
+  },
+
   // Contact
   contact: {
     title: 'Begin Your Journey',
-    subtitle: 'Schedule a private consultation with our team',
+    subtitle: 'Private Consultation',
+    description: 'Our team is available for private consultations, property viewings, and investment guidance. We look forward to welcoming you.',
     form: {
       name: 'Full Name',
       email: 'Email Address',
       phone: 'Phone Number',
       interest: 'I\'m interested in',
       interestOptions: {
-        purchase: 'Purchasing a residence',
-        shortTerm: 'Short-term stay',
-        longTerm: 'Long-term lease',
-        tour: 'Private viewing',
+        purchase: 'Purchase',
+        shortTerm: 'Short Stay',
+        longTerm: 'Long Lease',
+        tour: 'Private Viewing',
       },
-      message: 'Message',
+      message: 'Tell us about your vision',
       submit: 'Send Inquiry',
       sending: 'Sending...',
     },

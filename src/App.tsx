@@ -10,12 +10,13 @@ import "@/i18n";
 import Index from "./pages/Index";
 import IntentGateway from "./pages/IntentGateway";
 import Residence from "./pages/Residence";
-import Units from "./pages/Units";
+import Explore from "./pages/Explore";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import VirtualTour from "./pages/VirtualTour";
+import OwnInMauritius from "./pages/OwnInMauritius";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,9 +33,10 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/welcome" element={<IntentGateway />} />
               <Route path="/residence" element={<Residence />} />
-              <Route path="/units" element={<Units />} />
+              <Route path="/explore" element={<Explore />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/virtual-tour" element={<VirtualTour />} />
+              <Route path="/own-in-mauritius" element={<OwnInMauritius />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
