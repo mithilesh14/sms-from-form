@@ -136,23 +136,23 @@
 }
 
 @layer components {
-  /* Cinematic overlays */
+  /* Cinematic overlays — light warm tint */
   .hero-overlay-premium {
     background: linear-gradient(
       180deg,
-      hsl(var(--verso-charcoal) / 0.4) 0%,
-      hsl(var(--verso-charcoal) / 0.1) 40%,
-      hsl(var(--verso-charcoal) / 0.6) 80%,
-      hsl(var(--verso-charcoal) / 0.85) 100%
+      hsl(var(--verso-charcoal) / 0.3) 0%,
+      hsl(var(--verso-charcoal) / 0.05) 40%,
+      hsl(var(--verso-charcoal) / 0.45) 80%,
+      hsl(var(--verso-charcoal) / 0.7) 100%
     );
   }
 
   .overlay-cinematic {
     background: linear-gradient(
       180deg,
-      hsl(var(--verso-charcoal) / 0.5) 0%,
-      hsl(var(--verso-charcoal) / 0.15) 35%,
-      hsl(var(--verso-charcoal) / 0.5) 100%
+      hsl(var(--verso-charcoal) / 0.35) 0%,
+      hsl(var(--verso-charcoal) / 0.05) 35%,
+      hsl(var(--verso-charcoal) / 0.4) 100%
     );
   }
 
