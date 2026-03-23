@@ -312,7 +312,7 @@
   .image-reveal::after {
     content: '';
     @apply absolute inset-0;
-    background: hsl(var(--verso-charcoal));
+    background: hsl(var(--background));
     transform: translateX(0);
     transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
   }
