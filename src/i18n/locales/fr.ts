@@ -96,6 +96,12 @@ export default {
     description: 'Un dialogue entre terre et mer. The Verso s\'élève avec intention, son architecture façonnée par les rythmes de la vie insulaire et la pureté de la lumière naturelle.',
   },
 
+  explore: {
+    title: 'Trouvez Votre Résidence',
+    subtitle: 'Explorateur Interactif',
+    description: 'Naviguez dans le bâtiment étage par étage. Cliquez sur un étage pour découvrir les résidences disponibles, puis sélectionnez une unité pour explorer ses détails.',
+  },
+
   units: {
     title: 'Résidences',
     subtitle: 'Sélectionnez votre résidence',
@@ -127,21 +133,41 @@ export default {
     },
   },
 
+  virtualTour: {
+    title: 'Visite Virtuelle 360°',
+    subtitle: 'Expérience Immersive',
+    description: 'Entrez dans nos résidences. Glissez pour regarder autour, faites défiler pour zoomer. Activez le son ambiant pour une expérience complète.',
+  },
+
+  own: {
+    title: 'Investir à Maurice',
+    subtitle: 'Propriété Internationale',
+    intro: 'L\'île Maurice offre l\'un des cadres les plus attractifs au monde pour la propriété immobilière internationale — combinant droits de pleine propriété, efficacité fiscale et voie vers la résidence au paradis.',
+    benefitsLabel: 'Avantages Clés',
+    benefitsTitle: 'Une juridiction conçue pour les citoyens du monde',
+    investLabel: 'Aperçu Investissement',
+    investTitle: 'Des chiffres qui parlent d\'eux-mêmes',
+    investDescription: 'Le marché immobilier mauricien a démontré une croissance constante, soutenue par la stabilité politique, un cadre juridique solide et une demande croissante des acheteurs internationaux.',
+    processLabel: 'Le Parcours',
+    processTitle: 'De la demande à la propriété',
+  },
+
   contact: {
     title: 'Commencez Votre Parcours',
-    subtitle: 'Planifiez une consultation privée avec notre équipe',
+    subtitle: 'Consultation Privée',
+    description: 'Notre équipe est disponible pour des consultations privées, des visites de propriétés et des conseils en investissement. Nous avons hâte de vous accueillir.',
     form: {
       name: 'Nom Complet',
       email: 'Adresse Email',
       phone: 'Téléphone',
       interest: 'Je suis intéressé(e) par',
       interestOptions: {
-        purchase: 'L\'achat d\'une résidence',
-        shortTerm: 'Un séjour court',
-        longTerm: 'Une location longue durée',
-        tour: 'Une visite privée',
+        purchase: 'Achat',
+        shortTerm: 'Court Séjour',
+        longTerm: 'Location Longue Durée',
+        tour: 'Visite Privée',
       },
-      message: 'Message',
+      message: 'Parlez-nous de votre vision',
       submit: 'Envoyer',
       sending: 'Envoi...',
     },
