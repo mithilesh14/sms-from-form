@@ -35,6 +35,7 @@ export function Header() {
     { href: '/residence', label: t('nav.residence') },
     { href: '/units', label: t('nav.units') },
     { href: '/gallery', label: t('nav.gallery') },
+    { href: '/virtual-tour', label: t('nav.virtualTour', '360° Tour') },
     { href: '/contact', label: t('nav.contact') },
   ];
 
