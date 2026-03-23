@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { PanoramaViewer } from '@/components/PanoramaViewer';
@@ -52,14 +52,14 @@ export default function VirtualTour() {
       <Header />
 
       {/* Hero */}
-      <section className="pt-32 pb-8 md:pt-40 md:pb-12">
+      <section className="pt-36 pb-10 md:pt-44 md:pb-14">
         <div className="container-editorial">
           <FadeIn>
-            <p className="text-caption text-accent mb-4">
+            <p className="text-caption text-accent mb-8">
               {t('virtualTour.subtitle', 'Immersive Experience')}
             </p>
           </FadeIn>
-          <TextReveal className="font-serif text-headline text-foreground mb-6">
+          <TextReveal className="font-serif text-headline text-foreground mb-8">
             {t('virtualTour.title', '360° Virtual Tour')}
           </TextReveal>
           <FadeIn delay={0.2}>
@@ -72,7 +72,7 @@ export default function VirtualTour() {
 
       {/* Viewer */}
       <section className="section-gap-sm">
-        <div className="container-editorial">
+        <div className="container-wide">
           <motion.div
             ref={viewerRef}
             initial={{ opacity: 0, y: 30 }}
@@ -86,7 +86,7 @@ export default function VirtualTour() {
             <div className="absolute top-4 right-4 flex gap-2 z-20">
               <button
                 onClick={toggleSound}
-                className="w-10 h-10 bg-background/60 backdrop-blur-xl border border-border/20 flex items-center justify-center hover:bg-background/80 transition-all"
+                className="w-11 h-11 glass-panel flex items-center justify-center hover:bg-background/80 transition-all"
                 aria-label={ambientSound ? 'Mute' : 'Play ambient sound'}
               >
                 {ambientSound ? (
@@ -97,7 +97,7 @@ export default function VirtualTour() {
               </button>
               <button
                 onClick={toggleFullscreen}
-                className="w-10 h-10 bg-background/60 backdrop-blur-xl border border-border/20 flex items-center justify-center hover:bg-background/80 transition-all"
+                className="w-11 h-11 glass-panel flex items-center justify-center hover:bg-background/80 transition-all"
                 aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
               >
                 {isFullscreen ? (

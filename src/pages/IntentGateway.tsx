@@ -28,31 +28,37 @@ export default function IntentGateway() {
     localStorage.setItem('language', newLang);
   };
 
-  const intents: { key: IntentMode; label: string }[] = [
-    { key: 'live', label: t('gateway.live', 'Live') },
-    { key: 'invest', label: t('gateway.invest', 'Invest') },
-    { key: 'escape', label: t('gateway.escape', 'Escape') },
+  const intents: { key: IntentMode; label: string; subtitle: string }[] = [
+    { key: 'live', label: t('gateway.live', 'Live'), subtitle: 'Find your home' },
+    { key: 'invest', label: t('gateway.invest', 'Invest'), subtitle: 'Build your portfolio' },
+    { key: 'escape', label: t('gateway.escape', 'Escape'), subtitle: 'Experience paradise' },
   ];
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden">
-      {/* Background image that changes on hover */}
+    <div className="fixed inset-0 z-50 overflow-hidden grain-overlay">
+      {/* Background images that crossfade */}
       {Object.entries(intentImages).map(([key, url]) => (
         <motion.div
           key={key}
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${url})` }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: hoveredIntent === key ? 0.5 : 0 }}
-          transition={{ duration: 0.8 }}
+          animate={{ opacity: hoveredIntent === key ? 0.45 : 0 }}
+          transition={{ duration: 1 }}
         />
       ))}
 
-      {/* Default warm background when nothing hovered */}
-      <div className="absolute inset-0 bg-[hsl(38,35%,95%)]" style={{ zIndex: hoveredIntent ? -1 : 0 }} />
+      {/* Default warm base */}
+      <div
+        className="absolute inset-0 transition-opacity duration-1000"
+        style={{
+          background: 'linear-gradient(135deg, hsl(42 50% 96%) 0%, hsl(38 35% 91%) 100%)',
+          opacity: hoveredIntent ? 0 : 1,
+        }}
+      />
 
-      {/* Light warm overlay */}
-      <div className="absolute inset-0 bg-white/40" />
+      {/* Subtle warm overlay always */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/30" />
 
       {/* Language toggle */}
       <motion.button
@@ -60,52 +66,55 @@ export default function IntentGateway() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
         onClick={toggleLanguage}
-        className="absolute top-8 right-8 z-10 flex items-center gap-2 text-primary/60 hover:text-primary transition-colors min-h-[48px]"
+        className="absolute top-8 right-8 z-10 flex items-center gap-2 text-foreground/40 hover:text-foreground transition-colors min-h-[48px]"
       >
         <Globe className="h-4 w-4" />
         <span className="text-caption">{i18n.language === 'en' ? 'FR' : 'EN'}</span>
       </motion.button>
 
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center">
+      <div className="relative z-10 h-full flex flex-col items-center justify-center px-6">
         {/* Logo */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="mb-16 sm:mb-24"
+          className="mb-20 sm:mb-28"
         >
-          <span className="font-serif text-3xl sm:text-4xl text-primary">
+          <span className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground">
             <span className="font-light italic">The</span>{' '}
             <span className="font-medium">Verso</span>
           </span>
-          <p className="text-caption text-primary/50 mt-3 text-center">
+          <p className="text-caption text-foreground/35 mt-4 text-center tracking-[0.3em]">
             {t('gateway.subtitle', 'Mauritius')}
           </p>
         </motion.div>
 
-        {/* Intent choices */}
-        <div className="flex flex-col sm:flex-row items-center gap-8 sm:gap-16 md:gap-24">
+        {/* Intent choices — editorial, generous spacing */}
+        <div className="flex flex-col sm:flex-row items-center gap-12 sm:gap-20 md:gap-28">
           {intents.map((intent, index) => (
             <motion.button
               key={intent.key}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 + index * 0.15 }}
+              transition={{ duration: 0.9, delay: 0.6 + index * 0.15 }}
               onMouseEnter={() => setHoveredIntent(intent.key)}
               onMouseLeave={() => setHoveredIntent(null)}
               onClick={() => handleSelect(intent.key)}
-              className="group relative"
+              className="group relative text-center"
             >
-              <span className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-primary/40 
-                             hover:text-primary transition-colors duration-700 cursor-pointer italic">
+              <span className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-foreground/30 
+                             group-hover:text-foreground transition-colors duration-700 cursor-pointer italic block">
                 {intent.label}
               </span>
+              <span className="text-caption text-foreground/0 group-hover:text-foreground/40 transition-all duration-500 mt-3 block">
+                {intent.subtitle}
+              </span>
               <motion.span
-                className="absolute -bottom-2 left-0 h-px bg-accent"
+                className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-px bg-accent"
                 initial={{ width: 0 }}
-                whileHover={{ width: '100%' }}
-                transition={{ duration: 0.5 }}
+                whileHover={{ width: '60%' }}
+                transition={{ duration: 0.6 }}
               />
             </motion.button>
           ))}
@@ -115,9 +124,9 @@ export default function IntentGateway() {
         <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
+          transition={{ delay: 1.8 }}
           onClick={() => handleSelect('escape')}
-          className="absolute bottom-12 text-caption text-primary/30 hover:text-primary/60 transition-colors"
+          className="absolute bottom-12 text-caption text-foreground/20 hover:text-foreground/50 transition-colors duration-500 tracking-[0.3em]"
         >
           {t('gateway.skip', 'Enter Site')}
         </motion.button>

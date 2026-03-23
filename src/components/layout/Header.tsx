@@ -23,7 +23,6 @@ export function Header() {
     setIsOpen(false);
   }, [location]);
 
-  // Lock body scroll when menu open
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -53,7 +52,7 @@ export function Header() {
         transition={{ duration: 1, delay: 0.5 }}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-700",
-          isScrolled ? "bg-background/90 backdrop-blur-xl" : "bg-transparent"
+          isScrolled ? "glass-panel" : "bg-transparent"
         )}
       >
         <div className="container-editorial py-5 sm:py-6">
@@ -66,16 +65,14 @@ export function Header() {
               </span>
             </Link>
 
-            {/* Right side: Language + Menu button (always hamburger) */}
+            {/* Right side */}
             <div className="flex items-center gap-6">
-              {/* Mode indicator */}
               {mode && (
-                <span className="hidden sm:block text-caption text-accent">
+                <span className="hidden sm:block text-caption text-accent/70">
                   {mode === 'live' ? t('gateway.live', 'Live') : mode === 'invest' ? t('gateway.invest', 'Invest') : t('gateway.escape', 'Escape')}
                 </span>
               )}
 
-              {/* Language */}
               <button
                 onClick={toggleLanguage}
                 className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors min-h-[48px]"
@@ -84,7 +81,7 @@ export function Header() {
                 <span className="text-caption">{i18n.language.toUpperCase()}</span>
               </button>
 
-              {/* Hamburger - always visible */}
+              {/* Hamburger */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="relative z-10 min-h-[48px] min-w-[48px] flex items-center justify-center"
@@ -116,26 +113,27 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="fixed inset-0 z-40 bg-background/98 backdrop-blur-xl"
+            className="fixed inset-0 z-40 grain-overlay"
+            style={{ background: 'hsl(42 50% 96% / 0.98)' }}
           >
-            <div className="h-full flex flex-col justify-center container-editorial">
-              <nav className="space-y-2 sm:space-y-3">
+            <div className="h-full flex flex-col justify-center container-editorial relative z-10">
+              <nav className="space-y-1 sm:space-y-2">
                 {navLinks.map((link, index) => (
                   <div key={link.href} className="overflow-hidden">
                     <motion.div
                       initial={{ y: 80, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       exit={{ y: 80, opacity: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.06 }}
+                      transition={{ duration: 0.5, delay: index * 0.05 }}
                     >
                       <Link
                         to={link.href}
                         onClick={() => setIsOpen(false)}
                         className={cn(
-                          "block font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl py-2 transition-colors duration-300",
+                          "block font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl py-1.5 transition-all duration-500",
                           location.pathname === link.href
                             ? "text-foreground"
-                            : "text-muted-foreground hover:text-foreground"
+                            : "text-muted-foreground/40 hover:text-foreground hover:translate-x-4"
                         )}
                       >
                         {link.label}
@@ -145,26 +143,28 @@ export function Header() {
                 ))}
               </nav>
 
-              {/* Footer of menu */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ delay: 0.5 }}
-                className="mt-12 sm:mt-16 flex items-center gap-8"
+                className="mt-16 sm:mt-20"
               >
-                <a
-                  href="mailto:residences@theverso.mu"
-                  className="text-caption text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  residences@theverso.mu
-                </a>
-                <a
-                  href="tel:+2305555100"
-                  className="text-caption text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  +230 555 0100
-                </a>
+                <div className="divider-editorial mb-8" />
+                <div className="flex items-center gap-8">
+                  <a
+                    href="mailto:residences@theverso.mu"
+                    className="text-caption text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    residences@theverso.mu
+                  </a>
+                  <a
+                    href="tel:+2305555100"
+                    className="text-caption text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    +230 555 0100
+                  </a>
+                </div>
               </motion.div>
             </div>
           </motion.div>
