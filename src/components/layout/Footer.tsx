@@ -1,121 +1,53 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowUpRight, Instagram, Linkedin } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export function Footer() {
   const { t } = useTranslation();
 
-  const quickLinks = [
-    { href: '/residence', label: t('nav.residence') },
-    { href: '/units', label: t('nav.units') },
-    { href: '/gallery', label: t('nav.gallery') },
-    { href: '/contact', label: t('nav.contact') },
-  ];
-
   return (
-    <footer className="bg-primary text-primary-foreground relative overflow-hidden">
-      {/* Top decorative line */}
-      <div className="h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
-      
-      {/* Main Footer Content */}
-      <div className="container-editorial py-20 md:py-28">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8">
-          
-          {/* Brand Column */}
-          <div className="lg:col-span-5">
-            <Link to="/" className="inline-block mb-8">
-              <span className="font-serif text-4xl">
-                <span className="font-light italic">The</span>
-                {' '}
-                <span className="font-medium">Verso</span>
-              </span>
-            </Link>
-            
-            <p className="text-primary-foreground/60 text-lg font-light leading-relaxed max-w-md mb-10">
-              {t('footer.tagline')}
-            </p>
-            
-            {/* Social Links */}
-            <div className="flex gap-4">
-              {[
-                { icon: Instagram, href: '#' },
-                { icon: Linkedin, href: '#' },
-              ].map(({ icon: Icon, href }, index) => (
-                <motion.a
-                  key={index}
-                  href={href}
-                  whileHover={{ y: -3 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-12 h-12 border border-primary-foreground/20 flex items-center justify-center 
-                             text-primary-foreground/60 hover:text-accent hover:border-accent transition-colors duration-500"
-                >
-                  <Icon className="h-5 w-5" />
-                </motion.a>
-              ))}
-            </div>
-          </div>
-
-          {/* Navigation */}
-          <div className="lg:col-span-3">
-            <h4 className="text-caption text-primary-foreground/40 mb-8">Navigation</h4>
-            <nav className="flex flex-col gap-4">
-              {quickLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className="text-primary-foreground/70 hover:text-primary-foreground transition-colors duration-300 
-                             inline-flex items-center gap-2 group text-sm"
-                >
-                  {link.label}
-                  <ArrowUpRight className="h-3 w-3 opacity-0 -translate-y-1 translate-x-1 
-                                           group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 
-                                           transition-all duration-300" />
-                </Link>
-              ))}
-            </nav>
-          </div>
-
-          {/* Contact Info */}
-          <div className="lg:col-span-4">
-            <h4 className="text-caption text-primary-foreground/40 mb-8">{t('nav.contact')}</h4>
-            <div className="space-y-4 text-sm text-primary-foreground/70">
-              <p>{t('contact.info.address')}</p>
-              <p>{t('contact.info.city')}</p>
-              <div className="pt-4">
-                <a 
-                  href={`tel:${t('contact.info.phone')}`}
-                  className="block hover:text-primary-foreground transition-colors"
-                >
-                  {t('contact.info.phone')}
-                </a>
-                <a 
-                  href={`mailto:${t('contact.info.email')}`}
-                  className="block hover:text-primary-foreground transition-colors"
-                >
-                  {t('contact.info.email')}
-                </a>
-              </div>
-              <p className="pt-4 text-primary-foreground/50">{t('contact.info.hours')}</p>
-            </div>
-          </div>
-        </div>
+    <footer className="bg-background border-t border-border/30">
+      {/* CTA Band */}
+      <div className="container-editorial py-20 sm:py-28 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <p className="text-caption text-accent mb-6">{t('footer.ctaLabel', 'Private Consultation')}</p>
+          <h2 className="font-serif text-headline text-foreground mb-8">
+            {t('footer.ctaTitle', 'Begin Your Journey')}
+          </h2>
+          <Link
+            to="/contact"
+            className="btn-outline-premium inline-flex items-center gap-3 px-10 py-4 text-foreground border-foreground/30"
+          >
+            <span>{t('footer.ctaButton', 'Get in Touch')}</span>
+          </Link>
+        </motion.div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-primary-foreground/10">
-        <div className="container-editorial py-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-primary-foreground/40">
-            © {new Date().getFullYear()} The Verso. {t('footer.copyright')}
-          </p>
-          <div className="flex gap-8 text-xs text-primary-foreground/40">
-            <Link to="/privacy" className="hover:text-primary-foreground/70 transition-colors">
+      {/* Bottom bar */}
+      <div className="border-t border-border/20">
+        <div className="container-editorial py-8 flex flex-col md:flex-row justify-between items-center gap-6">
+          <Link to="/" className="font-serif text-lg text-foreground">
+            <span className="font-light italic">The</span>{' '}
+            <span className="font-medium">Verso</span>
+            <span className="text-caption text-muted-foreground ml-3">Mauritius</span>
+          </Link>
+
+          <div className="flex flex-wrap justify-center gap-8 text-caption text-muted-foreground">
+            <Link to="/privacy" className="hover:text-foreground transition-colors">
               {t('footer.privacy')}
             </Link>
-            <Link to="/terms" className="hover:text-primary-foreground/70 transition-colors">
+            <Link to="/terms" className="hover:text-foreground transition-colors">
               {t('footer.terms')}
             </Link>
           </div>
+
+          <p className="text-[10px] text-muted-foreground/50 tracking-wider">
+            © {new Date().getFullYear()} The Verso. {t('footer.copyright')}
+          </p>
         </div>
       </div>
     </footer>

@@ -4,9 +4,11 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { IntentProvider } from "@/contexts/IntentContext";
 import "@/i18n";
 
 import Index from "./pages/Index";
+import IntentGateway from "./pages/IntentGateway";
 import Residence from "./pages/Residence";
 import Units from "./pages/Units";
 import Gallery from "./pages/Gallery";
@@ -21,24 +23,27 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/residence" element={<Residence />} />
-            <Route path="/units" element={<Units />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/virtual-tour" element={<VirtualTour />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+      <IntentProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/welcome" element={<IntentGateway />} />
+              <Route path="/residence" element={<Residence />} />
+              <Route path="/units" element={<Units />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/virtual-tour" element={<VirtualTour />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </IntentProvider>
     </AuthProvider>
   </QueryClientProvider>
 );
