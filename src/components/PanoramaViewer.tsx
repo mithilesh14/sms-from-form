@@ -1,20 +1,18 @@
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import * as THREE from "three";
-import { RotateCcw, Move, ZoomIn, ZoomOut } from "lucide-react";
+import { Move } from "lucide-react";
 
 function PanoramaSphere({ url }: { url: string }) {
   const texture = useTexture(url);
-  const meshRef = useRef<THREE.Mesh>(null);
-  const { camera } = useThree();
 
   useEffect(() => {
     texture.colorSpace = THREE.SRGBColorSpace;
   }, [texture]);
 
   return (
-    <mesh ref={meshRef} scale={[-1, 1, 1]}>
+    <mesh scale={[-1, 1, 1]}>
       <sphereGeometry args={[500, 64, 32]} />
       <meshBasicMaterial map={texture} side={THREE.BackSide} />
     </mesh>
@@ -62,9 +60,7 @@ function CameraControls() {
       const dy = e.clientY - previousMouse.current.y;
       rotationRef.current.lon -= dx * 0.15;
       rotationRef.current.lat = THREE.MathUtils.clamp(
-        rotationRef.current.lat + dy * 0.15,
-        -85,
-        85
+        rotationRef.current.lat + dy * 0.15, -85, 85
       );
       previousMouse.current = { x: e.clientX, y: e.clientY };
     };
@@ -77,13 +73,10 @@ function CameraControls() {
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
       targetFov.current = THREE.MathUtils.clamp(
-        targetFov.current + e.deltaY * 0.05,
-        30,
-        100
+        targetFov.current + e.deltaY * 0.05, 30, 100
       );
     };
 
-    // Touch support
     const onTouchStart = (e: TouchEvent) => {
       if (e.touches.length === 1) {
         isDragging.current = true;
@@ -98,16 +91,12 @@ function CameraControls() {
       const dy = e.touches[0].clientY - previousMouse.current.y;
       rotationRef.current.lon -= dx * 0.2;
       rotationRef.current.lat = THREE.MathUtils.clamp(
-        rotationRef.current.lat + dy * 0.2,
-        -85,
-        85
+        rotationRef.current.lat + dy * 0.2, -85, 85
       );
       previousMouse.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     };
 
-    const onTouchEnd = () => {
-      isDragging.current = false;
-    };
+    const onTouchEnd = () => { isDragging.current = false; };
 
     el.style.cursor = "grab";
     el.addEventListener("pointerdown", onPointerDown);
@@ -143,13 +132,13 @@ export function PanoramaViewer({ images }: PanoramaViewerProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className="relative w-full h-[60vh] md:h-[80vh] bg-muted rounded-lg overflow-hidden">
+    <div className="relative w-full h-[60vh] md:h-[80vh] bg-secondary overflow-hidden">
       {/* Loading overlay */}
       {isLoading && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center bg-muted">
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-8 h-8 border-2 border-primary/20 border-t-primary rounded-full animate-spin" />
-            <p className="text-muted-foreground text-sm">Loading panorama…</p>
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-secondary">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-8 h-8 border border-accent/30 border-t-accent rounded-full animate-spin" />
+            <p className="text-muted-foreground text-caption">Loading panorama…</p>
           </div>
         </div>
       )}
@@ -164,9 +153,9 @@ export function PanoramaViewer({ images }: PanoramaViewerProps) {
       </Canvas>
 
       {/* Controls overlay */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
-        <Move className="w-4 h-4 text-primary/50" />
-        <span className="text-primary/60 text-xs hidden sm:inline">Drag to look around</span>
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 glass-panel px-5 py-2.5">
+        <Move className="w-3.5 h-3.5 text-muted-foreground" />
+        <span className="text-muted-foreground text-caption hidden sm:inline">Drag to look around</span>
       </div>
 
       {/* Scene selector */}
@@ -176,10 +165,10 @@ export function PanoramaViewer({ images }: PanoramaViewerProps) {
             <button
               key={i}
               onClick={() => { setIsLoading(true); setActiveIndex(i); }}
-              className={`px-4 py-2 text-xs rounded-full transition-all min-h-[40px] shadow-sm ${
+              className={`px-5 py-2.5 text-caption transition-all min-h-[40px] ${
                 i === activeIndex
                   ? "bg-accent text-accent-foreground"
-                  : "bg-white/70 text-primary/70 hover:bg-white hover:text-primary backdrop-blur-sm"
+                  : "glass-panel text-foreground/60 hover:text-foreground"
               }`}
             >
               {img.label}

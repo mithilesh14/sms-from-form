@@ -6,21 +6,25 @@ export function Footer() {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-background border-t border-border/30">
+    <footer className="bg-primary text-primary-foreground grain-overlay relative">
       {/* CTA Band */}
-      <div className="container-editorial py-20 sm:py-28 text-center">
+      <div className="container-editorial py-24 sm:py-32 text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <p className="text-caption text-accent mb-6">{t('footer.ctaLabel', 'Private Consultation')}</p>
-          <h2 className="font-serif text-headline text-foreground mb-8">
+          <p className="text-caption text-primary-foreground/40 mb-8 tracking-[0.3em]">
+            {t('footer.ctaLabel', 'Private Consultation')}
+          </p>
+          <h2 className="font-serif text-headline text-primary-foreground mb-10">
             {t('footer.ctaTitle', 'Begin Your Journey')}
           </h2>
           <Link
             to="/contact"
-            className="btn-outline-premium inline-flex items-center gap-3 px-10 py-4 text-foreground border-foreground/30"
+            className="relative border border-primary-foreground/20 bg-transparent font-light tracking-[0.15em] uppercase text-[10.5px]
+                       min-h-[52px] px-12 py-4 inline-flex items-center gap-3
+                       text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-all duration-700"
           >
             <span>{t('footer.ctaButton', 'Get in Touch')}</span>
           </Link>
@@ -28,24 +32,24 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-border/20">
+      <div className="border-t border-primary-foreground/10 relative z-10">
         <div className="container-editorial py-8 flex flex-col md:flex-row justify-between items-center gap-6">
-          <Link to="/" className="font-serif text-lg text-foreground">
+          <Link to="/" className="font-serif text-lg text-primary-foreground">
             <span className="font-light italic">The</span>{' '}
             <span className="font-medium">Verso</span>
-            <span className="text-caption text-muted-foreground ml-3">Mauritius</span>
+            <span className="text-caption text-primary-foreground/30 ml-3">Mauritius</span>
           </Link>
 
-          <div className="flex flex-wrap justify-center gap-8 text-caption text-muted-foreground">
-            <Link to="/privacy" className="hover:text-foreground transition-colors">
+          <div className="flex flex-wrap justify-center gap-8 text-caption text-primary-foreground/40">
+            <Link to="/privacy" className="hover:text-primary-foreground transition-colors">
               {t('footer.privacy')}
             </Link>
-            <Link to="/terms" className="hover:text-foreground transition-colors">
+            <Link to="/terms" className="hover:text-primary-foreground transition-colors">
               {t('footer.terms')}
             </Link>
           </div>
 
-          <p className="text-[10px] text-muted-foreground/50 tracking-wider">
+          <p className="text-[10px] text-primary-foreground/20 tracking-wider">
             © {new Date().getFullYear()} The Verso. {t('footer.copyright')}
           </p>
         </div>

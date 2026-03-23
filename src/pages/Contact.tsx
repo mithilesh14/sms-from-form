@@ -51,8 +51,8 @@ export default function Contact() {
     <div className="min-h-screen bg-background">
       <Header />
 
-      {/* Hero */}
-      <section className="relative h-[50vh] sm:h-[60vh] overflow-hidden">
+      {/* Hero — warm editorial */}
+      <section className="relative h-[50vh] sm:h-[60vh] overflow-hidden grain-overlay">
         <div
           className="absolute inset-0 bg-cover bg-center ken-burns"
           style={{
@@ -63,9 +63,9 @@ export default function Contact() {
         <div className="relative z-10 h-full flex flex-col justify-end pb-16">
           <div className="container-editorial">
             <FadeIn>
-              <p className="text-caption text-foreground/50 mb-4">{t('contact.subtitle', 'Private Consultation')}</p>
+              <p className="text-caption text-white/40 mb-4">{t('contact.subtitle', 'Private Consultation')}</p>
             </FadeIn>
-            <TextReveal className="font-serif text-display text-foreground">
+            <TextReveal className="font-serif text-display text-white">
               {t('contact.title', 'Begin Your Journey')}
             </TextReveal>
           </div>
@@ -75,33 +75,37 @@ export default function Contact() {
       {/* Content */}
       <section className="section-gap">
         <div className="container-editorial">
-          <div className="grid lg:grid-cols-5 gap-16 lg:gap-24">
+          <div className="grid lg:grid-cols-5 gap-16 lg:gap-28">
             {/* Left — Info */}
             <div className="lg:col-span-2">
               <FadeIn>
-                <p className="text-body-lg text-muted-foreground mb-12">
+                <p className="text-body-lg text-muted-foreground mb-14">
                   {t('contact.description', 'Our team is available for private consultations, property viewings, and investment guidance. We look forward to welcoming you.')}
                 </p>
               </FadeIn>
 
               <FadeIn delay={0.2}>
-                <div className="space-y-8 mb-12">
+                <div className="space-y-10 mb-14">
                   {[
                     { icon: MapPin, label: t('contact.info.city', 'Grand Baie, Mauritius'), sub: t('contact.info.address', 'Coastal Road') },
                     { icon: Phone, label: t('contact.info.phone', '+230 555 0100'), sub: t('contact.info.hours', 'By Appointment') },
                     { icon: Mail, label: t('contact.info.email', 'residences@theverso.mu'), sub: '' },
                   ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-4">
-                      <div className="w-10 h-10 border border-border/40 flex items-center justify-center shrink-0">
+                    <div key={i} className="flex items-start gap-5">
+                      <div className="w-11 h-11 border border-border/30 flex items-center justify-center shrink-0">
                         <item.icon className="h-4 w-4 text-accent" />
                       </div>
                       <div>
                         <p className="text-foreground text-sm">{item.label}</p>
-                        {item.sub && <p className="text-xs text-muted-foreground">{item.sub}</p>}
+                        {item.sub && <p className="text-xs text-muted-foreground mt-0.5">{item.sub}</p>}
                       </div>
                     </div>
                   ))}
                 </div>
+              </FadeIn>
+
+              <FadeIn delay={0.3}>
+                <div className="divider-editorial" />
               </FadeIn>
             </div>
 
@@ -109,9 +113,9 @@ export default function Contact() {
             <div className="lg:col-span-3">
               {submitted ? (
                 <FadeIn>
-                  <div className="flex flex-col items-center justify-center py-20 text-center">
-                    <div className="divider-editorial mb-8" />
-                    <h3 className="font-serif text-title text-foreground mb-4">Thank you</h3>
+                  <div className="flex flex-col items-center justify-center py-24 text-center">
+                    <div className="divider-editorial mb-10" />
+                    <h3 className="font-serif text-title text-foreground mb-5">Thank you</h3>
                     <p className="text-muted-foreground max-w-md">
                       {t('contact.success', 'Our team will be in touch within 24 hours.')}
                     </p>
@@ -119,10 +123,10 @@ export default function Contact() {
                 </FadeIn>
               ) : (
                 <FadeIn delay={0.3}>
-                  <form onSubmit={handleSubmit} className="space-y-8">
+                  <form onSubmit={handleSubmit} className="space-y-10">
                     {/* Interest */}
                     <div>
-                      <label className="text-caption text-muted-foreground mb-4 block">
+                      <label className="text-caption text-muted-foreground mb-5 block">
                         {t('contact.form.interest', 'I\'m interested in')}
                       </label>
                       <div className="flex flex-wrap gap-3">
@@ -131,7 +135,7 @@ export default function Contact() {
                             key={opt.id}
                             type="button"
                             onClick={() => setFormState(s => ({ ...s, interest: opt.id }))}
-                            className={`text-caption px-5 py-3 border transition-all duration-500 ${
+                            className={`text-caption px-6 py-3 border transition-all duration-500 ${
                               formState.interest === opt.id
                                 ? 'bg-foreground text-background border-foreground'
                                 : 'bg-transparent text-muted-foreground border-border hover:border-foreground hover:text-foreground'
@@ -144,14 +148,14 @@ export default function Contact() {
                     </div>
 
                     {/* Fields */}
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid md:grid-cols-2 gap-8">
                       <input
                         type="text"
                         value={formState.name}
                         onChange={e => setFormState(s => ({ ...s, name: e.target.value }))}
                         required
                         placeholder={t('contact.form.name', 'Full Name')}
-                        className="w-full bg-transparent border-b border-border py-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors duration-500"
+                        className="w-full bg-transparent border-b border-border py-4 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-accent transition-colors duration-500"
                       />
                       <input
                         type="email"
@@ -159,7 +163,7 @@ export default function Contact() {
                         onChange={e => setFormState(s => ({ ...s, email: e.target.value }))}
                         required
                         placeholder={t('contact.form.email', 'Email Address')}
-                        className="w-full bg-transparent border-b border-border py-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors duration-500"
+                        className="w-full bg-transparent border-b border-border py-4 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-accent transition-colors duration-500"
                       />
                     </div>
 
@@ -168,7 +172,7 @@ export default function Contact() {
                       value={formState.phone}
                       onChange={e => setFormState(s => ({ ...s, phone: e.target.value }))}
                       placeholder={t('contact.form.phone', 'Phone Number')}
-                      className="w-full bg-transparent border-b border-border py-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors duration-500"
+                      className="w-full bg-transparent border-b border-border py-4 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-accent transition-colors duration-500"
                     />
 
                     <textarea
@@ -177,13 +181,13 @@ export default function Contact() {
                       required
                       rows={4}
                       placeholder={t('contact.form.message', 'Tell us about your vision')}
-                      className="w-full bg-transparent border-b border-border py-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors duration-500 resize-none"
+                      className="w-full bg-transparent border-b border-border py-4 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-accent transition-colors duration-500 resize-none"
                     />
 
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="btn-premium inline-flex items-center gap-3 px-12 py-5"
+                      className="btn-premium inline-flex items-center gap-3 px-14 py-5"
                     >
                       <span>{isSubmitting ? t('contact.form.sending', 'Sending...') : t('contact.form.submit', 'Send Inquiry')}</span>
                       <ArrowRight className="h-4 w-4 relative z-10" />
