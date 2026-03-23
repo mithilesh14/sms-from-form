@@ -1,76 +1,112 @@
-import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { PanoramaViewer } from "@/components/PanoramaViewer";
+import { useTranslation } from 'react-i18next';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { PanoramaViewer } from '@/components/PanoramaViewer';
+import { FadeIn, TextReveal } from '@/components/ChapterSection';
+import { useState, useRef } from 'react';
+import { Volume2, VolumeX, Maximize, Minimize } from 'lucide-react';
 
 const panoramaScenes = [
-  {
-    url: "/panoramas/living-room.jpg",
-    label: "Living Room"
-  },
-  {
-    url: "/panoramas/kitchen.jpg",
-    label: "Lounge"
-  },
-  {
-    url: "/panoramas/bedroom.jpg",
-    label: "Master Suite"
-  },
-  {
-    url: "/panoramas/lobby.jpg",
-    label: "Grand Hall"
-  },
-  {
-    url: "/panoramas/rooftop.jpg",
-    label: "Rooftop Studio"
-  }
+  { url: '/panoramas/living-room.jpg', label: 'Living Room' },
+  { url: '/panoramas/kitchen.jpg', label: 'Lounge' },
+  { url: '/panoramas/bedroom.jpg', label: 'Master Suite' },
+  { url: '/panoramas/lobby.jpg', label: 'Grand Hall' },
+  { url: '/panoramas/rooftop.jpg', label: 'Rooftop Studio' },
 ];
 
 export default function VirtualTour() {
   const { t } = useTranslation();
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [ambientSound, setAmbientSound] = useState(false);
+  const viewerRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const toggleFullscreen = () => {
+    if (!viewerRef.current) return;
+    if (!document.fullscreenElement) {
+      viewerRef.current.requestFullscreen();
+      setIsFullscreen(true);
+    } else {
+      document.exitFullscreen();
+      setIsFullscreen(false);
+    }
+  };
+
+  const toggleSound = () => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio('https://cdn.freesound.org/previews/527/527604_2744307-lq.mp3');
+      audioRef.current.loop = true;
+      audioRef.current.volume = 0.3;
+    }
+    if (ambientSound) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play().catch(() => {});
+    }
+    setAmbientSound(!ambientSound);
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
-      <section className="pt-32 pb-8 md:pt-40 md:pb-12 bg-secondary">
+      {/* Hero */}
+      <section className="pt-32 pb-8 md:pt-40 md:pb-12">
         <div className="container-editorial">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-caption text-accent mb-4 block"
-          >
-            {t("virtualTour.subtitle", "IMMERSIVE EXPERIENCE")}
-          </motion.span>
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-serif text-4xl md:text-6xl lg:text-7xl text-foreground mb-6"
-          >
-            {t("virtualTour.title", "360° Virtual Tour")}
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-muted-foreground max-w-2xl text-base md:text-lg"
-          >
-            {t("virtualTour.description", "Explore our luxury residences from every angle. Click and drag to look around, scroll to zoom in and out.")}
-          </motion.p>
+          <FadeIn>
+            <p className="text-caption text-accent mb-4">
+              {t('virtualTour.subtitle', 'Immersive Experience')}
+            </p>
+          </FadeIn>
+          <TextReveal className="font-serif text-headline text-foreground mb-6">
+            {t('virtualTour.title', '360° Virtual Tour')}
+          </TextReveal>
+          <FadeIn delay={0.2}>
+            <p className="text-body-lg text-muted-foreground max-w-2xl">
+              {t('virtualTour.description', 'Step inside our residences. Drag to look around, scroll to zoom. Toggle ambient sound for the full experience.')}
+            </p>
+          </FadeIn>
         </div>
       </section>
 
-      <section className="section-gap">
+      {/* Viewer */}
+      <section className="section-gap-sm">
         <div className="container-editorial">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            ref={viewerRef}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="relative"
           >
             <PanoramaViewer images={panoramaScenes} />
+
+            {/* Ambient controls */}
+            <div className="absolute top-4 right-4 flex gap-2 z-20">
+              <button
+                onClick={toggleSound}
+                className="w-10 h-10 bg-background/60 backdrop-blur-xl border border-border/20 flex items-center justify-center hover:bg-background/80 transition-all"
+                aria-label={ambientSound ? 'Mute' : 'Play ambient sound'}
+              >
+                {ambientSound ? (
+                  <Volume2 className="h-4 w-4 text-accent" />
+                ) : (
+                  <VolumeX className="h-4 w-4 text-muted-foreground" />
+                )}
+              </button>
+              <button
+                onClick={toggleFullscreen}
+                className="w-10 h-10 bg-background/60 backdrop-blur-xl border border-border/20 flex items-center justify-center hover:bg-background/80 transition-all"
+                aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+              >
+                {isFullscreen ? (
+                  <Minimize className="h-4 w-4 text-foreground" />
+                ) : (
+                  <Maximize className="h-4 w-4 text-foreground" />
+                )}
+              </button>
+            </div>
           </motion.div>
         </div>
       </section>

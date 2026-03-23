@@ -1,98 +1,50 @@
-import { useTranslation } from "react-i18next";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslation } from 'react-i18next';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { FadeIn, TextReveal } from '@/components/ChapterSection';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const galleryImages = [
-  {
-    src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&auto=format&fit=crop&q=80",
-    alt: "Penthouse living room with panoramic views",
-    category: "interiors"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&auto=format&fit=crop&q=80",
-    alt: "Modern kitchen with marble island",
-    category: "interiors"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&auto=format&fit=crop&q=80",
-    alt: "Luxurious master suite",
-    category: "interiors"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&auto=format&fit=crop&q=80",
-    alt: "Building exterior at dusk",
-    category: "exterior"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&auto=format&fit=crop&q=80",
-    alt: "Rooftop terrace with city views",
-    category: "amenities"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&auto=format&fit=crop&q=80",
-    alt: "Designer bathroom with soaking tub",
-    category: "interiors"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&auto=format&fit=crop&q=80",
-    alt: "Open concept living space",
-    category: "interiors"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=1200&auto=format&fit=crop&q=80",
-    alt: "Private balcony retreat",
-    category: "amenities"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&auto=format&fit=crop&q=80",
-    alt: "Fitness center",
-    category: "amenities"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200&auto=format&fit=crop&q=80",
-    alt: "Lobby entrance",
-    category: "exterior"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&auto=format&fit=crop&q=80",
-    alt: "Study with built-in shelving",
-    category: "interiors"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&auto=format&fit=crop&q=80",
-    alt: "Dining area with chandelier",
-    category: "interiors"
-  }
+  { src: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&auto=format&fit=crop&q=80', alt: 'Penthouse living room', category: 'interiors' },
+  { src: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&auto=format&fit=crop&q=80', alt: 'Kitchen with marble island', category: 'interiors' },
+  { src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&auto=format&fit=crop&q=80', alt: 'Master suite', category: 'interiors' },
+  { src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&auto=format&fit=crop&q=80', alt: 'Building at dusk', category: 'exterior' },
+  { src: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&auto=format&fit=crop&q=80', alt: 'Rooftop terrace', category: 'amenities' },
+  { src: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&auto=format&fit=crop&q=80', alt: 'Designer bathroom', category: 'interiors' },
+  { src: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=1200&auto=format&fit=crop&q=80', alt: 'Mauritius coastline', category: 'views' },
+  { src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&auto=format&fit=crop&q=80', alt: 'Beach at sunset', category: 'views' },
+  { src: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&auto=format&fit=crop&q=80', alt: 'Open living space', category: 'interiors' },
+  { src: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&auto=format&fit=crop&q=80', alt: 'Infinity pool', category: 'amenities' },
+  { src: 'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=1200&auto=format&fit=crop&q=80', alt: 'Private balcony', category: 'views' },
+  { src: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&auto=format&fit=crop&q=80', alt: 'Study with ocean view', category: 'interiors' },
 ];
 
 export default function Gallery() {
   const { t } = useTranslation();
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [activeCategory, setActiveCategory] = useState('all');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const categories = [
-    { id: "all", label: t("gallery.all") },
-    { id: "interiors", label: t("gallery.interiors") },
-    { id: "exterior", label: t("gallery.exterior") },
-    { id: "amenities", label: t("gallery.amenities") }
+    { id: 'all', label: t('gallery.categories.all', 'All') },
+    { id: 'interiors', label: t('gallery.categories.interiors', 'Interiors') },
+    { id: 'exterior', label: t('gallery.categories.exterior', 'Exterior') },
+    { id: 'amenities', label: t('gallery.categories.amenities', 'Amenities') },
+    { id: 'views', label: t('gallery.categories.views', 'Views') },
   ];
 
-  const filteredImages = activeCategory === "all" 
-    ? galleryImages 
+  const filteredImages = activeCategory === 'all'
+    ? galleryImages
     : galleryImages.filter(img => img.category === activeCategory);
 
-  const openLightbox = (index: number) => setLightboxIndex(index);
-  const closeLightbox = () => setLightboxIndex(null);
-  
-  const navigateLightbox = (direction: "prev" | "next") => {
+  const navigateLightbox = (dir: 'prev' | 'next') => {
     if (lightboxIndex === null) return;
-    const newIndex = direction === "prev"
-      ? (lightboxIndex - 1 + filteredImages.length) % filteredImages.length
-      : (lightboxIndex + 1) % filteredImages.length;
-    setLightboxIndex(newIndex);
+    setLightboxIndex(
+      dir === 'prev'
+        ? (lightboxIndex - 1 + filteredImages.length) % filteredImages.length
+        : (lightboxIndex + 1) % filteredImages.length
+    );
   };
 
   return (
@@ -100,88 +52,61 @@ export default function Gallery() {
       <Header />
 
       {/* Hero */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 bg-secondary">
+      <section className="pt-32 pb-8 md:pt-40 md:pb-12">
         <div className="container-editorial">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-caption text-accent mb-4 block"
-          >
-            {t('gallery.subtitle')}
-          </motion.span>
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-serif text-5xl md:text-6xl lg:text-7xl text-foreground mb-12"
-          >
-            {t('gallery.title')}
-          </motion.h1>
+          <FadeIn>
+            <p className="text-caption text-accent mb-4">{t('gallery.subtitle', 'Visual Journey')}</p>
+          </FadeIn>
+          <TextReveal className="font-serif text-headline text-foreground mb-8">
+            {t('gallery.title', 'Visual Journey')}
+          </TextReveal>
 
-          {/* Category Filters */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap gap-4"
-          >
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`text-caption px-6 py-3 border transition-all duration-500 ${
-                  activeCategory === cat.id
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-transparent text-muted-foreground border-border hover:border-foreground hover:text-foreground"
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </motion.div>
+          {/* Filters */}
+          <FadeIn delay={0.3}>
+            <div className="flex flex-wrap gap-3">
+              {categories.map(cat => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={`text-caption px-5 py-3 border transition-all duration-500 ${
+                    activeCategory === cat.id
+                      ? 'bg-foreground text-background border-foreground'
+                      : 'bg-transparent text-muted-foreground border-border hover:border-foreground hover:text-foreground'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+          </FadeIn>
         </div>
       </section>
 
-      {/* Gallery Grid */}
-      <section className="section-gap">
+      {/* Masonry-style Grid */}
+      <section className="section-gap-sm">
         <div className="container-editorial">
-          <motion.div 
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
+          <motion.div layout className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
             <AnimatePresence mode="popLayout">
               {filteredImages.map((image, index) => (
                 <motion.div
                   key={image.src}
                   layout
-                  initial={{ opacity: 0, scale: 0.9 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  onClick={() => openLightbox(index)}
-                  className="cursor-pointer group"
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.4, delay: index * 0.03 }}
+                  onClick={() => setLightboxIndex(index)}
+                  className="cursor-pointer group break-inside-avoid"
                 >
-                  <div className="relative overflow-hidden aspect-[4/3]">
-                    <motion.img
+                  <div className="relative overflow-hidden">
+                    <img
                       src={image.src}
                       alt={image.alt}
                       loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/30 transition-colors duration-500 flex items-center justify-center">
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        whileHover={{ scale: 1 }}
-                        className="w-12 h-12 border border-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      >
-                        <span className="text-white text-xl">+</span>
-                      </motion.div>
-                    </div>
+                    <div className="absolute inset-0 bg-background/0 group-hover:bg-background/30 transition-colors duration-500" />
                   </div>
-                  <p className="text-sm text-muted-foreground mt-3 group-hover:text-foreground transition-colors duration-300">
-                    {image.alt}
-                  </p>
                 </motion.div>
               ))}
             </AnimatePresence>
@@ -196,43 +121,42 @@ export default function Gallery() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-primary/95 z-50 flex items-center justify-center"
-            onClick={closeLightbox}
+            className="fixed inset-0 bg-background/95 z-50 flex items-center justify-center"
+            onClick={() => setLightboxIndex(null)}
           >
             <button
-              onClick={closeLightbox}
-              className="absolute top-6 right-6 text-white/60 hover:text-white transition-colors"
+              onClick={() => setLightboxIndex(null)}
+              className="absolute top-6 right-6 text-muted-foreground hover:text-foreground transition-colors z-10"
             >
-              <X className="h-8 w-8" />
+              <X className="h-6 w-6" />
             </button>
 
             <button
-              onClick={(e) => { e.stopPropagation(); navigateLightbox("prev"); }}
-              className="absolute left-6 text-white/60 hover:text-white transition-colors"
+              onClick={e => { e.stopPropagation(); navigateLightbox('prev'); }}
+              className="absolute left-6 text-muted-foreground hover:text-foreground transition-colors"
             >
-              <ChevronLeft className="h-10 w-10" />
+              <ChevronLeft className="h-8 w-8" />
             </button>
 
             <motion.img
               key={filteredImages[lightboxIndex].src}
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
+              exit={{ opacity: 0, scale: 0.95 }}
               src={filteredImages[lightboxIndex].src}
               alt={filteredImages[lightboxIndex].alt}
               className="max-h-[85vh] max-w-[90vw] object-contain"
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
             />
 
             <button
-              onClick={(e) => { e.stopPropagation(); navigateLightbox("next"); }}
-              className="absolute right-6 text-white/60 hover:text-white transition-colors"
+              onClick={e => { e.stopPropagation(); navigateLightbox('next'); }}
+              className="absolute right-6 text-muted-foreground hover:text-foreground transition-colors"
             >
-              <ChevronRight className="h-10 w-10" />
+              <ChevronRight className="h-8 w-8" />
             </button>
 
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/60 text-caption">
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-muted-foreground text-caption">
               {lightboxIndex + 1} / {filteredImages.length}
             </div>
           </motion.div>
