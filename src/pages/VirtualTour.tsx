@@ -8,11 +8,11 @@ import { useState, useRef } from 'react';
 import { Volume2, VolumeX, Maximize, Minimize } from 'lucide-react';
 
 const panoramaScenes = [
-  { url: '/panoramas/living-room.jpg', label: 'Living Room' },
-  { url: '/panoramas/kitchen.jpg', label: 'Lounge' },
-  { url: '/panoramas/bedroom.jpg', label: 'Master Suite' },
-  { url: '/panoramas/lobby.jpg', label: 'Grand Hall' },
-  { url: '/panoramas/rooftop.jpg', label: 'Rooftop Studio' },
+  { url: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=4096&auto=format&fit=crop&q=90', label: 'Living Room' },
+  { url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=4096&auto=format&fit=crop&q=90', label: 'Kitchen' },
+  { url: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=4096&auto=format&fit=crop&q=90', label: 'Master Suite' },
+  { url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=4096&auto=format&fit=crop&q=90', label: 'Grand Hall' },
+  { url: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=4096&auto=format&fit=crop&q=90', label: 'Rooftop' },
 ];
 
 export default function VirtualTour() {

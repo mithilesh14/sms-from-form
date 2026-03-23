@@ -55,7 +55,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-caption text-foreground/50 mb-6"
+              className="text-caption text-white/50 mb-6"
             >
               {t('hero.location', 'Île Maurice · Indian Ocean')}
             </motion.p>
@@ -65,7 +65,7 @@ const Index = () => {
                 initial={{ y: 120 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1.2, delay: 0.7, ease: [0.4, 0, 0.2, 1] }}
-                className="font-serif text-display text-foreground mb-6"
+                className="font-serif text-display text-white mb-6"
               >
                 {t('hero.title')}
               </motion.h1>
@@ -75,7 +75,7 @@ const Index = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 1.2 }}
-              className="text-lg sm:text-xl text-foreground/60 max-w-lg font-light leading-relaxed mb-10"
+              className="text-lg sm:text-xl text-white/70 max-w-lg font-light leading-relaxed mb-10"
             >
               {t('hero.subtitle')}
             </motion.p>
@@ -88,10 +88,10 @@ const Index = () => {
             >
               <Link
                 to="/explore"
-                className="btn-premium inline-flex items-center gap-3 px-10 py-4"
+                className="relative overflow-hidden bg-white text-primary font-light tracking-[0.12em] uppercase text-[11px] min-h-[48px] px-10 py-4 inline-flex items-center gap-3 hover:bg-accent hover:text-white transition-all duration-500"
               >
                 <span>{t('hero.explore', 'Explore Residences')}</span>
-                <ArrowRight className="h-4 w-4 relative z-10" />
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </motion.div>
           </div>
@@ -103,12 +103,12 @@ const Index = () => {
             transition={{ delay: 2.5 }}
             className="absolute bottom-[8vh] left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20"
           >
-            <span className="text-caption text-foreground/30">{t('hero.scrollText', 'Discover')}</span>
+            <span className="text-caption text-white/30">{t('hero.scrollText', 'Discover')}</span>
             <motion.div
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <ArrowDown className="h-4 w-4 text-foreground/30" />
+              <ArrowDown className="h-4 w-4 text-white/30" />
             </motion.div>
           </motion.div>
         </motion.div>

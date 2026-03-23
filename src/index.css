@@ -11,63 +11,63 @@
 
 @layer base {
   :root {
-    /* Deep charcoal base — cinematic dark */
-    --background: 30 10% 6%;
-    --foreground: 38 30% 92%;
+    /* Warm, light, inviting — sand & cream base */
+    --background: 40 40% 97%;
+    --foreground: 25 20% 15%;
 
-    --card: 30 8% 10%;
-    --card-foreground: 38 30% 92%;
+    --card: 38 35% 95%;
+    --card-foreground: 25 20% 15%;
 
-    --popover: 30 8% 10%;
-    --popover-foreground: 38 30% 92%;
+    --popover: 40 40% 97%;
+    --popover-foreground: 25 20% 15%;
 
-    /* Warm sand primary (light on dark) */
-    --primary: 38 30% 92%;
-    --primary-foreground: 30 10% 6%;
+    /* Rich charcoal primary for buttons/text */
+    --primary: 25 15% 18%;
+    --primary-foreground: 40 40% 97%;
 
-    /* Muted charcoal secondary */
-    --secondary: 30 6% 14%;
-    --secondary-foreground: 38 20% 80%;
+    /* Light sand secondary */
+    --secondary: 38 30% 90%;
+    --secondary-foreground: 25 20% 25%;
 
-    /* Dark muted */
-    --muted: 30 6% 18%;
-    --muted-foreground: 30 10% 50%;
+    /* Warm muted */
+    --muted: 35 20% 88%;
+    --muted-foreground: 25 10% 45%;
 
     /* Burnished gold accent */
-    --accent: 36 50% 54%;
-    --accent-foreground: 30 10% 6%;
+    --accent: 36 50% 50%;
+    --accent-foreground: 40 40% 97%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 8% 16%;
-    --input: 30 8% 16%;
-    --ring: 36 50% 54%;
+    --border: 35 20% 85%;
+    --input: 35 20% 85%;
+    --ring: 36 50% 50%;
 
     --radius: 0px;
 
     /* Extended Palette */
-    --verso-charcoal: 30 10% 6%;
-    --verso-charcoal-light: 30 6% 14%;
-    --verso-sand: 38 30% 92%;
+    --verso-charcoal: 25 15% 18%;
+    --verso-charcoal-light: 25 10% 30%;
+    --verso-sand: 38 35% 95%;
     --verso-sand-dark: 35 20% 78%;
-    --verso-gold: 36 50% 54%;
-    --verso-gold-light: 36 40% 68%;
+    --verso-gold: 36 50% 50%;
+    --verso-gold-light: 36 40% 65%;
     --verso-teal: 175 40% 30%;
     --verso-teal-light: 175 35% 45%;
     --verso-cream: 40 35% 95%;
     --verso-warm-white: 40 40% 99%;
-    --verso-stone: 30 8% 40%;
+    --verso-stone: 30 8% 55%;
 
     /* Sidebar */
-    --sidebar-background: 30 10% 4%;
-    --sidebar-foreground: 38 30% 92%;
-    --sidebar-primary: 36 50% 54%;
-    --sidebar-primary-foreground: 30 10% 6%;
-    --sidebar-accent: 30 6% 14%;
-    --sidebar-accent-foreground: 38 30% 92%;
-    --sidebar-border: 30 8% 12%;
-    --sidebar-ring: 36 50% 54%;
+    --sidebar-background: 38 35% 95%;
+    --sidebar-foreground: 25 20% 15%;
+    --sidebar-primary: 36 50% 50%;
+    --sidebar-primary-foreground: 40 40% 97%;
+    --sidebar-accent: 38 30% 90%;
+    --sidebar-accent-foreground: 25 20% 15%;
+    --sidebar-border: 35 20% 85%;
+    --sidebar-ring: 36 50% 50%;
   }
 }
 
@@ -136,23 +136,23 @@
 }
 
 @layer components {
-  /* Cinematic overlays */
+  /* Cinematic overlays — light warm tint */
   .hero-overlay-premium {
     background: linear-gradient(
       180deg,
-      hsl(var(--verso-charcoal) / 0.4) 0%,
-      hsl(var(--verso-charcoal) / 0.1) 40%,
-      hsl(var(--verso-charcoal) / 0.6) 80%,
-      hsl(var(--verso-charcoal) / 0.85) 100%
+      hsl(var(--verso-charcoal) / 0.3) 0%,
+      hsl(var(--verso-charcoal) / 0.05) 40%,
+      hsl(var(--verso-charcoal) / 0.45) 80%,
+      hsl(var(--verso-charcoal) / 0.7) 100%
     );
   }
 
   .overlay-cinematic {
     background: linear-gradient(
       180deg,
-      hsl(var(--verso-charcoal) / 0.5) 0%,
-      hsl(var(--verso-charcoal) / 0.15) 35%,
-      hsl(var(--verso-charcoal) / 0.5) 100%
+      hsl(var(--verso-charcoal) / 0.35) 0%,
+      hsl(var(--verso-charcoal) / 0.05) 35%,
+      hsl(var(--verso-charcoal) / 0.4) 100%
     );
   }
 
@@ -164,7 +164,7 @@
     left: 0;
     right: 0;
     height: 8vh;
-    background: hsl(var(--verso-charcoal));
+    background: hsl(var(--background));
     z-index: 5;
     pointer-events: none;
   }
@@ -174,7 +174,7 @@
 
   /* Premium buttons */
   .btn-premium {
-    @apply relative overflow-hidden bg-foreground text-background font-light tracking-[0.12em] uppercase text-[11px];
+    @apply relative overflow-hidden bg-primary text-primary-foreground font-light tracking-[0.12em] uppercase text-[11px];
     @apply min-h-[48px] px-8;
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     -webkit-tap-highlight-color: transparent;
@@ -197,7 +197,7 @@
   }
 
   .btn-premium:hover {
-    color: hsl(var(--verso-charcoal));
+    color: hsl(var(--primary-foreground));
   }
 
   .btn-outline-premium {
@@ -312,7 +312,7 @@
   .image-reveal::after {
     content: '';
     @apply absolute inset-0;
-    background: hsl(var(--verso-charcoal));
+    background: hsl(var(--background));
     transform: translateX(0);
     transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
   }
