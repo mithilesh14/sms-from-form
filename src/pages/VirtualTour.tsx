@@ -6,24 +6,24 @@ import { PanoramaViewer } from "@/components/PanoramaViewer";
 
 const panoramaScenes = [
   {
-    url: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=4096&auto=format&fit=crop&q=90",
+    url: "/panoramas/living-room.jpg",
     label: "Living Room"
   },
   {
-    url: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=4096&auto=format&fit=crop&q=90",
-    label: "Kitchen"
+    url: "/panoramas/kitchen.jpg",
+    label: "Lounge"
   },
   {
-    url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=4096&auto=format&fit=crop&q=90",
+    url: "/panoramas/bedroom.jpg",
     label: "Master Suite"
   },
   {
-    url: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=4096&auto=format&fit=crop&q=90",
-    label: "Bathroom"
+    url: "/panoramas/lobby.jpg",
+    label: "Grand Hall"
   },
   {
-    url: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=4096&auto=format&fit=crop&q=90",
-    label: "Rooftop Terrace"
+    url: "/panoramas/rooftop.jpg",
+    label: "Rooftop Studio"
   }
 ];
 
