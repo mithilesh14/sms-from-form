@@ -1,28 +1,33 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Menu, X, Globe } from 'lucide-react';
+import { Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useIntent } from '@/contexts/IntentContext';
 
 export function Header() {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const { mode } = useIntent();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 80);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 80);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsOpen(false);
   }, [location]);
+
+  // Lock body scroll when menu open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'fr' : 'en';
@@ -33,151 +38,77 @@ export function Header() {
   const navLinks = [
     { href: '/', label: t('nav.home') },
     { href: '/residence', label: t('nav.residence') },
-    { href: '/units', label: t('nav.units') },
-    { href: '/gallery', label: t('nav.gallery') },
+    { href: '/explore', label: t('nav.explore', 'Explore') },
     { href: '/virtual-tour', label: t('nav.virtualTour', '360° Tour') },
+    { href: '/own-in-mauritius', label: t('nav.ownInMauritius', 'Own in Mauritius') },
+    { href: '/gallery', label: t('nav.gallery') },
     { href: '/contact', label: t('nav.contact') },
   ];
 
-  const isActive = (href: string) => location.pathname === href;
-
   return (
     <>
-      <motion.header 
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+      <motion.header
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-700",
-          isScrolled 
-            ? "bg-background/95 backdrop-blur-xl py-4" 
-            : "bg-transparent py-6"
+          isScrolled ? "bg-background/90 backdrop-blur-xl" : "bg-transparent"
         )}
       >
-        <div className="container-editorial">
+        <div className="container-editorial py-5 sm:py-6">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link 
-              to="/" 
-              className="group relative"
-            >
-              <motion.span 
-                className={cn(
-                  "font-serif text-2xl md:text-3xl tracking-tight transition-colors duration-500",
-                  isScrolled ? "text-foreground" : "text-white"
-                )}
-              >
-                <span className="font-light italic">The</span>
-                {' '}
+            <Link to="/" className="group relative z-10">
+              <span className="font-serif text-xl sm:text-2xl text-foreground">
+                <span className="font-light italic">The</span>{' '}
                 <span className="font-medium">Verso</span>
-              </motion.span>
-              <span className={cn(
-                "absolute -bottom-1 left-0 w-0 h-px transition-all duration-500 group-hover:w-full",
-                isScrolled ? "bg-accent" : "bg-white/50"
-              )} />
+              </span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-12">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className={cn(
-                    "text-caption relative py-2 transition-all duration-500",
-                    isActive(link.href) 
-                      ? isScrolled ? "text-foreground" : "text-white"
-                      : isScrolled 
-                        ? "text-muted-foreground hover:text-foreground" 
-                        : "text-white/70 hover:text-white"
-                  )}
-                >
-                  {link.label}
-                  <motion.span 
-                    className={cn(
-                      "absolute bottom-0 left-0 h-px",
-                      isScrolled ? "bg-accent" : "bg-white"
-                    )}
-                    initial={false}
-                    animate={{ width: isActive(link.href) ? '100%' : '0%' }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </Link>
-              ))}
-            </nav>
+            {/* Right side: Language + Menu button (always hamburger) */}
+            <div className="flex items-center gap-6">
+              {/* Mode indicator */}
+              {mode && (
+                <span className="hidden sm:block text-caption text-accent">
+                  {mode === 'live' ? t('gateway.live', 'Live') : mode === 'invest' ? t('gateway.invest', 'Invest') : t('gateway.escape', 'Escape')}
+                </span>
+              )}
 
-            {/* Actions */}
-            <div className="hidden lg:flex items-center gap-8">
+              {/* Language */}
               <button
                 onClick={toggleLanguage}
-                className={cn(
-                  "flex items-center gap-2 text-caption transition-all duration-500 group",
-                  isScrolled 
-                    ? "text-muted-foreground hover:text-foreground" 
-                    : "text-white/70 hover:text-white"
-                )}
+                className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors min-h-[48px]"
               >
-                <Globe className="h-4 w-4" />
-                <span className="relative">
-                  {i18n.language.toUpperCase()}
-                  <span className={cn(
-                    "absolute -bottom-0.5 left-0 w-0 h-px transition-all duration-300 group-hover:w-full",
-                    isScrolled ? "bg-foreground" : "bg-white"
-                  )} />
-                </span>
+                <Globe className="h-3.5 w-3.5" />
+                <span className="text-caption">{i18n.language.toUpperCase()}</span>
               </button>
-              
-              <Link 
-                to="/contact"
-                className={cn(
-                  "btn-outline-premium px-6 py-3 transition-all duration-500",
-                  isScrolled 
-                    ? "text-foreground border-foreground/30 hover:bg-primary hover:text-primary-foreground hover:border-primary" 
-                    : "text-white border-white/40 hover:bg-white hover:text-foreground hover:border-white"
-                )}
-              >
-                {t('nav.bookTour')}
-              </Link>
-            </div>
 
-            {/* Mobile Menu Button - Touch friendly */}
-            <button
-              className={cn(
-                "lg:hidden p-3 -mr-3 transition-colors duration-500 min-h-[48px] min-w-[48px] flex items-center justify-center",
-                isScrolled ? "text-foreground" : "text-white"
-              )}
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label={isOpen ? "Close menu" : "Open menu"}
-            >
-              <AnimatePresence mode="wait">
-                {isOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X className="h-6 w-6" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu className="h-6 w-6" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </button>
+              {/* Hamburger - always visible */}
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="relative z-10 min-h-[48px] min-w-[48px] flex items-center justify-center"
+                aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              >
+                <div className="w-6 flex flex-col gap-1.5">
+                  <motion.span
+                    className="block h-px bg-foreground origin-center"
+                    animate={isOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <motion.span
+                    className="block h-px bg-foreground origin-center"
+                    animate={isOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </motion.header>
 
-      {/* Mobile Navigation Overlay */}
+      {/* Fullscreen overlay menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -185,57 +116,55 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="fixed inset-0 z-40 lg:hidden"
+            className="fixed inset-0 z-40 bg-background"
           >
-            {/* Backdrop */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-primary"
-            />
-            
-            {/* Content */}
-            <div className="relative h-full flex flex-col justify-center px-6 sm:px-8 safe-area-inset">
-              <nav className="space-y-1">
+            <div className="h-full flex flex-col justify-center container-editorial">
+              <nav className="space-y-2 sm:space-y-3">
                 {navLinks.map((link, index) => (
-                  <motion.div
-                    key={link.href}
-                    initial={{ opacity: 0, x: -40 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -40 }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
-                  >
-                    <Link
-                      to={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className={cn(
-                        "block font-serif text-3xl sm:text-4xl md:text-5xl py-3 transition-colors duration-300 min-h-[52px]",
-                        isActive(link.href) 
-                          ? "text-primary-foreground" 
-                          : "text-primary-foreground/60 hover:text-primary-foreground active:text-primary-foreground"
-                      )}
+                  <div key={link.href} className="overflow-hidden">
+                    <motion.div
+                      initial={{ y: 80, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: 80, opacity: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.06 }}
                     >
-                      {link.label}
-                    </Link>
-                  </motion.div>
+                      <Link
+                        to={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className={cn(
+                          "block font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl py-2 transition-colors duration-300",
+                          location.pathname === link.href
+                            ? "text-foreground"
+                            : "text-muted-foreground hover:text-foreground"
+                        )}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  </div>
                 ))}
               </nav>
 
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                className="mt-8 sm:mt-12 flex items-center gap-6"
+              {/* Footer of menu */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ delay: 0.5 }}
+                className="mt-12 sm:mt-16 flex items-center gap-8"
               >
-                <button 
-                  onClick={toggleLanguage} 
-                  className="flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground active:text-primary-foreground transition-colors min-h-[48px] py-2"
+                <a
+                  href="mailto:residences@theverso.mu"
+                  className="text-caption text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  <Globe className="h-5 w-5" />
-                  <span className="text-sm tracking-wider">{i18n.language === 'en' ? 'Français' : 'English'}</span>
-                </button>
+                  residences@theverso.mu
+                </a>
+                <a
+                  href="tel:+2305555100"
+                  className="text-caption text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  +230 555 0100
+                </a>
               </motion.div>
             </div>
           </motion.div>

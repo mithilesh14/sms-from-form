@@ -1,511 +1,335 @@
 import { useTranslation } from 'react-i18next';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Bed, Bath, Maximize, Home, Waves, Dumbbell, Shield } from 'lucide-react';
+import { ArrowRight, ArrowDown } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { FadeIn, TextReveal } from '@/components/ChapterSection';
+import { ModeToggle } from '@/components/ModeToggle';
+import { useIntent } from '@/contexts/IntentContext';
 import { useRef } from 'react';
 
 const Index = () => {
   const { t } = useTranslation();
+  const { mode } = useIntent();
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
   });
-  
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  const units = [
-    {
-      id: 1,
-      type: 'sale',
-      badge: t('units.forSale'),
-      name: 'Penthouse Suite A',
-      location: 'Floor 32 · Corner Unit',
-      description: 'Expansive living with floor-to-ceiling windows and private terrace overlooking the city.',
-      price: '$2,450,000',
-      beds: 3,
-      baths: 3.5,
-      sqft: 3200,
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&auto=format&fit=crop&q=80',
-    },
-    {
-      id: 2,
-      type: 'short',
-      badge: t('units.shortTerm'),
-      name: 'Executive Suite',
-      location: 'Floor 24 · City View',
-      description: 'Fully furnished luxury suite perfect for extended business stays.',
-      price: '$450/night',
-      beds: 2,
-      baths: 2,
-      sqft: 1450,
-      image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format&fit=crop&q=80',
-    },
-    {
-      id: 3,
-      type: 'long',
-      badge: t('units.longTerm'),
-      name: 'Signature Residence',
-      location: 'Floor 18 · Park View',
-      description: 'Elegant two-bedroom with premium finishes and dedicated parking.',
-      price: '$5,200/mo',
-      beds: 2,
-      baths: 2,
-      sqft: 1680,
-      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80',
-    },
-  ];
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, 150]);
 
-  const spaces = [
-    {
-      title: t('spaces.livingRooms'),
-      description: t('spaces.livingRoomsDesc'),
-      image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&auto=format&fit=crop&q=80',
-    },
-    {
-      title: t('spaces.kitchens'),
-      description: t('spaces.kitchensDesc'),
-      image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&auto=format&fit=crop&q=80',
-    },
-    {
-      title: t('spaces.bedrooms'),
-      description: t('spaces.bedroomsDesc'),
-      image: 'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=800&auto=format&fit=crop&q=80',
-    },
-    {
-      title: t('spaces.bathrooms'),
-      description: t('spaces.bathroomsDesc'),
-      image: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&auto=format&fit=crop&q=80',
-    },
-  ];
-
-  const amenities = [
-    { icon: Waves, title: t('amenities.pool'), desc: t('amenities.poolDesc') },
-    { icon: Dumbbell, title: t('amenities.fitness'), desc: t('amenities.fitnessDesc') },
-    { icon: Shield, title: t('amenities.concierge'), desc: t('amenities.conciergeDesc') },
-    { icon: Home, title: t('amenities.lounge'), desc: t('amenities.loungeDesc') },
-  ];
+  const isInvest = mode === 'invest';
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <ModeToggle />
 
-      {/* ═══════════════════════════════════════════════════════════════════
-          HERO SECTION
-      ═══════════════════════════════════════════════════════════════════ */}
+      {/* ═══ VIDEO HERO ═══ */}
       <section ref={heroRef} className="relative h-screen overflow-hidden">
         <motion.div style={{ scale: heroScale }} className="absolute inset-0">
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-0 bg-cover bg-center ken-burns"
             style={{
-              backgroundImage: 'url(https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&auto=format&fit=crop&q=80)',
+              backgroundImage: 'url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&auto=format&fit=crop&q=80)',
             }}
           />
         </motion.div>
-        
-        <div className="overlay-cinematic absolute inset-0" />
-        
-        <motion.div 
-          style={{ opacity: heroOpacity }}
-          className="relative z-10 h-full flex flex-col justify-center pt-20 sm:pt-0"
+
+        {/* Letterbox bars */}
+        <div className="absolute top-0 left-0 right-0 h-[6vh] bg-background z-10" />
+        <div className="absolute bottom-0 left-0 right-0 h-[6vh] bg-background z-10" />
+
+        <div className="overlay-cinematic absolute inset-0 z-[1]" />
+
+        <motion.div
+          style={{ opacity: heroOpacity, y: heroY }}
+          className="relative z-[2] h-full flex flex-col justify-end pb-[12vh]"
         >
           <div className="container-editorial">
-            <motion.span
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-caption text-white/60 mb-4 sm:mb-6 block"
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="text-caption text-foreground/50 mb-6"
             >
-              Minneapolis, Minnesota
-            </motion.span>
-            
+              {t('hero.location', 'Île Maurice · Indian Ocean')}
+            </motion.p>
+
             <div className="overflow-hidden">
               <motion.h1
                 initial={{ y: 120 }}
                 animate={{ y: 0 }}
-                transition={{ duration: 1, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                className="font-serif text-display text-white mb-6 sm:mb-8"
+                transition={{ duration: 1.2, delay: 0.7, ease: [0.4, 0, 0.2, 1] }}
+                className="font-serif text-display text-foreground mb-6"
               >
                 {t('hero.title')}
               </motion.h1>
             </div>
-            
+
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
-              className="text-base sm:text-lg md:text-xl text-white/70 max-w-xl font-light leading-relaxed mb-8 sm:mb-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 1.2 }}
+              className="text-lg sm:text-xl text-foreground/60 max-w-lg font-light leading-relaxed mb-10"
             >
               {t('hero.subtitle')}
             </motion.p>
-            
+
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.1 }}
+              transition={{ duration: 0.8, delay: 1.5 }}
+              className="flex items-center gap-6"
             >
-              <Link 
-                to="/units"
-                className="btn-premium inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-5"
+              <Link
+                to="/explore"
+                className="btn-premium inline-flex items-center gap-3 px-10 py-4"
               >
-                <span>{t('hero.browseListing')}</span>
-                <ArrowRight className="h-4 w-4" />
+                <span>{t('hero.explore', 'Explore Residences')}</span>
+                <ArrowRight className="h-4 w-4 relative z-10" />
               </Link>
             </motion.div>
           </div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2.5 }}
+            className="absolute bottom-[8vh] left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20"
+          >
+            <span className="text-caption text-foreground/30">{t('hero.scrollText', 'Discover')}</span>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <ArrowDown className="h-4 w-4 text-foreground/30" />
+            </motion.div>
+          </motion.div>
         </motion.div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════
-          FEATURES SECTION - Three Pillars
-      ═══════════════════════════════════════════════════════════════════ */}
-      <section className="section-gap bg-secondary">
+      {/* ═══ CHAPTER 1: THE ISLAND ═══ */}
+      <section className="section-gap">
         <div className="container-editorial">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-10 sm:mb-16"
-          >
-            <h2 className="text-headline text-foreground mb-3 sm:mb-4">
-              {t('features.title')}
-            </h2>
-            <p className="text-body-lg text-muted-foreground max-w-2xl mx-auto">
-              {t('features.subtitle')}
+          <FadeIn>
+            <p className="text-caption text-accent mb-6">{t('chapter1.label', 'Chapter One')}</p>
+          </FadeIn>
+          <TextReveal className="font-serif text-headline text-foreground max-w-4xl mb-12">
+            {t('chapter1.title', 'Where the Indian Ocean whispers to the shore')}
+          </TextReveal>
+          <FadeIn delay={0.2}>
+            <p className="text-body-lg text-muted-foreground max-w-2xl mb-16">
+              {t('chapter1.description', 'Mauritius is not merely an island — it is a feeling. A luminous fragment of paradise where turquoise lagoons meet volcanic peaks, and every sunset writes a new poem across the sky.')}
             </p>
-          </motion.div>
+          </FadeIn>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+        {/* Full-bleed image */}
+        <FadeIn className="px-5 sm:px-0">
+          <div className="w-full aspect-cinema overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=1920&auto=format&fit=crop&q=80"
+              alt="Mauritius coastline"
+              className="w-full h-full object-cover ken-burns"
+              loading="lazy"
+            />
+          </div>
+        </FadeIn>
+
+        {/* Stats row */}
+        <div className="container-editorial mt-20 sm:mt-28">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             {[
-              { icon: '🏠', title: t('features.location'), desc: t('features.locationDesc') },
-              { icon: '🏢', title: t('features.propertyType'), desc: t('features.propertyTypeDesc') },
-              { icon: '✨', title: t('features.amenities'), desc: t('features.amenitiesDesc') },
-            ].map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
-                className="text-center p-6 sm:p-8 border border-border bg-background hover:bg-card transition-colors duration-500"
-              >
-                <span className="text-3xl sm:text-4xl mb-4 sm:mb-6 block">{feature.icon}</span>
-                <h3 className="font-serif text-xl sm:text-2xl text-foreground mb-3 sm:mb-4">{feature.title}</h3>
-                <p className="text-sm sm:text-base text-muted-foreground font-light">{feature.desc}</p>
-              </motion.div>
+              { number: '330', label: t('stats.sunnyDays', 'Days of Sunshine') },
+              { number: '26°', label: t('stats.avgTemp', 'Average Temperature') },
+              { number: '#1', label: t('stats.africaRank', 'In Africa for Quality of Life') },
+              { number: '0%', label: t('stats.capitalGains', 'Capital Gains Tax') },
+            ].map((stat, i) => (
+              <FadeIn key={i} delay={i * 0.1}>
+                <div className="text-center md:text-left">
+                  <span className="number-display text-5xl sm:text-6xl text-accent">{stat.number}</span>
+                  <p className="text-caption text-muted-foreground mt-3">{stat.label}</p>
+                </div>
+              </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════
-          NUMBERED PROCESS SECTION
-      ═══════════════════════════════════════════════════════════════════ */}
-      <section className="section-gap bg-background">
+      {/* ═══ CHAPTER 2: THE ARCHITECTURE ═══ */}
+      <section className="section-gap bg-secondary/50">
         <div className="container-editorial">
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center mb-12 sm:mb-16 lg:mb-24">
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <span className="number-display text-6xl sm:text-7xl md:text-8xl text-accent/20">01</span>
-              <h3 className="font-serif text-title text-foreground mt-2 sm:mt-4 mb-3 sm:mb-4">
-                {t('process.step1.title')}
-              </h3>
-              <p className="text-sm sm:text-base text-muted-foreground font-light mb-4 sm:mb-6">
-                {t('process.step1.description')}
-              </p>
-              <Link to="/contact" className="link-underline text-caption text-foreground inline-block py-2">
-                {t('common.learnMore')}
-              </Link>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="img-zoom aspect-[4/3]"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&auto=format&fit=crop&q=80"
-                alt="Inquire"
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center mb-12 sm:mb-16 lg:mb-24">
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="img-zoom aspect-[4/3] order-2 lg:order-1"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format&fit=crop&q=80"
-                alt="Tour"
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="order-1 lg:order-2"
-            >
-              <span className="number-display text-6xl sm:text-7xl md:text-8xl text-accent/20">02</span>
-              <h3 className="font-serif text-title text-foreground mt-2 sm:mt-4 mb-3 sm:mb-4">
-                {t('process.step2.title')}
-              </h3>
-              <p className="text-sm sm:text-base text-muted-foreground font-light mb-4 sm:mb-6">
-                {t('process.step2.description')}
-              </p>
-              <Link to="/contact" className="link-underline text-caption text-foreground inline-block py-2">
-                {t('nav.bookTour')}
-              </Link>
-            </motion.div>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <span className="number-display text-6xl sm:text-7xl md:text-8xl text-accent/20">03</span>
-              <h3 className="font-serif text-title text-foreground mt-2 sm:mt-4 mb-3 sm:mb-4">
-                {t('process.step3.title')}
-              </h3>
-              <p className="text-sm sm:text-base text-muted-foreground font-light mb-4 sm:mb-6">
-                {t('process.step3.description')}
-              </p>
-              <Link to="/units" className="link-underline text-caption text-foreground inline-block py-2">
-                {t('hero.browseListing')}
-              </Link>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="img-zoom aspect-[4/3]"
-            >
-              <img
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80"
-                alt="Move In"
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════════
-          RECENT LISTINGS - Card Grid
-      ═══════════════════════════════════════════════════════════════════ */}
-      <section className="section-gap bg-secondary">
-        <div className="container-editorial">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8 sm:mb-12"
-          >
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div>
-              <span className="text-caption text-accent mb-3 sm:mb-4 block">{t('units.subtitle')}</span>
-              <h2 className="text-headline text-foreground">{t('units.recentListing')}</h2>
+              <FadeIn>
+                <p className="text-caption text-accent mb-6">{t('chapter2.label', 'Chapter Two')}</p>
+              </FadeIn>
+              <TextReveal className="font-serif text-headline text-foreground mb-8">
+                {t('chapter2.title', 'Architecture born from the landscape')}
+              </TextReveal>
+              <FadeIn delay={0.2}>
+                <p className="text-body-lg text-muted-foreground mb-8">
+                  {t('chapter2.description', 'Thirty-two residences across eight floors, designed to frame the ocean and dissolve the boundary between interior and horizon. Every line, every material, responds to the light and air of the Indian Ocean.')}
+                </p>
+              </FadeIn>
+
+              {/* Animated numbers */}
+              <FadeIn delay={0.3}>
+                <div className="flex gap-12 mt-8">
+                  {[
+                    { n: '32', l: t('chapter2.residences', 'Residences') },
+                    { n: '8', l: t('chapter2.floors', 'Floors') },
+                    { n: '∞', l: t('chapter2.views', 'Ocean Views') },
+                  ].map((item, i) => (
+                    <div key={i}>
+                      <span className="number-display text-4xl text-foreground">{item.n}</span>
+                      <p className="text-caption text-muted-foreground mt-2">{item.l}</p>
+                    </div>
+                  ))}
+                </div>
+              </FadeIn>
             </div>
-            <Link to="/units" className="link-underline text-caption text-muted-foreground hover:text-foreground hidden sm:block">
-              {t('common.viewAll')}
-            </Link>
-          </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {units.map((unit, index) => (
-              <motion.div
-                key={unit.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Link to="/contact" className="group block bg-background active:bg-card">
-                  <div className="relative overflow-hidden">
-                    <div className="aspect-[4/3] img-zoom">
-                      <img
-                        src={unit.image}
-                        alt={unit.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <span className="absolute top-3 left-3 sm:top-4 sm:left-4 text-caption bg-accent text-accent-foreground px-2.5 py-1 sm:px-3 sm:py-1.5">
-                      {unit.badge}
-                    </span>
-                  </div>
-
-                  <div className="p-4 sm:p-6">
-                    <p className="text-xs sm:text-sm text-muted-foreground mb-1.5 sm:mb-2">{unit.location}</p>
-                    <h3 className="font-serif text-lg sm:text-xl text-foreground mb-2 sm:mb-3 group-hover:text-accent transition-colors duration-300">
-                      {unit.name}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4 line-clamp-2">
-                      {unit.description}
-                    </p>
-                    <p className="font-serif text-lg sm:text-xl text-accent mb-3 sm:mb-4">{unit.price}</p>
-
-                    <div className="flex flex-wrap gap-3 sm:gap-6 text-xs sm:text-sm text-muted-foreground pt-3 sm:pt-4 border-t border-border">
-                      <span className="flex items-center gap-1.5 sm:gap-2">
-                        <Bed className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                        {unit.beds} {t('common.rooms')}
-                      </span>
-                      <span className="flex items-center gap-1.5 sm:gap-2">
-                        <Bath className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                        {unit.baths} {t('common.baths')}
-                      </span>
-                      <span className="flex items-center gap-1.5 sm:gap-2">
-                        <Maximize className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                        {unit.sqft.toLocaleString()} {t('units.details.sqft')}
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="text-center mt-8 sm:hidden">
-            <Link to="/units" className="btn-outline-premium inline-flex items-center gap-3 px-8 py-4 w-full justify-center">
-              <span>{t('common.viewAll')}</span>
-            </Link>
+            <FadeIn direction="left">
+              <div className="aspect-editorial overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&auto=format&fit=crop&q=80"
+                  alt="Architectural vision"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════
-          INTERIOR SPACES SECTION
-      ═══════════════════════════════════════════════════════════════════ */}
-      <section className="section-gap bg-background">
-        <div className="container-editorial">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-8 sm:mb-12 md:mb-16"
-          >
-            <span className="text-caption text-accent mb-3 sm:mb-4 block">{t('spaces.subtitle')}</span>
-            <h2 className="text-headline text-foreground mb-3 sm:mb-4">{t('spaces.title')}</h2>
-            <p className="text-body-lg text-muted-foreground max-w-2xl mx-auto">
-              {t('spaces.description')}
+      {/* ═══ CHAPTER 3: THE LIVING ═══ */}
+      <section className="section-gap">
+        <div className="container-editorial mb-16">
+          <FadeIn>
+            <p className="text-caption text-accent mb-6">{t('chapter3.label', 'Chapter Three')}</p>
+          </FadeIn>
+          <TextReveal className="font-serif text-headline text-foreground max-w-3xl mb-8">
+            {t('chapter3.title', 'Moments, not features')}
+          </TextReveal>
+          <FadeIn delay={0.2}>
+            <p className="text-body-lg text-muted-foreground max-w-xl">
+              {t('chapter3.description', 'Morning light flooding through floor-to-ceiling glass. The infinity pool merging with the horizon. A private terrace dinner as the Indian Ocean turns gold.')}
             </p>
-          </motion.div>
+          </FadeIn>
+        </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            {spaces.map((space, index) => (
-              <motion.div
-                key={space.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="group relative overflow-hidden"
-              >
-                <div className="aspect-[16/10] img-zoom">
+        {/* Mood image grid */}
+        <div className="container-editorial">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              {
+                src: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&auto=format&fit=crop&q=80',
+                caption: t('chapter3.moment1', 'Morning Light'),
+              },
+              {
+                src: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&auto=format&fit=crop&q=80',
+                caption: t('chapter3.moment2', 'Infinity Edge'),
+              },
+              {
+                src: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&auto=format&fit=crop&q=80',
+                caption: t('chapter3.moment3', 'Terrace Dining'),
+              },
+            ].map((img, i) => (
+              <FadeIn key={i} delay={i * 0.15}>
+                <div className="group img-zoom aspect-editorial relative">
                   <img
-                    src={space.image}
-                    alt={space.title}
+                    src={img.src}
+                    alt={img.caption}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
-                </div>
-                {/* Always visible on mobile, hover on desktop */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent 
-                                sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6 sm:p-8">
-                  <div>
-                    <h3 className="font-serif text-xl sm:text-2xl text-white mb-1 sm:mb-2">{space.title}</h3>
-                    <p className="text-white/80 text-xs sm:text-sm">{space.description}</p>
+                  <div className="absolute inset-0 bg-background/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                    <span className="text-caption text-foreground">{img.caption}</span>
                   </div>
                 </div>
-              </motion.div>
+              </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════
-          POOL & AMENITIES SECTION
-      ═══════════════════════════════════════════════════════════════════ */}
-      <section className="relative">
-        <div className="aspect-[21/9] relative overflow-hidden">
-          <motion.img
-            initial={{ scale: 1.1 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.5 }}
-            src="https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=1920&auto=format&fit=crop&q=80"
-            alt="Pool"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-primary/40" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <span className="text-caption text-white/60 mb-4 block">{t('amenities.subtitle')}</span>
-              <h2 className="text-headline text-white">{t('amenities.poolTitle')}</h2>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      {/* ═══ INVESTMENT / LIFESTYLE ADAPTIVE SECTION ═══ */}
+      <section className="section-gap bg-secondary/50">
+        <div className="container-editorial text-center">
+          <FadeIn>
+            <p className="text-caption text-accent mb-6">
+              {isInvest ? t('invest.label', 'Investment Opportunity') : t('lifestyle.label', 'A Life Unlike Any Other')}
+            </p>
+          </FadeIn>
+          <TextReveal className="font-serif text-headline text-foreground mx-auto max-w-3xl mb-12">
+            {isInvest
+              ? t('invest.title', 'An asset class of its own')
+              : t('lifestyle.title', 'Where every day feels like the first')
+            }
+          </TextReveal>
 
-      <section className="section-gap-sm bg-primary text-primary-foreground">
-        <div className="container-editorial">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {amenities.map((amenity, index) => (
-              <motion.div
-                key={amenity.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
+          {isInvest ? (
+            <FadeIn delay={0.2}>
+              <div className="grid sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
+                {[
+                  { n: '7-9%', l: t('invest.yield', 'Annual Rental Yield') },
+                  { n: '15%', l: t('invest.appreciation', '5-Year Appreciation') },
+                  { n: '€0', l: t('invest.tax', 'Capital Gains Tax') },
+                ].map((stat, i) => (
+                  <div key={i} className="text-center">
+                    <span className="number-display text-4xl sm:text-5xl text-accent">{stat.n}</span>
+                    <p className="text-caption text-muted-foreground mt-3">{stat.l}</p>
+                  </div>
+                ))}
+              </div>
+            </FadeIn>
+          ) : (
+            <FadeIn delay={0.2}>
+              <p className="text-body-lg text-muted-foreground max-w-2xl mx-auto">
+                {t('lifestyle.description', 'Wake to the sound of waves. Spend afternoons between the pool and the reef. Watch the sun dissolve into the Indian Ocean from your private terrace. This is not a holiday — this is home.')}
+              </p>
+            </FadeIn>
+          )}
+
+          <FadeIn delay={0.4}>
+            <div className="mt-12">
+              <Link
+                to={isInvest ? '/own-in-mauritius' : '/explore'}
+                className="btn-outline-premium inline-flex items-center gap-3 px-10 py-4 text-foreground border-foreground/30"
               >
-                <amenity.icon className="h-8 w-8 mx-auto mb-4 text-accent" />
-                <h3 className="font-serif text-xl mb-2">{amenity.title}</h3>
-                <p className="text-sm text-primary-foreground/70">{amenity.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════════
-          CTA SECTION
-      ═══════════════════════════════════════════════════════════════════ */}
-      <section className="section-gap bg-background">
-        <div className="container-editorial">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <span className="text-caption text-accent mb-4 sm:mb-6 block">{t('cta.subtitle')}</span>
-            <h2 className="text-headline text-foreground mb-6 sm:mb-8">{t('cta.title')}</h2>
-            <p className="text-body-lg text-muted-foreground mb-8 sm:mb-12">{t('cta.description')}</p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-              <Link to="/contact" className="btn-premium inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-5 w-full sm:w-auto">
-                <span>{t('nav.bookTour')}</span>
+                <span>{isInvest ? t('invest.cta', 'Investment Details') : t('lifestyle.cta', 'Explore the Residences')}</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link to="/units" className="btn-outline-premium inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-5 w-full sm:w-auto">
-                <span>{t('hero.browseListing')}</span>
-              </Link>
             </div>
-          </motion.div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ═══ FINAL CTA ═══ */}
+      <section className="py-28 sm:py-36">
+        <div className="container-editorial text-center">
+          <FadeIn>
+            <span className="text-caption text-accent mb-6 block">{t('cta.label', 'Your Island Awaits')}</span>
+          </FadeIn>
+          <TextReveal className="font-serif text-display text-foreground mx-auto max-w-4xl mb-10">
+            {t('cta.title', 'The Verso')}
+          </TextReveal>
+          <FadeIn delay={0.3}>
+            <Link
+              to="/contact"
+              className="btn-premium inline-flex items-center gap-3 px-12 py-5"
+            >
+              <span>{t('cta.button', 'Schedule a Private Viewing')}</span>
+            </Link>
+          </FadeIn>
         </div>
       </section>
 

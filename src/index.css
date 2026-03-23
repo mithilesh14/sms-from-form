@@ -3,101 +3,71 @@
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   THE VERSO - Premium Single-Property Design System
-   Editorial luxury aesthetic for high-end real estate
+   THE VERSO MAURITIUS — Cinematic Luxury Design System
+   Inspired by Aman Resorts, Olson Kundig, Conran & Partners
 ═══════════════════════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap');
 
 @layer base {
   :root {
-    /* Sophisticated Neutral Palette */
-    --background: 40 20% 98%;
-    --foreground: 30 10% 12%;
+    /* Deep charcoal base — cinematic dark */
+    --background: 30 10% 6%;
+    --foreground: 38 30% 92%;
 
-    --card: 40 25% 97%;
-    --card-foreground: 30 10% 12%;
+    --card: 30 8% 10%;
+    --card-foreground: 38 30% 92%;
 
-    --popover: 40 20% 98%;
-    --popover-foreground: 30 10% 12%;
+    --popover: 30 8% 10%;
+    --popover-foreground: 38 30% 92%;
 
-    /* Warm charcoal primary */
-    --primary: 30 8% 18%;
-    --primary-foreground: 40 25% 97%;
+    /* Warm sand primary (light on dark) */
+    --primary: 38 30% 92%;
+    --primary-foreground: 30 10% 6%;
 
-    /* Warm stone secondary */
-    --secondary: 35 15% 93%;
-    --secondary-foreground: 30 10% 20%;
+    /* Muted charcoal secondary */
+    --secondary: 30 6% 14%;
+    --secondary-foreground: 38 20% 80%;
 
-    /* Soft sage muted */
-    --muted: 40 10% 92%;
-    --muted-foreground: 30 8% 45%;
+    /* Dark muted */
+    --muted: 30 6% 18%;
+    --muted-foreground: 30 10% 50%;
 
-    /* Burnished bronze accent */
-    --accent: 25 55% 45%;
-    --accent-foreground: 40 25% 97%;
+    /* Burnished gold accent */
+    --accent: 36 50% 54%;
+    --accent-foreground: 30 10% 6%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 35 12% 88%;
-    --input: 35 12% 88%;
-    --ring: 30 8% 18%;
+    --border: 30 8% 16%;
+    --input: 30 8% 16%;
+    --ring: 36 50% 54%;
 
     --radius: 0px;
 
     /* Extended Palette */
-    --verso-charcoal: 30 8% 18%;
-    --verso-charcoal-light: 30 6% 28%;
-    --verso-stone: 35 10% 55%;
-    --verso-sand: 35 20% 92%;
-    --verso-sand-dark: 35 15% 85%;
-    --verso-bronze: 25 55% 45%;
-    --verso-bronze-light: 25 45% 60%;
-    --verso-cream: 40 30% 96%;
+    --verso-charcoal: 30 10% 6%;
+    --verso-charcoal-light: 30 6% 14%;
+    --verso-sand: 38 30% 92%;
+    --verso-sand-dark: 35 20% 78%;
+    --verso-gold: 36 50% 54%;
+    --verso-gold-light: 36 40% 68%;
+    --verso-teal: 175 40% 30%;
+    --verso-teal-light: 175 35% 45%;
+    --verso-cream: 40 35% 95%;
     --verso-warm-white: 40 40% 99%;
-    --verso-sage: 80 15% 55%;
-    --verso-olive: 75 20% 35%;
+    --verso-stone: 30 8% 40%;
 
     /* Sidebar */
-    --sidebar-background: 30 8% 12%;
-    --sidebar-foreground: 35 20% 92%;
-    --sidebar-primary: 25 55% 50%;
-    --sidebar-primary-foreground: 40 25% 97%;
-    --sidebar-accent: 30 8% 18%;
-    --sidebar-accent-foreground: 35 20% 92%;
-    --sidebar-border: 30 8% 20%;
-    --sidebar-ring: 25 55% 50%;
-  }
-
-  .dark {
-    --background: 30 10% 6%;
-    --foreground: 35 20% 92%;
-
-    --card: 30 10% 10%;
-    --card-foreground: 35 20% 92%;
-
-    --popover: 30 10% 10%;
-    --popover-foreground: 35 20% 92%;
-
-    --primary: 35 20% 92%;
-    --primary-foreground: 30 10% 10%;
-
-    --secondary: 30 8% 15%;
-    --secondary-foreground: 35 20% 92%;
-
-    --muted: 30 8% 18%;
-    --muted-foreground: 30 8% 55%;
-
-    --accent: 25 55% 55%;
-    --accent-foreground: 30 10% 10%;
-
-    --destructive: 0 55% 40%;
-    --destructive-foreground: 35 20% 92%;
-
-    --border: 30 8% 18%;
-    --input: 30 8% 18%;
-    --ring: 35 20% 92%;
+    --sidebar-background: 30 10% 4%;
+    --sidebar-foreground: 38 30% 92%;
+    --sidebar-primary: 36 50% 54%;
+    --sidebar-primary-foreground: 30 10% 6%;
+    --sidebar-accent: 30 6% 14%;
+    --sidebar-accent-foreground: 38 30% 92%;
+    --sidebar-border: 30 8% 12%;
+    --sidebar-ring: 36 50% 54%;
   }
 }
 
@@ -113,31 +83,28 @@
     letter-spacing: 0.01em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
-  /* Typography */
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-weight: 400;
     letter-spacing: -0.02em;
   }
 
-  /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Selection */
   ::selection {
-    background: hsl(var(--accent) / 0.2);
+    background: hsl(var(--accent) / 0.25);
     color: hsl(var(--foreground));
   }
 
-  /* Custom scrollbar */
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
   }
 
   ::-webkit-scrollbar-track {
@@ -146,14 +113,13 @@
 
   ::-webkit-scrollbar-thumb {
     background: hsl(var(--verso-stone) / 0.3);
-    border-radius: 3px;
+    border-radius: 2px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--verso-stone) / 0.5);
   }
 
-  /* Hide scrollbar utility */
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -163,7 +129,6 @@
     display: none;
   }
 
-  /* Safe area for mobile */
   .safe-area-inset {
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
@@ -171,49 +136,56 @@
 }
 
 @layer components {
-  /* Premium hero overlay */
+  /* Cinematic overlays */
   .hero-overlay-premium {
     background: linear-gradient(
       180deg,
-      hsl(var(--verso-charcoal) / 0) 0%,
-      hsl(var(--verso-charcoal) / 0.1) 30%,
-      hsl(var(--verso-charcoal) / 0.5) 70%,
-      hsl(var(--verso-charcoal) / 0.75) 100%
+      hsl(var(--verso-charcoal) / 0.4) 0%,
+      hsl(var(--verso-charcoal) / 0.1) 40%,
+      hsl(var(--verso-charcoal) / 0.6) 80%,
+      hsl(var(--verso-charcoal) / 0.85) 100%
     );
   }
 
-  /* Cinematic overlay */
   .overlay-cinematic {
     background: linear-gradient(
       180deg,
-      hsl(var(--verso-charcoal) / 0.3) 0%,
-      hsl(var(--verso-charcoal) / 0.1) 40%,
-      hsl(var(--verso-charcoal) / 0.4) 100%
+      hsl(var(--verso-charcoal) / 0.5) 0%,
+      hsl(var(--verso-charcoal) / 0.15) 35%,
+      hsl(var(--verso-charcoal) / 0.5) 100%
     );
   }
 
-  /* Editorial card */
-  .card-editorial {
-    @apply bg-card transition-all duration-700 ease-out;
+  /* Letterbox bars for cinematic effect */
+  .letterbox::before,
+  .letterbox::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 8vh;
+    background: hsl(var(--verso-charcoal));
+    z-index: 5;
+    pointer-events: none;
   }
 
-  .card-editorial:hover {
-    @apply bg-secondary;
-  }
+  .letterbox::before { top: 0; }
+  .letterbox::after { bottom: 0; }
 
-  /* Premium button - Touch friendly */
+  /* Premium buttons */
   .btn-premium {
-    @apply relative overflow-hidden bg-primary text-primary-foreground font-light tracking-[0.1em] sm:tracking-[0.15em] uppercase text-[11px] sm:text-xs;
-    @apply min-h-[48px] px-6 sm:px-8;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    @apply relative overflow-hidden bg-foreground text-background font-light tracking-[0.12em] uppercase text-[11px];
+    @apply min-h-[48px] px-8;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     -webkit-tap-highlight-color: transparent;
   }
 
   .btn-premium::before {
     content: '';
-    @apply absolute inset-0 bg-accent;
+    @apply absolute inset-0;
+    background: hsl(var(--accent));
     transform: translateX(-101%);
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .btn-premium:hover::before {
@@ -225,43 +197,55 @@
   }
 
   .btn-premium:hover {
-    @apply text-accent-foreground;
+    color: hsl(var(--verso-charcoal));
   }
 
-  /* Outline premium button - Touch friendly */
   .btn-outline-premium {
-    @apply relative border border-current bg-transparent font-light tracking-[0.1em] sm:tracking-[0.15em] uppercase text-[11px] sm:text-xs;
-    @apply min-h-[48px] px-6 sm:px-8;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    @apply relative border border-current bg-transparent font-light tracking-[0.12em] uppercase text-[11px];
+    @apply min-h-[48px] px-8;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     -webkit-tap-highlight-color: transparent;
   }
 
   .btn-outline-premium:hover {
-    @apply bg-primary text-primary-foreground border-primary;
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
+    border-color: hsl(var(--foreground));
   }
 
-  /* Image reveal animation */
-  .image-reveal {
-    @apply relative overflow-hidden;
+  /* Card styles */
+  .card-editorial {
+    @apply bg-card transition-all duration-700 ease-out;
   }
 
-  .image-reveal::after {
-    content: '';
-    @apply absolute inset-0 bg-secondary;
-    transform: translateX(0);
-    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+  .card-editorial:hover {
+    @apply bg-secondary;
   }
 
-  .image-reveal.revealed::after {
-    transform: translateX(101%);
+  /* Image zoom */
+  .img-zoom {
+    @apply overflow-hidden;
   }
 
-  /* Magnetic hover effect */
-  .magnetic-hover {
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  .img-zoom img {
+    transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Text link with line */
+  .img-zoom:hover img {
+    transform: scale(1.06);
+  }
+
+  /* Ken Burns slow zoom */
+  @keyframes ken-burns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.15); }
+  }
+
+  .ken-burns {
+    animation: ken-burns 20s ease-out forwards;
+  }
+
+  /* Link underline */
   .link-underline {
     @apply relative inline-block;
   }
@@ -279,18 +263,12 @@
     transform-origin: left;
   }
 
-  /* Split text animation base */
-  .split-text span {
-    @apply inline-block;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
-  }
-
   /* Divider */
   .divider-editorial {
     @apply w-12 h-px bg-accent;
   }
 
-  /* Number styling */
+  /* Number display */
   .number-display {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 300;
@@ -299,23 +277,16 @@
 
   /* Glass panel */
   .glass-panel {
-    @apply bg-background/80 backdrop-blur-xl border border-border/30;
+    @apply bg-background/60 backdrop-blur-2xl border border-border/20;
   }
 
-  /* Image zoom container */
-  .img-zoom {
-    @apply overflow-hidden;
+  /* Text caption */
+  .text-caption {
+    @apply text-[11px] tracking-[0.2em] uppercase font-normal;
+    font-family: 'Outfit', system-ui, sans-serif;
   }
 
-  .img-zoom img {
-    transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .img-zoom:hover img {
-    transform: scale(1.08);
-  }
-
-  /* Stagger animation */
+  /* Stagger items */
   .stagger-item {
     opacity: 0;
     transform: translateY(30px);
@@ -326,10 +297,32 @@
     transform: translateY(0);
     transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
+  /* Split text */
+  .split-text span {
+    @apply inline-block;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+  }
+
+  /* Image reveal */
+  .image-reveal {
+    @apply relative overflow-hidden;
+  }
+
+  .image-reveal::after {
+    content: '';
+    @apply absolute inset-0;
+    background: hsl(var(--verso-charcoal));
+    transform: translateX(0);
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  .image-reveal.revealed::after {
+    transform: translateX(101%);
+  }
 }
 
 @layer utilities {
-  /* Container - More padding on mobile */
   .container-editorial {
     @apply max-w-[1400px] mx-auto px-5 sm:px-6 md:px-12 lg:px-16;
   }
@@ -338,45 +331,34 @@
     @apply max-w-4xl mx-auto px-5 sm:px-6 md:px-12;
   }
 
-  /* Section spacing - Reduced on mobile */
   .section-gap {
-    @apply py-16 sm:py-24 md:py-32 lg:py-40;
+    @apply py-20 sm:py-28 md:py-36 lg:py-44;
   }
 
   .section-gap-sm {
-    @apply py-12 sm:py-16 md:py-24;
+    @apply py-14 sm:py-20 md:py-28;
   }
 
-  /* Text sizes - Better mobile scaling */
+  /* Typography scale */
   .text-display {
-    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.95];
+    @apply text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl leading-[0.9];
   }
 
   .text-headline {
-    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1];
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.05];
   }
 
   .text-title {
-    @apply text-2xl sm:text-3xl md:text-4xl leading-[1.15];
+    @apply text-2xl sm:text-3xl md:text-4xl leading-[1.1];
   }
 
   .text-body-lg {
     @apply text-base sm:text-lg md:text-xl leading-relaxed font-light;
   }
 
-  .text-caption {
-    @apply text-[11px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase font-normal;
-  }
-
   /* Aspect ratios */
   .aspect-cinema {
-    aspect-ratio: 16/9;
-  }
-
-  @screen md {
-    .aspect-cinema {
-      aspect-ratio: 21/9;
-    }
+    aspect-ratio: 21/9;
   }
 
   .aspect-editorial {
@@ -387,14 +369,14 @@
     aspect-ratio: 16/10;
   }
 
-  /* Animation delays */
+  /* Delays */
   .delay-100 { animation-delay: 100ms; }
   .delay-200 { animation-delay: 200ms; }
   .delay-300 { animation-delay: 300ms; }
   .delay-400 { animation-delay: 400ms; }
   .delay-500 { animation-delay: 500ms; }
 
-  /* Transition presets */
+  /* Transitions */
   .transition-premium {
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -403,13 +385,12 @@
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Page transition overlay */
-  .page-transition {
-    @apply fixed inset-0 bg-primary z-[100] pointer-events-none;
-  }
-
-  /* Touch-friendly targets */
+  /* Touch targets */
   .touch-target {
     @apply min-h-[44px] min-w-[44px];
+  }
+
+  .page-transition {
+    @apply fixed inset-0 bg-background z-[100] pointer-events-none;
   }
 }

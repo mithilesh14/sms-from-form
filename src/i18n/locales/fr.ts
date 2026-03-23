@@ -1,65 +1,109 @@
 export default {
-  // Brand
   brand: {
     name: 'The Verso',
-    tagline: 'L\'Art de Vivre',
-    location: 'Minneapolis',
+    tagline: 'Maurice',
   },
 
-  // Navigation
+  gateway: {
+    live: 'Vivre',
+    invest: 'Investir',
+    escape: 'S\'évader',
+    subtitle: 'Maurice',
+    skip: 'Entrer',
+  },
+
+  mode: {
+    lifestyle: 'Art de Vivre',
+    investment: 'Investissement',
+  },
+
   nav: {
     home: 'Accueil',
-    residence: 'La Résidence',
-    units: 'Unités Disponibles',
-    forSale: 'À Vendre',
-    shortTerm: 'Court Séjour',
-    longTerm: 'Location Longue Durée',
-    amenities: 'Commodités',
+    residence: 'La Vision',
+    explore: 'Explorer',
+    units: 'Résidences',
     gallery: 'Galerie',
     contact: 'Contact',
-    bookTour: 'Planifier une Visite',
+    virtualTour: 'Visite 360°',
+    ownInMauritius: 'Investir à Maurice',
+    bookTour: 'Visite Privée',
   },
 
-  // Hero
   hero: {
     title: 'The Verso',
-    subtitle: 'Là où l\'architecture raffinée rencontre le rythme de la vie urbaine. Une adresse unique pour ceux qui exigent l\'excellence.',
+    subtitle: 'Une collection privée de trente-deux résidences sur la côte de l\'île Maurice. Là où l\'architecture se fond dans l\'océan Indien.',
     explore: 'Découvrir les Résidences',
-    schedule: 'Planifier une Visite',
+    location: 'Île Maurice · Océan Indien',
     scrollText: 'Découvrir',
   },
 
-  // Residence
-  residence: {
-    title: 'Un Nouveau Standard de Vie',
-    subtitle: 'La Résidence',
-    description: 'S\'élevant sur 32 étages au-dessus de la skyline de Minneapolis, The Verso représente l\'apogée du design résidentiel contemporain. Chaque détail a été considéré, chaque matériau soigneusement sélectionné.',
-    features: {
-      architecture: 'Architecture Primée',
-      architectureDesc: 'Conçu par un studio de renommée internationale',
-      views: 'Vues Panoramiques sur la Ville',
-      viewsDesc: 'Vistas à 270 degrés depuis des fenêtres du sol au plafond',
-      service: 'Service Premium',
-      serviceDesc: 'Conciergerie et services résidents 24h/24',
-    },
+  chapter1: {
+    label: 'Chapitre Un',
+    title: 'Là où l\'océan Indien murmure au rivage',
+    description: 'L\'île Maurice n\'est pas simplement une île — c\'est un sentiment. Un fragment lumineux de paradis où les lagons turquoise rencontrent les pics volcaniques, et chaque coucher de soleil écrit un nouveau poème dans le ciel.',
   },
 
-  // Units/Properties
+  stats: {
+    sunnyDays: 'Jours d\'Ensoleillement',
+    avgTemp: 'Température Moyenne',
+    africaRank: 'En Afrique pour la Qualité de Vie',
+    capitalGains: 'Impôt sur les Plus-values',
+  },
+
+  chapter2: {
+    label: 'Chapitre Deux',
+    title: 'Une architecture née du paysage',
+    description: 'Trente-deux résidences sur huit étages, conçues pour cadrer l\'océan et dissoudre la frontière entre intérieur et horizon. Chaque ligne, chaque matériau, répond à la lumière et à l\'air de l\'océan Indien.',
+    residences: 'Résidences',
+    floors: 'Étages',
+    views: 'Vues sur l\'Océan',
+  },
+
+  chapter3: {
+    label: 'Chapitre Trois',
+    title: 'Des moments, pas des caractéristiques',
+    description: 'La lumière du matin inondant les baies vitrées. La piscine à débordement se fondant dans l\'horizon. Un dîner sur terrasse privée tandis que l\'océan Indien se teinte d\'or.',
+    moment1: 'Lumière du Matin',
+    moment2: 'Piscine à Débordement',
+    moment3: 'Dîner en Terrasse',
+  },
+
+  invest: {
+    label: 'Opportunité d\'Investissement',
+    title: 'Une classe d\'actifs à part',
+    yield: 'Rendement Locatif Annuel',
+    appreciation: 'Appréciation sur 5 Ans',
+    tax: 'Impôt sur les Plus-values',
+    cta: 'Détails d\'Investissement',
+  },
+
+  lifestyle: {
+    label: 'Un Art de Vivre Unique',
+    title: 'Où chaque jour semble être le premier',
+    description: 'Se réveiller au son des vagues. Passer les après-midis entre la piscine et le récif. Regarder le soleil se dissoudre dans l\'océan Indien depuis votre terrasse privée. Ce n\'est pas des vacances — c\'est chez vous.',
+    cta: 'Explorer les Résidences',
+  },
+
+  cta: {
+    label: 'Votre Île Vous Attend',
+    title: 'The Verso',
+    button: 'Planifier une Visite Privée',
+  },
+
+  residence: {
+    title: 'La Vision Architecturale',
+    subtitle: 'La Vision',
+    description: 'Un dialogue entre terre et mer. The Verso s\'élève avec intention, son architecture façonnée par les rythmes de la vie insulaire et la pureté de la lumière naturelle.',
+  },
+
   units: {
-    title: 'Résidences Disponibles',
-    subtitle: 'Sélectionnez votre mode de vie préféré',
+    title: 'Résidences',
+    subtitle: 'Sélectionnez votre résidence',
     forSale: 'Achat',
     shortTerm: 'Court Séjour',
-    longTerm: 'Location Longue Durée',
-    types: {
-      studio: 'Studio',
-      oneBed: 'Une Chambre',
-      twoBed: 'Deux Chambres',
-      threeBed: 'Trois Chambres',
-      penthouse: 'Penthouse',
-    },
+    longTerm: 'Longue Durée',
     details: {
-      sqft: 'pi²',
+      sqft: 'm²',
       floor: 'Étage',
       available: 'Disponible',
       price: 'Prix',
@@ -67,27 +111,10 @@ export default {
       perMonth: '/mois',
       from: 'À partir de',
     },
-    cta: 'Demander des Informations',
+    cta: 'Demander',
     viewFloorPlan: 'Voir le Plan',
   },
 
-  // Amenities
-  amenities: {
-    title: 'Commodités Raffinées',
-    subtitle: 'Chaque confort, pensé avec soin',
-    list: {
-      fitness: 'Centre de Fitness 24h/24',
-      pool: 'Piscine à Débordement sur le Toit',
-      lounge: 'Salon des Résidents',
-      theater: 'Salle de Projection Privée',
-      business: 'Centre d\'Affaires',
-      parking: 'Stationnement Souterrain Sécurisé',
-      concierge: 'Conciergerie 24h/24',
-      pets: 'Accepte les Animaux avec Spa',
-    },
-  },
-
-  // Gallery
   gallery: {
     title: 'Voyage Visuel',
     subtitle: 'Découvrez The Verso à travers notre objectif',
@@ -95,57 +122,49 @@ export default {
       all: 'Tout',
       exterior: 'Extérieur',
       interiors: 'Intérieurs',
-      amenities: 'Commodités',
+      amenities: 'Équipements',
       views: 'Vues',
     },
   },
 
-  // Contact
   contact: {
     title: 'Commencez Votre Parcours',
-    subtitle: 'Notre équipe est prête à vous aider à trouver votre résidence idéale',
+    subtitle: 'Planifiez une consultation privée avec notre équipe',
     form: {
       name: 'Nom Complet',
       email: 'Adresse Email',
-      phone: 'Numéro de Téléphone',
+      phone: 'Téléphone',
       interest: 'Je suis intéressé(e) par',
       interestOptions: {
-        purchase: 'L\'achat d\'une unité',
-        shortTerm: 'La location courte durée',
-        longTerm: 'La location longue durée',
-        tour: 'La planification d\'une visite',
+        purchase: 'L\'achat d\'une résidence',
+        shortTerm: 'Un séjour court',
+        longTerm: 'Une location longue durée',
+        tour: 'Une visite privée',
       },
-      message: 'Détails Supplémentaires',
-      submit: 'Envoyer la Demande',
-      sending: 'Envoi en cours...',
+      message: 'Message',
+      submit: 'Envoyer',
+      sending: 'Envoi...',
     },
     info: {
-      address: '1000 Verso Boulevard',
-      city: 'Minneapolis, MN 55401',
-      phone: '+1 (612) 555-0100',
-      email: 'residences@theverso.com',
-      hours: 'Heures de la Galerie : Lun–Sam, 10h–18h',
+      address: 'Route Côtière',
+      city: 'Grand Baie, Maurice',
+      phone: '+230 555 0100',
+      email: 'residences@theverso.mu',
+      hours: 'Sur Rendez-vous',
     },
-    success: 'Merci pour votre demande. Notre équipe vous contactera dans les 24 heures.',
+    success: 'Merci. Notre équipe vous contactera dans les 24 heures.',
   },
 
-  // Footer
   footer: {
-    tagline: 'Une nouvelle perspective sur la vie urbaine',
-    legal: 'Mentions Légales',
-    privacy: 'Politique de Confidentialité',
-    terms: 'Conditions d\'Utilisation',
-    accessibility: 'Accessibilité',
+    tagline: 'Une adresse privée au paradis',
+    privacy: 'Confidentialité',
+    terms: 'Conditions',
     copyright: 'Tous droits réservés.',
-    newsletter: {
-      title: 'Restez Informé',
-      subtitle: 'Recevez des mises à jour sur les disponibilités et les événements exclusifs',
-      placeholder: 'Entrez votre email',
-      button: 'S\'abonner',
-    },
+    ctaLabel: 'Consultation Privée',
+    ctaTitle: 'Commencez Votre Parcours',
+    ctaButton: 'Nous Contacter',
   },
 
-  // Common
   common: {
     learnMore: 'En Savoir Plus',
     viewAll: 'Voir Tout',
