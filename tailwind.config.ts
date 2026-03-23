@@ -73,6 +73,9 @@ export default {
           cream: "hsl(var(--verso-cream))",
           "warm-white": "hsl(var(--verso-warm-white))",
           stone: "hsl(var(--verso-stone))",
+          copper: "hsl(var(--verso-copper))",
+          terracotta: "hsl(var(--verso-terracotta))",
+          ivory: "hsl(var(--verso-ivory))",
         },
       },
       borderRadius: {
