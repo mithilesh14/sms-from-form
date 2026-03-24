@@ -36,7 +36,6 @@ export default function IntentGateway() {
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden grain-overlay">
-      {/* Background images that crossfade */}
       {Object.entries(intentImages).map(([key, url]) => (
         <motion.div
           key={key}
@@ -48,7 +47,6 @@ export default function IntentGateway() {
         />
       ))}
 
-      {/* Default warm base */}
       <div
         className="absolute inset-0 transition-opacity duration-1000"
         style={{
@@ -59,7 +57,6 @@ export default function IntentGateway() {
 
       <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/30" />
 
-      {/* Language toggle */}
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -71,25 +68,21 @@ export default function IntentGateway() {
         <span className="text-caption">{i18n.language === 'en' ? 'FR' : 'EN'}</span>
       </motion.button>
 
-      {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-6">
-        {/* Logo */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
           className="mb-20 sm:mb-28"
         >
-          <span className="font-serif text-3xl sm:text-4xl md:text-5xl text-foreground">
-            <span className="font-light italic">The</span>{' '}
-            <span className="font-medium">Verso</span>
+          <span className="text-[28px] sm:text-[36px] md:text-[44px] tracking-[0.35em] uppercase font-sans font-semibold text-foreground block text-center">
+            MONT CHOISY
           </span>
           <p className="text-caption text-foreground/35 mt-4 text-center tracking-[0.3em]">
             {t('gateway.subtitle')}
           </p>
         </motion.div>
 
-        {/* Intent choices */}
         <div className="flex flex-col sm:flex-row items-center gap-12 sm:gap-20 md:gap-28">
           {intents.map((intent, index) => (
             <motion.button
@@ -119,7 +112,6 @@ export default function IntentGateway() {
           ))}
         </div>
 
-        {/* Skip link */}
         <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
