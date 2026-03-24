@@ -126,20 +126,21 @@ function CameraControls() {
 interface PanoramaViewerProps {
   images: { url: string; label: string }[];
   className?: string;
+  showControls?: boolean;
 }
 
-export function PanoramaViewer({ images, className = '' }: PanoramaViewerProps) {
+export function PanoramaViewer({ images, className = '', showControls = true }: PanoramaViewerProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className={`relative w-full h-full min-h-[60vh] bg-foreground/90 overflow-hidden ${className}`}>
+    <div className={`relative w-full h-full min-h-[60vh] bg-muted overflow-hidden ${className}`}>
       {/* Loading */}
       {isLoading && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center bg-foreground/90">
-          <div className="flex flex-col items-center gap-4">
-            <div className="w-8 h-8 border border-white/30 border-t-white rounded-full animate-spin" />
-            <p className="text-white/40 text-caption">Loading panorama…</p>
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-muted">
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-7 h-7 border-2 border-border border-t-foreground rounded-full animate-spin" />
+            <p className="text-muted-foreground text-[12px] tracking-[0.1em]">Loading panorama…</p>
           </div>
         </div>
       )}
@@ -153,23 +154,23 @@ export function PanoramaViewer({ images, className = '' }: PanoramaViewerProps) 
         <CameraControls />
       </Canvas>
 
-      {/* Drag hint */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/30 backdrop-blur-md px-5 py-2.5 border border-white/10">
-        <Move className="w-3.5 h-3.5 text-white/50" />
-        <span className="text-white/50 text-caption hidden sm:inline">Drag to look around</span>
+      {/* Drag hint — subtle bottom pill */}
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/80 backdrop-blur-md px-4 py-2 rounded-full shadow-sm">
+        <Move className="w-3.5 h-3.5 text-foreground/40" />
+        <span className="text-foreground/50 text-[11px] tracking-[0.05em] hidden sm:inline">Drag to explore</span>
       </div>
 
-      {/* Scene selector */}
-      {images.length > 1 && (
+      {/* Scene selector — only on dedicated pages, not hero */}
+      {showControls && images.length > 1 && (
         <div className="absolute bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 flex gap-2 flex-wrap justify-center max-w-[90%]">
           {images.map((img, i) => (
             <button
               key={i}
               onClick={() => { setIsLoading(true); setActiveIndex(i); }}
-              className={`px-5 py-2.5 text-caption transition-all min-h-[40px] border ${
+              className={`px-5 py-2.5 text-[11px] tracking-[0.1em] uppercase transition-all min-h-[40px] rounded-full ${
                 i === activeIndex
-                  ? "bg-white/20 text-white border-white/30"
-                  : "bg-black/20 backdrop-blur-md text-white/50 border-white/10 hover:text-white hover:border-white/30"
+                  ? "bg-white text-foreground shadow-md"
+                  : "bg-white/60 backdrop-blur-md text-foreground/50 hover:text-foreground hover:bg-white/80"
               }`}
             >
               {img.label}

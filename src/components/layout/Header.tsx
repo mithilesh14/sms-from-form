@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Globe } from 'lucide-react';
+import { Globe, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -12,7 +12,7 @@ export function Header() {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 80);
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -31,49 +31,47 @@ export function Header() {
   };
 
   const leftLinks = [
-    { href: '/', label: t('nav.home') },
-    { href: '/residence', label: t('nav.residence') },
-    { href: '/gallery', label: t('nav.gallery') },
+    { href: '/', label: 'Home' },
+    { href: '/residence', label: 'The Residences' },
+    { href: '/gallery', label: 'Gallery' },
   ];
 
   const rightLinks = [
-    { href: '/explore', label: t('nav.explore', 'Availability') },
-    { href: '/own-in-mauritius', label: t('nav.ownInMauritius', 'Own in Mauritius') },
-    { href: '/contact', label: t('nav.contact') },
+    { href: '/explore', label: 'Availability' },
+    { href: '/own-in-mauritius', label: 'Own in Mauritius' },
+    { href: '/contact', label: 'Book A Tour' },
   ];
 
   const allLinks = [
     ...leftLinks,
-    { href: '/virtual-tour', label: t('nav.virtualTour', '360° Tour') },
+    { href: '/virtual-tour', label: '360° Tour' },
     ...rightLinks,
   ];
 
   return (
     <>
-      <motion.header
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.3 }}
+      <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-700",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           isScrolled
-            ? "bg-background/95 backdrop-blur-md border-b border-border/20"
-            : "bg-transparent"
+            ? "bg-white shadow-sm"
+            : "bg-white/95 backdrop-blur-sm"
         )}
       >
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-8 md:px-14 lg:px-20">
-          <div className="flex items-center justify-between h-[72px] sm:h-[80px]">
-            {/* Left nav links — desktop */}
-            <nav className="hidden lg:flex items-center gap-8 flex-1">
+        <div className="w-full px-6 sm:px-10 lg:px-14">
+          <div className="flex items-center justify-between h-[70px] lg:h-[90px]">
+
+            {/* Left nav — desktop */}
+            <nav className="hidden lg:flex items-center gap-7 xl:gap-10 flex-1">
               {leftLinks.map(link => (
                 <Link
                   key={link.href}
                   to={link.href}
                   className={cn(
-                    "text-[11px] tracking-[0.18em] uppercase font-normal transition-colors duration-500 link-underline",
+                    "text-[13px] tracking-[0.04em] font-normal transition-colors duration-300 relative pb-0.5",
                     location.pathname === link.href
-                      ? "text-foreground"
-                      : isScrolled ? "text-foreground/60 hover:text-foreground" : "text-white/60 hover:text-white"
+                      ? "text-foreground border-b border-foreground"
+                      : "text-muted-foreground hover:text-foreground"
                   )}
                 >
                   {link.label}
@@ -82,107 +80,90 @@ export function Header() {
             </nav>
 
             {/* Center logo */}
-            <Link to="/" className="relative z-10 flex flex-col items-center shrink-0">
-              <span className={cn(
-                "text-[22px] sm:text-[26px] tracking-[0.35em] uppercase font-sans font-semibold transition-colors duration-700",
-                isScrolled ? "text-foreground" : "text-white"
-              )}>
-                MONT CHOISY
-              </span>
-              <span className={cn(
-                "text-[8px] tracking-[0.5em] uppercase font-normal mt-0.5 transition-colors duration-700",
-                isScrolled ? "text-muted-foreground" : "text-white/40"
-              )}>
-                Oceanfront Living
-              </span>
+            <Link to="/" className="relative z-10 flex flex-col items-center shrink-0 group">
+              {/* Decorative lines + text */}
+              <div className="flex items-center gap-3">
+                <span className="hidden sm:block w-8 lg:w-12 h-px bg-foreground/30" />
+                <div className="flex flex-col items-center">
+                  <span className="text-[20px] sm:text-[24px] lg:text-[28px] tracking-[0.25em] uppercase font-semibold text-foreground font-sans">
+                    MONT CHOISY
+                  </span>
+                  <span className="text-[8px] sm:text-[9px] tracking-[0.35em] uppercase text-muted-foreground font-normal mt-0.5">
+                    Oceanfront Living
+                  </span>
+                </div>
+                <span className="hidden sm:block w-8 lg:w-12 h-px bg-foreground/30" />
+              </div>
             </Link>
 
-            {/* Right nav links — desktop */}
-            <nav className="hidden lg:flex items-center gap-8 flex-1 justify-end">
+            {/* Right nav — desktop */}
+            <nav className="hidden lg:flex items-center gap-7 xl:gap-10 flex-1 justify-end">
               {rightLinks.map(link => (
                 <Link
                   key={link.href}
                   to={link.href}
                   className={cn(
-                    "text-[11px] tracking-[0.18em] uppercase font-normal transition-colors duration-500 link-underline",
+                    "text-[13px] tracking-[0.04em] font-normal transition-colors duration-300 relative pb-0.5",
                     location.pathname === link.href
-                      ? "text-foreground"
-                      : isScrolled ? "text-foreground/60 hover:text-foreground" : "text-white/60 hover:text-white"
+                      ? "text-foreground border-b border-foreground"
+                      : "text-muted-foreground hover:text-foreground"
                   )}
                 >
                   {link.label}
                 </Link>
               ))}
 
-              {/* Language + hamburger */}
-              <div className="flex items-center gap-4 ml-4">
-                <button
-                  onClick={toggleLanguage}
-                  className={cn(
-                    "flex items-center gap-1.5 transition-colors min-h-[48px]",
-                    isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/50 hover:text-white"
-                  )}
-                >
-                  <Globe className="h-3.5 w-3.5" />
-                  <span className="text-[10px] tracking-[0.15em] uppercase">{i18n.language === 'en' ? 'FR' : 'EN'}</span>
-                </button>
+              {/* Language toggle */}
+              <button
+                onClick={toggleLanguage}
+                className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors min-h-[44px] ml-2"
+              >
+                <Globe className="h-3.5 w-3.5" />
+                <span className="text-[12px] tracking-[0.08em]">{i18n.language === 'en' ? 'FR' : 'EN'}</span>
+              </button>
 
-                <button
-                  onClick={() => setIsOpen(!isOpen)}
-                  className="min-h-[48px] min-w-[48px] flex items-center justify-center"
-                  aria-label={isOpen ? 'Close menu' : 'Open menu'}
-                >
-                  <div className="w-6 flex flex-col gap-1.5">
-                    <motion.span
-                      className={cn("block h-px origin-center", isScrolled ? "bg-foreground" : "bg-white")}
-                      animate={isOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                    <motion.span
-                      className={cn("block h-px origin-center", isScrolled ? "bg-foreground" : "bg-white")}
-                      animate={isOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </div>
-                </button>
-              </div>
+              {/* Hamburger */}
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="min-h-[44px] min-w-[44px] flex items-center justify-center ml-1"
+                aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              >
+                <div className="w-7 flex flex-col gap-[6px]">
+                  <span className="block h-[2px] bg-foreground rounded-full transition-all duration-300" />
+                  <span className="block h-[2px] bg-foreground rounded-full transition-all duration-300 w-5" />
+                  <span className="block h-[2px] bg-foreground rounded-full transition-all duration-300" />
+                </div>
+              </button>
             </nav>
 
             {/* Mobile: lang + hamburger */}
-            <div className="lg:hidden flex items-center gap-3">
+            <div className="lg:hidden flex items-center gap-2">
               <button
                 onClick={toggleLanguage}
-                className={cn(
-                  "flex items-center gap-1.5 transition-colors min-h-[48px]",
-                  isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/50 hover:text-white"
-                )}
+                className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors min-h-[44px]"
               >
                 <Globe className="h-3.5 w-3.5" />
-                <span className="text-[10px] tracking-[0.15em] uppercase">{i18n.language === 'en' ? 'FR' : 'EN'}</span>
+                <span className="text-[12px]">{i18n.language === 'en' ? 'FR' : 'EN'}</span>
               </button>
 
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="min-h-[48px] min-w-[48px] flex items-center justify-center"
+                className="min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label={isOpen ? 'Close menu' : 'Open menu'}
               >
-                <div className="w-6 flex flex-col gap-1.5">
-                  <motion.span
-                    className={cn("block h-px origin-center", isScrolled ? "bg-foreground" : "bg-white")}
-                    animate={isOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <motion.span
-                    className={cn("block h-px origin-center", isScrolled ? "bg-foreground" : "bg-white")}
-                    animate={isOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                  />
+                <div className="w-6 flex flex-col gap-[5px]">
+                  <span className="block h-[2px] bg-foreground rounded-full" />
+                  <span className="block h-[2px] bg-foreground rounded-full w-4" />
+                  <span className="block h-[2px] bg-foreground rounded-full" />
                 </div>
               </button>
             </div>
           </div>
         </div>
-      </motion.header>
+
+        {/* Bottom border */}
+        <div className="h-px bg-border/50" />
+      </header>
 
       {/* Fullscreen overlay menu */}
       <AnimatePresence>
@@ -191,28 +172,36 @@ export function Header() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="fixed inset-0 z-40 grain-overlay"
-            style={{ background: 'hsl(42 50% 96% / 0.98)' }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 z-[60] bg-white"
           >
-            <div className="h-full flex flex-col justify-center container-editorial relative z-10">
-              <nav className="space-y-1 sm:space-y-2">
+            {/* Close button */}
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute top-5 right-6 sm:right-10 min-h-[44px] min-w-[44px] flex items-center justify-center z-10"
+              aria-label="Close menu"
+            >
+              <X className="h-6 w-6 text-foreground" />
+            </button>
+
+            <div className="h-full flex flex-col justify-center px-10 sm:px-16 lg:px-24">
+              <nav className="space-y-1">
                 {allLinks.map((link, index) => (
                   <div key={link.href} className="overflow-hidden">
                     <motion.div
-                      initial={{ y: 80, opacity: 0 }}
+                      initial={{ y: 60, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: 80, opacity: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.05 }}
+                      exit={{ y: 60, opacity: 0 }}
+                      transition={{ duration: 0.4, delay: index * 0.04 }}
                     >
                       <Link
                         to={link.href}
                         onClick={() => setIsOpen(false)}
                         className={cn(
-                          "block font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl py-1.5 transition-all duration-500",
+                          "block font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl py-2 transition-all duration-300",
                           location.pathname === link.href
                             ? "text-foreground"
-                            : "text-muted-foreground/40 hover:text-foreground hover:translate-x-4"
+                            : "text-muted-foreground/50 hover:text-foreground hover:translate-x-3"
                         )}
                       >
                         {link.label}
@@ -226,21 +215,15 @@ export function Header() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ delay: 0.5 }}
-                className="mt-16 sm:mt-20"
+                transition={{ delay: 0.4 }}
+                className="mt-14"
               >
-                <div className="divider-editorial mb-8" />
-                <div className="flex items-center gap-8">
-                  <a
-                    href="mailto:residences@montchoisy.mu"
-                    className="text-caption text-muted-foreground hover:text-foreground transition-colors"
-                  >
+                <div className="h-px bg-border mb-6" />
+                <div className="flex items-center gap-6 text-[13px] text-muted-foreground">
+                  <a href="mailto:residences@montchoisy.mu" className="hover:text-foreground transition-colors">
                     residences@montchoisy.mu
                   </a>
-                  <a
-                    href="tel:+2305555100"
-                    className="text-caption text-muted-foreground hover:text-foreground transition-colors"
-                  >
+                  <a href="tel:+2305555100" className="hover:text-foreground transition-colors">
                     +230 555 0100
                   </a>
                 </div>
