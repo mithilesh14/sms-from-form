@@ -49,9 +49,14 @@ export function Footer() {
             </Link>
           </div>
 
-          <p className="text-[10px] text-primary-foreground/20 tracking-wider">
-            © {new Date().getFullYear()} The Verso. {t('footer.copyright')}
-          </p>
+          <div className="flex items-center gap-6">
+            <p className="text-[10px] text-primary-foreground/20 tracking-wider">
+              © {new Date().getFullYear()} The Verso. {t('footer.copyright')}
+            </p>
+            <Link to="/admin" className="text-[10px] text-primary-foreground/10 hover:text-primary-foreground/30 transition-colors tracking-wider">
+              Admin
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
