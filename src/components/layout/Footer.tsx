@@ -34,10 +34,8 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-primary-foreground/10 relative z-10">
         <div className="container-editorial py-8 flex flex-col md:flex-row justify-between items-center gap-6">
-          <Link to="/" className="font-serif text-lg text-primary-foreground">
-            <span className="font-light italic">The</span>{' '}
-            <span className="font-medium">Verso</span>
-            <span className="text-caption text-primary-foreground/30 ml-3">Mauritius</span>
+          <Link to="/" className="text-[18px] tracking-[0.3em] uppercase font-sans font-semibold text-primary-foreground">
+            MONT CHOISY
           </Link>
 
           <div className="flex flex-wrap justify-center gap-8 text-caption text-primary-foreground/40">
@@ -51,7 +49,7 @@ export function Footer() {
 
           <div className="flex items-center gap-6">
             <p className="text-[10px] text-primary-foreground/20 tracking-wider">
-              © {new Date().getFullYear()} The Verso. {t('footer.copyright')}
+              © {new Date().getFullYear()} Mont Choisy. {t('footer.copyright')}
             </p>
             <Link to="/admin" className="text-[10px] text-primary-foreground/10 hover:text-primary-foreground/30 transition-colors tracking-wider">
               Admin

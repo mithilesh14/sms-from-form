@@ -1,11 +1,9 @@
 export default {
-  // Brand
   brand: {
-    name: 'The Verso',
+    name: 'Mont Choisy',
     tagline: 'Mauritius',
   },
 
-  // Gateway
   gateway: {
     live: 'Reside',
     invest: 'Invest',
@@ -17,39 +15,35 @@ export default {
     escapeSubtitle: 'Discover the lifestyle',
   },
 
-  // Mode
   mode: {
     lifestyle: 'Lifestyle',
     investment: 'Investment',
   },
 
-  // Navigation
   nav: {
     home: 'Home',
-    residence: 'The Vision',
-    explore: 'Explore',
+    residence: 'The Residences',
+    explore: 'Availability',
     units: 'Residences',
     gallery: 'Gallery',
-    contact: 'Contact',
+    contact: 'Book A Tour',
     virtualTour: '360° Tour',
     ownInMauritius: 'Own in Mauritius',
-    bookTour: 'Private Viewing',
+    bookTour: 'Book A Tour',
   },
 
-  // Hero
   hero: {
-    title: 'Live Above the Horizon',
-    subtitle: 'Thirty-two exceptional residences where contemporary architecture meets the Indian Ocean. Welcome to The Verso.',
-    explore: 'Discover Your Residence',
+    title: 'Oceanfront Living Redefined',
+    subtitle: 'Luxury residences where contemporary architecture meets the Indian Ocean. Welcome to Mont Choisy.',
+    explore: 'Explore Residences',
     location: 'Grand Baie · Mauritius',
-    scrollText: 'Explore',
+    scrollText: 'Scroll to Explore',
   },
 
-  // Chapter 1 — THE BUILDING
   chapter1: {
     label: 'The Building',
     title: 'Designed to elevate every moment',
-    description: 'The Verso is not just a building — it is a statement. Eight floors of bold, contemporary architecture rising from the Grand Baie coastline, shaped by light, ocean breeze, and an unwavering commitment to craft.',
+    description: 'Mont Choisy is not just a building — it is a statement. Eight floors of bold, contemporary architecture rising from the Grand Baie coastline, shaped by light, ocean breeze, and an unwavering commitment to craft.',
   },
 
   stats: {
@@ -59,7 +53,6 @@ export default {
     completion: 'Completion',
   },
 
-  // Chapter 2 — THE RESIDENCES
   chapter2: {
     label: 'The Residences',
     title: 'Spaces that breathe with the ocean',
@@ -69,7 +62,6 @@ export default {
     views: 'Panoramic Ocean Views',
   },
 
-  // Chapter 3 — THE AMENITIES
   chapter3: {
     label: 'The Lifestyle',
     title: 'Where luxury becomes everyday',
@@ -89,9 +81,9 @@ export default {
   },
 
   lifestyle: {
-    label: 'Your Life at The Verso',
+    label: 'Your Life at Mont Choisy',
     title: 'Wake up to the life you deserve',
-    description: 'Imagine mornings on your private terrace, coffee in hand, watching the sun paint the lagoon. Afternoons by the infinity pool. Evenings on the rooftop as Grand Baie comes alive below. This is your everyday at The Verso.',
+    description: 'Imagine mornings on your private terrace, coffee in hand, watching the sun paint the lagoon. Afternoons by the infinity pool. Evenings on the rooftop as Grand Baie comes alive below. This is your everyday at Mont Choisy.',
     cta: 'Explore Residences',
   },
 
@@ -101,21 +93,18 @@ export default {
     button: 'Book a Private Viewing',
   },
 
-  // Residence
   residence: {
     title: 'The Architectural Vision',
     subtitle: 'The Vision',
-    description: 'Every angle of The Verso has been sculpted with intention. The facade plays with light and shadow, the materials echo the natural coast, and each residence is oriented to capture the most breathtaking views.',
+    description: 'Every angle of Mont Choisy has been sculpted with intention. The facade plays with light and shadow, the materials echo the natural coast, and each residence is oriented to capture the most breathtaking views.',
   },
 
-  // Explore
   explore: {
     title: 'Find Your Residence',
     subtitle: 'Interactive Explorer',
-    description: 'Navigate The Verso floor by floor. Click any floor to reveal available residences, then select a unit to explore its layout, views, and natural light.',
+    description: 'Navigate Mont Choisy floor by floor. Click any floor to reveal available residences, then select a unit to explore its layout, views, and natural light.',
   },
 
-  // Units
   units: {
     title: 'Residences',
     subtitle: 'Select your residence',
@@ -135,9 +124,8 @@ export default {
     viewFloorPlan: 'View Floor Plan',
   },
 
-  // Gallery
   gallery: {
-    title: 'The Verso in Detail',
+    title: 'Mont Choisy in Detail',
     subtitle: 'Visual exploration of architecture, interiors, and lifestyle',
     categories: {
       all: 'All',
@@ -148,28 +136,25 @@ export default {
     },
   },
 
-  // Virtual Tour
   virtualTour: {
-    title: 'Step Inside The Verso',
+    title: 'Step Inside Mont Choisy',
     subtitle: 'Immersive 360° Experience',
     description: 'Explore our show residence as if you were there. Drag to look around, scroll to zoom. Experience the light, the space, the views.',
   },
 
-  // Own in Mauritius
   own: {
-    title: 'Own at The Verso',
+    title: 'Own at Mont Choisy',
     subtitle: 'International Ownership',
-    intro: 'Mauritius offers one of the world\'s most attractive frameworks for international property ownership — and The Verso is your gateway to freehold rights, tax efficiency, and residency in paradise.',
+    intro: 'Mauritius offers one of the world\'s most attractive frameworks for international property ownership — and Mont Choisy is your gateway to freehold rights, tax efficiency, and residency in paradise.',
     benefitsLabel: 'Key Advantages',
     benefitsTitle: 'Designed for global citizens',
     investLabel: 'Investment Snapshot',
     investTitle: 'Numbers that speak for themselves',
-    investDescription: 'Grand Baie is Mauritius\' most sought-after address. The Verso sits at the heart of this growth, offering owners a premium asset with strong rental demand and consistent capital appreciation.',
+    investDescription: 'Grand Baie is Mauritius\' most sought-after address. Mont Choisy sits at the heart of this growth, offering owners a premium asset with strong rental demand and consistent capital appreciation.',
     processLabel: 'The Journey',
     processTitle: 'From inquiry to ownership',
   },
 
-  // Contact
   contact: {
     title: 'Let\'s Talk',
     subtitle: 'Private Consultation',
@@ -193,24 +178,22 @@ export default {
       address: 'Coastal Road',
       city: 'Grand Baie, Mauritius',
       phone: '+230 555 0100',
-      email: 'residences@theverso.mu',
+      email: 'residences@montchoisy.mu',
       hours: 'By Appointment',
     },
     success: 'Thank you. Our team will be in touch within 24 hours.',
   },
 
-  // Footer
   footer: {
     tagline: 'Exceptional living on the Mauritian coast',
     privacy: 'Privacy',
     terms: 'Terms',
     copyright: 'All rights reserved.',
     ctaLabel: 'Your Next Step',
-    ctaTitle: 'Experience The Verso',
+    ctaTitle: 'Experience Mont Choisy',
     ctaButton: 'Book a Viewing',
   },
 
-  // Common
   common: {
     learnMore: 'Learn More',
     viewAll: 'View All',
