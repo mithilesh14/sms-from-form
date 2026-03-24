@@ -363,9 +363,8 @@ export default function Admin() {
             <a href="/" className="text-muted-foreground hover:text-foreground transition-colors">
               <ArrowLeft className="h-4 w-4" />
             </a>
-            <span className="font-serif text-lg text-foreground">
-              <span className="font-light italic">The</span>{' '}
-              <span className="font-medium">Verso</span>
+            <span className="text-[16px] tracking-[0.25em] uppercase font-sans font-semibold text-foreground">
+              MONT CHOISY
             </span>
             <span className="text-caption text-accent">CRM</span>
           </div>
