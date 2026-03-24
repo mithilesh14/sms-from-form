@@ -125,20 +125,21 @@ function CameraControls() {
 
 interface PanoramaViewerProps {
   images: { url: string; label: string }[];
+  className?: string;
 }
 
-export function PanoramaViewer({ images }: PanoramaViewerProps) {
+export function PanoramaViewer({ images, className = '' }: PanoramaViewerProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className="relative w-full h-[60vh] md:h-[80vh] bg-secondary overflow-hidden">
-      {/* Loading overlay */}
+    <div className={`relative w-full h-full min-h-[60vh] bg-foreground/90 overflow-hidden ${className}`}>
+      {/* Loading */}
       {isLoading && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center bg-secondary">
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-foreground/90">
           <div className="flex flex-col items-center gap-4">
-            <div className="w-8 h-8 border border-accent/30 border-t-accent rounded-full animate-spin" />
-            <p className="text-muted-foreground text-caption">Loading panorama…</p>
+            <div className="w-8 h-8 border border-white/30 border-t-white rounded-full animate-spin" />
+            <p className="text-white/40 text-caption">Loading panorama…</p>
           </div>
         </div>
       )}
@@ -152,10 +153,10 @@ export function PanoramaViewer({ images }: PanoramaViewerProps) {
         <CameraControls />
       </Canvas>
 
-      {/* Controls overlay */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 glass-panel px-5 py-2.5">
-        <Move className="w-3.5 h-3.5 text-muted-foreground" />
-        <span className="text-muted-foreground text-caption hidden sm:inline">Drag to look around</span>
+      {/* Drag hint */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/30 backdrop-blur-md px-5 py-2.5 border border-white/10">
+        <Move className="w-3.5 h-3.5 text-white/50" />
+        <span className="text-white/50 text-caption hidden sm:inline">Drag to look around</span>
       </div>
 
       {/* Scene selector */}
@@ -165,10 +166,10 @@ export function PanoramaViewer({ images }: PanoramaViewerProps) {
             <button
               key={i}
               onClick={() => { setIsLoading(true); setActiveIndex(i); }}
-              className={`px-5 py-2.5 text-caption transition-all min-h-[40px] ${
+              className={`px-5 py-2.5 text-caption transition-all min-h-[40px] border ${
                 i === activeIndex
-                  ? "bg-accent text-accent-foreground"
-                  : "glass-panel text-foreground/60 hover:text-foreground"
+                  ? "bg-white/20 text-white border-white/30"
+                  : "bg-black/20 backdrop-blur-md text-white/50 border-white/10 hover:text-white hover:border-white/30"
               }`}
             >
               {img.label}
