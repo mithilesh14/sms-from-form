@@ -17,7 +17,7 @@ function PasswordGate({ onAuth }: { onAuth: () => void }) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === 'verso2026') {
+    if (password === 'montchoisy2026') {
       sessionStorage.setItem('admin_auth', 'true');
       onAuth();
     } else {
