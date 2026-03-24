@@ -4,14 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useIntent } from '@/contexts/IntentContext';
 
 export function Header() {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const { mode } = useIntent();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 80);
@@ -19,9 +17,7 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location]);
+  useEffect(() => { setIsOpen(false); }, [location]);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
@@ -34,14 +30,22 @@ export function Header() {
     localStorage.setItem('language', newLang);
   };
 
-  const navLinks = [
+  const leftLinks = [
     { href: '/', label: t('nav.home') },
     { href: '/residence', label: t('nav.residence') },
-    { href: '/explore', label: t('nav.explore', 'Explore') },
-    { href: '/virtual-tour', label: t('nav.virtualTour', '360° Tour') },
-    { href: '/own-in-mauritius', label: t('nav.ownInMauritius', 'Own in Mauritius') },
     { href: '/gallery', label: t('nav.gallery') },
+  ];
+
+  const rightLinks = [
+    { href: '/explore', label: t('nav.explore', 'Availability') },
+    { href: '/own-in-mauritius', label: t('nav.ownInMauritius', 'Own in Mauritius') },
     { href: '/contact', label: t('nav.contact') },
+  ];
+
+  const allLinks = [
+    ...leftLinks,
+    { href: '/virtual-tour', label: t('nav.virtualTour', '360° Tour') },
+    ...rightLinks,
   ];
 
   return (
@@ -49,52 +53,127 @@ export function Header() {
       <motion.header
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
+        transition={{ duration: 1, delay: 0.3 }}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-700",
-          isScrolled ? "glass-panel" : "bg-transparent"
+          isScrolled
+            ? "bg-background/95 backdrop-blur-md border-b border-border/20"
+            : "bg-transparent"
         )}
       >
-        <div className="container-editorial py-5 sm:py-6">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link to="/" className="group relative z-10">
-              <span className="font-serif text-xl sm:text-2xl text-foreground">
-                <span className="font-light italic">The</span>{' '}
-                <span className="font-medium">Verso</span>
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-8 md:px-14 lg:px-20">
+          <div className="flex items-center justify-between h-[72px] sm:h-[80px]">
+            {/* Left nav links — desktop */}
+            <nav className="hidden lg:flex items-center gap-8 flex-1">
+              {leftLinks.map(link => (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className={cn(
+                    "text-[11px] tracking-[0.18em] uppercase font-normal transition-colors duration-500 link-underline",
+                    location.pathname === link.href
+                      ? "text-foreground"
+                      : isScrolled ? "text-foreground/60 hover:text-foreground" : "text-white/60 hover:text-white"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Center logo */}
+            <Link to="/" className="relative z-10 flex flex-col items-center shrink-0">
+              <span className={cn(
+                "text-[22px] sm:text-[26px] tracking-[0.35em] uppercase font-sans font-semibold transition-colors duration-700",
+                isScrolled ? "text-foreground" : "text-white"
+              )}>
+                MONT CHOISY
+              </span>
+              <span className={cn(
+                "text-[8px] tracking-[0.5em] uppercase font-normal mt-0.5 transition-colors duration-700",
+                isScrolled ? "text-muted-foreground" : "text-white/40"
+              )}>
+                Oceanfront Living
               </span>
             </Link>
 
-            {/* Right side */}
-            <div className="flex items-center gap-6">
-              {mode && (
-                <span className="hidden sm:block text-caption text-accent/70">
-                  {mode === 'live' ? t('gateway.live', 'Live') : mode === 'invest' ? t('gateway.invest', 'Invest') : t('gateway.escape', 'Escape')}
-                </span>
-              )}
+            {/* Right nav links — desktop */}
+            <nav className="hidden lg:flex items-center gap-8 flex-1 justify-end">
+              {rightLinks.map(link => (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className={cn(
+                    "text-[11px] tracking-[0.18em] uppercase font-normal transition-colors duration-500 link-underline",
+                    location.pathname === link.href
+                      ? "text-foreground"
+                      : isScrolled ? "text-foreground/60 hover:text-foreground" : "text-white/60 hover:text-white"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
 
+              {/* Language + hamburger */}
+              <div className="flex items-center gap-4 ml-4">
+                <button
+                  onClick={toggleLanguage}
+                  className={cn(
+                    "flex items-center gap-1.5 transition-colors min-h-[48px]",
+                    isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/50 hover:text-white"
+                  )}
+                >
+                  <Globe className="h-3.5 w-3.5" />
+                  <span className="text-[10px] tracking-[0.15em] uppercase">{i18n.language === 'en' ? 'FR' : 'EN'}</span>
+                </button>
+
+                <button
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="min-h-[48px] min-w-[48px] flex items-center justify-center"
+                  aria-label={isOpen ? 'Close menu' : 'Open menu'}
+                >
+                  <div className="w-6 flex flex-col gap-1.5">
+                    <motion.span
+                      className={cn("block h-px origin-center", isScrolled ? "bg-foreground" : "bg-white")}
+                      animate={isOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <motion.span
+                      className={cn("block h-px origin-center", isScrolled ? "bg-foreground" : "bg-white")}
+                      animate={isOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </div>
+                </button>
+              </div>
+            </nav>
+
+            {/* Mobile: lang + hamburger */}
+            <div className="lg:hidden flex items-center gap-3">
               <button
                 onClick={toggleLanguage}
-                className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors min-h-[48px]"
+                className={cn(
+                  "flex items-center gap-1.5 transition-colors min-h-[48px]",
+                  isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/50 hover:text-white"
+                )}
               >
                 <Globe className="h-3.5 w-3.5" />
-                <span className="text-caption">{i18n.language.toUpperCase()}</span>
+                <span className="text-[10px] tracking-[0.15em] uppercase">{i18n.language === 'en' ? 'FR' : 'EN'}</span>
               </button>
 
-              {/* Hamburger */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="relative z-10 min-h-[48px] min-w-[48px] flex items-center justify-center"
+                className="min-h-[48px] min-w-[48px] flex items-center justify-center"
                 aria-label={isOpen ? 'Close menu' : 'Open menu'}
               >
                 <div className="w-6 flex flex-col gap-1.5">
                   <motion.span
-                    className="block h-px bg-foreground origin-center"
+                    className={cn("block h-px origin-center", isScrolled ? "bg-foreground" : "bg-white")}
                     animate={isOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
                     transition={{ duration: 0.3 }}
                   />
                   <motion.span
-                    className="block h-px bg-foreground origin-center"
+                    className={cn("block h-px origin-center", isScrolled ? "bg-foreground" : "bg-white")}
                     animate={isOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
                     transition={{ duration: 0.3 }}
                   />
@@ -118,7 +197,7 @@ export function Header() {
           >
             <div className="h-full flex flex-col justify-center container-editorial relative z-10">
               <nav className="space-y-1 sm:space-y-2">
-                {navLinks.map((link, index) => (
+                {allLinks.map((link, index) => (
                   <div key={link.href} className="overflow-hidden">
                     <motion.div
                       initial={{ y: 80, opacity: 0 }}
@@ -153,10 +232,10 @@ export function Header() {
                 <div className="divider-editorial mb-8" />
                 <div className="flex items-center gap-8">
                   <a
-                    href="mailto:residences@theverso.mu"
+                    href="mailto:residences@montchoisy.mu"
                     className="text-caption text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    residences@theverso.mu
+                    residences@montchoisy.mu
                   </a>
                   <a
                     href="tel:+2305555100"

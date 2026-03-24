@@ -89,7 +89,7 @@ export default function Contact() {
                   {[
                     { icon: MapPin, label: t('contact.info.city', 'Grand Baie, Mauritius'), sub: t('contact.info.address', 'Coastal Road') },
                     { icon: Phone, label: t('contact.info.phone', '+230 555 0100'), sub: t('contact.info.hours', 'By Appointment') },
-                    { icon: Mail, label: t('contact.info.email', 'residences@theverso.mu'), sub: '' },
+                    { icon: Mail, label: t('contact.info.email', 'residences@montchoisy.mu'), sub: '' },
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-5">
                       <div className="w-11 h-11 border border-border/30 flex items-center justify-center shrink-0">
