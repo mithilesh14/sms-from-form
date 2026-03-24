@@ -33,9 +33,8 @@ function PasswordGate({ onAuth }: { onAuth: () => void }) {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-sm text-center"
       >
-        <span className="font-serif text-2xl text-foreground block mb-2">
-          <span className="font-light italic">The</span>{' '}
-          <span className="font-medium">Verso</span>
+        <span className="text-[20px] tracking-[0.3em] uppercase font-sans font-semibold text-foreground block mb-2">
+          MONT CHOISY
         </span>
         <p className="text-caption text-muted-foreground mb-10">Owner Panel</p>
 
