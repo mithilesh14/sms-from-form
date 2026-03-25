@@ -5,11 +5,6 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { FadeIn, TextReveal } from '@/components/ChapterSection';
-import { PanoramaViewer } from '@/components/PanoramaViewer';
-
-const heroScene = [
-  { url: 'https://dl.polyhaven.org/file/ph-assets/HDRIs/extra/Tonemapped%20JPG/lebombo.jpg', label: 'Exterior' },
-];
 
 const Index = () => {
   const { t } = useTranslation();
