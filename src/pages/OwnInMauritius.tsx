@@ -39,7 +39,7 @@ const process = [
 
 export default function OwnInMauritius() {
   const { t } = useTranslation();
-  const { mode } = useIntent();
+  
 
   return (
     <div className="min-h-screen bg-background">

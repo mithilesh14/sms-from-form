@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Eye, Maximize2, ArrowRight, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useIntent } from '@/contexts/IntentContext';
+
 
 interface Unit {
   id: string;
