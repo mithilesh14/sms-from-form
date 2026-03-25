@@ -103,7 +103,10 @@ export function Header() {
               {/* Language toggle */}
               <button
                 onClick={toggleLanguage}
-                className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors min-h-[44px] ml-2"
+                className={cn(
+                  "flex items-center gap-1.5 transition-colors min-h-[44px] ml-2",
+                  isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/70 hover:text-white"
+                )}
               >
                 <Globe className="h-3.5 w-3.5" />
                 <span className="text-[12px] tracking-[0.08em]">{i18n.language === 'en' ? 'FR' : 'EN'}</span>
