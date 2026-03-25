@@ -52,12 +52,14 @@ function CameraControls() {
     const el = gl.domElement;
 
     const onPointerDown = (e: PointerEvent) => {
+      if (e.pointerType === "touch") return;
       isDragging.current = true;
       previousMouse.current = { x: e.clientX, y: e.clientY };
       el.style.cursor = "grabbing";
     };
 
     const onPointerMove = (e: PointerEvent) => {
+      if (e.pointerType === "touch") return;
       if (!isDragging.current) return;
       const dx = e.clientX - previousMouse.current.x;
       const dy = e.clientY - previousMouse.current.y;
