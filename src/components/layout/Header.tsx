@@ -117,7 +117,10 @@ export function Header() {
             <div className="lg:hidden flex items-center gap-2">
               <button
                 onClick={toggleLanguage}
-                className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors min-h-[44px]"
+                className={cn(
+                  "flex items-center gap-1 transition-colors min-h-[44px]",
+                  isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/70 hover:text-white"
+                )}
               >
                 <Globe className="h-3.5 w-3.5" />
                 <span className="text-[12px]">{i18n.language === 'en' ? 'FR' : 'EN'}</span>
@@ -129,9 +132,9 @@ export function Header() {
                 aria-label={isOpen ? 'Close menu' : 'Open menu'}
               >
                 <div className="w-6 flex flex-col gap-[5px]">
-                  <span className="block h-[2px] bg-foreground rounded-full" />
-                  <span className="block h-[2px] bg-foreground rounded-full w-4" />
-                  <span className="block h-[2px] bg-foreground rounded-full" />
+                  <span className={cn("block h-[2px] rounded-full transition-colors duration-500", isScrolled ? "bg-foreground" : "bg-white")} />
+                  <span className={cn("block h-[2px] rounded-full w-4 transition-colors duration-500", isScrolled ? "bg-foreground" : "bg-white")} />
+                  <span className={cn("block h-[2px] rounded-full transition-colors duration-500", isScrolled ? "bg-foreground" : "bg-white")} />
                 </div>
               </button>
             </div>
