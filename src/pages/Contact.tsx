@@ -184,6 +184,19 @@ export default function Contact() {
                       className="w-full bg-transparent border-b border-border py-4 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-accent transition-colors duration-500 resize-none"
                     />
 
+                    {/* Consent checkbox — DPA 2017 compliance */}
+                    <div className="flex items-start gap-3">
+                      <input
+                        type="checkbox"
+                        required
+                        id="contact-consent"
+                        className="mt-1 h-4 w-4 border-border accent-accent"
+                      />
+                      <label htmlFor="contact-consent" className="text-xs text-muted-foreground leading-relaxed">
+                        {t('contact.form.consent', 'I consent to Mont Choisy collecting and processing my personal data for the purpose of responding to this inquiry, in accordance with the Privacy Policy and the Mauritius Data Protection Act 2017. I understand I can withdraw my consent at any time.')}
+                      </label>
+                    </div>
+
                     <button
                       type="submit"
                       disabled={isSubmitting}
