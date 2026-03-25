@@ -15,7 +15,14 @@ const Index = () => {
 
       {/* ═══ 360° HERO ═══ */}
       <section className="relative h-dvh">
-        <PanoramaViewer images={heroScene} showControls={false} className="h-full" />
+        <motion.img
+          src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&auto=format&fit=crop&q=80"
+          alt="Luxury apartment interior"
+          className="absolute inset-0 w-full h-full object-cover"
+          initial={{ scale: 1 }}
+          animate={{ scale: 1.08 }}
+          transition={{ duration: 20, ease: 'easeOut' }}
+        />
 
         {/* Overlay text */}
         <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center z-10">
