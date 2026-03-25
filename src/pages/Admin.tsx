@@ -370,6 +370,9 @@ export default function Admin() {
     { id: 'bookings', label: 'Bookings', icon: Calendar, count: bookings.length },
     { id: 'clients', label: 'Clients', icon: Users, count: clients.length },
     { id: 'reviews', label: 'Reviews', icon: Star, count: reviews.length },
+    { id: 'consent', label: 'Consent Logs', icon: Shield, count: consentLogs.length },
+    { id: 'data_rights', label: 'Data Rights', icon: FileText, count: dataRightsRequests.length },
+    { id: 'audit', label: 'Audit Trail', icon: Activity, count: auditLogs.length },
   ];
 
   const totalLeads = contacts.length + tours.length + sales.length + rentals.length;
