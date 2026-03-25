@@ -57,11 +57,11 @@ export default function OwnInMauritius() {
         <div className="relative z-10 h-full flex flex-col justify-end pb-16 md:pb-24">
           <div className="container-editorial">
             <FadeIn>
-              <p className="text-caption text-foreground/50 mb-4">
+              <p className="text-caption text-white/50 mb-4">
                 {t('own.subtitle', 'International Ownership')}
               </p>
             </FadeIn>
-            <TextReveal className="font-serif text-display text-foreground max-w-4xl">
+            <TextReveal className="font-serif text-display text-white max-w-4xl drop-shadow-lg">
               {t('own.title', 'Own in Mauritius')}
             </TextReveal>
           </div>

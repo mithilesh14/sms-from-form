@@ -8,7 +8,7 @@ import { FadeIn, TextReveal } from '@/components/ChapterSection';
 import { PanoramaViewer } from '@/components/PanoramaViewer';
 
 const heroScene = [
-  { url: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=4096&auto=format&fit=crop&q=90', label: 'Living Room' },
+  { url: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=4096&auto=format&fit=crop&q=90', label: 'Exterior' },
 ];
 
 const Index = () => {

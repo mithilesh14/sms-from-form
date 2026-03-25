@@ -10,8 +10,9 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const isHome = location.pathname === '/';
-  const useLight = isHome && !isScrolled;
+  const pagesWithDarkHero = ['/', '/residence', '/own-in-mauritius'];
+  const hasDarkHero = pagesWithDarkHero.includes(location.pathname);
+  const useLight = hasDarkHero && !isScrolled;
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
