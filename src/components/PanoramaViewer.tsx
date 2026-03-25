@@ -27,6 +27,7 @@ function CameraControls() {
   const rotationRef = useRef({ lon: 0, lat: 0 });
   const targetFov = useRef(75);
   const lastPinchDist = useRef(0);
+  const touchIntent = useRef<'undecided' | 'pan' | 'scroll'>('undecided');
 
   useFrame(() => {
     const { lon, lat } = rotationRef.current;
@@ -73,6 +74,7 @@ function CameraControls() {
     };
 
     const onWheel = (e: WheelEvent) => {
+      if (!e.ctrlKey && !e.metaKey) return; // plain scroll passes through to page
       e.preventDefault();
       targetFov.current = THREE.MathUtils.clamp(
         targetFov.current + e.deltaY * 0.05, 30, 100
@@ -89,17 +91,19 @@ function CameraControls() {
       if (e.touches.length === 2) {
         isPinching.current = true;
         isDragging.current = false;
+        touchIntent.current = 'pan';
         lastPinchDist.current = getTouchDist(e.touches);
       } else if (e.touches.length === 1) {
         isDragging.current = true;
         isPinching.current = false;
+        touchIntent.current = 'undecided';
         previousMouse.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
       }
     };
 
     const onTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
       if (isPinching.current && e.touches.length === 2) {
+        e.preventDefault();
         const dist = getTouchDist(e.touches);
         const delta = lastPinchDist.current - dist;
         targetFov.current = THREE.MathUtils.clamp(targetFov.current + delta * 0.15, 30, 100);
@@ -107,8 +111,18 @@ function CameraControls() {
         return;
       }
       if (!isDragging.current || e.touches.length !== 1) return;
+
       const dx = e.touches[0].clientX - previousMouse.current.x;
       const dy = e.touches[0].clientY - previousMouse.current.y;
+
+      if (touchIntent.current === 'undecided') {
+        if (Math.abs(dx) + Math.abs(dy) < 5) return; // wait for meaningful movement
+        touchIntent.current = Math.abs(dx) > Math.abs(dy) ? 'pan' : 'scroll';
+      }
+
+      if (touchIntent.current === 'scroll') return; // let browser scroll
+
+      e.preventDefault();
       rotationRef.current.lon -= dx * 0.2;
       rotationRef.current.lat = THREE.MathUtils.clamp(
         rotationRef.current.lat + dy * 0.2, -85, 85
@@ -116,7 +130,7 @@ function CameraControls() {
       previousMouse.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     };
 
-    const onTouchEnd = () => { isDragging.current = false; isPinching.current = false; };
+    const onTouchEnd = () => { isDragging.current = false; isPinching.current = false; touchIntent.current = 'undecided'; };
 
     el.style.cursor = "grab";
     el.addEventListener("pointerdown", onPointerDown);
