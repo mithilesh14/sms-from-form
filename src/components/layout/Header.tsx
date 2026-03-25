@@ -51,9 +51,9 @@ export function Header() {
   const navLinkClass = (href: string) =>
     cn(
       "text-[13px] tracking-[0.04em] font-normal transition-colors duration-300 relative pb-0.5 whitespace-nowrap",
-      location.pathname === href
-        ? "text-foreground border-b border-foreground"
-        : "text-muted-foreground hover:text-foreground"
+      isScrolled
+        ? (location.pathname === href ? "text-foreground border-b border-foreground" : "text-muted-foreground hover:text-foreground")
+        : (location.pathname === href ? "text-white border-b border-white" : "text-white/70 hover:text-white")
     );
 
   return (
@@ -61,7 +61,7 @@ export function Header() {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          isScrolled ? "bg-background shadow-sm" : "bg-background/95 backdrop-blur-sm"
+          isScrolled ? "bg-background shadow-sm" : "bg-transparent"
         )}
       >
         <div className="w-full px-6 sm:px-10 lg:px-14">
