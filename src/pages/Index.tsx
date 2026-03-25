@@ -19,11 +19,11 @@ const Index = () => {
       <Header />
 
       {/* ═══ 360° HERO ═══ */}
-      <section className="relative h-screen pt-[70px] lg:pt-[91px]">
+      <section className="relative h-screen">
         <PanoramaViewer images={heroScene} showControls={false} className="h-full" />
 
         {/* Overlay text */}
-        <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center z-10 pt-[70px] lg:pt-[91px]">
+        <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

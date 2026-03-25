@@ -51,9 +51,9 @@ export function Header() {
   const navLinkClass = (href: string) =>
     cn(
       "text-[13px] tracking-[0.04em] font-normal transition-colors duration-300 relative pb-0.5 whitespace-nowrap",
-      location.pathname === href
-        ? "text-foreground border-b border-foreground"
-        : "text-muted-foreground hover:text-foreground"
+      isScrolled
+        ? (location.pathname === href ? "text-foreground border-b border-foreground" : "text-muted-foreground hover:text-foreground")
+        : (location.pathname === href ? "text-white border-b border-white" : "text-white/70 hover:text-white")
     );
 
   return (
@@ -61,7 +61,7 @@ export function Header() {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          isScrolled ? "bg-background shadow-sm" : "bg-background/95 backdrop-blur-sm"
+          isScrolled ? "bg-background shadow-sm" : "bg-transparent"
         )}
       >
         <div className="w-full px-6 sm:px-10 lg:px-14">
@@ -78,10 +78,16 @@ export function Header() {
 
             {/* Center logo */}
             <Link to="/" className="relative z-10 flex flex-col items-center shrink-0">
-              <span className="text-[20px] sm:text-[24px] lg:text-[28px] tracking-[0.25em] uppercase font-semibold text-foreground font-sans">
+              <span className={cn(
+                "text-[20px] sm:text-[24px] lg:text-[28px] tracking-[0.25em] uppercase font-semibold font-sans transition-colors duration-500",
+                isScrolled ? "text-foreground" : "text-white"
+              )}>
                 MONT CHOISY
               </span>
-              <span className="text-[8px] sm:text-[9px] tracking-[0.35em] uppercase text-muted-foreground font-normal mt-0.5">
+              <span className={cn(
+                "text-[8px] sm:text-[9px] tracking-[0.35em] uppercase font-normal mt-0.5 transition-colors duration-500",
+                isScrolled ? "text-muted-foreground" : "text-white/60"
+              )}>
                 Oceanfront Living
               </span>
             </Link>
@@ -97,7 +103,10 @@ export function Header() {
               {/* Language toggle */}
               <button
                 onClick={toggleLanguage}
-                className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors min-h-[44px] ml-2"
+                className={cn(
+                  "flex items-center gap-1.5 transition-colors min-h-[44px] ml-2",
+                  isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/70 hover:text-white"
+                )}
               >
                 <Globe className="h-3.5 w-3.5" />
                 <span className="text-[12px] tracking-[0.08em]">{i18n.language === 'en' ? 'FR' : 'EN'}</span>
@@ -108,7 +117,10 @@ export function Header() {
             <div className="lg:hidden flex items-center gap-2">
               <button
                 onClick={toggleLanguage}
-                className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors min-h-[44px]"
+                className={cn(
+                  "flex items-center gap-1 transition-colors min-h-[44px]",
+                  isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/70 hover:text-white"
+                )}
               >
                 <Globe className="h-3.5 w-3.5" />
                 <span className="text-[12px]">{i18n.language === 'en' ? 'FR' : 'EN'}</span>
@@ -120,16 +132,16 @@ export function Header() {
                 aria-label={isOpen ? 'Close menu' : 'Open menu'}
               >
                 <div className="w-6 flex flex-col gap-[5px]">
-                  <span className="block h-[2px] bg-foreground rounded-full" />
-                  <span className="block h-[2px] bg-foreground rounded-full w-4" />
-                  <span className="block h-[2px] bg-foreground rounded-full" />
+                  <span className={cn("block h-[2px] rounded-full transition-colors duration-500", isScrolled ? "bg-foreground" : "bg-white")} />
+                  <span className={cn("block h-[2px] rounded-full w-4 transition-colors duration-500", isScrolled ? "bg-foreground" : "bg-white")} />
+                  <span className={cn("block h-[2px] rounded-full transition-colors duration-500", isScrolled ? "bg-foreground" : "bg-white")} />
                 </div>
               </button>
             </div>
           </div>
         </div>
 
-        <div className="h-px bg-border/50" />
+        {isScrolled && <div className="h-px bg-border/50" />}
       </header>
 
       {/* Fullscreen overlay menu */}
