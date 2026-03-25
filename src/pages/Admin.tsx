@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import {
   LayoutDashboard, Users, MessageSquare, Calendar, Home, TrendingUp,
   Search, Filter, ChevronDown, ChevronUp, ExternalLink, Mail, Phone,
-  MapPin, Clock, Star, Eye, EyeOff, ArrowLeft, LogOut
+  MapPin, Clock, Star, Eye, EyeOff, ArrowLeft, LogOut, Shield, FileText, Activity
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
