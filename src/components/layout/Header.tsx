@@ -107,7 +107,7 @@ export function Header() {
                 onClick={toggleLanguage}
                 className={cn(
                   "flex items-center gap-1.5 transition-colors min-h-[44px] ml-2",
-                  isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/70 hover:text-white"
+                  useLight ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 <Globe className="h-3.5 w-3.5" />
