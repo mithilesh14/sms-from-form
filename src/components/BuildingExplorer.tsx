@@ -86,7 +86,7 @@ function SunlightBar({ hours }: { hours: number }) {
 
 export function BuildingExplorer() {
   const { t } = useTranslation();
-  const { mode } = useIntent();
+  
   const [selectedFloor, setSelectedFloor] = useState<number | null>(null);
   const [selectedUnit, setSelectedUnit] = useState<Unit | null>(null);
   const [filterView, setFilterView] = useState<string>('all');
