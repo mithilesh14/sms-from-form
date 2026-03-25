@@ -82,7 +82,7 @@ export function Header() {
             <Link to="/" className="relative z-10 flex flex-col items-center shrink-0">
               <span className={cn(
                 "text-[20px] sm:text-[24px] lg:text-[28px] tracking-[0.25em] uppercase font-semibold font-sans transition-colors duration-500",
-                isScrolled ? "text-foreground" : "text-white"
+                useLight ? "text-white" : "text-foreground"
               )}>
                 MONT CHOISY
               </span>
