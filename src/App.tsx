@@ -17,6 +17,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import VirtualTour from "./pages/VirtualTour";
 import OwnInMauritius from "./pages/OwnInMauritius";
+import DataRights from "./pages/DataRights";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 
