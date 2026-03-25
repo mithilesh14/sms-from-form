@@ -45,7 +45,7 @@ const Residence = () => {
                 initial={{ y: 120 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1.2, delay: 0.7, ease: [0.4, 0, 0.2, 1] }}
-                className="font-serif text-display text-foreground max-w-4xl"
+                className="font-serif text-display text-white max-w-4xl drop-shadow-lg"
               >
                 {t('residence.title', 'The Architectural Vision')}
               </motion.h1>
