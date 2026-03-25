@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { IntentProvider } from "@/contexts/IntentContext";
+import { CookieConsent } from "@/components/CookieConsent";
 import "@/i18n";
 
 import Index from "./pages/Index";
@@ -17,6 +18,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import VirtualTour from "./pages/VirtualTour";
 import OwnInMauritius from "./pages/OwnInMauritius";
+import DataRights from "./pages/DataRights";
 import NotFound from "./pages/NotFound";
 import Admin from "./pages/Admin";
 
@@ -29,6 +31,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
+          <CookieConsent />
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
@@ -41,6 +44,7 @@ const App = () => (
               <Route path="/contact" element={<Contact />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
+              <Route path="/data-rights" element={<DataRights />} />
               <Route path="/admin" element={<Admin />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

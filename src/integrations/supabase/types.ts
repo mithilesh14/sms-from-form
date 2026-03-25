@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      audit_logs: {
+        Row: {
+          action: string
+          created_at: string | null
+          details: Json | null
+          entity_id: string | null
+          entity_type: string | null
+          id: string
+          ip_address: string | null
+          performed_by: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string | null
+          details?: Json | null
+          entity_id?: string | null
+          entity_type?: string | null
+          id?: string
+          ip_address?: string | null
+          performed_by?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string | null
+          details?: Json | null
+          entity_id?: string | null
+          entity_type?: string | null
+          id?: string
+          ip_address?: string | null
+          performed_by?: string | null
+        }
+        Relationships: []
+      }
       blocked_dates: {
         Row: {
           created_at: string | null
@@ -177,6 +210,45 @@ export type Database = {
         }
         Relationships: []
       }
+      consent_logs: {
+        Row: {
+          consent_details: Json | null
+          consent_given: boolean
+          consent_type: string
+          created_at: string | null
+          id: string
+          ip_address: string | null
+          user_agent: string | null
+          visitor_email: string | null
+          visitor_name: string | null
+          withdrawn_at: string | null
+        }
+        Insert: {
+          consent_details?: Json | null
+          consent_given?: boolean
+          consent_type: string
+          created_at?: string | null
+          id?: string
+          ip_address?: string | null
+          user_agent?: string | null
+          visitor_email?: string | null
+          visitor_name?: string | null
+          withdrawn_at?: string | null
+        }
+        Update: {
+          consent_details?: Json | null
+          consent_given?: boolean
+          consent_type?: string
+          created_at?: string | null
+          id?: string
+          ip_address?: string | null
+          user_agent?: string | null
+          visitor_email?: string | null
+          visitor_name?: string | null
+          withdrawn_at?: string | null
+        }
+        Relationships: []
+      }
       contact_inquiries: {
         Row: {
           admin_notes: string | null
@@ -210,6 +282,45 @@ export type Database = {
           phone?: string | null
           status?: string | null
           subject?: string | null
+        }
+        Relationships: []
+      }
+      data_rights_requests: {
+        Row: {
+          admin_notes: string | null
+          completed_at: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          request_type: string
+          requester_email: string
+          requester_name: string
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          completed_at?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          request_type: string
+          requester_email: string
+          requester_name: string
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          completed_at?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          request_type?: string
+          requester_email?: string
+          requester_name?: string
+          status?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }

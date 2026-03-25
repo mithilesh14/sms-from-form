@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import {
   LayoutDashboard, Users, MessageSquare, Calendar, Home, TrendingUp,
   Search, Filter, ChevronDown, ChevronUp, ExternalLink, Mail, Phone,
-  MapPin, Clock, Star, Eye, EyeOff, ArrowLeft, LogOut
+  MapPin, Clock, Star, Eye, EyeOff, ArrowLeft, LogOut, Shield, FileText, Activity
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
@@ -254,7 +254,7 @@ function DetailDrawer({ data, onClose, title }: {
 }
 
 // ─── Main Admin ───
-type Tab = 'dashboard' | 'contacts' | 'tours' | 'sales' | 'rentals' | 'bookings' | 'clients' | 'reviews';
+type Tab = 'dashboard' | 'contacts' | 'tours' | 'sales' | 'rentals' | 'bookings' | 'clients' | 'reviews' | 'consent' | 'data_rights' | 'audit';
 
 export default function Admin() {
   const [authed, setAuthed] = useState(() => sessionStorage.getItem('admin_auth') === 'true');
@@ -325,6 +325,33 @@ export default function Admin() {
     enabled: authed,
   });
 
+  const { data: consentLogs = [] } = useQuery({
+    queryKey: ['admin-consent-logs'],
+    queryFn: async () => {
+      const { data } = await supabase.from('consent_logs').select('*').order('created_at', { ascending: false });
+      return data || [];
+    },
+    enabled: authed,
+  });
+
+  const { data: dataRightsRequests = [] } = useQuery({
+    queryKey: ['admin-data-rights'],
+    queryFn: async () => {
+      const { data } = await supabase.from('data_rights_requests').select('*').order('created_at', { ascending: false });
+      return data || [];
+    },
+    enabled: authed,
+  });
+
+  const { data: auditLogs = [] } = useQuery({
+    queryKey: ['admin-audit-logs'],
+    queryFn: async () => {
+      const { data } = await supabase.from('audit_logs').select('*').order('created_at', { ascending: false });
+      return data || [];
+    },
+    enabled: authed,
+  });
+
   if (!authed) return <PasswordGate onAuth={() => setAuthed(true)} />;
 
   const handleLogout = () => {
@@ -343,6 +370,9 @@ export default function Admin() {
     { id: 'bookings', label: 'Bookings', icon: Calendar, count: bookings.length },
     { id: 'clients', label: 'Clients', icon: Users, count: clients.length },
     { id: 'reviews', label: 'Reviews', icon: Star, count: reviews.length },
+    { id: 'consent', label: 'Consent Logs', icon: Shield, count: consentLogs.length },
+    { id: 'data_rights', label: 'Data Rights', icon: FileText, count: dataRightsRequests.length },
+    { id: 'audit', label: 'Audit Trail', icon: Activity, count: auditLogs.length },
   ];
 
   const totalLeads = contacts.length + tours.length + sales.length + rentals.length;
@@ -609,6 +639,66 @@ export default function Admin() {
                   { key: 'created_at', label: 'Date', render: (v) => formatDate(v) },
                 ]}
                 data={reviews}
+                onRowClick={row => setDetailData(row)}
+              />
+            </motion.div>
+          )}
+
+          {/* Consent Logs */}
+          {activeTab === 'consent' && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              <h2 className="font-serif text-2xl text-foreground mb-2">Consent Logs</h2>
+              <p className="text-sm text-muted-foreground mb-6">DPA 2017 — Record of all user consent actions</p>
+              <DataTable
+                columns={[
+                  { key: 'consent_type', label: 'Type' },
+                  { key: 'consent_given', label: 'Consent', render: (v) => v ? '✓ Given' : '✗ Denied' },
+                  { key: 'visitor_email', label: 'Email' },
+                  { key: 'visitor_name', label: 'Name' },
+                  { key: 'consent_details', label: 'Details', render: (v) => v ? JSON.stringify(v) : '—' },
+                  { key: 'created_at', label: 'Date', render: (v) => formatDate(v) },
+                  { key: 'withdrawn_at', label: 'Withdrawn', render: (v) => v ? formatDate(v) : '—' },
+                ]}
+                data={consentLogs}
+                onRowClick={row => setDetailData(row)}
+              />
+            </motion.div>
+          )}
+
+          {/* Data Rights Requests */}
+          {activeTab === 'data_rights' && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              <h2 className="font-serif text-2xl text-foreground mb-2">Data Rights Requests</h2>
+              <p className="text-sm text-muted-foreground mb-6">DPA 2017 — Must respond within 30 days</p>
+              <DataTable
+                columns={[
+                  { key: 'request_type', label: 'Type' },
+                  { key: 'requester_name', label: 'Name' },
+                  { key: 'requester_email', label: 'Email' },
+                  { key: 'status', label: 'Status', render: (v) => <StatusBadge status={v || 'pending'} /> },
+                  { key: 'created_at', label: 'Submitted', render: (v) => formatDate(v) },
+                  { key: 'completed_at', label: 'Completed', render: (v) => v ? formatDate(v) : '—' },
+                ]}
+                data={dataRightsRequests}
+                onRowClick={row => setDetailData(row)}
+              />
+            </motion.div>
+          )}
+
+          {/* Audit Trail */}
+          {activeTab === 'audit' && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              <h2 className="font-serif text-2xl text-foreground mb-2">Audit Trail</h2>
+              <p className="text-sm text-muted-foreground mb-6">Complete log of all administrative actions</p>
+              <DataTable
+                columns={[
+                  { key: 'action', label: 'Action' },
+                  { key: 'entity_type', label: 'Entity' },
+                  { key: 'performed_by', label: 'Performed By' },
+                  { key: 'details', label: 'Details', render: (v) => v ? JSON.stringify(v) : '—' },
+                  { key: 'created_at', label: 'Timestamp', render: (v) => v ? format(new Date(v), 'dd MMM yyyy HH:mm:ss') : '—' },
+                ]}
+                data={auditLogs}
                 onRowClick={row => setDetailData(row)}
               />
             </motion.div>

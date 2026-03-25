@@ -45,6 +45,9 @@ export function Footer() {
             <Link to="/terms" className="hover:text-primary-foreground transition-colors">
               {t('footer.terms')}
             </Link>
+            <Link to="/data-rights" className="hover:text-primary-foreground transition-colors">
+              Data Rights
+            </Link>
           </div>
 
           <div className="flex items-center gap-6">
