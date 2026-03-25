@@ -27,6 +27,7 @@ function CameraControls() {
   const rotationRef = useRef({ lon: 0, lat: 0 });
   const targetFov = useRef(75);
   const lastPinchDist = useRef(0);
+  const touchIntent = useRef<'undecided' | 'pan' | 'scroll'>('undecided');
 
   useFrame(() => {
     const { lon, lat } = rotationRef.current;
