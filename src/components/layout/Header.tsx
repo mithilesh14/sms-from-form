@@ -141,7 +141,7 @@ export function Header() {
           </div>
         </div>
 
-        <div className="h-px bg-border/50" />
+        {isScrolled && <div className="h-px bg-border/50" />}
       </header>
 
       {/* Fullscreen overlay menu */}
