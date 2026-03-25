@@ -92,7 +92,7 @@ export function BuildingExplorer() {
   const [filterView, setFilterView] = useState<string>('all');
 
   const floors = [8, 7, 6, 5, 4, 3, 2, 1];
-  const isInvest = mode === 'invest';
+  const isInvest = false;
 
   const getFloorUnits = (floor: number) => {
     return units.filter(u => u.floor === floor && (filterView === 'all' || u.view === filterView));
