@@ -74,6 +74,7 @@ function CameraControls() {
     };
 
     const onWheel = (e: WheelEvent) => {
+      if (!e.ctrlKey && !e.metaKey) return; // plain scroll passes through to page
       e.preventDefault();
       targetFov.current = THREE.MathUtils.clamp(
         targetFov.current + e.deltaY * 0.05, 30, 100
