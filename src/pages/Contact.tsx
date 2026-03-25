@@ -32,6 +32,15 @@ export default function Contact() {
         subject: formState.interest,
       });
       if (error) throw error;
+      // Log consent for DPA compliance
+      await supabase.from('consent_logs').insert({
+        consent_type: 'form_contact',
+        consent_given: true,
+        consent_details: { purpose: 'inquiry_response', interest: formState.interest } as any,
+        visitor_email: formState.email,
+        visitor_name: formState.name,
+        user_agent: navigator.userAgent,
+      });
       setSubmitted(true);
     } catch {
       toast.error(t('common.error', 'An error occurred'));
