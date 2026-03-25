@@ -59,6 +59,7 @@ function CameraControls() {
     };
 
     const onPointerMove = (e: PointerEvent) => {
+      if (e.pointerType === "touch") return;
       if (!isDragging.current) return;
       const dx = e.clientX - previousMouse.current.x;
       const dy = e.clientY - previousMouse.current.y;
