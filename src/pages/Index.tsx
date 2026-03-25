@@ -5,6 +5,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { FadeIn, TextReveal } from '@/components/ChapterSection';
+import { PanoramaViewer } from '@/components/PanoramaViewer';
 
 const Index = () => {
   const { t } = useTranslation();
