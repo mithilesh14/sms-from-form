@@ -1,21 +1,18 @@
 
 
-# Transparent Header Over 360° Hero
-
-## What I See
-The header currently has a solid cream/white background (`bg-background` / `bg-background/95`) that sits above the 360° panorama, creating a visible break. The panorama starts below the header at `pt-[70px] lg:pt-[91px]`. The user wants the Verso-style effect where the hero image/panorama extends edge-to-edge behind a transparent header.
+# Mobile 360° Panorama Improvements
 
 ## Changes
 
-### `src/components/layout/Header.tsx`
-- **Default state** (not scrolled): `bg-transparent` with white text for logo, nav links, and language toggle. Remove bottom border line when transparent.
-- **Scrolled state**: Keep current solid `bg-background shadow-sm` with dark text (`text-foreground`).
-- Add `isScrolled` conditional to all text elements — white when transparent, dark when scrolled.
-- The logo "MONT CHOISY" and "Oceanfront Living" switch between white and dark based on scroll.
+### `src/components/PanoramaViewer.tsx`
+- Add **pinch-to-zoom** via tracking two-finger touch distance changes, mapping to `targetFov`
+- Update `onTouchStart` to detect two-finger gestures and store initial pinch distance
+- Update `onTouchMove` to calculate pinch delta and adjust zoom accordingly
+- Prevent single-finger drag from firing during pinch
 
 ### `src/pages/Index.tsx`
-- Remove `pt-[70px] lg:pt-[91px]` from the hero section so the 360° panorama fills the full viewport behind the header.
-- Keep the overlay text padding adjusted so it doesn't hide behind the header area.
+- Change hero section from `h-screen` to `h-dvh` (dynamic viewport height) so the panorama properly fills mobile browsers when the address bar toggles
 
-This is a focused, two-file change. No routes or pages are removed.
+### `src/pages/VirtualTour.tsx`
+- Update `min-h-[60vh]` references if needed to use `dvh` units for consistency
 
