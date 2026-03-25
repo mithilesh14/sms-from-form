@@ -1,23 +1,18 @@
 
 
-# Fix Scroll-Past-Panorama (Mobile + Desktop)
+# Fix: Panorama Still Traps Scroll on Mobile
 
-## Problem
-The panorama's `onTouchMove` and `onWheel` handlers call `preventDefault()` unconditionally, trapping users on the panorama — they can't scroll past it on mobile (touch) or desktop (wheel).
+## Root Cause
 
-## Solution — Single file change: `src/components/PanoramaViewer.tsx`
+On touch devices, **both** pointer events and touch events fire. The `onPointerDown`/`onPointerMove` handlers unconditionally set `isDragging = true` and consume the gesture — they have no scroll disambiguation. This overrides the touch handler logic that correctly detects vertical swipes and lets the page scroll.
 
-### Touch (mobile)
-- Add a `touchIntent` ref: starts `'undecided'` on each `touchstart`
-- On first movement in `touchmove`, compare `|dx|` vs `|dy|`:
-  - Horizontal dominant → `'pan'`, preventDefault, rotate panorama
-  - Vertical dominant → `'scroll'`, do nothing (browser scrolls page)
-- Pinch gestures always preventDefault (zoom)
+## Solution — `src/components/PanoramaViewer.tsx`
 
-### Wheel (desktop)
-- Remove `e.preventDefault()` from the wheel handler entirely
-- Instead, only zoom when user holds **Ctrl/Cmd + scroll** (standard map/embed convention)
-- Plain scroll passes through to page scroll
+**Skip pointer events when touch is the input source.** Pointer events include a `pointerType` property (`"mouse"`, `"touch"`, `"pen"`). We simply ignore pointer events where `pointerType === "touch"` so the touch-specific handlers (which already have the scroll-vs-pan disambiguation) are the sole controllers on mobile.
 
-This is the standard disambiguation pattern used by Google Maps embeds and carousels.
+Changes:
+- `onPointerDown`: early return if `e.pointerType === "touch"`
+- `onPointerMove`: early return if `e.pointerType === "touch"`
+
+This is a ~2-line change. Desktop mouse behavior stays identical; mobile touch is handled exclusively by the touch handlers with proper scroll disambiguation.
 
