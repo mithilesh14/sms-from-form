@@ -325,6 +325,33 @@ export default function Admin() {
     enabled: authed,
   });
 
+  const { data: consentLogs = [] } = useQuery({
+    queryKey: ['admin-consent-logs'],
+    queryFn: async () => {
+      const { data } = await supabase.from('consent_logs').select('*').order('created_at', { ascending: false });
+      return data || [];
+    },
+    enabled: authed,
+  });
+
+  const { data: dataRightsRequests = [] } = useQuery({
+    queryKey: ['admin-data-rights'],
+    queryFn: async () => {
+      const { data } = await supabase.from('data_rights_requests').select('*').order('created_at', { ascending: false });
+      return data || [];
+    },
+    enabled: authed,
+  });
+
+  const { data: auditLogs = [] } = useQuery({
+    queryKey: ['admin-audit-logs'],
+    queryFn: async () => {
+      const { data } = await supabase.from('audit_logs').select('*').order('created_at', { ascending: false });
+      return data || [];
+    },
+    enabled: authed,
+  });
+
   if (!authed) return <PasswordGate onAuth={() => setAuthed(true)} />;
 
   const handleLogout = () => {
