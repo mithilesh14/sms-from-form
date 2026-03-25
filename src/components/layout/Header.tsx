@@ -88,7 +88,7 @@ export function Header() {
               </span>
               <span className={cn(
                 "text-[8px] sm:text-[9px] tracking-[0.35em] uppercase font-normal mt-0.5 transition-colors duration-500",
-                isScrolled ? "text-muted-foreground" : "text-white/60"
+                useLight ? "text-white/60" : "text-muted-foreground"
               )}>
                 Oceanfront Living
               </span>
