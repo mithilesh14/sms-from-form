@@ -10,6 +10,8 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const isHome = location.pathname === '/';
+  const useLight = isHome && !isScrolled;
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -51,9 +53,9 @@ export function Header() {
   const navLinkClass = (href: string) =>
     cn(
       "text-[13px] tracking-[0.04em] font-normal transition-colors duration-300 relative pb-0.5 whitespace-nowrap",
-      isScrolled
-        ? (location.pathname === href ? "text-foreground border-b border-foreground" : "text-muted-foreground hover:text-foreground")
-        : (location.pathname === href ? "text-white border-b border-white" : "text-white/70 hover:text-white")
+      useLight
+        ? (location.pathname === href ? "text-white border-b border-white" : "text-white/70 hover:text-white")
+        : (location.pathname === href ? "text-foreground border-b border-foreground" : "text-muted-foreground hover:text-foreground")
     );
 
   return (
@@ -80,13 +82,13 @@ export function Header() {
             <Link to="/" className="relative z-10 flex flex-col items-center shrink-0">
               <span className={cn(
                 "text-[20px] sm:text-[24px] lg:text-[28px] tracking-[0.25em] uppercase font-semibold font-sans transition-colors duration-500",
-                isScrolled ? "text-foreground" : "text-white"
+                useLight ? "text-white" : "text-foreground"
               )}>
                 MONT CHOISY
               </span>
               <span className={cn(
                 "text-[8px] sm:text-[9px] tracking-[0.35em] uppercase font-normal mt-0.5 transition-colors duration-500",
-                isScrolled ? "text-muted-foreground" : "text-white/60"
+                useLight ? "text-white/60" : "text-muted-foreground"
               )}>
                 Oceanfront Living
               </span>
@@ -105,7 +107,7 @@ export function Header() {
                 onClick={toggleLanguage}
                 className={cn(
                   "flex items-center gap-1.5 transition-colors min-h-[44px] ml-2",
-                  isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/70 hover:text-white"
+                  useLight ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 <Globe className="h-3.5 w-3.5" />
@@ -119,7 +121,7 @@ export function Header() {
                 onClick={toggleLanguage}
                 className={cn(
                   "flex items-center gap-1 transition-colors min-h-[44px]",
-                  isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/70 hover:text-white"
+                  useLight ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 <Globe className="h-3.5 w-3.5" />
@@ -132,9 +134,9 @@ export function Header() {
                 aria-label={isOpen ? 'Close menu' : 'Open menu'}
               >
                 <div className="w-6 flex flex-col gap-[5px]">
-                  <span className={cn("block h-[2px] rounded-full transition-colors duration-500", isScrolled ? "bg-foreground" : "bg-white")} />
-                  <span className={cn("block h-[2px] rounded-full w-4 transition-colors duration-500", isScrolled ? "bg-foreground" : "bg-white")} />
-                  <span className={cn("block h-[2px] rounded-full transition-colors duration-500", isScrolled ? "bg-foreground" : "bg-white")} />
+                  <span className={cn("block h-[2px] rounded-full transition-colors duration-500", useLight ? "bg-white" : "bg-foreground")} />
+                  <span className={cn("block h-[2px] rounded-full w-4 transition-colors duration-500", useLight ? "bg-white" : "bg-foreground")} />
+                  <span className={cn("block h-[2px] rounded-full transition-colors duration-500", useLight ? "bg-white" : "bg-foreground")} />
                 </div>
               </button>
             </div>
