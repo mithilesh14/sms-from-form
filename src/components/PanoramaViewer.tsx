@@ -79,16 +79,34 @@ function CameraControls() {
       );
     };
 
+    const getTouchDist = (t: TouchList) => {
+      const dx = t[0].clientX - t[1].clientX;
+      const dy = t[0].clientY - t[1].clientY;
+      return Math.sqrt(dx * dx + dy * dy);
+    };
+
     const onTouchStart = (e: TouchEvent) => {
-      if (e.touches.length === 1) {
+      if (e.touches.length === 2) {
+        isPinching.current = true;
+        isDragging.current = false;
+        lastPinchDist.current = getTouchDist(e.touches);
+      } else if (e.touches.length === 1) {
         isDragging.current = true;
+        isPinching.current = false;
         previousMouse.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
       }
     };
 
     const onTouchMove = (e: TouchEvent) => {
-      if (!isDragging.current || e.touches.length !== 1) return;
       e.preventDefault();
+      if (isPinching.current && e.touches.length === 2) {
+        const dist = getTouchDist(e.touches);
+        const delta = lastPinchDist.current - dist;
+        targetFov.current = THREE.MathUtils.clamp(targetFov.current + delta * 0.15, 30, 100);
+        lastPinchDist.current = dist;
+        return;
+      }
+      if (!isDragging.current || e.touches.length !== 1) return;
       const dx = e.touches[0].clientX - previousMouse.current.x;
       const dy = e.touches[0].clientY - previousMouse.current.y;
       rotationRef.current.lon -= dx * 0.2;
@@ -98,7 +116,7 @@ function CameraControls() {
       previousMouse.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     };
 
-    const onTouchEnd = () => { isDragging.current = false; };
+    const onTouchEnd = () => { isDragging.current = false; isPinching.current = false; };
 
     el.style.cursor = "grab";
     el.addEventListener("pointerdown", onPointerDown);
