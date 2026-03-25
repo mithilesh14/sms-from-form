@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Eye, Maximize2, ArrowRight, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useIntent } from '@/contexts/IntentContext';
+
 
 interface Unit {
   id: string;
@@ -86,13 +86,13 @@ function SunlightBar({ hours }: { hours: number }) {
 
 export function BuildingExplorer() {
   const { t } = useTranslation();
-  const { mode } = useIntent();
+  
   const [selectedFloor, setSelectedFloor] = useState<number | null>(null);
   const [selectedUnit, setSelectedUnit] = useState<Unit | null>(null);
   const [filterView, setFilterView] = useState<string>('all');
 
   const floors = [8, 7, 6, 5, 4, 3, 2, 1];
-  const isInvest = mode === 'invest';
+  const isInvest = false;
 
   const getFloorUnits = (floor: number) => {
     return units.filter(u => u.floor === floor && (filterView === 'all' || u.view === filterView));

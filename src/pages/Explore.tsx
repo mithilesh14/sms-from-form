@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { BuildingExplorer } from '@/components/BuildingExplorer';
-import { ModeToggle } from '@/components/ModeToggle';
 import { FadeIn, TextReveal } from '@/components/ChapterSection';
 
 export default function Explore() {
@@ -12,7 +11,6 @@ export default function Explore() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <ModeToggle />
 
       {/* Hero */}
       <section className="pt-32 pb-8 md:pt-40 md:pb-12">

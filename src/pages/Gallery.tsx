@@ -7,18 +7,18 @@ import { FadeIn, TextReveal } from '@/components/ChapterSection';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const galleryImages = [
-  { src: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&auto=format&fit=crop&q=80', alt: 'Penthouse living room', category: 'interiors' },
-  { src: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&auto=format&fit=crop&q=80', alt: 'Kitchen with marble island', category: 'interiors' },
-  { src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&auto=format&fit=crop&q=80', alt: 'Master suite', category: 'interiors' },
-  { src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&auto=format&fit=crop&q=80', alt: 'Building at dusk', category: 'exterior' },
-  { src: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&auto=format&fit=crop&q=80', alt: 'Rooftop terrace', category: 'amenities' },
-  { src: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&auto=format&fit=crop&q=80', alt: 'Designer bathroom', category: 'interiors' },
-  { src: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=1200&auto=format&fit=crop&q=80', alt: 'Mauritius coastline', category: 'views' },
-  { src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&auto=format&fit=crop&q=80', alt: 'Beach at sunset', category: 'views' },
-  { src: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&auto=format&fit=crop&q=80', alt: 'Open living space', category: 'interiors' },
-  { src: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&auto=format&fit=crop&q=80', alt: 'Infinity pool', category: 'amenities' },
-  { src: 'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=1200&auto=format&fit=crop&q=80', alt: 'Private balcony', category: 'views' },
-  { src: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&auto=format&fit=crop&q=80', alt: 'Study with ocean view', category: 'interiors' },
+  { src: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&auto=format&fit=crop&q=80', alt: 'Luxury tropical villa exterior', category: 'exterior' },
+  { src: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1200&auto=format&fit=crop&q=80', alt: 'Modern oceanfront residence', category: 'exterior' },
+  { src: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&auto=format&fit=crop&q=80', alt: 'Open-plan living with ocean views', category: 'interiors' },
+  { src: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&auto=format&fit=crop&q=80', alt: 'Contemporary kitchen', category: 'interiors' },
+  { src: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&auto=format&fit=crop&q=80', alt: 'Infinity pool at sunset', category: 'amenities' },
+  { src: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1200&auto=format&fit=crop&q=80', alt: 'Resort-style pool terrace', category: 'amenities' },
+  { src: 'https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1200&auto=format&fit=crop&q=80', alt: 'Tropical oceanfront terrace', category: 'views' },
+  { src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&auto=format&fit=crop&q=80', alt: 'Mauritius beach at golden hour', category: 'views' },
+  { src: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1200&auto=format&fit=crop&q=80', alt: 'Master suite with panoramic views', category: 'interiors' },
+  { src: 'https://images.unsplash.com/photo-1540555700478-4be289fbec6d?w=1200&auto=format&fit=crop&q=80', alt: 'Tropical spa and wellness', category: 'amenities' },
+  { src: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=1200&auto=format&fit=crop&q=80', alt: 'Mauritius coastline aerial', category: 'views' },
+  { src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&auto=format&fit=crop&q=80', alt: 'Elegant bedroom retreat', category: 'interiors' },
 ];
 
 export default function Gallery() {

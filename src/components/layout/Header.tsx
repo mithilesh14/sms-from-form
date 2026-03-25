@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Globe, Menu, X } from 'lucide-react';
+import { Globe, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -32,14 +32,14 @@ export function Header() {
 
   const leftLinks = [
     { href: '/', label: 'Home' },
-    { href: '/residence', label: 'The Residences' },
+    { href: '/residence', label: 'Residences' },
     { href: '/gallery', label: 'Gallery' },
   ];
 
   const rightLinks = [
     { href: '/explore', label: 'Availability' },
-    { href: '/own-in-mauritius', label: 'Own in Mauritius' },
-    { href: '/contact', label: 'Book A Tour' },
+    { href: '/own-in-mauritius', label: 'Ownership' },
+    { href: '/contact', label: 'Contact' },
   ];
 
   const allLinks = [
@@ -48,14 +48,20 @@ export function Header() {
     ...rightLinks,
   ];
 
+  const navLinkClass = (href: string) =>
+    cn(
+      "text-[13px] tracking-[0.04em] font-normal transition-colors duration-300 relative pb-0.5 whitespace-nowrap",
+      location.pathname === href
+        ? "text-foreground border-b border-foreground"
+        : "text-muted-foreground hover:text-foreground"
+    );
+
   return (
     <>
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          isScrolled
-            ? "bg-white shadow-sm"
-            : "bg-white/95 backdrop-blur-sm"
+          isScrolled ? "bg-background shadow-sm" : "bg-background/95 backdrop-blur-sm"
         )}
       >
         <div className="w-full px-6 sm:px-10 lg:px-14">
@@ -64,51 +70,26 @@ export function Header() {
             {/* Left nav — desktop */}
             <nav className="hidden lg:flex items-center gap-7 xl:gap-10 flex-1">
               {leftLinks.map(link => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className={cn(
-                    "text-[13px] tracking-[0.04em] font-normal transition-colors duration-300 relative pb-0.5",
-                    location.pathname === link.href
-                      ? "text-foreground border-b border-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                >
+                <Link key={link.href} to={link.href} className={navLinkClass(link.href)}>
                   {link.label}
                 </Link>
               ))}
             </nav>
 
             {/* Center logo */}
-            <Link to="/" className="relative z-10 flex flex-col items-center shrink-0 group">
-              {/* Decorative lines + text */}
-              <div className="flex items-center gap-3">
-                <span className="hidden sm:block w-8 lg:w-12 h-px bg-foreground/30" />
-                <div className="flex flex-col items-center">
-                  <span className="text-[20px] sm:text-[24px] lg:text-[28px] tracking-[0.25em] uppercase font-semibold text-foreground font-sans">
-                    MONT CHOISY
-                  </span>
-                  <span className="text-[8px] sm:text-[9px] tracking-[0.35em] uppercase text-muted-foreground font-normal mt-0.5">
-                    Oceanfront Living
-                  </span>
-                </div>
-                <span className="hidden sm:block w-8 lg:w-12 h-px bg-foreground/30" />
-              </div>
+            <Link to="/" className="relative z-10 flex flex-col items-center shrink-0">
+              <span className="text-[20px] sm:text-[24px] lg:text-[28px] tracking-[0.25em] uppercase font-semibold text-foreground font-sans">
+                MONT CHOISY
+              </span>
+              <span className="text-[8px] sm:text-[9px] tracking-[0.35em] uppercase text-muted-foreground font-normal mt-0.5">
+                Oceanfront Living
+              </span>
             </Link>
 
             {/* Right nav — desktop */}
             <nav className="hidden lg:flex items-center gap-7 xl:gap-10 flex-1 justify-end">
               {rightLinks.map(link => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className={cn(
-                    "text-[13px] tracking-[0.04em] font-normal transition-colors duration-300 relative pb-0.5",
-                    location.pathname === link.href
-                      ? "text-foreground border-b border-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                >
+                <Link key={link.href} to={link.href} className={navLinkClass(link.href)}>
                   {link.label}
                 </Link>
               ))}
@@ -120,19 +101,6 @@ export function Header() {
               >
                 <Globe className="h-3.5 w-3.5" />
                 <span className="text-[12px] tracking-[0.08em]">{i18n.language === 'en' ? 'FR' : 'EN'}</span>
-              </button>
-
-              {/* Hamburger */}
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="min-h-[44px] min-w-[44px] flex items-center justify-center ml-1"
-                aria-label={isOpen ? 'Close menu' : 'Open menu'}
-              >
-                <div className="w-7 flex flex-col gap-[6px]">
-                  <span className="block h-[2px] bg-foreground rounded-full transition-all duration-300" />
-                  <span className="block h-[2px] bg-foreground rounded-full transition-all duration-300 w-5" />
-                  <span className="block h-[2px] bg-foreground rounded-full transition-all duration-300" />
-                </div>
               </button>
             </nav>
 
@@ -161,7 +129,6 @@ export function Header() {
           </div>
         </div>
 
-        {/* Bottom border */}
         <div className="h-px bg-border/50" />
       </header>
 
@@ -173,9 +140,8 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-[60] bg-white"
+            className="fixed inset-0 z-[60] bg-background"
           >
-            {/* Close button */}
             <button
               onClick={() => setIsOpen(false)}
               className="absolute top-5 right-6 sm:right-10 min-h-[44px] min-w-[44px] flex items-center justify-center z-10"

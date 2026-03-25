@@ -65,7 +65,7 @@ export default function Contact() {
         <div
           className="absolute inset-0 bg-cover bg-center ken-burns"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&auto=format&fit=crop&q=80)',
+            backgroundImage: 'url(https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1920&auto=format&fit=crop&q=80)',
           }}
         />
         <div className="overlay-cinematic absolute inset-0" />

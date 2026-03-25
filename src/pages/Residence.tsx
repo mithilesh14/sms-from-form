@@ -25,7 +25,7 @@ const Residence = () => {
         <div
           className="absolute inset-0 bg-cover bg-center ken-burns"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&auto=format&fit=crop&q=80)',
+            backgroundImage: 'url(https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1920&auto=format&fit=crop&q=80)',
           }}
         />
         <div className="absolute top-0 left-0 right-0 h-[6vh] bg-background z-10" />

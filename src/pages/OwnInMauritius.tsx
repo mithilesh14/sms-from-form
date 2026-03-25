@@ -5,7 +5,7 @@ import { Footer } from '@/components/layout/Footer';
 import { FadeIn, TextReveal } from '@/components/ChapterSection';
 import { Shield, Globe, TrendingUp, Home, CheckCircle2, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useIntent } from '@/contexts/IntentContext';
+
 
 const benefits = [
   {
@@ -39,7 +39,7 @@ const process = [
 
 export default function OwnInMauritius() {
   const { t } = useTranslation();
-  const { mode } = useIntent();
+  
 
   return (
     <div className="min-h-screen bg-background">
