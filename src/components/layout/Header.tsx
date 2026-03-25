@@ -134,9 +134,9 @@ export function Header() {
                 aria-label={isOpen ? 'Close menu' : 'Open menu'}
               >
                 <div className="w-6 flex flex-col gap-[5px]">
-                  <span className={cn("block h-[2px] rounded-full transition-colors duration-500", isScrolled ? "bg-foreground" : "bg-white")} />
-                  <span className={cn("block h-[2px] rounded-full w-4 transition-colors duration-500", isScrolled ? "bg-foreground" : "bg-white")} />
-                  <span className={cn("block h-[2px] rounded-full transition-colors duration-500", isScrolled ? "bg-foreground" : "bg-white")} />
+                  <span className={cn("block h-[2px] rounded-full transition-colors duration-500", useLight ? "bg-white" : "bg-foreground")} />
+                  <span className={cn("block h-[2px] rounded-full w-4 transition-colors duration-500", useLight ? "bg-white" : "bg-foreground")} />
+                  <span className={cn("block h-[2px] rounded-full transition-colors duration-500", useLight ? "bg-white" : "bg-foreground")} />
                 </div>
               </button>
             </div>
