@@ -22,9 +22,11 @@ function PanoramaSphere({ url }: { url: string }) {
 function CameraControls() {
   const { camera, gl } = useThree();
   const isDragging = useRef(false);
+  const isPinching = useRef(false);
   const previousMouse = useRef({ x: 0, y: 0 });
   const rotationRef = useRef({ lon: 0, lat: 0 });
   const targetFov = useRef(75);
+  const lastPinchDist = useRef(0);
 
   useFrame(() => {
     const { lon, lat } = rotationRef.current;
@@ -77,16 +79,34 @@ function CameraControls() {
       );
     };
 
+    const getTouchDist = (t: TouchList) => {
+      const dx = t[0].clientX - t[1].clientX;
+      const dy = t[0].clientY - t[1].clientY;
+      return Math.sqrt(dx * dx + dy * dy);
+    };
+
     const onTouchStart = (e: TouchEvent) => {
-      if (e.touches.length === 1) {
+      if (e.touches.length === 2) {
+        isPinching.current = true;
+        isDragging.current = false;
+        lastPinchDist.current = getTouchDist(e.touches);
+      } else if (e.touches.length === 1) {
         isDragging.current = true;
+        isPinching.current = false;
         previousMouse.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
       }
     };
 
     const onTouchMove = (e: TouchEvent) => {
-      if (!isDragging.current || e.touches.length !== 1) return;
       e.preventDefault();
+      if (isPinching.current && e.touches.length === 2) {
+        const dist = getTouchDist(e.touches);
+        const delta = lastPinchDist.current - dist;
+        targetFov.current = THREE.MathUtils.clamp(targetFov.current + delta * 0.15, 30, 100);
+        lastPinchDist.current = dist;
+        return;
+      }
+      if (!isDragging.current || e.touches.length !== 1) return;
       const dx = e.touches[0].clientX - previousMouse.current.x;
       const dy = e.touches[0].clientY - previousMouse.current.y;
       rotationRef.current.lon -= dx * 0.2;
@@ -96,7 +116,7 @@ function CameraControls() {
       previousMouse.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     };
 
-    const onTouchEnd = () => { isDragging.current = false; };
+    const onTouchEnd = () => { isDragging.current = false; isPinching.current = false; };
 
     el.style.cursor = "grab";
     el.addEventListener("pointerdown", onPointerDown);
@@ -134,7 +154,7 @@ export function PanoramaViewer({ images, className = '', showControls = true }: 
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className={`relative w-full h-full min-h-[60vh] bg-muted overflow-hidden ${className}`}>
+    <div className={`relative w-full h-full min-h-[60dvh] bg-muted overflow-hidden ${className}`}>
       {/* Loading */}
       {isLoading && (
         <div className="absolute inset-0 z-10 flex items-center justify-center bg-muted">
