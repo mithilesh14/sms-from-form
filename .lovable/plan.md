@@ -1,18 +1,26 @@
 
 
-# Fix: Panorama Still Traps Scroll on Mobile
+# Replace Hero with Cinematic Static Luxury Image
 
-## Root Cause
+## What changes
+Replace the 360° `PanoramaViewer` in the hero section with a full-bleed static image of a luxury apartment interior, using a slow Ken Burns zoom animation for a cinematic feel.
 
-On touch devices, **both** pointer events and touch events fire. The `onPointerDown`/`onPointerMove` handlers unconditionally set `isDragging = true` and consume the gesture — they have no scroll disambiguation. This overrides the touch handler logic that correctly detects vertical swipes and lets the page scroll.
+## Image
+Use a high-quality Unsplash luxury interior with light tones, e.g.:
+`https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1920&auto=format&fit=crop&q=80`
+(bright, modern luxury living room with neutral/light palette, large windows, elegant furnishings)
 
-## Solution — `src/components/PanoramaViewer.tsx`
+Backup options to evaluate:
+- `photo-1616486338812-3dadae4b4ace` — light modern living room
+- `photo-1618221195710-dd6b41faaea6` — minimal luxury with cream tones
 
-**Skip pointer events when touch is the input source.** Pointer events include a `pointerType` property (`"mouse"`, `"touch"`, `"pen"`). We simply ignore pointer events where `pointerType === "touch"` so the touch-specific handlers (which already have the scroll-vs-pan disambiguation) are the sole controllers on mobile.
+## Changes — `src/pages/Index.tsx`
 
-Changes:
-- `onPointerDown`: early return if `e.pointerType === "touch"`
-- `onPointerMove`: early return if `e.pointerType === "touch"`
+1. Remove `PanoramaViewer` import
+2. Replace the hero `<section>` contents: swap `<PanoramaViewer>` for a full-bleed `<img>` with:
+   - `object-cover` filling the viewport
+   - Framer Motion slow Ken Burns animation (scale 1 → 1.08 over ~20s)
+3. Keep all existing overlay text, scroll indicator, and bottom gradient unchanged
 
-This is a ~2-line change. Desktop mouse behavior stays identical; mobile touch is handled exclusively by the touch handlers with proper scroll disambiguation.
+Single file change, ~15 lines modified.
 
