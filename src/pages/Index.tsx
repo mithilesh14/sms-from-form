@@ -19,7 +19,7 @@ const Index = () => {
       <Header />
 
       {/* ═══ 360° HERO ═══ */}
-      <section className="relative h-screen">
+      <section className="relative h-dvh">
         <PanoramaViewer images={heroScene} showControls={false} className="h-full" />
 
         {/* Overlay text */}

@@ -154,7 +154,7 @@ export function PanoramaViewer({ images, className = '', showControls = true }: 
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className={`relative w-full h-full min-h-[60vh] bg-muted overflow-hidden ${className}`}>
+    <div className={`relative w-full h-full min-h-[60dvh] bg-muted overflow-hidden ${className}`}>
       {/* Loading */}
       {isLoading && (
         <div className="absolute inset-0 z-10 flex items-center justify-center bg-muted">
