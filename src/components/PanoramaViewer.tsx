@@ -22,9 +22,11 @@ function PanoramaSphere({ url }: { url: string }) {
 function CameraControls() {
   const { camera, gl } = useThree();
   const isDragging = useRef(false);
+  const isPinching = useRef(false);
   const previousMouse = useRef({ x: 0, y: 0 });
   const rotationRef = useRef({ lon: 0, lat: 0 });
   const targetFov = useRef(75);
+  const lastPinchDist = useRef(0);
 
   useFrame(() => {
     const { lon, lat } = rotationRef.current;
