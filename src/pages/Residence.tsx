@@ -28,8 +28,6 @@ const Residence = () => {
             backgroundImage: 'url(https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1920&auto=format&fit=crop&q=80)',
           }}
         />
-        <div className="absolute top-0 left-0 right-0 h-[6vh] bg-background z-10" />
-        <div className="absolute bottom-0 left-0 right-0 h-[6vh] bg-background z-10" />
         <div className="overlay-cinematic absolute inset-0 z-[1]" />
 
         <div className="relative z-[2] h-full flex flex-col justify-end pb-[12vh]">
