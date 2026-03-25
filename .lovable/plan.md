@@ -1,18 +1,23 @@
 
 
-# Mobile 360° Panorama Improvements
+# Fix Scroll-Past-Panorama (Mobile + Desktop)
 
-## Changes
+## Problem
+The panorama's `onTouchMove` and `onWheel` handlers call `preventDefault()` unconditionally, trapping users on the panorama — they can't scroll past it on mobile (touch) or desktop (wheel).
 
-### `src/components/PanoramaViewer.tsx`
-- Add **pinch-to-zoom** via tracking two-finger touch distance changes, mapping to `targetFov`
-- Update `onTouchStart` to detect two-finger gestures and store initial pinch distance
-- Update `onTouchMove` to calculate pinch delta and adjust zoom accordingly
-- Prevent single-finger drag from firing during pinch
+## Solution — Single file change: `src/components/PanoramaViewer.tsx`
 
-### `src/pages/Index.tsx`
-- Change hero section from `h-screen` to `h-dvh` (dynamic viewport height) so the panorama properly fills mobile browsers when the address bar toggles
+### Touch (mobile)
+- Add a `touchIntent` ref: starts `'undecided'` on each `touchstart`
+- On first movement in `touchmove`, compare `|dx|` vs `|dy|`:
+  - Horizontal dominant → `'pan'`, preventDefault, rotate panorama
+  - Vertical dominant → `'scroll'`, do nothing (browser scrolls page)
+- Pinch gestures always preventDefault (zoom)
 
-### `src/pages/VirtualTour.tsx`
-- Update `min-h-[60vh]` references if needed to use `dvh` units for consistency
+### Wheel (desktop)
+- Remove `e.preventDefault()` from the wheel handler entirely
+- Instead, only zoom when user holds **Ctrl/Cmd + scroll** (standard map/embed convention)
+- Plain scroll passes through to page scroll
+
+This is the standard disambiguation pattern used by Google Maps embeds and carousels.
 
