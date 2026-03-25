@@ -78,10 +78,16 @@ export function Header() {
 
             {/* Center logo */}
             <Link to="/" className="relative z-10 flex flex-col items-center shrink-0">
-              <span className="text-[20px] sm:text-[24px] lg:text-[28px] tracking-[0.25em] uppercase font-semibold text-foreground font-sans">
+              <span className={cn(
+                "text-[20px] sm:text-[24px] lg:text-[28px] tracking-[0.25em] uppercase font-semibold font-sans transition-colors duration-500",
+                isScrolled ? "text-foreground" : "text-white"
+              )}>
                 MONT CHOISY
               </span>
-              <span className="text-[8px] sm:text-[9px] tracking-[0.35em] uppercase text-muted-foreground font-normal mt-0.5">
+              <span className={cn(
+                "text-[8px] sm:text-[9px] tracking-[0.35em] uppercase font-normal mt-0.5 transition-colors duration-500",
+                isScrolled ? "text-muted-foreground" : "text-white/60"
+              )}>
                 Oceanfront Living
               </span>
             </Link>
