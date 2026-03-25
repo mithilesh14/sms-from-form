@@ -254,7 +254,7 @@ function DetailDrawer({ data, onClose, title }: {
 }
 
 // ─── Main Admin ───
-type Tab = 'dashboard' | 'contacts' | 'tours' | 'sales' | 'rentals' | 'bookings' | 'clients' | 'reviews';
+type Tab = 'dashboard' | 'contacts' | 'tours' | 'sales' | 'rentals' | 'bookings' | 'clients' | 'reviews' | 'consent' | 'data_rights' | 'audit';
 
 export default function Admin() {
   const [authed, setAuthed] = useState(() => sessionStorage.getItem('admin_auth') === 'true');
