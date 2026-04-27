@@ -164,34 +164,54 @@ export default function Index() {
 
           <div className="grid md:grid-cols-3 gap-10 lg:gap-8">
             {RESIDENCES.map((r, i) => (
-              <Reveal key={r.name} delay={i * 0.12} className="flex flex-col bg-ivory">
-                <div className={r.featured ? 'border-t-2 border-gold relative' : 'border-t border-hair relative'}>
-                  {r.featured && (
-                    <span className="absolute -top-3 left-6 bg-gold text-ivory text-[10px] tracking-[0.24em] uppercase font-medium px-3 py-1.5">
-                      Most Sought After
-                    </span>
-                  )}
-                  <div className="overflow-hidden aspect-[4/5]">
-                    <img
-                      src={r.image}
-                      alt={`${r.name} — ${r.spec}`}
-                      data-slot={r.slot}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-[1.04]"
-                    />
-                  </div>
-                  <div className="p-7">
-                    <p className="eyebrow mb-3">{r.type}</p>
-                    <h3 className="text-h3 text-ink mb-3">{r.name}</h3>
-                    <p className="text-[11px] tracking-[0.2em] uppercase text-ink-mute mb-5">{r.spec}</p>
-                    <p className="text-ink-soft text-[15px] leading-[1.75] mb-6 min-h-[120px]">{r.desc}</p>
-
-                    <div className="flex flex-wrap gap-2 mb-7">
-                      {['IRS Eligible', 'Rental Programme', 'Move-In Ready'].map(t => (
-                        <span key={t} className="text-[10px] tracking-[0.18em] uppercase text-gold-deep border border-gold/40 px-3 py-1.5">
-                          {t}
-                        </span>
-                      ))}
+              <Reveal key={r.slug} delay={i * 0.12} className="flex">
+                <Link
+                  to={`/residences/${r.slug}`}
+                  className="group flex flex-col w-full bg-ivory"
+                >
+                  <div className={r.featured ? 'border-t-2 border-gold relative' : 'border-t border-hair relative'}>
+                    {r.featured && (
+                      <span className="absolute -top-3 left-6 bg-gold text-ivory text-[10px] tracking-[0.24em] uppercase font-medium px-3 py-1.5">
+                        Most Sought After
+                      </span>
+                    )}
+                    <div className="overflow-hidden aspect-[4/5] relative">
+                      <img
+                        src={r.cover}
+                        alt={`${r.name} — ${r.spec}`}
+                        className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
+                      />
+                      <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors duration-500" />
+                      <span className="absolute bottom-5 left-5 right-5 text-ivory text-[10px] tracking-[0.28em] uppercase opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                        Explore the residence →
+                      </span>
                     </div>
+                    <div className="p-7">
+                      <p className="eyebrow mb-3">{r.type}</p>
+                      <h3 className="text-h3 text-ink mb-3">{r.name}</h3>
+                      <p className="text-[11px] tracking-[0.2em] uppercase text-ink-mute mb-5">{r.spec}</p>
+                      <p className="text-ink-soft text-[15px] leading-[1.75] mb-6 min-h-[120px]">{r.blurb}</p>
+
+                      <div className="flex flex-wrap gap-2 mb-7">
+                        {['IRS Eligible', 'Rental Programme', 'Move-In Ready'].map(t => (
+                          <span key={t} className="text-[10px] tracking-[0.18em] uppercase text-gold-deep border border-gold/40 px-3 py-1.5">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="flex items-center justify-between border-t border-hair pt-5">
+                        <span className="font-serif italic text-[22px] text-ink" style={{ fontWeight: 400 }}>{r.price}</span>
+                        <span className="text-gold-deep text-[11px] tracking-[0.24em] uppercase font-medium group-hover:text-ink transition-colors inline-flex items-center gap-2">
+                          View &amp; 360° <span aria-hidden>→</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
 
                     <div className="flex items-center justify-between border-t border-hair pt-5">
                       <span className="font-serif italic text-[22px] text-ink" style={{ fontWeight: 400 }}>{r.price}</span>
@@ -276,22 +296,50 @@ export default function Index() {
         </div>
       </section>
 
-      {/* ─── 6. INTERIORS STRIP (lets the photos breathe) ────── */}
-      <section className="bg-ivory pb-20 lg:pb-28">
+      {/* ─── 6. THE BUILDING & GROUNDS ────────────────────────── */}
+      <section className="bg-ivory section-pad">
         <div className="container-x">
-          <div className="grid grid-cols-12 gap-4">
-            <Reveal className="col-span-12 md:col-span-7">
-              <div className="aspect-[4/3] overflow-hidden">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 mb-12 lg:mb-16">
+            <div className="lg:col-span-6">
+              <Reveal><p className="eyebrow mb-5">THE BUILDING &amp; GROUNDS</p></Reveal>
+              <Reveal delay={0.1}>
+                <h2 className="text-h1 text-ink">
+                  A quiet building.<br />A garden you walk into.
+                </h2>
+              </Reveal>
+            </div>
+            <Reveal delay={0.2} className="lg:col-span-6 lg:pt-4">
+              <p className="text-ink-soft text-base sm:text-lg leading-[1.85]">
+                Two low blocks set in landscaped gardens of mature flame trees and palms.
+                A residents-only pool, secure parking, and a single private entrance.
+                Designed to feel like a home, not a complex.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="grid grid-cols-12 gap-3 sm:gap-4">
+            <Reveal className="col-span-12 md:col-span-8">
+              <div className="aspect-[16/10] overflow-hidden group">
                 <img src={poolLoungers} alt="Residents' pool with sun loungers and tropical garden"
-                     data-slot="amenity-pool"
-                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.03]" />
+                     className="w-full h-full object-cover transition-transform duration-[900ms] group-hover:scale-[1.04]" />
               </div>
             </Reveal>
-            <Reveal delay={0.12} className="col-span-12 md:col-span-5">
-              <div className="aspect-[4/3] overflow-hidden">
-                <img src={penthouseBedroom} alt="Penthouse bedroom with garden and ocean view"
-                     data-slot="interior-bedroom"
-                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.03]" />
+            <Reveal delay={0.1} className="col-span-12 md:col-span-4">
+              <div className="aspect-[16/10] md:aspect-auto md:h-full overflow-hidden group">
+                <img src={buildingShot} alt="The Oryam building exterior"
+                     className="w-full h-full object-cover transition-transform duration-[900ms] group-hover:scale-[1.04]" />
+              </div>
+            </Reveal>
+            <Reveal delay={0.15} className="col-span-6 md:col-span-4">
+              <div className="aspect-[4/3] overflow-hidden group">
+                <img src={gardenShot} alt="Landscaped gardens at Oryam"
+                     className="w-full h-full object-cover transition-transform duration-[900ms] group-hover:scale-[1.04]" />
+              </div>
+            </Reveal>
+            <Reveal delay={0.2} className="col-span-6 md:col-span-8">
+              <div className="aspect-[4/3] md:aspect-[16/9] overflow-hidden group">
+                <img src={entranceShot} alt="Entrance and architecture"
+                     className="w-full h-full object-cover transition-transform duration-[900ms] group-hover:scale-[1.04]" />
               </div>
             </Reveal>
           </div>
