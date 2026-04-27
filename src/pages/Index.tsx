@@ -133,22 +133,24 @@ export default function Index() {
         <div className="container-x">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 mb-16 lg:mb-20">
             <div className="lg:col-span-7">
-              <Reveal><p className="eyebrow mb-6">THE RESIDENCES</p></Reveal>
+              <Reveal><p className="eyebrow mb-6">{t('oryam.residences.eyebrow')}</p></Reveal>
               <Reveal delay={0.1}>
                 <h2 className="text-h1 text-ink">
-                  Three exceptional homes.<br />One quiet address.
+                  {t('oryam.residences.title_l1')}<br />{t('oryam.residences.title_l2')}
                 </h2>
               </Reveal>
             </div>
             <Reveal delay={0.2} className="lg:col-span-5 lg:pt-4">
               <p className="text-ink-soft text-base sm:text-lg leading-[1.85]">
-                Each Oryam residence is delivered fully fitted — kitchen, bathrooms and built-in joinery complete — and available under Mauritius's IRS scheme, granting full freehold ownership and a Resident Permit for you and your family upon purchase.
+                {t('oryam.residences.body')}
               </p>
             </Reveal>
           </div>
 
           <div className="grid md:grid-cols-3 gap-10 lg:gap-8">
-            {RESIDENCES.map((r, i) => (
+            {RESIDENCES.map((r, i) => {
+              const rt = (k: string) => t(`oryam.residencesData.${r.slug}.${k}`);
+              return (
               <Reveal key={r.slug} delay={i * 0.12} className="flex">
                 <Link
                   to={`/residences/${r.slug}`}
@@ -157,45 +159,46 @@ export default function Index() {
                   <div className={r.featured ? 'border-t-2 border-gold relative' : 'border-t border-hair relative'}>
                     {r.featured && (
                       <span className="absolute -top-3 left-6 bg-gold text-ivory text-[10px] tracking-[0.24em] uppercase font-medium px-3 py-1.5">
-                        Most Sought After
+                        {t('oryam.residences.featured')}
                       </span>
                     )}
                     <div className="overflow-hidden aspect-[4/5] relative">
                       <img
                         src={r.cover}
-                        alt={`${r.name} — ${r.spec}`}
+                        alt={`${rt('name')} — ${rt('spec')}`}
                         className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
                       />
                       <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors duration-500" />
                       <span className="absolute bottom-5 left-5 right-5 text-ivory text-[10px] tracking-[0.28em] uppercase opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                        Explore the residence →
+                        {t('oryam.residences.explore')}
                       </span>
                     </div>
                     <div className="p-7">
-                      <p className="eyebrow mb-3">{r.type}</p>
-                      <h3 className="text-h3 text-ink mb-3">{r.name}</h3>
-                      <p className="text-[11px] tracking-[0.2em] uppercase text-ink-mute mb-5">{r.spec}</p>
-                      <p className="text-ink-soft text-[15px] leading-[1.75] mb-6 min-h-[120px]">{r.blurb}</p>
+                      <p className="eyebrow mb-3">{rt('type')}</p>
+                      <h3 className="text-h3 text-ink mb-3">{rt('name')}</h3>
+                      <p className="text-[11px] tracking-[0.2em] uppercase text-ink-mute mb-5">{rt('spec')}</p>
+                      <p className="text-ink-soft text-[15px] leading-[1.75] mb-6 min-h-[120px]">{rt('blurb')}</p>
 
                       <div className="flex flex-wrap gap-2 mb-7">
-                        {['IRS Eligible', 'Rental Programme', 'Move-In Ready'].map(t => (
-                          <span key={t} className="text-[10px] tracking-[0.18em] uppercase text-gold-deep border border-gold/40 px-3 py-1.5">
-                            {t}
+                        {[t('oryam.residences.tag_irs'), t('oryam.residences.tag_rental'), t('oryam.residences.tag_ready')].map(tag => (
+                          <span key={tag} className="text-[10px] tracking-[0.18em] uppercase text-gold-deep border border-gold/40 px-3 py-1.5">
+                            {tag}
                           </span>
                         ))}
                       </div>
 
                       <div className="flex items-center justify-between border-t border-hair pt-5">
-                        <span className="font-serif italic text-[22px] text-ink" style={{ fontWeight: 400 }}>{r.price}</span>
+                        <span className="font-serif italic text-[22px] text-ink" style={{ fontWeight: 400 }}>{rt('price')}</span>
                         <span className="text-gold-deep text-[11px] tracking-[0.24em] uppercase font-medium group-hover:text-ink transition-colors inline-flex items-center gap-2">
-                          View &amp; 360° <span aria-hidden>→</span>
+                          {t('oryam.residences.view360')} <span aria-hidden>→</span>
                         </span>
                       </div>
                     </div>
                   </div>
                 </Link>
               </Reveal>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
