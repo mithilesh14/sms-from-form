@@ -1,56 +1,25 @@
 import { useState, FormEvent } from 'react';
+import { Link } from 'react-router-dom';
 import { OryamHeader } from '@/components/oryam/OryamHeader';
 import { OryamFooter } from '@/components/oryam/OryamFooter';
 import { ScrollProgress } from '@/components/oryam/ScrollProgress';
 import { Reveal } from '@/components/oryam/Reveal';
+import { RESIDENCES } from '@/data/residences';
 
-import heroPool         from '@/assets/oryam/hero-pool.jpg';
+import heroPool         from '@/assets/oryam/common/01-pool.jpg';
+import poolLoungers     from '@/assets/oryam/common/02-pool-loungers.jpg';
+import buildingShot     from '@/assets/oryam/common/03-building.jpg';
+import gardenShot       from '@/assets/oryam/common/04-garden.jpg';
+import entranceShot     from '@/assets/oryam/common/05-entrance.jpg';
 import settingFlametrees from '@/assets/oryam/setting-flametrees.jpg';
-import poolLoungers     from '@/assets/oryam/pool-loungers.jpg';
-import cardB11          from '@/assets/oryam/card-b11.jpg';
-import cardB22          from '@/assets/oryam/card-b22.jpg';
-import cardPenthouse    from '@/assets/oryam/card-penthouse.jpg';
-import penthouseBedroom from '@/assets/oryam/penthouse-bedroom.jpg';
 
 const HERO_FACTS = [
   { num: '3',     label: 'Residences in the Collection' },
-  { num: '€500k', label: 'Starting Price' },
+  { num: '€520k', label: 'Starting Price' },
   { num: 'IRS',   label: 'Residency Included' },
   { num: 'Now',   label: 'Ready to Move In' },
 ];
 
-const RESIDENCES = [
-  {
-    slot: 'card-coral',
-    image: cardB11,
-    type: 'Residence One',
-    name: 'The Coral',
-    spec: '2 Bedrooms · 2 Bathrooms · 110 m²',
-    desc: 'A bright two-bedroom apartment with open-plan living, oak joinery and a private terrace overlooking the gardens. Steps from the residents\' pool, moments from Mont Choisy beach.',
-    price: 'From €520,000',
-    featured: false,
-  },
-  {
-    slot: 'card-indigo',
-    image: cardB22,
-    type: 'Residence Two',
-    name: 'The Indigo',
-    spec: '3 Bedrooms · 3 Bathrooms · 155 m²',
-    desc: 'Three generous bedrooms, full chef\'s kitchen, and a wraparound terrace catching the trade winds. The most considered family layout in the building. For those who do not compromise on space, light, or the quality of silence.',
-    price: 'From €720,000',
-    featured: true,
-  },
-  {
-    slot: 'card-horizon',
-    image: cardPenthouse,
-    type: 'The Penthouse',
-    name: 'The Horizon',
-    spec: '4 Bedrooms · 4 Bathrooms · 220 m²',
-    desc: 'The entire top floor. A 100m² rooftop terrace with private plunge pool, ocean glimpses across the rooftops, and a level of finish that has no equal in the building. One residence. Limited in every sense.',
-    price: 'From €980,000',
-    featured: false,
-  },
-];
 
 const KEY_NUMBERS = [
   { num: '3',     label: 'Residences in the collection' },
