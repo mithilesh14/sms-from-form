@@ -212,21 +212,6 @@ export default function Index() {
               </Reveal>
             ))}
           </div>
-
-                    <div className="flex items-center justify-between border-t border-hair pt-5">
-                      <span className="font-serif italic text-[22px] text-ink" style={{ fontWeight: 400 }}>{r.price}</span>
-                      <a
-                        href="#contact"
-                        className="text-gold-deep text-[11px] tracking-[0.24em] uppercase font-medium hover:text-ink transition-colors inline-flex items-center gap-2"
-                      >
-                        Enquire <span aria-hidden>→</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
 
