@@ -46,8 +46,29 @@ const REASONS = [
 ];
 
 export default function Index() {
+  const { t } = useTranslation();
   const [submitted, setSubmitted] = useState(false);
   const onSubmit = (e: FormEvent<HTMLFormElement>) => { e.preventDefault(); setSubmitted(true); };
+
+  const HERO_FACTS = [
+    { num: '3',     label: t('oryam.hero.facts.residences') },
+    { num: '€520k', label: t('oryam.hero.facts.starting') },
+    { num: 'IRS',   label: t('oryam.hero.facts.residency') },
+    { num: t('oryam.hero.facts.ready') === 'Prêt à Habiter' ? 'Maintenant' : 'Now', label: t('oryam.hero.facts.ready') },
+  ];
+  const KEY_NUMBERS_I18N = [
+    { num: '3',     label: t('oryam.keyNumbers.n1') },
+    { num: '15%',   label: t('oryam.keyNumbers.n2') },
+    { num: '€0',    label: t('oryam.keyNumbers.n3') },
+    { num: '12 hr', label: t('oryam.keyNumbers.n4') },
+  ];
+  const REASONS_I18N = [
+    { n: '01', title: t('oryam.why.r1.title'), body: t('oryam.why.r1.body') },
+    { n: '02', title: t('oryam.why.r2.title'), body: t('oryam.why.r2.body') },
+    { n: '03', title: t('oryam.why.r3.title'), body: t('oryam.why.r3.body') },
+    { n: '04', title: t('oryam.why.r4.title'), body: t('oryam.why.r4.body') },
+  ];
+
 
   return (
     <div id="top" className="bg-ivory text-ink">
