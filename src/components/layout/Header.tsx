@@ -1,85 +1,98 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const NAV = [
+  { href: '/residence', label: 'Projects' },
+  { href: '/explore', label: 'Explore' },
+  { href: '/own-in-mauritius', label: 'About' },
+  { href: '/gallery', label: 'Blog' },
+];
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
-  // Hide header entirely on Paradise gateway
-  if (location.pathname === '/') return null;
-
-  const pagesWithDarkHero = ['/home', '/residence', '/own-in-mauritius'];
-  const hasDarkHero = pagesWithDarkHero.includes(location.pathname);
-  const useLight = hasDarkHero && !isScrolled;
+  const isHome = location.pathname === '/';
+  const useLight = isHome && !isScrolled;
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 60);
+    onScroll();
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => { setIsOpen(false); }, [location]);
-
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
-  const navLinks = [
-    { href: '/home', label: 'Lifestyle' },
-    { href: '/residence', label: 'Residences' },
-    { href: '/gallery', label: 'Gallery' },
-    { href: '/contact', label: 'Contact' },
-  ];
-
-  const linkClass = (href: string) =>
+  const linkCls = (href: string) =>
     cn(
-      'text-[12px] tracking-[0.18em] uppercase font-sans font-light transition-colors duration-300 whitespace-nowrap',
+      'text-[13px] font-medium tracking-wide transition-colors duration-300',
       useLight
-        ? location.pathname === href ? 'text-offwhite' : 'text-offwhite/65 hover:text-offwhite'
-        : location.pathname === href ? 'text-ocean' : 'text-ocean/60 hover:text-ocean'
+        ? location.pathname === href ? 'text-white' : 'text-white/80 hover:text-white'
+        : location.pathname === href ? 'text-navy' : 'text-ink-muted hover:text-navy'
     );
 
   return (
     <>
       <header
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-400',
           isScrolled
-            ? 'bg-offwhite/85 backdrop-blur-xl border-b border-gold/20'
+            ? 'bg-white/95 backdrop-blur-md shadow-sm'
             : 'bg-transparent'
         )}
       >
-        <div className="w-full px-6 sm:px-10 lg:px-14">
-          <div className="flex items-center justify-between h-[70px] lg:h-[84px]">
+        <div className="container-x">
+          <div className="flex items-center justify-between h-[72px] lg:h-[84px]">
             {/* Wordmark */}
-            <Link to="/home" className="shrink-0">
-              <span
-                className={cn(
-                  'text-[15px] sm:text-[16px] tracking-[0.32em] uppercase font-sans font-medium transition-colors duration-500',
-                  useLight ? 'text-offwhite' : 'text-ocean'
-                )}
-              >
+            <Link to="/" className="shrink-0 flex flex-col leading-none">
+              <span className={cn(
+                'font-serif text-[22px] sm:text-[26px] tracking-[0.02em] font-medium transition-colors duration-300',
+                useLight ? 'text-white' : 'text-navy'
+              )}>
                 Mont Choisy
+              </span>
+              <span className={cn(
+                'text-[9px] tracking-[0.32em] uppercase font-medium mt-0.5 transition-colors duration-300',
+                useLight ? 'text-white/60' : 'text-teal'
+              )}>
+                Mauritius
               </span>
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center gap-10">
-              {navLinks.map(link => (
-                <Link key={link.href} to={link.href} className={linkClass(link.href)}>
-                  {link.label}
+            <nav className="hidden lg:flex items-center gap-9">
+              {NAV.map(l => (
+                <Link key={l.href} to={l.href} className={linkCls(l.href)}>
+                  {l.label}
                 </Link>
               ))}
+              <button
+                className={cn(
+                  'flex items-center gap-1 text-[13px] font-medium transition-colors',
+                  useLight ? 'text-white/80 hover:text-white' : 'text-ink-muted hover:text-navy'
+                )}
+              >
+                EUR <ChevronDown className="h-3 w-3" />
+              </button>
               <Link
                 to="/contact"
-                className="bg-coral text-offwhite px-6 py-3 text-[11px] tracking-[0.25em] uppercase font-sans hover:bg-coral/85 transition-colors duration-300"
+                className={cn(
+                  'inline-flex items-center px-6 py-3 text-[12px] tracking-[0.14em] uppercase font-medium border-2 transition-all duration-300',
+                  useLight
+                    ? 'border-white text-white hover:bg-white hover:text-navy'
+                    : 'border-navy text-navy hover:bg-navy hover:text-white'
+                )}
               >
-                Enquire
+                Contact
               </Link>
             </nav>
 
@@ -87,66 +100,61 @@ export function Header() {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="lg:hidden touch-target flex items-center justify-center"
-              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-label="Open menu"
             >
-              <div className="w-6 flex flex-col gap-[5px]">
-                <span className={cn('block h-px transition-colors duration-500', useLight ? 'bg-offwhite' : 'bg-ocean')} />
-                <span className={cn('block h-px w-4 transition-colors duration-500', useLight ? 'bg-offwhite' : 'bg-ocean')} />
-                <span className={cn('block h-px transition-colors duration-500', useLight ? 'bg-offwhite' : 'bg-ocean')} />
-              </div>
+              <Menu className={cn('h-6 w-6', useLight ? 'text-white' : 'text-navy')} />
             </button>
           </div>
         </div>
       </header>
 
-      {/* Fullscreen mobile overlay */}
+      {/* Mobile fullscreen menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-[60] bg-ocean text-offwhite"
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[60] bg-navy text-white"
           >
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-5 right-6 sm:right-10 touch-target flex items-center justify-center z-10"
+              className="absolute top-5 right-6 touch-target flex items-center justify-center"
               aria-label="Close menu"
             >
-              <X className="h-6 w-6 text-offwhite" />
+              <X className="h-6 w-6 text-white" />
             </button>
-
-            <div className="h-full flex flex-col justify-center px-10 sm:px-16">
-              <nav className="space-y-2">
-                {navLinks.map((link, index) => (
+            <div className="h-full flex flex-col justify-center px-10">
+              <nav className="space-y-3">
+                {[{ href: '/', label: 'Home' }, ...NAV].map((l, i) => (
                   <motion.div
-                    key={link.href}
-                    initial={{ y: 60, opacity: 0 }}
+                    key={l.href}
+                    initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    transition={{ duration: 0.4, delay: i * 0.05 }}
                   >
                     <Link
-                      to={link.href}
+                      to={l.href}
                       onClick={() => setIsOpen(false)}
-                      className="block font-serif italic text-4xl sm:text-5xl py-2 text-offwhite hover:text-coral transition-colors duration-300"
+                      className="block font-serif text-4xl sm:text-5xl py-2 text-white hover:text-teal-soft transition-colors"
                     >
-                      {link.label}
+                      {l.label}
                     </Link>
                   </motion.div>
                 ))}
                 <motion.div
-                  initial={{ y: 60, opacity: 0 }}
+                  initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.4, delay: navLinks.length * 0.05 }}
+                  transition={{ duration: 0.4, delay: 0.3 }}
                   className="pt-8"
                 >
                   <Link
                     to="/contact"
                     onClick={() => setIsOpen(false)}
-                    className="inline-block bg-coral text-offwhite px-8 py-4 text-[12px] tracking-[0.25em] uppercase"
+                    className="inline-block bg-teal text-white px-8 py-4 text-[12px] tracking-[0.14em] uppercase font-medium"
                   >
-                    Enquire
+                    Contact us
                   </Link>
                 </motion.div>
               </nav>
