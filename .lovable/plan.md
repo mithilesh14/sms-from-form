@@ -1,77 +1,45 @@
-## Goal
+## What's wrong
 
-Make the entire site truly bilingual (EN / FR). Right now the language switcher exists, the dictionary keys exist, and the data-driven arrays use them — but most of the visible page text is still hardcoded English, and per-residence content (names, descriptions, gallery captions) isn't translated at all.
+I baked "three apartments / three residences total" into the copy in many places. The reality: **three layouts** (B-11, B-22, Penthouse), **multiple units of each**. I'll strip every false-quantity claim and reframe everything around layouts + limited availability, without quoting any unit count.
 
-## What's still hardcoded
+The B-22 copy (`Three bedrooms`, `Three full bedrooms`) is correct — that's bedrooms, not units — and stays.
 
-**Homepage (`src/pages/Index.tsx`)** — every hero/intro/residences/ownership/grounds/why/setting/contact heading, paragraph and form label.
+## Fixes
 
-**Residence Detail (`src/pages/ResidenceDetail.tsx`)** — 100% English (back link, hero meta labels, "In detail.", spec list keys, 360° section, gallery heading, CTA, "Also in the collection").
+### 1. EN locale (`src/i18n/locales/en.ts`)
 
-**Residence data (`src/data/residences.ts`)** — `name`, `tagline`, `blurb`, `description`, `type`, gallery `caption`. None of these are translated.
+- **`hero.lede`** → "A private residence at Mont Choisy, Grand Baie. Two- and three-bedroom apartments and a penthouse — fully fitted, freehold, IRS-eligible — with Mauritian residency from €500,000."
+- **`hero.facts.residences`** label → "Apartment Layouts" (so the `3` tile reads as "3 · Apartment Layouts", which is true).
+- **`intro.body`** → "Oryam is a private residence at Mont Choisy — one of the most coveted neighbourhoods on the north coast of Mauritius. Three carefully considered layouts: a bright two-bedroom, a generous three-bedroom, and a single rooftop penthouse. Each apartment is delivered fully fitted, available under the IRS scheme, and ready for immediate occupation. Availability is limited and managed by appointment."
+- **`residences.title_l1`** → "Three layouts." **`title_l2`** → "One quiet address." **`body`** → "Each Oryam apartment is delivered fully fitted — kitchen, bathrooms and built-in joinery complete — and available under Mauritius's IRS scheme, granting full freehold ownership and a Resident Permit for you and your family upon purchase. Several units of each layout are currently offered."
+- **`keyNumbers.n1`** → "Apartment layouts in the residence" (keeps the `3` honest).
+- **`setting.body`** → drop "the last three available". Replace ending with: "The location is exceptional. Availability at this address is limited — and managed by private appointment."
+- **`contact.title_l1` / `_l2` / `_l3`** → "By appointment only." / "No open days." / "Strictly private." (removes the literal "Three residences." line).
+- **`detail.others_title`** → "The other layouts." (was "Two other residences.")
 
-## Plan
+### 2. FR locale (`src/i18n/locales/fr.ts`) — same fixes, mirrored
 
-### 1. Locales — add per-residence content + missing detail keys
+- `hero.lede` → "Une adresse privée à Mont Choisy, Grand Baie. Appartements de deux et trois chambres et un penthouse — entièrement équipés, en pleine propriété, éligibles IRS — avec résidence mauricienne à partir de 500 000 €."
+- `hero.facts.residences` → "Typologies d'appartements"
+- `intro.body` → "Oryam est une adresse privée à Mont Choisy — l'un des quartiers les plus prisés de la côte nord de Maurice. Trois typologies pensées avec soin : un deux-chambres lumineux, un trois-chambres généreux, et un penthouse unique en toiture. Chaque appartement est livré entièrement équipé, disponible sous le régime IRS et prêt à habiter. La disponibilité est limitée et gérée sur rendez-vous."
+- `residences.title_l1` → "Trois typologies." `title_l2` → "Une adresse discrète." `body` → "Chaque appartement Oryam est livré entièrement équipé… Plusieurs unités de chaque typologie sont actuellement proposées."
+- `keyNumbers.n1` → "Typologies d'appartements dans la résidence"
+- `setting.body` → ending becomes "L'emplacement est exceptionnel. La disponibilité à cette adresse est limitée — et gérée sur rendez-vous privé."
+- `contact.title_l1` / `_l2` / `_l3` → "Sur rendez-vous uniquement." / "Pas de portes ouvertes." / "Strictement privé."
+- `detail.others_title` → "Les autres typologies."
 
-In `src/i18n/locales/en.ts` and `fr.ts`, add an `oryam.residencesData` block keyed by slug:
+### 3. Memory
 
-```
-residencesData: {
-  b11: { type, name, tagline, blurb, description,
-         captions: ['…', '…', …8] },
-  b22: { … },
-  penthouse: { … },
-}
-```
-
-EN keeps the current copy. FR gets a proper translation (e.g. *The Coral* → *Le Corail*, *The Indigo* → *L'Indigo*, *The Horizon* → *L'Horizon*; `From €520,000` → `À partir de 520 000 €`; spec strings localized: `2 Chambres · 2 Salles de bain · 110 m²`).
-
-Also add a small `oryam.detail.back_long` ("← Back to the collection" / "← Retour à la collection") plus any existing `oryam.detail.*` keys we haven't wired.
-
-### 2. Wire homepage (`src/pages/Index.tsx`)
-
-Replace every hardcoded string with a `t('oryam.…')` call:
-- Hero eyebrow, h1, lede, two CTA buttons.
-- Intro section (eyebrow, h2, body).
-- Residences section heading + body + featured tag + tags ("IRS Eligible", "Rental Programme", "Move-In Ready") + "Explore the residence →" + "View & 360°".
-- Ownership section (h2 + both columns).
-- Building & Grounds (eyebrow, h2, body).
-- Why Oryam heading.
-- The Setting (eyebrow, h2, body).
-- Contact (h2, body, three meta rows, form labels, placeholder, button text — pending / sent — footnote).
-
-For the residence cards, pull `name / blurb / type / spec / price` from `t('oryam.residencesData.<slug>.…')` instead of the data file. The `RESIDENCES` constant continues to provide images, slug, beds/baths, featured flag.
-
-### 3. Wire `ResidenceDetail.tsx`
-
-Add `useTranslation`. Translate every static label:
-- Back link, hero eyebrow (`{type} · ORYAM · MONT CHOISY`), beds/baths/m² labels.
-- "THE RESIDENCE / In detail." block + the 6-row spec dl (BEDROOMS / BATHROOMS / INTERIOR / STATUS / SCHEME / RESIDENCY and their values).
-- 360° section eyebrow, title, body (with `{{name}}` interpolation), placeholder eyebrow / title / body / "See the gallery" button.
-- Gallery heading ("{{count}} views.").
-- CTA eyebrow / title / body / button.
-- "Also in the collection" eyebrow + title.
-
-Use translated `name / tagline / description / type / spec / price` from the dictionary, and translated gallery captions (`captions[i]`).
-
-### 4. Sanity check
-
-- French `Intl`-style price format (thin-space + `€` after the number).
-- Confirm `LanguageSwitcher` already persists choice (it does — i18next default).
-- No layout regressions: French strings tend to be ~15 % longer; existing typography handles that, no width changes needed.
+Update `mem://index.md` Core to make the rule unmissable: "THREE LAYOUTS, MULTIPLE UNITS each. Never claim a total apartment count. Don't say 'only three' / 'just three'." (I tried to write this in plan mode and it was rejected, so I'll do it on approval.)
 
 ### Out of scope
 
-- No backend, no Supabase changes.
-- No new pages, no design changes.
-- 360° viewer stays a placeholder (per existing scope).
+- No layout, design, image, or routing changes.
+- No edits to `src/pages/Index.tsx` or `ResidenceDetail.tsx` — they already pull every affected string through `t()`. Only the dictionaries change (plus the two `num: '3'` tile labels are corrected via the locale label change).
+- B-22 copy that mentions "three bedrooms" stays (correct).
 
-## Files touched
+### Files touched
 
-- `src/i18n/locales/en.ts` — add `residencesData` block + any missing detail keys.
-- `src/i18n/locales/fr.ts` — same, fully translated.
-- `src/pages/Index.tsx` — replace ~40 hardcoded strings with `t(…)`.
-- `src/pages/ResidenceDetail.tsx` — add `useTranslation`, replace ~25 hardcoded strings.
-
-No other files need to change.
+- `src/i18n/locales/en.ts`
+- `src/i18n/locales/fr.ts`
+- `mem://index.md`

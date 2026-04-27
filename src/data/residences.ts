@@ -1,4 +1,4 @@
-// ─── Oryam — three residences in the collection ────────────────────────────
+// ─── Oryam — three apartment layouts (B-11, B-22, Penthouse), multiple units of each ─
 // One source of truth for the home grid and the detail pages.
 
 
