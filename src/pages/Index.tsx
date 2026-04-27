@@ -157,7 +157,7 @@ export default function Index() {
             </div>
             <Reveal delay={0.2} className="lg:col-span-5 lg:pt-4">
               <p className="text-ink-soft text-base sm:text-lg leading-[1.85]">
-                Each Oryam residence is fully furnished and available under Mauritius's IRS scheme — granting full ownership and a Resident Permit for you and your family upon purchase.
+                Each Oryam residence is delivered fully fitted — kitchen, bathrooms and built-in joinery complete — and available under Mauritius's IRS scheme, granting full freehold ownership and a Resident Permit for you and your family upon purchase.
               </p>
             </Reveal>
           </div>
