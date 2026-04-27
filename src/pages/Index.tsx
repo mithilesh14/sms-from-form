@@ -1,324 +1,415 @@
-import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import { FadeIn, TextReveal } from '@/components/ChapterSection';
-import { PanoramaViewer } from '@/components/PanoramaViewer';
 
-const Index = () => {
-  const { t } = useTranslation();
+// ─── Image slots (swap via Dropbox; keep data-slot attributes) ───
+const IMG = {
+  hero: 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?w=2400&auto=format&fit=crop&q=85',
+  ocean: 'https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=1600&auto=format&fit=crop&q=85',
+  culture: 'https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=1600&auto=format&fit=crop&q=85',
+  pace: 'https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1600&auto=format&fit=crop&q=85',
+  gallery: [
+    'https://images.unsplash.com/photo-1583248369069-9d91f1640fe6?w=900&auto=format&fit=crop&q=85',
+    'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=900&auto=format&fit=crop&q=85',
+    'https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=900&auto=format&fit=crop&q=85',
+    'https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?w=900&auto=format&fit=crop&q=85',
+    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&auto=format&fit=crop&q=85',
+    'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=900&auto=format&fit=crop&q=85',
+    'https://images.unsplash.com/photo-1502209524164-acea936639a2?w=900&auto=format&fit=crop&q=85',
+  ],
+  galleryCaptions: [
+    'Lagoon Mornings',
+    'Reef at Golden Hour',
+    'Trade Winds',
+    'Frangipani',
+    'Sega Nights',
+    'Creole Table',
+    'Sail to Île aux Cerfs',
+  ],
+  apartments: [
+    {
+      slot: 'apt-card-1',
+      name: 'Lagoon Suite',
+      size: '142 m²',
+      price: 'From €620,000',
+      img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&auto=format&fit=crop&q=85',
+    },
+    {
+      slot: 'apt-card-2',
+      name: 'Beachfront Residence',
+      size: '186 m²',
+      price: 'From €890,000',
+      img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&auto=format&fit=crop&q=85',
+    },
+    {
+      slot: 'apt-card-3',
+      name: 'Penthouse',
+      size: '240 m²',
+      price: 'From €1,450,000',
+      img: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&auto=format&fit=crop&q=85',
+    },
+  ],
+};
+
+// ─── Scroll progress bar ───
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  return (
+    <motion.div
+      style={{ scaleX, transformOrigin: '0% 50%' }}
+      className="fixed top-0 left-0 right-0 h-px z-[70] bg-gradient-to-r from-coral to-gold"
+    />
+  );
+}
+
+// ─── Pillar section ───
+function Pillar({
+  label,
+  title,
+  body,
+  img,
+  slot,
+  reverse,
+  dark,
+}: {
+  label: string;
+  title: string;
+  body: string;
+  img: string;
+  slot: string;
+  reverse?: boolean;
+  dark?: boolean;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const x = useTransform(scrollYProgress, [0, 1], reverse ? [80, -40] : [-80, 40]);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-
-      {/* ═══ 360° HERO ═══ */}
-      <section className="relative h-dvh">
-        <div className="absolute inset-0">
-          <PanoramaViewer
-            images={[{ url: 'https://dl.polyhaven.org/file/ph-assets/HDRIs/extra/Tonemapped%20JPG/cayley_interior.jpg', label: 'Interior' }]}
-            showControls={false}
-          />
-        </div>
-
-        {/* Overlay text */}
-        <div className="absolute inset-0 pointer-events-none flex flex-col items-center justify-center z-10">
+    <section
+      ref={ref}
+      className={dark ? 'section-dark' : 'section-light'}
+    >
+      <div className="container-editorial py-24 sm:py-32 lg:py-40">
+        <div className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center ${reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}>
+          <motion.div style={{ x }} className="overflow-hidden">
+            <img
+              data-slot={slot}
+              src={img}
+              alt={title}
+              className="w-full h-full object-cover aspect-[4/5]"
+              loading="lazy"
+            />
+          </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 1.2 }}
-            className="text-center"
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <p className="text-[11px] tracking-[0.4em] uppercase text-white/60 mb-4 font-light">
-              Grand Baie · Mauritius
+            <p className="label-gold mb-6">{label}</p>
+            <h2 className="text-display-md mb-8 max-w-md">{title}</h2>
+            <p className={`font-sans font-light text-base sm:text-lg leading-[1.9] max-w-md mb-10 ${dark ? 'text-offwhite/75' : 'text-ocean/75'}`}>
+              {body}
             </p>
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.05] drop-shadow-lg">
-              Welcome to<br />Mont Choisy
-            </h1>
-            <p className="text-[13px] sm:text-[15px] text-white/70 mt-5 tracking-wide font-light">
-              Oceanfront Living Redefined
-            </p>
-          </motion.div>
-        </div>
-
-        {/* Bottom gradient for readability */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background/60 to-transparent pointer-events-none z-[5]" />
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center pointer-events-none"
-        >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-2">{t('hero.scrollText', 'Scroll to Explore')}</span>
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <ChevronDown className="h-4 w-4 text-white/40" />
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* ═══ INTRO TAGLINE ═══ */}
-      <section className="py-24 sm:py-32 lg:py-44 bg-background">
-        <div className="max-w-4xl mx-auto px-6 sm:px-10 text-center">
-          <FadeIn>
-            <p className="text-[11px] tracking-[0.3em] uppercase text-accent mb-8 font-normal">Now Available</p>
-          </FadeIn>
-          <TextReveal className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] text-foreground leading-[1.15] mb-8">
-            {t('hero.title')}
-          </TextReveal>
-          <FadeIn delay={0.2}>
-            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-10 font-light">
-              {t('hero.subtitle')}
-            </p>
-          </FadeIn>
-          <FadeIn delay={0.3}>
             <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 text-[13px] tracking-[0.06em] text-foreground border-b border-foreground pb-1 hover:text-accent hover:border-accent transition-colors duration-300"
+              to="/home"
+              className={`inline-flex items-center gap-2 text-[12px] tracking-[0.2em] uppercase border-b pb-1 transition-colors duration-300 ${
+                dark
+                  ? 'text-offwhite border-offwhite/40 hover:text-coral hover:border-coral'
+                  : 'text-ocean border-ocean/40 hover:text-coral hover:border-coral'
+              }`}
             >
-              Schedule A Tour
-              <ArrowRight className="h-4 w-4" />
+              Discover <ArrowRight className="h-4 w-4" />
             </Link>
-          </FadeIn>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const Index = () => {
+  return (
+    <div className="min-h-screen bg-sand">
+      <ScrollProgress />
+      <Header />
+
+      {/* ═══ 1. HERO ═══ */}
+      <section className="relative h-dvh w-full overflow-hidden bg-ocean">
+        <img
+          data-slot="hero-bg"
+          src={IMG.hero}
+          alt="Turquoise lagoon meeting white sand at Mont Choisy"
+          className="absolute inset-0 w-full h-full object-cover ken-burns"
+        />
+        <div className="absolute inset-0 vignette" />
+
+        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-offwhite px-6">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="label-gold mb-8"
+          >
+            Mont Choisy · Mauritius
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.6 }}
+            className="text-display-xl text-offwhite max-w-5xl"
+          >
+            Where the Indian Ocean
+            <br />
+            becomes your backyard
+          </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1.6 }}
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+          >
+            <span className="text-[10px] tracking-[0.35em] uppercase text-offwhite/60">Scroll</span>
+            <div className="scroll-cue" />
+          </motion.div>
         </div>
       </section>
 
-      {/* ═══ RESIDENCE CARDS ═══ */}
-      <section className="pb-24 sm:pb-32 lg:pb-44 bg-background">
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14">
-          <div className="grid md:grid-cols-3 gap-5 lg:gap-7">
-            {[
-              {
-                title: 'Short-Term Rentals',
-                subtitle: 'Light-filled living spaces.',
-                desc: 'Fully furnished apartments perfect for holiday stays, from a few nights to several weeks.',
-                img: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=800&auto=format&fit=crop&q=80',
-                link: '/explore',
-              },
-              {
-                title: 'Long-Term Rentals',
-                subtitle: 'Thoughtfully designed details.',
-                desc: 'Spacious residences with premium finishes, ideal for extended living with ocean views.',
-                img: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&auto=format&fit=crop&q=80',
-                link: '/explore',
-              },
-              {
-                title: 'Buy Your Residence',
-                subtitle: 'Oceanfront ownership.',
-                desc: 'Select units available for purchase, offering freehold ownership and Mauritius residency benefits.',
-                img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format&fit=crop&q=80',
-                link: '/own-in-mauritius',
-              },
-            ].map((card, i) => (
-              <FadeIn key={i} delay={i * 0.1}>
-                <Link to={card.link} className="group block">
-                  <div className="overflow-hidden aspect-[3/4] mb-5">
-                    <img
-                      src={card.img}
-                      alt={card.title}
-                      className="w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                  <h3 className="text-[12px] tracking-[0.2em] uppercase text-muted-foreground mb-2">{card.title}</h3>
-                  <p className="font-serif text-xl sm:text-2xl text-foreground mb-2">{card.subtitle}</p>
-                  <p className="text-[14px] text-muted-foreground leading-relaxed font-light">{card.desc}</p>
-                </Link>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ FULL-BLEED LIFESTYLE IMAGE ═══ */}
-      <FadeIn>
-        <div className="w-full aspect-[21/9] overflow-hidden relative">
-          <img
-            src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1920&auto=format&fit=crop&q=80"
-            alt="Tropical oceanfront pool and terrace"
-            className="w-full h-full object-cover"
-            loading="lazy"
+      {/* ═══ 2. LIFESTYLE INTRO ═══ */}
+      <section className="section-dark py-32 sm:py-44 lg:py-56">
+        <div className="container-narrow text-center">
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+            className="divider-gold mb-16 origin-center"
+          />
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2 }}
+            className="font-serif italic text-2xl sm:text-3xl lg:text-[2.4rem] leading-[1.5] text-offwhite/90"
+          >
+            Turquoise lagoons at first light. Trade winds carrying the scent of frangipani.
+            Sunsets that bleed coral over coral. Here, the day finds its own slow rhythm —
+            and somehow you find yours.
+          </motion.p>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+            className="divider-gold mt-16 origin-center"
           />
         </div>
-      </FadeIn>
-
-      {/* ═══ THE BUILDING ═══ */}
-      <section className="py-24 sm:py-32 lg:py-44 bg-background">
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
-            <div>
-              <FadeIn>
-                <p className="text-[11px] tracking-[0.3em] uppercase text-accent mb-6">{t('chapter1.label')}</p>
-              </FadeIn>
-              <TextReveal className="font-serif text-3xl sm:text-4xl lg:text-5xl text-foreground leading-[1.1] mb-8">
-                {t('chapter1.title')}
-              </TextReveal>
-              <FadeIn delay={0.2}>
-                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-light mb-10 max-w-lg">
-                  {t('chapter1.description')}
-                </p>
-              </FadeIn>
-              <FadeIn delay={0.3}>
-                <Link
-                  to="/residence"
-                  className="inline-flex items-center gap-2 text-[13px] tracking-[0.06em] text-foreground border-b border-foreground pb-1 hover:text-accent hover:border-accent transition-colors duration-300"
-                >
-                  Explore the Residences
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </FadeIn>
-            </div>
-            <FadeIn direction="left">
-              <div className="overflow-hidden aspect-[4/5]">
-                <img
-                  src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1000&auto=format&fit=crop&q=80"
-                  alt="Mont Choisy architecture"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            </FadeIn>
-          </div>
-        </div>
       </section>
 
-      {/* ═══ STATS BAR ═══ */}
-      <section className="py-16 sm:py-24 border-y border-border/50 bg-secondary/30">
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-            {[
-              { number: '32', label: t('stats.residences') },
-              { number: '8', label: t('stats.floors') },
-              { number: '450+', label: t('stats.terraceSize') },
-              { number: '2026', label: t('stats.completion') },
-            ].map((stat, i) => (
-              <FadeIn key={i} delay={i * 0.08}>
-                <div className="text-center">
-                  <span className="font-serif text-5xl sm:text-6xl lg:text-7xl text-foreground font-light italic">{stat.number}</span>
-                  <p className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground mt-3">{stat.label}</p>
-                </div>
-              </FadeIn>
-            ))}
+      {/* ═══ 3. THE EXPERIENCE — 3 PILLARS ═══ */}
+      <Pillar
+        label="The Ocean"
+        title="A reef on your doorstep."
+        body="Step from your terrace into water so clear the morning sun reaches the seabed. Sail at dawn, dive among parrotfish, watch the sky turn molten as the day folds into the lagoon."
+        img={IMG.ocean}
+        slot="lifestyle-ocean"
+      />
+      <Pillar
+        label="The Culture"
+        title="The island, on a plate."
+        body="Stroll Grand Baie's morning markets for green mango and saffron. Sit at a roadside table for a Creole rougaille. Let sega drums find you on a Friday night — Mauritius lives through its senses."
+        img={IMG.culture}
+        slot="lifestyle-culture"
+        reverse
+        dark
+      />
+      <Pillar
+        label="The Pace"
+        title="Unhurried, on purpose."
+        body="A long coffee on the terrace. A book in a hammock. The afternoon that asks nothing of you. This is the rhythm Mont Choisy is built around — the luxury of time, made yours."
+        img={IMG.pace}
+        slot="lifestyle-pace"
+      />
+
+      {/* ═══ 4. LIFESTYLE GALLERY (horizontal scroll) ═══ */}
+      <section className="section-light py-24 sm:py-32 overflow-hidden">
+        <div className="container-editorial mb-12 flex items-end justify-between gap-6">
+          <div>
+            <p className="label-gold mb-4">A Sense of Place</p>
+            <h2 className="text-display-md max-w-xl">Fragments of an island.</h2>
           </div>
+          <p className="text-[11px] tracking-[0.3em] uppercase text-ocean/50 hidden sm:block">
+            scroll to explore →
+          </p>
         </div>
-      </section>
-
-      {/* ═══ LIFESTYLE GRID ═══ */}
-      <section className="py-24 sm:py-32 lg:py-44 bg-background">
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14">
-          <div className="text-center mb-16">
-            <FadeIn>
-              <p className="text-[11px] tracking-[0.3em] uppercase text-accent mb-6">{t('chapter3.label')}</p>
-            </FadeIn>
-            <TextReveal className="font-serif text-3xl sm:text-4xl lg:text-5xl text-foreground leading-[1.1] max-w-3xl mx-auto">
-              {t('chapter3.title')}
-            </TextReveal>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-4 lg:gap-5">
-            {[
-              { src: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&auto=format&fit=crop&q=80', label: t('chapter3.moment1') },
-              { src: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&auto=format&fit=crop&q=80', label: t('chapter3.moment2') },
-              { src: 'https://images.unsplash.com/photo-1540555700478-4be289fbec6d?w=800&auto=format&fit=crop&q=80', label: t('chapter3.moment3') },
-            ].map((img, i) => (
-              <FadeIn key={i} delay={i * 0.1}>
-                <div className="overflow-hidden aspect-[3/4] group">
+        <div className="overflow-x-auto scrollbar-hide snap-x snap-mandatory">
+          <div className="flex gap-5 lg:gap-7 px-6 sm:px-10 lg:px-14 pb-4">
+            {IMG.gallery.map((src, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.8, delay: (i % 3) * 0.1 }}
+                className="shrink-0 w-[78vw] sm:w-[42vw] lg:w-[28vw] snap-center"
+              >
+                <div className="overflow-hidden aspect-[3/4] mb-4">
                   <img
-                    src={img.src}
-                    alt={img.label}
-                    className="w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105"
+                    data-slot={`gallery-${i + 1}`}
+                    src={src}
+                    alt={IMG.galleryCaptions[i]}
+                    className="w-full h-full object-cover transition-transform duration-[1.4s] hover:scale-[1.04]"
                     loading="lazy"
                   />
                 </div>
-                <p className="text-[12px] tracking-[0.15em] uppercase text-muted-foreground mt-4">{img.label}</p>
-              </FadeIn>
+                <p className="label-gold">{IMG.galleryCaptions[i]}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══ LIFESTYLE + INVESTMENT COMBINED ═══ */}
-      <section className="py-24 sm:py-32 lg:py-44 border-t border-border/50" style={{ background: 'hsl(40 40% 94%)' }}>
-        <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
-            <FadeIn>
-              <div className="overflow-hidden aspect-[4/5]">
-                <img
-                  src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format&fit=crop&q=80"
-                  alt="Mont Choisy residence"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            </FadeIn>
-            <div>
-              <FadeIn>
-                <p className="text-[11px] tracking-[0.3em] uppercase text-accent mb-6">
-                  {t('lifestyle.label')}
-                </p>
-              </FadeIn>
-              <TextReveal className="font-serif text-3xl sm:text-4xl lg:text-5xl text-foreground leading-[1.1] mb-8">
-                {t('lifestyle.title')}
-              </TextReveal>
-              <FadeIn delay={0.2}>
-                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-light mb-10 max-w-lg">
-                  {t('lifestyle.description')}
-                </p>
-              </FadeIn>
+      {/* ═══ 5. THE RESIDENCES ═══ */}
+      <section className="section-light pt-12 pb-24 sm:pb-32 lg:pb-40">
+        <div className="container-editorial">
+          <div className="text-center mb-16 sm:mb-20">
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="label-gold mb-6"
+            >
+              The Residences
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9 }}
+              className="text-display-md max-w-3xl mx-auto"
+            >
+              Your private address on the edge of paradise.
+            </motion.h2>
+          </div>
 
-              {/* Investment stats inline */}
-              <FadeIn delay={0.25}>
-                <div className="flex flex-wrap gap-10 mb-10">
-                  {[
-                    { n: '7-9%', l: t('invest.yield') },
-                    { n: '15%', l: t('invest.appreciation') },
-                    { n: '€0', l: t('invest.tax') },
-                  ].map((stat, i) => (
-                    <div key={i}>
-                      <span className="font-serif text-3xl sm:text-4xl text-accent italic">{stat.n}</span>
-                      <p className="text-[11px] tracking-[0.15em] uppercase text-muted-foreground mt-2">{stat.l}</p>
-                    </div>
-                  ))}
-                </div>
-              </FadeIn>
-
-              <FadeIn delay={0.3}>
-                <Link
-                  to="/own-in-mauritius"
-                  className="inline-flex items-center gap-2 text-[13px] tracking-[0.06em] text-foreground border-b border-foreground pb-1 hover:text-accent hover:border-accent transition-colors duration-300"
-                >
-                  {t('invest.cta')}
-                  <ArrowRight className="h-4 w-4" />
+          <div className="grid md:grid-cols-3 gap-5 lg:gap-7">
+            {IMG.apartments.map((apt, i) => (
+              <motion.div
+                key={apt.slot}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.8, delay: i * 0.12 }}
+              >
+                <Link to="/residence" className="card-residence group block aspect-[3/4] relative">
+                  <img
+                    data-slot={apt.slot}
+                    src={apt.img}
+                    alt={apt.name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ocean/80 via-ocean/10 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-offwhite">
+                    <p className="label-gold mb-3">{apt.size}</p>
+                    <h3 className="font-serif italic text-2xl sm:text-3xl mb-2">{apt.name}</h3>
+                    <p className="text-[13px] font-sans font-light text-offwhite/80 mb-4">{apt.price}</p>
+                    <span className="inline-block text-[11px] tracking-[0.25em] uppercase text-coral opacity-0 group-hover:opacity-100 transition-opacity duration-500 border-b border-coral pb-1">
+                      Discover →
+                    </span>
+                  </div>
                 </Link>
-              </FadeIn>
-            </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <p className="text-center text-[13px] text-ocean/60 font-sans font-light mt-14 tracking-wide">
+            All residences are beachfront, managed, and ready to move in.
+          </p>
+        </div>
+      </section>
+
+      {/* ═══ 6. WHY MAURITIUS ═══ */}
+      <section className="section-light py-24 sm:py-32 lg:py-40 border-t border-gold/20">
+        <div className="container-editorial">
+          <div className="text-center mb-16">
+            <p className="label-gold mb-6">Why Mauritius</p>
+            <h2 className="text-display-md max-w-2xl mx-auto">A place built for the life you've imagined.</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 sm:gap-16 max-w-4xl mx-auto">
+            {[
+              { n: '300+', l: 'sunny days a year' },
+              { n: '15 min', l: 'to Grand Baie' },
+              { n: 'IRS', l: 'full ownership for non-citizens' },
+              { n: 'World-class', l: 'snorkeling on your doorstep' },
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: i * 0.08 }}
+                className="text-center sm:text-left"
+              >
+                <p className="font-serif italic text-5xl sm:text-6xl lg:text-7xl text-ocean leading-none mb-4">
+                  {stat.n}
+                </p>
+                <p className="text-[12px] tracking-[0.22em] uppercase text-ocean/60 font-sans">{stat.l}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ═══ FINAL CTA ═══ */}
-      <section className="py-28 sm:py-36 lg:py-48 bg-background">
-        <div className="max-w-3xl mx-auto px-6 sm:px-10 text-center">
-          <FadeIn>
-            <p className="text-[11px] tracking-[0.3em] uppercase text-accent mb-6">{t('cta.label')}</p>
-          </FadeIn>
-          <TextReveal className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] text-foreground leading-[1.1] mb-10">
-            {t('cta.title')}
-          </TextReveal>
-          <FadeIn delay={0.3}>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-3 bg-foreground text-background px-10 py-4 text-[12px] tracking-[0.15em] uppercase hover:bg-accent transition-colors duration-500"
-            >
-              {t('cta.button')}
-            </Link>
-          </FadeIn>
+      {/* ═══ 7. ENQUIRY ═══ */}
+      <section className="section-dark py-24 sm:py-32 lg:py-40">
+        <div className="container-narrow">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9 }}
+            className="text-center mb-16"
+          >
+            <p className="label-gold mb-6">Enquire</p>
+            <h2 className="text-display-md text-offwhite">Begin your Mauritian story.</h2>
+          </motion.div>
+
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const data = new FormData(e.currentTarget);
+              const subject = encodeURIComponent('Mont Choisy enquiry');
+              const body = encodeURIComponent(
+                `Name: ${data.get('name')}\nEmail: ${data.get('email')}\nPhone: ${data.get('phone') || '—'}\n\n${data.get('message')}`
+              );
+              window.location.href = `mailto:residences@montchoisy.mu?subject=${subject}&body=${body}`;
+            }}
+            className="space-y-8 max-w-xl mx-auto"
+          >
+            <input name="name" required placeholder="Your name" className="input-underline" />
+            <input name="email" type="email" required placeholder="Email address" className="input-underline" />
+            <input name="phone" placeholder="Phone (optional)" className="input-underline" />
+            <textarea
+              name="message"
+              required
+              rows={4}
+              placeholder="Tell us about the life you're imagining"
+              className="input-underline resize-none"
+            />
+
+            <div className="text-center pt-6">
+              <button type="submit" className="btn-coral touch-target">
+                <span>Send Enquiry</span>
+              </button>
+              <p className="label-gold mt-8">We respond within 24 hours</p>
+            </div>
+          </form>
         </div>
       </section>
 

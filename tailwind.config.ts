@@ -15,9 +15,15 @@ export default {
     extend: {
       fontFamily: {
         serif: ["Cormorant Garamond", "Georgia", "serif"],
-        sans: ["Outfit", "system-ui", "sans-serif"],
+        sans: ["DM Sans", "system-ui", "sans-serif"],
       },
       colors: {
+        ocean: "hsl(var(--ocean-night))",
+        sand: "hsl(var(--warm-sand))",
+        coral: "hsl(var(--coral))",
+        lagoon: "hsl(var(--lagoon))",
+        gold: "hsl(var(--gold))",
+        offwhite: "hsl(var(--off-white))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
