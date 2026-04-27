@@ -1,117 +1,103 @@
-# Mont Choisy — Complete Reimagining + Paradise Entry Page
+# Oryam — Single-Page Rebuild
 
-A full ground-up redesign that sells the Mauritian lifestyle first, apartments second. Editorial luxury travel magazine meets cinematic landing page (Aman / Six Senses / Dunton references).
-
-This pass introduces a new cinematic **"Welcome to Paradise"** entry page at `/` and moves the main homepage to `/home`. Visitors are emotionally transported before browsing residences.
+A complete reset to a one-page luxury site for **Oryam** (3 beachfront residences, Mont Choisy). All copy, palette, fonts, and section structure follow the brief verbatim. The Mauritius lifestyle stays in exactly two places (hero line + Section 7). Everything else sells the apartment, the ownership, the financial logic.
 
 ---
 
-## 1. Routing changes — `src/App.tsx`
+## Scope
 
-- `/` → new `Paradise` page (cinematic gateway)
-- `/home` → existing/redesigned `Index` page (the lifestyle homepage)
-- All other routes unchanged
+**Brand rename:** "Mont Choisy" → **Oryam** across the homepage, header, footer, `<title>`, meta description, and favicon wordmark. (Other pages keep working but are deprioritized — the homepage is the product.)
 
----
-
-## 2. New page — `src/pages/Paradise.tsx`
-
-A single full-screen cinematic experience. No header, no footer, no scroll.
-
-- Full-bleed background: turquoise lagoon + white beach (Unsplash placeholder, slot `paradise-bg`)
-- Slow Ken Burns zoom (scale 1 → 1.08 / 25s)
-- Soft dark vignette gradient for legibility
-- Subtle ambient overlay (optional grain texture already in CSS)
-- Centered content stack (staggered fade-up on load):
-  - Tiny gold label: `MAURITIUS · INDIAN OCEAN`
-  - Giant italic Cormorant headline (2 lines, ~52px mobile / ~104px desktop): *"Welcome to / Paradise"*
-  - Thin gold divider line (animated draw-in)
-  - One-line DM Sans subtitle: *"A private collection of oceanfront residences at Mont Choisy"*
-  - Coral CTA button: **"Enter"** → routes to `/home`
-- Faint bottom caption: `MONT CHOISY` wordmark
-- Respects `prefers-reduced-motion` (disables Ken Burns + stagger)
-
-The button uses `react-router` `Link` to `/home` with a 600ms fade-out page transition (overlay div fades in over the viewport, navigation triggers, new page mounts).
+**Routing:** `/` becomes the new single-page Oryam site. Existing routes (`/residence`, `/contact`, `/admin`, etc.) remain mounted but are no longer linked from the new header/footer. All in-page CTAs scroll to anchors (`#residences`, `#intro`, `#ownership`, `#why`, `#contact`).
 
 ---
 
-## 3. Design system overhaul — `src/index.css` + `tailwind.config.ts`
+## Design system rewrite (`src/index.css` + `tailwind.config.ts`)
 
-Replace the warm-ivory palette with the new sensory palette:
-- `--ocean-night: 209 53% 11%` (#0D1B2A)
-- `--warm-sand: 41 47% 89%` (#F2E8D5)
-- `--coral: 14 64% 53%` (#D4603A)
-- `--lagoon: 188 39% 48%` (#4A9BAB)
-- `--gold: 44 53% 54%` (#C9A84C)
-- `--off-white: 41 56% 95%` (#FAF6EF)
+**Palette (exact hex from brief):**
+```
+--ocean:  #0B1724    --sand:  #F3EDE2    --cream: #F8F3EC
+--gold:   #A8883A    --coral: #B8502E
+--muted:  rgba(248,243,236,0.5)
+--line:   rgba(168,136,58,0.2)
+```
 
-Mapped semantics: `background` → warm sand, `foreground` → ocean night, `accent` → coral, `ring` → gold.
+**Fonts (Google Fonts):** Cormorant Garamond (300, 300italic, 400italic, 600italic) for headlines; Jost (200, 300, 400, 500) for body/UI. Replace the current Inter+Cormorant import.
 
-Fonts: load **DM Sans (300, 400, 500)** alongside **Cormorant Garamond (300i, 400i, 600)**. Body becomes DM Sans 300, line-height 1.9.
-
-New utilities:
-- `.section-dark` / `.section-light`
-- `.label-gold` (uppercase 11px / 0.3em / gold)
-- `.divider-gold` (1px hairline gold)
-- `.input-underline` (animates from center on focus)
-- `.scroll-progress` (1px coral→gold bar driven by Framer `useScroll`)
-
-Tailwind colors extended with `ocean`, `sand`, `coral`, `lagoon`, `gold`, `offwhite`.
+**Global rules:**
+- No rounded corners anywhere (`--radius: 0`), no shadows, no gradients (except hero overlay).
+- Sections alternate ocean → sand → ocean.
+- 1px gold horizontal lines as section separators.
+- Max content width 1280px, 80px+ vertical section padding on desktop.
+- Eyebrow util: `.eyebrow` → 11–12px, `tracking-[0.3em]`, uppercase, gold.
 
 ---
 
-## 4. Header redesign — `src/components/layout/Header.tsx`
+## New components
 
-Hidden on `/` (Paradise page). On `/home` and elsewhere:
-- Left: small "MONT CHOISY" wordmark
-- Right: 4 ghost links (Lifestyle · Residences · Gallery · Contact) + one solid coral **"Enquire"** button
-- Transparent over dark hero; on scroll → off-white background with thin gold border
-- Mobile: existing fullscreen overlay menu, restyled with new palette
+**`src/components/oryam/ScrollProgress.tsx`** — fixed top 2px gold bar tracking `scrollY / (scrollHeight - innerHeight)`.
 
----
+**`src/components/oryam/Reveal.tsx`** — IntersectionObserver wrapper: opacity 0→1, translateY 24px→0, 0.7s ease, optional stagger delay prop (used at 0.12s steps for grids).
 
-## 5. Homepage rebuild — `src/pages/Index.tsx` (now at `/home`)
+**`src/components/oryam/OryamHeader.tsx`** — fixed top bar. Transparent over hero, `#0B1724` at 95% opacity + bottom gold line on scroll. Left: `ORYAM` (Cormorant, tracking 0.18em). Right desktop: `Residences · Ownership · Why Oryam` + gold-filled `Private Enquiry` button. Mobile: logo + Enquire button only (no hamburger).
 
-Eight sections, alternating dark/light, with named image slots for Dropbox swap.
-
-1. **Hero** — full-bleed lagoon (slot `hero-bg`), Ken Burns, italic headline *"Where the Indian Ocean / becomes your backyard"*, gold label, animated scroll line.
-2. **Lifestyle Intro** (dark) — centered poetic 2–3 sentence paragraph, gold rules above + below.
-3. **The Experience** — 3 alternating asymmetric pillars (Ocean / Culture / Pace), image slides in from outer edge. Slots: `lifestyle-ocean`, `lifestyle-culture`, `lifestyle-pace`.
-4. **Lifestyle Gallery** — horizontal-scroll strip of 7 portrait images with subtle parallax. Slots: `gallery-1`…`gallery-7`. Mobile: native swipe + snap.
-5. **The Residences** — headline "Your private address on the edge of paradise", 3 editorial cards (image + name/size/price overlay), hover scale + coral border + "Discover" fade-in. Slots: `apt-card-1`…`apt-card-3`. Tagline below.
-6. **Why Mauritius** (light) — 2×2 grid of stat tiles (no icons): "300+ sunny days", "15 min to Grand Baie", "IRS — full ownership for non-citizens", "World-class snorkeling on your doorstep".
-7. **Enquiry** (dark) — italic headline *"Begin your Mauritian story"*, underline-only inputs (Name, Email, Phone optional, Message), coral "Send Enquiry" button, gold "We respond within 24 hours". Frontend-only in this pass (button currently opens `mailto:`); backend wiring is a flagged follow-up.
-8. **Footer** — inherits new palette from existing global Footer; minor color tweaks only.
+**`src/components/oryam/OryamFooter.tsx`** — single row: wordmark / nav links / copyright + legal note (verbatim from brief).
 
 ---
 
-## 6. Motion & accessibility
-- Framer `useScroll` → 1px coral/gold progress bar at top of viewport
-- `whileInView` for section heading fade-ups
-- Hero text staggered fade-up (0.2s gap per line)
-- Pillar images slide 60px from outer edge
-- Gallery parallax via `useTransform`
-- All animations gated by `@media (prefers-reduced-motion: reduce)` (transforms disabled)
+## Homepage rewrite — `src/pages/Index.tsx`
 
-## 7. Responsive
-- All sections stack below `md`
-- Hero scales 52px → 96px+ between mobile and desktop
-- Tap targets ≥ 44px
+Rebuilt from scratch as one file composing 9 sections. **Copy used verbatim — no rewrites.**
 
-## 8. Image slot naming
-Each `<img>` carries a `data-slot="..."` attribute matching the names above so client photography swaps in cleanly.
+1. **Hero** — full viewport (`100dvh`), Unsplash beachfront image with Ken Burns, dark bottom-left → centre gradient. Bottom-left: gold eyebrow `ORYAM · MONT CHOISY · MAURITIUS`, two-line italic headline, sub-headline, two CTAs (gold filled `View the Residences →`, ghost `↓ The story`). Bottom-right: vertical stack of 4 facts (`3` / `€500k` / `IRS` / `Now`) separated by gold lines, number in Cormorant italic, label gold all-caps below.
+
+2. **Intro** (ocean) — centred, max-width 640px, `THE PROPERTY` label, "Not a development. A private address." headline, body verbatim.
+
+3. **The Residences** (sand, `id="residences"`) — header row (label + headline left, intro right), then 3-column grid of apartment cards. Each card: full-bleed image (zoom to 1.04 on hover, 0.6s ease), gold type label, italic name, spec line, description, 3 outlined tags, italic price, coral `Enquire →` link scrolling to `#contact`. **The Indigo** card has thin gold top border + `MOST SOUGHT AFTER` gold badge.
+
+4. **Key Numbers Bar** (ocean) — 4 columns separated by gold vertical lines: `3 / 15% / €0 / 12 hr` with labels. No section heading.
+
+5. **Ownership** (ocean, `id="ownership"`) — gold label, headline, then 2 columns (IRS Scheme / Managed Rental). Each column: short gold rule, gold small-caps label, column headline, body, tiny gold footer note.
+
+6. **Why Oryam** (sand, `id="why"`) — label, headline, 2×2 grid of 4 numbered reasons (`01–04`), each with italic headline + body. Numbers in large Cormorant italic gold.
+
+7. **The Setting** — full-bleed Unsplash beachfront image, dark overlay, centred text overlay (gold label, large italic headline, max-width 520px body). The single lifestyle moment.
+
+8. **Contact** (ocean, `id="contact"`) — 2 columns. Left: headline, body, three label/value detail rows. Right: form with underline-only inputs (name, email, message textarea with the specified placeholder), gold filled `Send Enquiry →` button, tiny gold note below. On submit: `preventDefault`, swap button to `Enquiry Received ✓` in dark green, no reload. (No backend wiring in this pass — pure UX state. Hookup to Lovable Cloud can be a follow-up if wanted.)
+
+9. **Footer** — very dark, three elements in one row, legal text verbatim.
 
 ---
 
-## Files changed
-- `src/App.tsx` — add `/` Paradise route, move homepage to `/home`
-- `src/pages/Paradise.tsx` — **new** cinematic gateway
-- `src/index.css` — new palette, fonts, utilities
-- `tailwind.config.ts` — color/font extensions
-- `src/components/layout/Header.tsx` — minimal top bar, hidden on `/`
-- `src/pages/Index.tsx` — full rewrite, 8 sections
-- `index.html` — meta description updated to lifestyle-first wording
+## Behaviour & polish
 
-## Out of scope (this pass)
-- Other routes (`/residence`, `/explore`, `/gallery`, etc.) keep working and inherit the new palette; deeper redesigns can follow.
-- Backend wiring of the enquiry form to an `enquiries` table — flagged for a follow-up.
+- Smooth scroll on all anchor links (CSS `scroll-behavior: smooth`, already present).
+- All headings + body blocks wrapped in `<Reveal>` with stagger on grid children.
+- Card image hover: `transform: scale(1.04); transition: 0.6s ease`.
+- Form input focus: underline slides in from centre (pseudo-element with `transform: scaleX(0)` → `scaleX(1)`, `transform-origin: center`).
+- Nav CTA hover: fills gold.
+- `prefers-reduced-motion`: disable Ken Burns and reveal animations (already covered in CSS).
+
+---
+
+## `index.html`
+
+- `<title>` → "Oryam — Beachfront Residences, Mont Choisy, Mauritius"
+- meta description → "A private collection of three beachfront residences at Mont Choisy, Grand Baie. IRS ownership. From €500,000."
+- Update Google Fonts `<link>` to Cormorant Garamond + Jost.
+
+---
+
+## Out of scope this pass
+
+- Wiring the contact form to the database/email (UX state only). Easy to add after.
+- Refactoring the other routes (`/residence`, `/explore`, etc.) to the new look — they stay functional but unlinked from the new homepage.
+- Real photography — Unsplash placeholders with descriptive alt text and `data-slot` attributes (`hero-bg`, `card-coral`, `card-indigo`, `card-horizon`, `setting-bg`) so the client can swap one-for-one.
+
+---
+
+## Files touched
+
+- **Edit:** `src/index.css`, `tailwind.config.ts`, `index.html`, `src/pages/Index.tsx`
+- **Create:** `src/components/oryam/OryamHeader.tsx`, `OryamFooter.tsx`, `ScrollProgress.tsx`, `Reveal.tsx`
+- **Memory:** update `mem://identity/project-scope` and `mem://style/aesthetic-direction` to reflect Oryam brand + new palette/typography.

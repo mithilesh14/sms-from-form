@@ -1,408 +1,439 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Search, Bed, Bath, Maximize2, MapPin, ArrowRight, ShieldCheck, Hammer, Compass, Handshake } from 'lucide-react';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
+import { useState, FormEvent } from 'react';
+import { OryamHeader } from '@/components/oryam/OryamHeader';
+import { OryamFooter } from '@/components/oryam/OryamFooter';
+import { ScrollProgress } from '@/components/oryam/ScrollProgress';
+import { Reveal } from '@/components/oryam/Reveal';
 
-// ─── Image slots (data-slot for Dropbox swap) ───
-const HERO_BG = 'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?w=2400&auto=format&fit=crop&q=85';
+const HERO_IMG     = 'https://images.unsplash.com/photo-1540541338537-1220059be25b?w=2000&q=85';
+const SETTING_IMG  = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2000&q=85';
+const CARD_CORAL   = 'https://images.unsplash.com/photo-1618219740975-d40978bb7378?w=1400&q=85';
+const CARD_INDIGO  = 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1400&q=85';
+const CARD_HORIZON = 'https://images.unsplash.com/photo-1564540583246-934409427776?w=1400&q=85';
 
-const PROJECTS = [
+const HERO_FACTS = [
+  { num: '3',     label: 'Only Three Residences' },
+  { num: '€500k', label: 'Starting Price' },
+  { num: 'IRS',   label: 'Residency Included' },
+  { num: 'Now',   label: 'Ready to Move In' },
+];
+
+const RESIDENCES = [
   {
-    slot: 'project-1',
-    name: 'eQ Residences',
-    location: 'Pointe aux Canonniers',
-    type: '2-Bedroom Apartment',
-    beds: 2, baths: 2, m2: 108,
-    price: 'From €387,000',
-    desc: 'Luxury living and strong investment potential, 1 km from the beach and 3 km from Mont Choisy Le Golf.',
-    img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&auto=format&fit=crop&q=85',
-    tag: 'Available for foreigners',
+    slot: 'card-coral',
+    image: CARD_CORAL,
+    type: 'Residence One',
+    name: 'The Coral',
+    spec: '2 Bedrooms · 2 Bathrooms · 110 m²',
+    desc: 'An elegant two-bedroom apartment opening directly onto the lagoon. Wraparound terrace, open-plan living, premium stone finishes. Shared infinity pool and private beach access.',
+    price: 'From €520,000',
+    featured: false,
   },
   {
-    slot: 'project-2',
-    name: 'The Essence',
-    location: 'Trou aux Biches',
-    type: '3-Bedroom PDS Apartment',
-    beds: 3, baths: 3, m2: 145,
-    price: 'From €620,000',
-    desc: 'A 3-bedroom PDS apartment a few steps from one of the most glorious beaches in the north.',
-    img: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&auto=format&fit=crop&q=85',
-    tag: 'PDS · Foreigner ownership',
+    slot: 'card-indigo',
+    image: CARD_INDIGO,
+    type: 'Residence Two',
+    name: 'The Indigo',
+    spec: '3 Bedrooms · 3 Bathrooms · 155 m²',
+    desc: 'Three bedrooms, each with ocean or garden outlook. Floor-to-ceiling glass opens onto a private terrace with plunge pool. For those who do not compromise on space, light, or the quality of silence.',
+    price: 'From €720,000',
+    featured: true,
   },
   {
-    slot: 'project-3',
-    name: 'La Pirogue Residences',
-    location: 'Black River',
-    type: '4-Bedroom Penthouse',
-    beds: 4, baths: 4, m2: 388,
-    price: 'From €1,950,000',
-    desc: 'Authentic living with bohemian allure on the magnificent west coast of Mauritius.',
-    img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&auto=format&fit=crop&q=85',
-    tag: 'PDS · Foreigner ownership',
-  },
-  {
-    slot: 'project-4',
-    name: 'Gemstone Villas',
-    location: 'Trou aux Biches',
-    type: '4-Bedroom Villa',
-    beds: 4, baths: 4, m2: 812,
-    price: 'From €2,560,000',
-    desc: 'A bespoke collection of villas in a picturesque locale in the north of Mauritius.',
-    img: 'https://images.unsplash.com/photo-1613553474179-e1eda3ea5734?w=1200&auto=format&fit=crop&q=85',
-    tag: 'Available for foreigners',
+    slot: 'card-horizon',
+    image: CARD_HORIZON,
+    type: 'The Penthouse',
+    name: 'The Horizon',
+    spec: '4 Bedrooms · 4 Bathrooms · 220 m²',
+    desc: 'The entire top floor. Panoramic Indian Ocean views from every room. Rooftop terrace with private pool. A level of finish that has no equal on the island. One residence. Limited in every sense.',
+    price: 'From €980,000',
+    featured: false,
   },
 ];
 
-const PILLARS = [
-  { icon: ShieldCheck, text: 'Over 15 years of completed projects make us the most trusted developer on the island.' },
-  { icon: Hammer,      text: 'From the architecture down to the smallest finish, every detail is the result of a search for excellence.' },
-  { icon: Compass,     text: 'We hand-pick the most beautiful sites to guarantee an unmatched lifestyle and investment potential.' },
-  { icon: Handshake,   text: 'We accompany you from the first visit to the handover, with a smooth, transparent experience.' },
+const KEY_NUMBERS = [
+  { num: '3',     label: 'Residences in the collection' },
+  { num: '15%',   label: 'Flat income tax in Mauritius' },
+  { num: '€0',    label: 'Inheritance tax. Zero capital gains tax.' },
+  { num: '12 hr', label: 'Direct flight from major European cities' },
 ];
 
-const ARTICLES = [
+const REASONS = [
   {
-    cat: 'Investment',
-    title: 'Understanding payment plans and bank loans for property buyers in Mauritius',
-    excerpt: 'Investing in property is a significant decision. In Mauritius, a stable economy, investor-friendly policies and a range of quality developments make it an attractive market.',
-    img: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&auto=format&fit=crop&q=85',
+    n: '01',
+    title: 'Ready now. No off-plan risk.',
+    body: 'Every residence is complete, furnished, and available for immediate occupation. No construction delays. No developer risk. You sign, you receive keys, you arrive. It is that straightforward.',
   },
   {
-    cat: 'Lifestyle',
-    title: 'Why Mauritius is the top emerging destination for luxury travel in 2025',
-    excerpt: 'Once a well-kept secret among discerning travellers, Mauritius is now making a confident return to centre stage as one of the world\'s most sought-after destinations.',
-    img: 'https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=900&auto=format&fit=crop&q=85',
+    n: '02',
+    title: 'Beachfront that cannot be recreated.',
+    body: 'Mont Choisy is one of the most protected and celebrated beaches on the north coast of Mauritius. This type of direct beachfront ownership with international property rights at this price point does not come up again once it is gone.',
   },
   {
-    cat: 'Investment',
-    title: 'Mauritian beachfront properties: where do you find the best ROI?',
-    excerpt: 'Mauritius is not only a tropical paradise but a prime location for property investment, with idyllic settings and political stability.',
-    img: 'https://images.unsplash.com/photo-1540541338287-41700207dee6?w=900&auto=format&fit=crop&q=85',
+    n: '03',
+    title: 'Ownership without restriction.',
+    body: 'IRS classification gives non-Mauritian buyers identical property rights to locals. Freehold title. No ownership time limits. No restrictions on resale. You own it as completely as anything you own at home.',
+  },
+  {
+    n: '04',
+    title: 'An exit as strong as the entry.',
+    body: 'Demand for quality beachfront property in Mauritius consistently outpaces supply. Oryam owners who choose to sell benefit from a liquid international buyer market and an asset that has never compromised on quality.',
   },
 ];
 
-const REGIONS = ['North', 'Centre', 'West'];
-const CATEGORIES = ['All categories', 'Villa', 'Penthouse', 'Apartment', 'Office'];
+export default function Index() {
+  const [submitted, setSubmitted] = useState(false);
 
-const Index = () => {
-  const [activeRegion, setActiveRegion] = useState('North');
-  const [category, setCategory] = useState(CATEGORIES[0]);
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
 
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
+    <div id="top" className="bg-ocean text-cream">
+      <ScrollProgress />
+      <OryamHeader />
 
-      {/* ═══ 1. HERO ═══ */}
-      <section className="relative h-dvh min-h-[680px] w-full overflow-hidden bg-navy">
-        <img
-          data-slot="hero-bg"
-          src={HERO_BG}
-          alt="Aerial view of turquoise lagoon and white beach in Mauritius"
-          className="absolute inset-0 w-full h-full object-cover ken-burns"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy/35 via-navy/15 to-navy/65" />
-
-        <div className="relative z-10 h-full container-x flex flex-col items-center justify-center text-center text-white pt-20">
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="eyebrow-light mb-6"
-          >
-            Mont Choisy · Mauritius
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="text-h1 text-white max-w-5xl mb-6"
-          >
-            Authentic & Timeless
-            <br />
-            <span className="italic font-light text-white/95">Luxury · Heritage · Oceanfront Living</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.7 }}
-            className="text-base sm:text-lg text-white/85 max-w-2xl leading-[1.7] mb-12 font-light"
-          >
-            Mont Choisy doesn't just build properties — we craft exceptional living spaces in Mauritius.
-            Our expertise is your guarantee of a serene investment and a daily life that feels like a dream.
-          </motion.p>
-
-          {/* Search bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 1 }}
-            className="w-full max-w-4xl"
-          >
-            {/* Region pills */}
-            <div className="flex justify-center gap-3 mb-5 flex-wrap">
-              {REGIONS.map(r => (
-                <button
-                  key={r}
-                  onClick={() => setActiveRegion(r)}
-                  data-active={activeRegion === r}
-                  className="search-pill touch-target"
-                >
-                  {r}
-                </button>
-              ))}
-            </div>
-
-            {/* Category + search */}
-            <div className="flex flex-col sm:flex-row items-stretch gap-3 bg-white/10 backdrop-blur-md border border-white/30 rounded-sm p-3">
-              <select
-                value={category}
-                onChange={e => setCategory(e.target.value)}
-                className="flex-1 bg-transparent text-white px-4 py-3 outline-none text-[14px] [&>option]:text-navy"
-              >
-                {CATEGORIES.map(c => <option key={c}>{c}</option>)}
-              </select>
-              <Link
-                to="/explore"
-                className="bg-navy hover:bg-teal transition-colors text-white px-8 py-3 inline-flex items-center justify-center gap-2 text-[13px] tracking-[0.12em] uppercase font-medium"
-              >
-                <Search className="h-4 w-4" /> Search
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ═══ 2. INTRO ═══ */}
-      <section className="section-pad bg-white">
-        <div className="container-x grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-          <div className="lg:col-span-5">
-            <p className="eyebrow mb-4">Mont Choisy</p>
-            <h2 className="text-h2 text-navy mb-2">The leader of luxury real estate</h2>
-            <p className="text-h3 text-ink-muted font-light italic">in Mauritius</p>
-          </div>
-          <div className="lg:col-span-7">
-            <p className="text-lg text-ink leading-[1.75] mb-6">
-              We make acquiring a luxury property in Mauritius simple. Our expert advisors help you find the perfect home,
-              tailored to your lifestyle or your investment objectives.
-            </p>
-            <Link to="/own-in-mauritius" className="btn-ghost-dark touch-target">
-              Discover Mont Choisy <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+      {/* ─── 1. HERO ─────────────────────────────────────────── */}
+      <section className="relative w-full h-[100dvh] min-h-[640px] overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={HERO_IMG}
+            alt="Aerial view of the turquoise lagoon at Mont Choisy, Mauritius"
+            data-slot="hero-bg"
+            className="w-full h-full object-cover ken-burns"
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(135deg, rgba(11,23,36,0.85) 0%, rgba(11,23,36,0.45) 45%, rgba(11,23,36,0.15) 100%)' }}
+          />
         </div>
 
-        {/* Pillars */}
-        <div className="container-x mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border">
-          {PILLARS.map((p, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="bg-white p-8 lg:p-10 flex flex-col items-start"
-            >
-              <div className="w-12 h-12 rounded-full bg-cream flex items-center justify-center mb-6">
-                <p.icon className="h-5 w-5 text-teal" strokeWidth={1.5} />
+        {/* Bottom-left content */}
+        <div className="relative z-10 h-full container-x flex flex-col justify-end pb-16 sm:pb-20 lg:pb-28">
+          <div className="max-w-2xl">
+            <Reveal>
+              <p className="eyebrow mb-6">ORYAM · MONT CHOISY · MAURITIUS</p>
+            </Reveal>
+            <Reveal delay={0.12}>
+              <h1 className="text-display text-cream mb-8">
+                Where the Indian Ocean<br />
+                becomes your address.
+              </h1>
+            </Reveal>
+            <Reveal delay={0.24}>
+              <p className="text-cream/70 text-base sm:text-lg max-w-lg mb-10 leading-relaxed">
+                Three beachfront residences. Ready to move in.<br />
+                IRS status — full ownership and Mauritian residency from €500,000.
+              </p>
+            </Reveal>
+            <Reveal delay={0.36}>
+              <div className="flex flex-wrap items-center gap-4">
+                <a href="#residences" className="btn-gold">
+                  View the Residences <span aria-hidden>→</span>
+                </a>
+                <a href="#intro" className="btn-ghost-light group">
+                  <span className="inline-block w-6 h-px bg-cream/60 group-hover:bg-gold mr-1 transition-colors" />
+                  The story
+                </a>
               </div>
-              <p className="text-[15px] text-ink leading-[1.7]">{p.text}</p>
-            </motion.div>
-          ))}
+            </Reveal>
+          </div>
+        </div>
+
+        {/* Bottom-right facts (desktop only) */}
+        <div className="hidden lg:block absolute right-12 bottom-28 z-10">
+          <div className="flex flex-col">
+            {HERO_FACTS.map((f, i) => (
+              <Reveal
+                key={f.label}
+                delay={0.5 + i * 0.1}
+                className={'py-5 ' + (i !== HERO_FACTS.length - 1 ? 'border-b border-gold/30' : '')}
+              >
+                <div className="text-num text-cream leading-none">{f.num}</div>
+                <div className="eyebrow mt-2">{f.label}</div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ═══ 3. PROJECTS GRID ═══ */}
-      <section className="section-pad bg-cream">
+      {/* ─── 2. INTRO ────────────────────────────────────────── */}
+      <section id="intro" className="bg-ocean section-pad border-t border-gold/20">
         <div className="container-x">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+          <div className="max-w-[640px] mx-auto text-center">
+            <Reveal><p className="eyebrow mb-8">THE PROPERTY</p></Reveal>
+            <Reveal delay={0.12}>
+              <h2 className="text-h2 text-cream mb-10">
+                Not a development.<br />A private address.
+              </h2>
+            </Reveal>
+            <Reveal delay={0.24}>
+              <p className="text-cream/65 text-base sm:text-lg leading-[1.8]">
+                Oryam is a collection of just three beachfront apartments at Mont Choisy — one of the most coveted stretches of coastline in the north of Mauritius. Each residence is complete, furnished to specification, and immediately available. There are no more being built. There is no waiting list. There are simply three exceptional homes, on the Indian Ocean, with your name on one of them.
+              </p>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 3. THE RESIDENCES ───────────────────────────────── */}
+      <section id="residences" className="bg-sand text-ocean section-pad border-t border-gold/20">
+        <div className="container-x">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 mb-16 lg:mb-20">
             <div>
-              <p className="eyebrow mb-3">Our Real Estate Gems</p>
-              <h2 className="text-h2 text-navy">Best Investment Opportunities</h2>
+              <Reveal><p className="eyebrow mb-6">THE RESIDENCES</p></Reveal>
+              <Reveal delay={0.12}>
+                <h2 className="text-h2 text-ocean">
+                  Three exceptional homes.<br />One extraordinary address.
+                </h2>
+              </Reveal>
             </div>
-            <Link to="/explore" className="btn-ghost-dark touch-target self-start sm:self-end">
-              View all <ArrowRight className="h-4 w-4" />
-            </Link>
+            <Reveal delay={0.24} className="lg:pt-4">
+              <p className="text-ocean/70 text-base sm:text-lg leading-[1.8] max-w-lg">
+                Each Oryam residence is beachfront, fully furnished, and available under Mauritius's IRS scheme — granting full ownership and a Resident Permit for you and your family upon purchase.
+              </p>
+            </Reveal>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {PROJECTS.map((p, i) => (
-              <motion.div
-                key={p.slot}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.6, delay: i * 0.08 }}
-              >
-                <Link to="/residence" className="project-card h-full">
-                  <div className="img-wrap">
-                    <img data-slot={p.slot} src={p.img} alt={`${p.name} — ${p.location}`} loading="lazy" />
-                    <span className="absolute top-3 left-3 bg-white/95 text-navy text-[10px] tracking-[0.14em] uppercase font-medium px-3 py-1.5">
-                      {p.tag}
+          <div className="grid md:grid-cols-3 gap-10 lg:gap-8">
+            {RESIDENCES.map((r, i) => (
+              <Reveal key={r.name} delay={i * 0.12} className="flex flex-col">
+                <div className={r.featured ? 'border-t border-gold pt-6 relative' : 'pt-6 relative'}>
+                  {r.featured && (
+                    <span className="absolute -top-3 left-0 bg-gold text-ocean text-[10px] tracking-[0.24em] uppercase font-medium px-3 py-1.5">
+                      Most Sought After
                     </span>
+                  )}
+                  <div className="overflow-hidden mb-7 aspect-[4/5]">
+                    <img
+                      src={r.image}
+                      alt={`${r.name} — ${r.spec}`}
+                      data-slot={r.slot}
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-[1.04]"
+                    />
                   </div>
-                  <div className="p-5 flex flex-col flex-1">
-                    <p className="flex items-center gap-1.5 text-[12px] text-ink-muted mb-2 tracking-wide">
-                      <MapPin className="h-3.5 w-3.5 text-teal" /> {p.location}
-                    </p>
-                    <h3 className="font-serif text-[22px] text-navy leading-tight mb-1">{p.name}</h3>
-                    <p className="text-[13px] text-ink-muted mb-4">{p.type}</p>
+                  <p className="eyebrow mb-3">{r.type}</p>
+                  <h3 className="text-h3 text-ocean mb-3">{r.name}</h3>
+                  <p className="text-[12px] tracking-[0.18em] uppercase text-ocean/55 mb-5">{r.spec}</p>
+                  <p className="text-ocean/70 text-[15px] leading-[1.75] mb-6">{r.desc}</p>
 
-                    <div className="flex items-center gap-4 text-[12px] text-ink mb-4 pb-4 border-b border-border">
-                      <span className="inline-flex items-center gap-1.5"><Bed className="h-3.5 w-3.5 text-teal" />{p.beds}</span>
-                      <span className="inline-flex items-center gap-1.5"><Bath className="h-3.5 w-3.5 text-teal" />{p.baths}</span>
-                      <span className="inline-flex items-center gap-1.5"><Maximize2 className="h-3.5 w-3.5 text-teal" />{p.m2} m²</span>
-                    </div>
-
-                    <p className="text-[13px] text-ink-muted leading-[1.6] mb-5 line-clamp-3">{p.desc}</p>
-
-                    <div className="mt-auto pt-2 flex items-end justify-between">
-                      <div>
-                        <p className="text-[10px] uppercase tracking-[0.18em] text-ink-muted mb-1">Starting at</p>
-                        <p className="font-serif text-[20px] text-teal font-medium">{p.price}</p>
-                      </div>
-                      <ArrowRight className="h-4 w-4 text-navy" />
-                    </div>
+                  <div className="flex flex-wrap gap-2 mb-7">
+                    {['IRS Eligible', 'Rental Programme', 'Move-In Ready'].map(t => (
+                      <span key={t} className="text-[10px] tracking-[0.18em] uppercase text-gold border border-gold/40 px-3 py-1.5">
+                        {t}
+                      </span>
+                    ))}
                   </div>
-                </Link>
-              </motion.div>
+
+                  <div className="flex items-center justify-between border-t border-gold/30 pt-5 mt-auto">
+                    <span className="text-h3 text-ocean">{r.price}</span>
+                    <a
+                      href="#contact"
+                      className="text-coral text-[12px] tracking-[0.24em] uppercase font-normal hover:text-ocean transition-colors inline-flex items-center gap-2"
+                    >
+                      Enquire <span aria-hidden>→</span>
+                    </a>
+                  </div>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══ 4. FEATURED PROJECT (cinematic banner) ═══ */}
-      <section className="relative h-[70vh] min-h-[480px] w-full overflow-hidden bg-navy">
-        <img
-          data-slot="featured-bg"
-          src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=2400&auto=format&fit=crop&q=85"
-          alt="Beachfront residence"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/40 to-transparent" />
-        <div className="relative z-10 h-full container-x flex items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9 }}
-            className="max-w-xl text-white"
-          >
-            <p className="eyebrow-light mb-4">Now Selling</p>
-            <h2 className="text-h2 text-white mb-5">Mont Choisy Le Parc</h2>
-            <p className="text-base sm:text-lg text-white/85 leading-[1.75] mb-8 font-light">
-              Beachfront residences with private gardens, a clubhouse, and direct access to one of Mauritius'
-              finest white-sand beaches. Limited availability for foreign buyers under PDS.
+      {/* ─── 4. KEY NUMBERS BAR ──────────────────────────────── */}
+      <section className="bg-ocean section-pad border-t border-gold/20">
+        <div className="container-x">
+          <div className="grid grid-cols-2 lg:grid-cols-4">
+            {KEY_NUMBERS.map((k, i) => (
+              <Reveal
+                key={k.label}
+                delay={i * 0.1}
+                className={
+                  'px-6 py-8 text-center ' +
+                  (i !== 0 ? 'lg:border-l border-gold/30 ' : '') +
+                  (i % 2 === 1 ? 'border-l border-gold/30 lg:border-l ' : '')
+                }
+              >
+                <div className="text-num text-gold mb-3">{k.num}</div>
+                <div className="text-cream/60 text-[12px] sm:text-[13px] leading-relaxed max-w-[220px] mx-auto">{k.label}</div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 5. OWNERSHIP ────────────────────────────────────── */}
+      <section id="ownership" className="bg-ocean section-pad border-t border-gold/20">
+        <div className="container-x">
+          <div className="max-w-3xl mb-16 lg:mb-20">
+            <Reveal><p className="eyebrow mb-6">OWNERSHIP AT ORYAM</p></Reveal>
+            <Reveal delay={0.12}>
+              <h2 className="text-h2 text-cream">
+                You own it. You live in it.<br />It works for you.
+              </h2>
+            </Reveal>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-14 lg:gap-20">
+            {/* IRS */}
+            <Reveal>
+              <div className="w-12 h-px bg-gold mb-7" />
+              <p className="eyebrow mb-5">MAURITIUS IRS SCHEME</p>
+              <h3 className="text-h3 text-cream mb-7">Your purchase comes with a residency permit.</h3>
+              <p className="text-cream/65 text-[15px] leading-[1.85] mb-5">
+                Every Oryam residence is classified under Mauritius's Integrated Resort Scheme (IRS). When you complete your purchase, you and your entire family automatically receive a Mauritian Resident Permit — with no quota, no lengthy process, no uncertainty.
+              </p>
+              <p className="text-cream/65 text-[15px] leading-[1.85] mb-8">
+                You gain the legal right to live, work, and retire in one of the world's most politically stable and tax-efficient nations. 15% flat income tax. No inheritance tax. No capital gains tax. Full freehold ownership — the same rights as a Mauritian citizen.
+              </p>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-gold">Included with every residence</p>
+            </Reveal>
+
+            {/* Rental */}
+            <Reveal delay={0.18}>
+              <div className="w-12 h-px bg-gold mb-7" />
+              <p className="eyebrow mb-5">MANAGED RENTAL PROGRAMME</p>
+              <h3 className="text-h3 text-cream mb-7">When you're not here, your apartment earns.</h3>
+              <p className="text-cream/65 text-[15px] leading-[1.85] mb-5">
+                Our fully managed rental programme means your residence is never idle. When you are not in residence, we handle everything — marketing, bookings, guest management, housekeeping, and maintenance — and deposit rental income directly to your account.
+              </p>
+              <p className="text-cream/65 text-[15px] leading-[1.85] mb-8">
+                You block the dates you want the apartment to yourself. We handle the rest. Many owners find the programme covers their carrying costs entirely. It is the most intelligent way to own a second home anywhere in the world.
+              </p>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-gold">Fully managed · Zero landlord effort</p>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 6. WHY ORYAM ────────────────────────────────────── */}
+      <section id="why" className="bg-sand text-ocean section-pad border-t border-gold/20">
+        <div className="container-x">
+          <div className="max-w-3xl mb-16 lg:mb-20">
+            <Reveal><p className="eyebrow mb-6">WHY ORYAM</p></Reveal>
+            <Reveal delay={0.12}>
+              <h2 className="text-h2 text-ocean">
+                Four reasons this is the most<br />intelligent second home you can own.
+              </h2>
+            </Reveal>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-x-16 gap-y-14 lg:gap-y-20">
+            {REASONS.map((r, i) => (
+              <Reveal key={r.n} delay={(i % 2) * 0.12}>
+                <div className="text-num text-gold mb-5">{r.n}</div>
+                <h3 className="text-h3 text-ocean mb-5">{r.title}</h3>
+                <p className="text-ocean/70 text-[15px] leading-[1.85] max-w-md">{r.body}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 7. THE SETTING ──────────────────────────────────── */}
+      <section className="relative w-full min-h-[80dvh] flex items-center overflow-hidden border-t border-gold/20">
+        <div className="absolute inset-0">
+          <img
+            src={SETTING_IMG}
+            alt="Golden hour over Mont Choisy beach"
+            data-slot="setting-bg"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-ocean/65" />
+        </div>
+        <div className="relative z-10 container-x py-24 lg:py-32 text-center">
+          <Reveal><p className="eyebrow mb-7">THE SETTING</p></Reveal>
+          <Reveal delay={0.12}>
+            <h2 className="text-h2 text-cream mb-10 max-w-3xl mx-auto">
+              Mont Choisy. Grand Baie.<br />Northern Mauritius.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.24}>
+            <p className="text-cream/75 text-base sm:text-lg leading-[1.85] max-w-[520px] mx-auto">
+              300 days of sunshine. A protected turquoise lagoon. 15 minutes from Grand Baie's restaurants and marina. 45 minutes from the international airport, with direct connections to Paris, London, Frankfurt, and Zurich. The location is exceptional. That is precisely why these are the last three available.
             </p>
-            <div className="flex flex-wrap gap-3">
-              <Link to="/residence" className="btn-primary touch-target">Discover the project</Link>
-              <Link to="/contact" className="btn-outline touch-target">Schedule a visit</Link>
-            </div>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 
-      {/* ═══ 5. WHY MAURITIUS — stats ═══ */}
-      <section className="section-pad bg-white">
+      {/* ─── 8. CONTACT ──────────────────────────────────────── */}
+      <section id="contact" className="bg-ocean section-pad border-t border-gold/20">
         <div className="container-x">
-          <div className="text-center mb-14">
-            <p className="eyebrow mb-3">Why Mauritius</p>
-            <h2 className="text-h2 text-navy max-w-2xl mx-auto">A place built for the life you've imagined.</h2>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-6 max-w-5xl mx-auto">
-            {[
-              { n: '300+', l: 'sunny days a year' },
-              { n: '15 min', l: 'to Grand Baie' },
-              { n: 'PDS', l: 'foreign ownership scheme' },
-              { n: '7–9%', l: 'rental yield potential' },
-            ].map((s, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="text-center"
-              >
-                <p className="font-serif text-5xl sm:text-6xl text-navy mb-3">{s.n}</p>
-                <p className="text-[12px] tracking-[0.2em] uppercase text-ink-muted">{s.l}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+          <Reveal><p className="eyebrow mb-6">PRIVATE ENQUIRY</p></Reveal>
 
-      {/* ═══ 6. ARTICLES ═══ */}
-      <section className="section-pad bg-cream">
-        <div className="container-x">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
             <div>
-              <p className="eyebrow mb-3">Mont Choisy</p>
-              <h2 className="text-h2 text-navy">Our Selection of Articles</h2>
-            </div>
-            <Link to="/gallery" className="btn-ghost-dark touch-target self-start sm:self-end">
-              All articles <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+              <Reveal delay={0.1}>
+                <h2 className="text-h2 text-cream mb-8">
+                  Three residences.<br />No open days.<br />By appointment only.
+                </h2>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <p className="text-cream/65 text-[15px] leading-[1.85] mb-12 max-w-md">
+                  Oryam is not a development. We do not hold open days or distribute brochures on request. Every conversation is private, personal, and focused entirely on what you are looking for. A member of our team will respond within 24 hours to arrange a call at your convenience.
+                </p>
+              </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {ARTICLES.map((a, i) => (
-              <motion.article
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.6, delay: i * 0.08 }}
-                className="bg-white overflow-hidden group cursor-pointer"
-              >
-                <div className="aspect-[16/10] overflow-hidden">
-                  <img
-                    data-slot={`article-${i + 1}`}
-                    src={a.img}
-                    alt={a.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
+              <Reveal delay={0.3}>
+                <dl className="space-y-5 max-w-md">
+                  {[
+                    ['RESPONSE TIME',   'Within 24 hours, always'],
+                    ['CONFIDENTIALITY', 'All enquiries are strictly private'],
+                    ['LOCATION',        'Mont Choisy, Grand Baie, Mauritius'],
+                  ].map(([k, v]) => (
+                    <div key={k} className="grid grid-cols-[140px_1fr] gap-6 items-baseline border-t border-gold/20 pt-5">
+                      <dt className="text-[10px] tracking-[0.3em] uppercase text-gold">{k}</dt>
+                      <dd className="text-cream/70 text-[14px]">{v}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </Reveal>
+            </div>
+
+            <Reveal delay={0.2}>
+              <form onSubmit={onSubmit} className="space-y-9">
+                <div className="field">
+                  <label htmlFor="name">Your Name</label>
+                  <input id="name" name="name" type="text" required autoComplete="name" />
+                </div>
+                <div className="field">
+                  <label htmlFor="email">Email Address</label>
+                  <input id="email" name="email" type="email" required autoComplete="email" />
+                </div>
+                <div className="field">
+                  <label htmlFor="message">Your Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    placeholder="Which residence interests you? Any questions about IRS, the rental programme, or the purchase process?"
                   />
                 </div>
-                <div className="p-6">
-                  <p className="eyebrow mb-3 text-[11px]">{a.cat}</p>
-                  <h3 className="font-serif text-[22px] text-navy leading-tight mb-3 group-hover:text-teal transition-colors">
-                    {a.title}
-                  </h3>
-                  <p className="text-[14px] text-ink-muted leading-[1.65] mb-4 line-clamp-3">{a.excerpt}</p>
-                  <span className="inline-flex items-center gap-1.5 text-[12px] tracking-[0.12em] uppercase text-teal font-medium">
-                    Read more <ArrowRight className="h-3.5 w-3.5" />
-                  </span>
-                </div>
-              </motion.article>
-            ))}
+
+                <button
+                  type="submit"
+                  disabled={submitted}
+                  className="inline-flex items-center justify-center gap-2 px-9 py-4 text-[12px] tracking-[0.24em] uppercase font-normal border transition-all duration-500"
+                  style={
+                    submitted
+                      ? { background: '#1F4D3A', borderColor: '#1F4D3A', color: '#F8F3EC' }
+                      : { background: '#A8883A', borderColor: '#A8883A', color: '#0B1724' }
+                  }
+                >
+                  {submitted ? <>Enquiry Received <span aria-hidden>✓</span></> : <>Send Enquiry <span aria-hidden>→</span></>}
+                </button>
+
+                <p className="text-[10px] tracking-[0.3em] uppercase text-gold pt-2">
+                  We respond within 24 hours · Strictly confidential
+                </p>
+              </form>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ═══ 7. CTA STRIP ═══ */}
-      <section className="bg-navy text-white">
-        <div className="container-x py-20 lg:py-28 grid lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-7">
-            <p className="eyebrow-light mb-3">Begin the conversation</p>
-            <h2 className="text-h2 text-white">Find your address in Mauritius.</h2>
-          </div>
-          <div className="lg:col-span-5 lg:text-right">
-            <p className="text-white/75 mb-6 leading-[1.7] font-light">
-              Our team responds within 24 hours with a curated shortlist of properties matched to your goals.
-            </p>
-            <div className="flex flex-wrap gap-3 lg:justify-end">
-              <Link to="/contact" className="btn-primary touch-target">Contact us</Link>
-              <Link to="/explore" className="btn-outline touch-target">Browse projects</Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
+      <OryamFooter />
     </div>
   );
-};
-
-export default Index;
+}
