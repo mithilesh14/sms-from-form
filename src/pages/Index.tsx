@@ -1,24 +1,18 @@
 import { useState, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { OryamHeader } from '@/components/oryam/OryamHeader';
 import { OryamFooter } from '@/components/oryam/OryamFooter';
 import { ScrollProgress } from '@/components/oryam/ScrollProgress';
 import { Reveal } from '@/components/oryam/Reveal';
 import { RESIDENCES } from '@/data/residences';
 
-import heroPool         from '@/assets/oryam/common/01-pool.jpg';
+import heroPool         from '@/assets/oryam/hero-pool.jpg';
 import poolLoungers     from '@/assets/oryam/common/02-pool-loungers.jpg';
 import buildingShot     from '@/assets/oryam/common/03-building.jpg';
 import gardenShot       from '@/assets/oryam/common/04-garden.jpg';
 import entranceShot     from '@/assets/oryam/common/05-entrance.jpg';
 import settingFlametrees from '@/assets/oryam/setting-flametrees.jpg';
-
-const HERO_FACTS = [
-  { num: '3',     label: 'Residences in the Collection' },
-  { num: '€520k', label: 'Starting Price' },
-  { num: 'IRS',   label: 'Residency Included' },
-  { num: 'Now',   label: 'Ready to Move In' },
-];
 
 
 const KEY_NUMBERS = [
