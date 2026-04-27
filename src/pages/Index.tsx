@@ -64,24 +64,23 @@ export default function Index() {
         <div className="relative z-10 h-full container-x flex flex-col justify-end pb-16 sm:pb-20 lg:pb-24">
           <div className="grid lg:grid-cols-12 gap-10 items-end">
             <div className="lg:col-span-8">
-              <Reveal><p className="eyebrow-light mb-6">ORYAM · MONT CHOISY · MAURITIUS</p></Reveal>
+              <Reveal><p className="eyebrow-light mb-6">{t('oryam.hero.eyebrow')}</p></Reveal>
               <Reveal delay={0.12}>
                 <h1 className="text-display text-ivory mb-8">
-                  A quieter way<br />to own Mauritius.
+                  {t('oryam.hero.title_l1')}<br />{t('oryam.hero.title_l2')}
                 </h1>
               </Reveal>
               <Reveal delay={0.24}>
                 <p className="text-ivory/80 text-base sm:text-lg max-w-xl mb-10 leading-relaxed">
-                  A private collection of three residences in Mont Choisy, Grand Baie.
-                  Furnished, freehold, IRS-eligible — with Mauritian residency from €500,000.
+                  {t('oryam.hero.lede')}
                 </p>
               </Reveal>
               <Reveal delay={0.36}>
                 <div className="flex flex-wrap items-center gap-4">
                   <a href="#residences" className="btn-primary" style={{ background: '#A88842', borderColor: '#A88842' }}>
-                    View the Residences <span aria-hidden>→</span>
+                    {t('oryam.hero.cta_view')} <span aria-hidden>→</span>
                   </a>
-                  <a href="#intro" className="btn-ghost-light">↓ &nbsp; The story</a>
+                  <a href="#intro" className="btn-ghost-light">↓ &nbsp; {t('oryam.hero.cta_story')}</a>
                 </div>
               </Reveal>
             </div>
@@ -109,15 +108,15 @@ export default function Index() {
       <section id="intro" className="bg-ivory section-pad">
         <div className="container-x">
           <div className="max-w-[680px] mx-auto text-center">
-            <Reveal><p className="eyebrow mb-8">THE PROPERTY</p></Reveal>
+            <Reveal><p className="eyebrow mb-8">{t('oryam.intro.eyebrow')}</p></Reveal>
             <Reveal delay={0.1}>
               <h2 className="text-h1 text-ink mb-10">
-                Not a development.<br />A private address.
+                {t('oryam.intro.title_l1')}<br />{t('oryam.intro.title_l2')}
               </h2>
             </Reveal>
             <Reveal delay={0.2}>
               <p className="text-ink-soft text-base sm:text-lg leading-[1.85]">
-                Oryam is a collection of just three apartments in Mont Choisy — one of the most coveted neighbourhoods on the north coast of Mauritius. Each residence is complete, furnished to specification, and immediately available. There are no more being built. There is no waiting list. There are simply three exceptional homes, in the right place, with your name on one of them.
+                {t('oryam.intro.body')}
               </p>
             </Reveal>
             <Reveal delay={0.3}>
