@@ -231,10 +231,10 @@ export default function Index() {
       <section id="ownership" className="bg-ivory section-pad">
         <div className="container-x">
           <div className="max-w-3xl mb-16 lg:mb-20">
-            <Reveal><p className="eyebrow mb-6">OWNERSHIP AT ORYAM</p></Reveal>
+            <Reveal><p className="eyebrow mb-6">{t('oryam.ownership.eyebrow')}</p></Reveal>
             <Reveal delay={0.1}>
               <h2 className="text-h1 text-ink">
-                You own it. You live in it.<br />It works for you.
+                {t('oryam.ownership.title_l1')}<br />{t('oryam.ownership.title_l2')}
               </h2>
             </Reveal>
           </div>
@@ -242,28 +242,20 @@ export default function Index() {
           <div className="grid lg:grid-cols-2 gap-14 lg:gap-20">
             <Reveal>
               <div className="w-12 h-px bg-gold mb-7" />
-              <p className="eyebrow mb-5">MAURITIUS IRS SCHEME</p>
-              <h3 className="text-h2 text-ink mb-7">Your purchase comes with a residency permit.</h3>
-              <p className="text-ink-soft text-[15px] leading-[1.85] mb-5">
-                Every Oryam residence is classified under Mauritius's Integrated Resort Scheme (IRS). When you complete your purchase, you and your entire family automatically receive a Mauritian Resident Permit — with no quota, no lengthy process, no uncertainty.
-              </p>
-              <p className="text-ink-soft text-[15px] leading-[1.85] mb-8">
-                You gain the legal right to live, work, and retire in one of the world's most politically stable and tax-efficient nations. 15% flat income tax. No inheritance tax. No capital gains tax. Full freehold ownership — the same rights as a Mauritian citizen.
-              </p>
-              <p className="text-[10px] tracking-[0.3em] uppercase text-gold">Included with every residence</p>
+              <p className="eyebrow mb-5">{t('oryam.ownership.irs.eyebrow')}</p>
+              <h3 className="text-h2 text-ink mb-7">{t('oryam.ownership.irs.title')}</h3>
+              <p className="text-ink-soft text-[15px] leading-[1.85] mb-5">{t('oryam.ownership.irs.p1')}</p>
+              <p className="text-ink-soft text-[15px] leading-[1.85] mb-8">{t('oryam.ownership.irs.p2')}</p>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-gold">{t('oryam.ownership.irs.tag')}</p>
             </Reveal>
 
             <Reveal delay={0.18}>
               <div className="w-12 h-px bg-gold mb-7" />
-              <p className="eyebrow mb-5">MANAGED RENTAL PROGRAMME</p>
-              <h3 className="text-h2 text-ink mb-7">When you're not here, your apartment earns.</h3>
-              <p className="text-ink-soft text-[15px] leading-[1.85] mb-5">
-                Our fully managed rental programme means your residence is never idle. When you are not in residence, we handle everything — marketing, bookings, guest management, housekeeping, and maintenance — and deposit rental income directly to your account.
-              </p>
-              <p className="text-ink-soft text-[15px] leading-[1.85] mb-8">
-                You block the dates you want the apartment to yourself. We handle the rest. Many owners find the programme covers their carrying costs entirely. It is the most intelligent way to own a second home anywhere in the world.
-              </p>
-              <p className="text-[10px] tracking-[0.3em] uppercase text-gold">Fully managed · Zero landlord effort</p>
+              <p className="eyebrow mb-5">{t('oryam.ownership.rental.eyebrow')}</p>
+              <h3 className="text-h2 text-ink mb-7">{t('oryam.ownership.rental.title')}</h3>
+              <p className="text-ink-soft text-[15px] leading-[1.85] mb-5">{t('oryam.ownership.rental.p1')}</p>
+              <p className="text-ink-soft text-[15px] leading-[1.85] mb-8">{t('oryam.ownership.rental.p2')}</p>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-gold">{t('oryam.ownership.rental.tag')}</p>
             </Reveal>
           </div>
         </div>
@@ -274,18 +266,16 @@ export default function Index() {
         <div className="container-x">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 mb-12 lg:mb-16">
             <div className="lg:col-span-6">
-              <Reveal><p className="eyebrow mb-5">THE BUILDING &amp; GROUNDS</p></Reveal>
+              <Reveal><p className="eyebrow mb-5">{t('oryam.grounds.eyebrow')}</p></Reveal>
               <Reveal delay={0.1}>
                 <h2 className="text-h1 text-ink">
-                  A quiet building.<br />A garden you walk into.
+                  {t('oryam.grounds.title_l1')}<br />{t('oryam.grounds.title_l2')}
                 </h2>
               </Reveal>
             </div>
             <Reveal delay={0.2} className="lg:col-span-6 lg:pt-4">
               <p className="text-ink-soft text-base sm:text-lg leading-[1.85]">
-                Two low blocks set in landscaped gardens of mature flame trees and palms.
-                A residents-only pool, secure parking, and a single private entrance.
-                Designed to feel like a home, not a complex.
+                {t('oryam.grounds.body')}
               </p>
             </Reveal>
           </div>
@@ -323,10 +313,10 @@ export default function Index() {
       <section id="why" className="bg-bone section-pad">
         <div className="container-x">
           <div className="max-w-3xl mb-16 lg:mb-20">
-            <Reveal><p className="eyebrow mb-6">WHY ORYAM</p></Reveal>
+            <Reveal><p className="eyebrow mb-6">{t('oryam.why.eyebrow')}</p></Reveal>
             <Reveal delay={0.1}>
               <h2 className="text-h1 text-ink">
-                Four reasons this is the most<br />intelligent second home you can own.
+                {t('oryam.why.title_l1')}<br />{t('oryam.why.title_l2')}
               </h2>
             </Reveal>
           </div>
@@ -355,15 +345,15 @@ export default function Index() {
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(15,22,32,0.45) 0%, rgba(15,22,32,0.65) 100%)' }} />
         </div>
         <div className="relative z-10 container-x py-24 lg:py-32 text-center">
-          <Reveal><p className="eyebrow-light mb-7">THE SETTING</p></Reveal>
+          <Reveal><p className="eyebrow-light mb-7">{t('oryam.setting.eyebrow')}</p></Reveal>
           <Reveal delay={0.1}>
             <h2 className="text-h1 text-ivory mb-10 max-w-3xl mx-auto">
-              Mont Choisy. Grand Baie.<br />Northern Mauritius.
+              {t('oryam.setting.title_l1')}<br />{t('oryam.setting.title_l2')}
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-ivory/80 text-base sm:text-lg leading-[1.85] max-w-[560px] mx-auto">
-              300 days of sunshine. A protected turquoise lagoon a short walk away. Ten minutes from Grand Baie's restaurants and marina. 45 minutes from the international airport, with direct connections to Paris, London, Frankfurt and Zurich. The location is exceptional. That is precisely why these are the last three available.
+              {t('oryam.setting.body')}
             </p>
           </Reveal>
         </div>
@@ -372,27 +362,27 @@ export default function Index() {
       {/* ─── 9. CONTACT ──────────────────────────────────────── */}
       <section id="contact" className="bg-ivory section-pad">
         <div className="container-x">
-          <Reveal><p className="eyebrow mb-6">PRIVATE ENQUIRY</p></Reveal>
+          <Reveal><p className="eyebrow mb-6">{t('oryam.contact.eyebrow')}</p></Reveal>
 
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
             <div>
               <Reveal delay={0.08}>
                 <h2 className="text-h1 text-ink mb-8">
-                  Three residences.<br />No open days.<br />By appointment only.
+                  {t('oryam.contact.title_l1')}<br />{t('oryam.contact.title_l2')}<br />{t('oryam.contact.title_l3')}
                 </h2>
               </Reveal>
               <Reveal delay={0.18}>
                 <p className="text-ink-soft text-[15px] leading-[1.85] mb-12 max-w-md">
-                  Oryam is not a development. We do not hold open days or distribute brochures on request. Every conversation is private, personal, and focused entirely on what you are looking for. A member of our team will respond within 24 hours to arrange a call at your convenience.
+                  {t('oryam.contact.body')}
                 </p>
               </Reveal>
 
               <Reveal delay={0.28}>
                 <dl className="space-y-0 max-w-md">
                   {[
-                    ['RESPONSE TIME',   'Within 24 hours, always'],
-                    ['CONFIDENTIALITY', 'All enquiries are strictly private'],
-                    ['LOCATION',        'Mont Choisy, Grand Baie, Mauritius'],
+                    [t('oryam.contact.label_response'), t('oryam.contact.val_response')],
+                    [t('oryam.contact.label_conf'),     t('oryam.contact.val_conf')],
+                    [t('oryam.contact.label_loc'),      t('oryam.contact.val_loc')],
                   ].map(([k, v]) => (
                     <div key={k} className="grid grid-cols-[150px_1fr] gap-6 items-baseline border-t border-hair py-5">
                       <dt className="text-[10px] tracking-[0.3em] uppercase text-gold">{k}</dt>
@@ -406,20 +396,20 @@ export default function Index() {
             <Reveal delay={0.18}>
               <form onSubmit={onSubmit} className="space-y-9">
                 <div className="field">
-                  <label htmlFor="name">Your Name</label>
+                  <label htmlFor="name">{t('oryam.contact.f_name')}</label>
                   <input id="name" name="name" type="text" required autoComplete="name" />
                 </div>
                 <div className="field">
-                  <label htmlFor="email">Email Address</label>
+                  <label htmlFor="email">{t('oryam.contact.f_email')}</label>
                   <input id="email" name="email" type="email" required autoComplete="email" />
                 </div>
                 <div className="field">
-                  <label htmlFor="message">Your Message</label>
+                  <label htmlFor="message">{t('oryam.contact.f_message')}</label>
                   <textarea
                     id="message"
                     name="message"
                     rows={5}
-                    placeholder="Which residence interests you? Any questions about IRS, the rental programme, or the purchase process?"
+                    placeholder={t('oryam.contact.f_message_ph')}
                   />
                 </div>
 
@@ -433,11 +423,11 @@ export default function Index() {
                       : { background: '#A88842', borderColor: '#A88842', color: '#F8F4EC' }
                   }
                 >
-                  {submitted ? <>Enquiry Received <span aria-hidden>✓</span></> : <>Send Enquiry <span aria-hidden>→</span></>}
+                  {submitted ? <>{t('oryam.contact.sent')} <span aria-hidden>✓</span></> : <>{t('oryam.contact.send')} <span aria-hidden>→</span></>}
                 </button>
 
                 <p className="text-[10px] tracking-[0.3em] uppercase text-gold pt-2">
-                  We respond within 24 hours · Strictly confidential
+                  {t('oryam.contact.footnote')}
                 </p>
               </form>
             </Reveal>
