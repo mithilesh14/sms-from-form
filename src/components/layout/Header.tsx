@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { Globe, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function Header() {
-  const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const pagesWithDarkHero = ['/', '/residence', '/own-in-mauritius'];
+
+  // Hide header entirely on Paradise gateway
+  if (location.pathname === '/') return null;
+
+  const pagesWithDarkHero = ['/home', '/residence', '/own-in-mauritius'];
   const hasDarkHero = pagesWithDarkHero.includes(location.pathname);
   const useLight = hasDarkHero && !isScrolled;
 
@@ -27,127 +29,77 @@ export function Header() {
     return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
-  const toggleLanguage = () => {
-    const newLang = i18n.language === 'en' ? 'fr' : 'en';
-    i18n.changeLanguage(newLang);
-    localStorage.setItem('language', newLang);
-  };
-
-  const leftLinks = [
-    { href: '/', label: 'Home' },
+  const navLinks = [
+    { href: '/home', label: 'Lifestyle' },
     { href: '/residence', label: 'Residences' },
     { href: '/gallery', label: 'Gallery' },
-  ];
-
-  const rightLinks = [
-    { href: '/explore', label: 'Availability' },
-    { href: '/own-in-mauritius', label: 'Ownership' },
     { href: '/contact', label: 'Contact' },
   ];
 
-  const allLinks = [
-    ...leftLinks,
-    { href: '/virtual-tour', label: '360° Tour' },
-    ...rightLinks,
-  ];
-
-  const navLinkClass = (href: string) =>
+  const linkClass = (href: string) =>
     cn(
-      "text-[13px] tracking-[0.04em] font-normal transition-colors duration-300 relative pb-0.5 whitespace-nowrap",
+      'text-[12px] tracking-[0.18em] uppercase font-sans font-light transition-colors duration-300 whitespace-nowrap',
       useLight
-        ? (location.pathname === href ? "text-white border-b border-white" : "text-white/70 hover:text-white")
-        : (location.pathname === href ? "text-foreground border-b border-foreground" : "text-muted-foreground hover:text-foreground")
+        ? location.pathname === href ? 'text-offwhite' : 'text-offwhite/65 hover:text-offwhite'
+        : location.pathname === href ? 'text-ocean' : 'text-ocean/60 hover:text-ocean'
     );
 
   return (
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          isScrolled ? "bg-background/80 backdrop-blur-xl shadow-sm" : "bg-transparent"
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
+          isScrolled
+            ? 'bg-offwhite/85 backdrop-blur-xl border-b border-gold/20'
+            : 'bg-transparent'
         )}
       >
         <div className="w-full px-6 sm:px-10 lg:px-14">
-          <div className="flex items-center justify-between h-[70px] lg:h-[90px]">
-
-            {/* Left nav — desktop */}
-            <nav className="hidden lg:flex items-center gap-7 xl:gap-10 flex-1">
-              {leftLinks.map(link => (
-                <Link key={link.href} to={link.href} className={navLinkClass(link.href)}>
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Center logo */}
-            <Link to="/" className="relative z-10 flex flex-col items-center shrink-0">
-              <span className={cn(
-                "text-[20px] sm:text-[24px] lg:text-[28px] tracking-[0.25em] uppercase font-semibold font-sans transition-colors duration-500",
-                useLight ? "text-white" : "text-foreground"
-              )}>
-                MONT CHOISY
-              </span>
-              <span className={cn(
-                "text-[8px] sm:text-[9px] tracking-[0.35em] uppercase font-normal mt-0.5 transition-colors duration-500",
-                useLight ? "text-white/60" : "text-muted-foreground"
-              )}>
-                Oceanfront Living
+          <div className="flex items-center justify-between h-[70px] lg:h-[84px]">
+            {/* Wordmark */}
+            <Link to="/home" className="shrink-0">
+              <span
+                className={cn(
+                  'text-[15px] sm:text-[16px] tracking-[0.32em] uppercase font-sans font-medium transition-colors duration-500',
+                  useLight ? 'text-offwhite' : 'text-ocean'
+                )}
+              >
+                Mont Choisy
               </span>
             </Link>
 
-            {/* Right nav — desktop */}
-            <nav className="hidden lg:flex items-center gap-7 xl:gap-10 flex-1 justify-end">
-              {rightLinks.map(link => (
-                <Link key={link.href} to={link.href} className={navLinkClass(link.href)}>
+            {/* Desktop nav */}
+            <nav className="hidden lg:flex items-center gap-10">
+              {navLinks.map(link => (
+                <Link key={link.href} to={link.href} className={linkClass(link.href)}>
                   {link.label}
                 </Link>
               ))}
-
-              {/* Language toggle */}
-              <button
-                onClick={toggleLanguage}
-                className={cn(
-                  "flex items-center gap-1.5 transition-colors min-h-[44px] ml-2",
-                  useLight ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-foreground"
-                )}
+              <Link
+                to="/contact"
+                className="bg-coral text-offwhite px-6 py-3 text-[11px] tracking-[0.25em] uppercase font-sans hover:bg-coral/85 transition-colors duration-300"
               >
-                <Globe className="h-3.5 w-3.5" />
-                <span className="text-[12px] tracking-[0.08em]">{i18n.language === 'en' ? 'FR' : 'EN'}</span>
-              </button>
+                Enquire
+              </Link>
             </nav>
 
-            {/* Mobile: lang + hamburger */}
-            <div className="lg:hidden flex items-center gap-2">
-              <button
-                onClick={toggleLanguage}
-                className={cn(
-                  "flex items-center gap-1 transition-colors min-h-[44px]",
-                  useLight ? "text-white/70 hover:text-white" : "text-muted-foreground hover:text-foreground"
-                )}
-              >
-                <Globe className="h-3.5 w-3.5" />
-                <span className="text-[12px]">{i18n.language === 'en' ? 'FR' : 'EN'}</span>
-              </button>
-
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="min-h-[44px] min-w-[44px] flex items-center justify-center"
-                aria-label={isOpen ? 'Close menu' : 'Open menu'}
-              >
-                <div className="w-6 flex flex-col gap-[5px]">
-                  <span className={cn("block h-[2px] rounded-full transition-colors duration-500", useLight ? "bg-white" : "bg-foreground")} />
-                  <span className={cn("block h-[2px] rounded-full w-4 transition-colors duration-500", useLight ? "bg-white" : "bg-foreground")} />
-                  <span className={cn("block h-[2px] rounded-full transition-colors duration-500", useLight ? "bg-white" : "bg-foreground")} />
-                </div>
-              </button>
-            </div>
+            {/* Mobile burger */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="lg:hidden touch-target flex items-center justify-center"
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+            >
+              <div className="w-6 flex flex-col gap-[5px]">
+                <span className={cn('block h-px transition-colors duration-500', useLight ? 'bg-offwhite' : 'bg-ocean')} />
+                <span className={cn('block h-px w-4 transition-colors duration-500', useLight ? 'bg-offwhite' : 'bg-ocean')} />
+                <span className={cn('block h-px transition-colors duration-500', useLight ? 'bg-offwhite' : 'bg-ocean')} />
+              </div>
+            </button>
           </div>
         </div>
-
-        {isScrolled && <div className="h-px bg-border/50" />}
       </header>
 
-      {/* Fullscreen overlay menu */}
+      {/* Fullscreen mobile overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -155,60 +107,49 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-[60] bg-background"
+            className="fixed inset-0 z-[60] bg-ocean text-offwhite"
           >
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-5 right-6 sm:right-10 min-h-[44px] min-w-[44px] flex items-center justify-center z-10"
+              className="absolute top-5 right-6 sm:right-10 touch-target flex items-center justify-center z-10"
               aria-label="Close menu"
             >
-              <X className="h-6 w-6 text-foreground" />
+              <X className="h-6 w-6 text-offwhite" />
             </button>
 
-            <div className="h-full flex flex-col justify-center px-10 sm:px-16 lg:px-24">
-              <nav className="space-y-1">
-                {allLinks.map((link, index) => (
-                  <div key={link.href} className="overflow-hidden">
-                    <motion.div
-                      initial={{ y: 60, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: 60, opacity: 0 }}
-                      transition={{ duration: 0.4, delay: index * 0.04 }}
+            <div className="h-full flex flex-col justify-center px-10 sm:px-16">
+              <nav className="space-y-2">
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    key={link.href}
+                    initial={{ y: 60, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                  >
+                    <Link
+                      to={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="block font-serif italic text-4xl sm:text-5xl py-2 text-offwhite hover:text-coral transition-colors duration-300"
                     >
-                      <Link
-                        to={link.href}
-                        onClick={() => setIsOpen(false)}
-                        className={cn(
-                          "block font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl py-2 transition-all duration-300",
-                          location.pathname === link.href
-                            ? "text-foreground"
-                            : "text-muted-foreground/50 hover:text-foreground hover:translate-x-3"
-                        )}
-                      >
-                        {link.label}
-                      </Link>
-                    </motion.div>
-                  </div>
+                      {link.label}
+                    </Link>
+                  </motion.div>
                 ))}
+                <motion.div
+                  initial={{ y: 60, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.4, delay: navLinks.length * 0.05 }}
+                  className="pt-8"
+                >
+                  <Link
+                    to="/contact"
+                    onClick={() => setIsOpen(false)}
+                    className="inline-block bg-coral text-offwhite px-8 py-4 text-[12px] tracking-[0.25em] uppercase"
+                  >
+                    Enquire
+                  </Link>
+                </motion.div>
               </nav>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ delay: 0.4 }}
-                className="mt-14"
-              >
-                <div className="h-px bg-border mb-6" />
-                <div className="flex items-center gap-6 text-[13px] text-muted-foreground">
-                  <a href="mailto:residences@montchoisy.mu" className="hover:text-foreground transition-colors">
-                    residences@montchoisy.mu
-                  </a>
-                  <a href="tel:+2305555100" className="hover:text-foreground transition-colors">
-                    +230 555 0100
-                  </a>
-                </div>
-              </motion.div>
             </div>
           </motion.div>
         )}
