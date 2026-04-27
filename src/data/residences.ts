@@ -1,7 +1,7 @@
 // ─── Oryam — three residences in the collection ────────────────────────────
 // One source of truth for the home grid and the detail pages.
 
-import card01 from '@/assets/oryam/b11/01-living-pano.jpg';
+
 import b11_01 from '@/assets/oryam/b11/01-living-pano.jpg';
 import b11_02 from '@/assets/oryam/b11/02-kitchen.jpg';
 import b11_03 from '@/assets/oryam/b11/03-dining.jpg';
