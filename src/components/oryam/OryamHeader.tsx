@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-
-const LINKS = [
-  { href: '#residences', label: 'Residences' },
-  { href: '#ownership',  label: 'Ownership' },
-  { href: '#why',        label: 'Why Oryam' },
-];
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 interface Props { variant?: 'over-light' | 'over-dark'; }
 
 export function OryamHeader({ variant = 'over-dark' }: Props) {
+  const { t } = useTranslation();
+  const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -21,6 +20,17 @@ export function OryamHeader({ variant = 'over-dark' }: Props) {
 
   const onDark = !scrolled && variant === 'over-dark';
 
+  // Anchors should always point at the homepage's section ids,
+  // so they work whether you're on `/` or `/residences/:slug`.
+  const isHome = pathname === '/';
+  const anchor = (id: string) => (isHome ? `#${id}` : `/#${id}`);
+
+  const links = [
+    { href: anchor('residences'), label: t('oryam.nav.residences') },
+    { href: anchor('ownership'),  label: t('oryam.nav.ownership') },
+    { href: anchor('why'),        label: t('oryam.nav.why') },
+  ];
+
   return (
     <header
       className={cn(
@@ -31,7 +41,7 @@ export function OryamHeader({ variant = 'over-dark' }: Props) {
       <div className="container-x">
         <div className="flex items-center justify-between h-[68px] lg:h-[80px]">
           <a
-            href="#top"
+            href={isHome ? '#top' : '/'}
             className={cn(
               'font-serif text-[22px] sm:text-[26px] transition-colors duration-300',
               onDark ? 'text-ivory' : 'text-ink'
@@ -42,7 +52,7 @@ export function OryamHeader({ variant = 'over-dark' }: Props) {
           </a>
 
           <nav className="hidden lg:flex items-center gap-10">
-            {LINKS.map(l => (
+            {links.map(l => (
               <a
                 key={l.href}
                 href={l.href}
@@ -54,8 +64,11 @@ export function OryamHeader({ variant = 'over-dark' }: Props) {
                 {l.label}
               </a>
             ))}
+
+            <LanguageSwitcher onDark={onDark} />
+
             <a
-              href="#contact"
+              href={anchor('contact')}
               className={cn(
                 'inline-flex items-center px-7 py-3 text-[11px] tracking-[0.24em] uppercase font-normal border transition-all duration-400',
                 onDark
@@ -63,19 +76,23 @@ export function OryamHeader({ variant = 'over-dark' }: Props) {
                   : 'border-ink text-ink hover:bg-ink hover:text-ivory'
               )}
             >
-              Private Enquiry
+              {t('oryam.nav.enquire')}
             </a>
           </nav>
 
-          <a
-            href="#contact"
-            className={cn(
-              'lg:hidden inline-flex items-center px-5 py-2.5 text-[10px] tracking-[0.22em] uppercase font-normal border',
-              onDark ? 'border-ivory text-ivory' : 'border-ink text-ink'
-            )}
-          >
-            Enquire
-          </a>
+          {/* Mobile: language switcher + Enquire pill */}
+          <div className="lg:hidden flex items-center gap-4">
+            <LanguageSwitcher onDark={onDark} />
+            <a
+              href={anchor('contact')}
+              className={cn(
+                'inline-flex items-center px-5 py-2.5 text-[10px] tracking-[0.22em] uppercase font-normal border',
+                onDark ? 'border-ivory text-ivory' : 'border-ink text-ink'
+              )}
+            >
+              {t('oryam.nav.enquireShort')}
+            </a>
+          </div>
         </div>
       </div>
     </header>
