@@ -15,35 +15,6 @@ import entranceShot     from '@/assets/oryam/common/05-entrance.jpg';
 import settingFlametrees from '@/assets/oryam/setting-flametrees.jpg';
 
 
-const KEY_NUMBERS = [
-  { num: '3',     label: 'Residences in the collection' },
-  { num: '15%',   label: 'Flat income tax in Mauritius' },
-  { num: '€0',    label: 'Inheritance and capital gains tax' },
-  { num: '12 hr', label: 'Direct flight from major European cities' },
-];
-
-const REASONS = [
-  {
-    n: '01',
-    title: 'Ready now. No off-plan risk.',
-    body: 'Every residence is complete, furnished, and available for immediate occupation. No construction delays. No developer risk. You sign, you receive keys, you arrive. It is that straightforward.',
-  },
-  {
-    n: '02',
-    title: 'Mont Choisy. The address that holds value.',
-    body: 'Mont Choisy is one of the most protected and celebrated stretches of the north coast — a fifteen-minute walk to the beach, ten minutes to Grand Baie\'s restaurants. Quality property at this address rarely comes back to market.',
-  },
-  {
-    n: '03',
-    title: 'Ownership without restriction.',
-    body: 'IRS classification gives non-Mauritian buyers identical property rights to locals. Freehold title. No ownership time limits. No restrictions on resale. You own it as completely as anything you own at home.',
-  },
-  {
-    n: '04',
-    title: 'An exit as strong as the entry.',
-    body: 'Demand for quality residences in Mauritius consistently outpaces supply. Oryam owners who choose to sell benefit from a liquid international buyer market and an asset that has never compromised on quality.',
-  },
-];
 
 export default function Index() {
   const { t } = useTranslation();
@@ -234,7 +205,7 @@ export default function Index() {
       <section className="bg-night section-pad">
         <div className="container-x">
           <div className="grid grid-cols-2 lg:grid-cols-4">
-            {KEY_NUMBERS.map((k, i) => (
+            {KEY_NUMBERS_I18N.map((k, i) => (
               <Reveal
                 key={k.label}
                 delay={i * 0.1}
@@ -359,7 +330,7 @@ export default function Index() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-x-16 gap-y-14 lg:gap-y-20">
-            {REASONS.map((r, i) => (
+            {REASONS_I18N.map((r, i) => (
               <Reveal key={r.n} delay={(i % 2) * 0.12}>
                 <div className="text-num text-gold mb-5">{r.n}</div>
                 <h3 className="text-h3 text-ink mb-5">{r.title}</h3>
