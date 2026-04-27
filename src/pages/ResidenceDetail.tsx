@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { OryamHeader } from '@/components/oryam/OryamHeader';
 import { OryamFooter } from '@/components/oryam/OryamFooter';
 import { ScrollProgress } from '@/components/oryam/ScrollProgress';
@@ -8,6 +9,7 @@ import { findResidence, RESIDENCES } from '@/data/residences';
 
 export default function ResidenceDetail() {
   const { slug } = useParams();
+  const { t } = useTranslation();
   const residence = findResidence(slug ?? '');
   const [lightbox, setLightbox] = useState<number | null>(null);
 
@@ -33,6 +35,16 @@ export default function ResidenceDetail() {
 
   if (!residence) return <Navigate to="/" replace />;
 
+  // Translated residence content (falls back to data file for safety)
+  const rt = (k: string) => t(`oryam.residencesData.${residence.slug}.${k}`);
+  const name = rt('name') as string;
+  const type = rt('type') as string;
+  const tagline = rt('tagline') as string;
+  const spec = rt('spec') as string;
+  const price = rt('price') as string;
+  const description = rt('description') as string;
+  const captions = t(`oryam.residencesData.${residence.slug}.captions`, { returnObjects: true }) as string[];
+
   const others = RESIDENCES.filter(r => r.slug !== residence.slug);
 
   return (
@@ -44,7 +56,7 @@ export default function ResidenceDetail() {
       <section className="relative w-full h-[88dvh] min-h-[600px] overflow-hidden">
         <img
           src={residence.cover}
-          alt={`${residence.name} — ${residence.spec}`}
+          alt={`${name} — ${spec}`}
           className="absolute inset-0 w-full h-full object-cover ken-burns"
         />
         <div
@@ -61,27 +73,27 @@ export default function ResidenceDetail() {
               to="/#residences"
               className="text-ivory/70 hover:text-ivory text-[11px] tracking-[0.28em] uppercase mb-8 inline-flex items-center gap-2 transition-colors"
             >
-              <span aria-hidden>←</span> Back to the collection
+              {t('oryam.nav.back_long')}
             </Link>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="eyebrow-light mb-5">{residence.type} · ORYAM · MONT CHOISY</p>
+            <p className="eyebrow-light mb-5">{type} · ORYAM · MONT CHOISY</p>
           </Reveal>
           <Reveal delay={0.2}>
-            <h1 className="text-display text-ivory mb-6 max-w-4xl">{residence.name}</h1>
+            <h1 className="text-display text-ivory mb-6 max-w-4xl">{name}</h1>
           </Reveal>
           <Reveal delay={0.3}>
-            <p className="text-ivory/85 text-base sm:text-lg max-w-xl mb-8">{residence.tagline}</p>
+            <p className="text-ivory/85 text-base sm:text-lg max-w-xl mb-8">{tagline}</p>
           </Reveal>
           <Reveal delay={0.4}>
             <div className="flex flex-wrap items-center gap-x-10 gap-y-4 text-ivory/80 text-[11px] tracking-[0.24em] uppercase">
-              <span>{residence.beds} Bedrooms</span>
+              <span>{residence.beds} {t('oryam.detail.bedrooms')}</span>
               <span className="w-px h-3 bg-ivory/40" />
-              <span>{residence.baths} Bathrooms</span>
+              <span>{residence.baths} {t('oryam.detail.bathrooms')}</span>
               <span className="w-px h-3 bg-ivory/40" />
               <span>{residence.area} m²</span>
               <span className="w-px h-3 bg-ivory/40" />
-              <span className="font-serif italic text-[18px] tracking-normal text-ivory normal-case">{residence.price}</span>
+              <span className="font-serif italic text-[18px] tracking-normal text-ivory normal-case">{price}</span>
             </div>
           </Reveal>
         </div>
@@ -91,25 +103,25 @@ export default function ResidenceDetail() {
       <section className="bg-ivory section-pad">
         <div className="container-x grid lg:grid-cols-12 gap-12 lg:gap-20">
           <div className="lg:col-span-5">
-            <Reveal><p className="eyebrow mb-6">THE RESIDENCE</p></Reveal>
+            <Reveal><p className="eyebrow mb-6">{t('oryam.detail.eyebrow_residence')}</p></Reveal>
             <Reveal delay={0.1}>
               <h2 className="text-h1 text-ink">
-                {residence.name}.<br />In detail.
+                {name}.<br />{t('oryam.detail.in_detail')}
               </h2>
             </Reveal>
           </div>
           <Reveal delay={0.2} className="lg:col-span-7">
             <p className="text-ink-soft text-base sm:text-lg leading-[1.85] mb-10">
-              {residence.description}
+              {description}
             </p>
             <dl className="grid grid-cols-2 gap-x-8 gap-y-0 max-w-lg">
               {[
-                ['BEDROOMS',   `${residence.beds}`],
-                ['BATHROOMS',  `${residence.baths}`],
-                ['INTERIOR',   `${residence.area} m²`],
-                ['STATUS',     'Move-in ready'],
-                ['SCHEME',     'IRS — freehold'],
-                ['RESIDENCY',  'Permit included'],
+                [t('oryam.detail.bedrooms'),  `${residence.beds}`],
+                [t('oryam.detail.bathrooms'), `${residence.baths}`],
+                [t('oryam.detail.interior'),  `${residence.area} m²`],
+                [t('oryam.detail.status'),    t('oryam.detail.status_value')],
+                [t('oryam.detail.scheme'),    t('oryam.detail.scheme_value')],
+                [t('oryam.detail.residency'), t('oryam.detail.residency_value')],
               ].map(([k, v]) => (
                 <div key={k} className="border-t border-hair py-5">
                   <dt className="text-[10px] tracking-[0.3em] uppercase text-gold mb-2">{k}</dt>
@@ -126,17 +138,16 @@ export default function ResidenceDetail() {
         <div className="container-x">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 mb-12 lg:mb-16">
             <div className="lg:col-span-7">
-              <Reveal><p className="eyebrow mb-5">VIRTUAL WALKTHROUGH</p></Reveal>
+              <Reveal><p className="eyebrow mb-5">{t('oryam.detail.tour_eyebrow')}</p></Reveal>
               <Reveal delay={0.1}>
                 <h2 className="text-h1 text-ink">
-                  Step inside —<br />a 360° tour.
+                  {t('oryam.detail.tour_title_l1')}<br />{t('oryam.detail.tour_title_l2')}
                 </h2>
               </Reveal>
             </div>
             <Reveal delay={0.2} className="lg:col-span-5 lg:pt-4">
               <p className="text-ink-soft text-[15px] leading-[1.85]">
-                A full immersive walkthrough of {residence.name}, room by room.
-                Drag, look up, look out — explore the residence as if you were standing inside it.
+                {t('oryam.detail.tour_body', { name })}
               </p>
             </Reveal>
           </div>
@@ -146,7 +157,6 @@ export default function ResidenceDetail() {
               className="relative w-full overflow-hidden border border-hair"
               style={{ aspectRatio: '16 / 9', background: 'hsl(var(--ink))' }}
             >
-              {/* dim cover image as backdrop */}
               <img
                 src={residence.gallery[0].src}
                 alt=""
@@ -155,21 +165,19 @@ export default function ResidenceDetail() {
               />
               <div className="absolute inset-0 bg-ink/40" />
 
-              {/* Placeholder content */}
               <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
                 <div className="w-16 h-16 border border-ivory/40 rounded-full flex items-center justify-center mb-7">
                   <span className="text-ivory/80 text-[20px] font-serif italic">360°</span>
                 </div>
-                <p className="eyebrow-light mb-4">VIRTUAL TOUR · COMING SOON</p>
+                <p className="eyebrow-light mb-4">{t('oryam.detail.tour_soon_eyebrow')}</p>
                 <h3 className="text-h2 text-ivory max-w-xl mb-5">
-                  {residence.name} — fully immersive
+                  {t('oryam.detail.tour_soon_title', { name })}
                 </h3>
                 <p className="text-ivory/70 text-[14px] max-w-md leading-[1.85] mb-7">
-                  Our 360° capture for this residence is being prepared. In the meantime,
-                  the photo gallery below shows every room in detail.
+                  {t('oryam.detail.tour_soon_body')}
                 </p>
                 <a href="#gallery" className="btn-ghost-light">
-                  ↓ &nbsp; See the gallery
+                  {t('oryam.detail.tour_see_gallery')}
                 </a>
               </div>
             </div>
@@ -181,16 +189,17 @@ export default function ResidenceDetail() {
       <section id="gallery" className="bg-ivory section-pad">
         <div className="container-x">
           <div className="mb-12 lg:mb-16 max-w-3xl">
-            <Reveal><p className="eyebrow mb-5">GALLERY</p></Reveal>
+            <Reveal><p className="eyebrow mb-5">{t('oryam.detail.gallery_eyebrow')}</p></Reveal>
             <Reveal delay={0.1}>
-              <h2 className="text-h1 text-ink">{residence.gallery.length} views.</h2>
+              <h2 className="text-h1 text-ink">
+                {t('oryam.detail.gallery_count', { count: residence.gallery.length })}
+              </h2>
             </Reveal>
           </div>
 
-          {/* Editorial mosaic */}
           <div className="grid grid-cols-12 gap-3 sm:gap-4">
             {residence.gallery.map((g, i) => {
-              // rhythm: large / small / small / large / small / small / large / large
+              const caption = (Array.isArray(captions) && captions[i]) || g.caption;
               const span =
                 i % 7 === 0 ? 'col-span-12 md:col-span-8 aspect-[16/10]' :
                 i % 7 === 1 ? 'col-span-6  md:col-span-4 aspect-[4/5]'  :
@@ -208,13 +217,13 @@ export default function ResidenceDetail() {
                   >
                     <img
                       src={g.src}
-                      alt={g.caption}
+                      alt={caption}
                       loading="lazy"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
                     />
                     <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/15 transition-colors duration-500" />
                     <span className="absolute left-4 bottom-4 right-4 text-ivory text-[10px] tracking-[0.24em] uppercase opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                      {g.caption}
+                      {caption}
                     </span>
                   </button>
                 </Reveal>
@@ -227,21 +236,20 @@ export default function ResidenceDetail() {
       {/* ─── CTA ─────────────────────────────────────────────────── */}
       <section className="bg-night section-pad">
         <div className="container-x text-center">
-          <Reveal><p className="eyebrow-light mb-6">PRIVATE ENQUIRY</p></Reveal>
+          <Reveal><p className="eyebrow-light mb-6">{t('oryam.detail.cta_eyebrow')}</p></Reveal>
           <Reveal delay={0.1}>
             <h2 className="text-h1 text-ivory mb-7 max-w-3xl mx-auto">
-              Interested in {residence.name}?<br />Speak with us directly.
+              {t('oryam.detail.cta_title_l1', { name })}<br />{t('oryam.detail.cta_title_l2')}
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-ivory/75 text-base max-w-xl mx-auto mb-10 leading-[1.85]">
-              Every conversation is private and personal. A member of our team will
-              respond within 24 hours to arrange a call at your convenience.
+              {t('oryam.detail.cta_body')}
             </p>
           </Reveal>
           <Reveal delay={0.3}>
             <Link to="/#contact" className="btn-ghost-light">
-              Make a Private Enquiry &nbsp;→
+              {t('oryam.detail.cta_button')}
             </Link>
           </Reveal>
         </div>
@@ -251,36 +259,41 @@ export default function ResidenceDetail() {
       <section className="bg-bone section-pad">
         <div className="container-x">
           <div className="mb-12 lg:mb-16">
-            <Reveal><p className="eyebrow mb-5">ALSO IN THE COLLECTION</p></Reveal>
+            <Reveal><p className="eyebrow mb-5">{t('oryam.detail.others_eyebrow')}</p></Reveal>
             <Reveal delay={0.1}>
-              <h2 className="text-h1 text-ink">Two other residences.</h2>
+              <h2 className="text-h1 text-ink">{t('oryam.detail.others_title')}</h2>
             </Reveal>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-            {others.map((r, i) => (
-              <Reveal key={r.slug} delay={i * 0.12}>
-                <Link to={`/residences/${r.slug}`} className="group block bg-ivory border-t border-hair">
-                  <div className="aspect-[16/10] overflow-hidden">
-                    <img
-                      src={r.cover}
-                      alt={r.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                    />
-                  </div>
-                  <div className="p-7 flex items-end justify-between gap-6">
-                    <div>
-                      <p className="eyebrow mb-2">{r.type}</p>
-                      <h3 className="text-h3 text-ink mb-2">{r.name}</h3>
-                      <p className="text-[11px] tracking-[0.2em] uppercase text-ink-mute">{r.spec}</p>
+            {others.map((r, i) => {
+              const ortName = t(`oryam.residencesData.${r.slug}.name`) as string;
+              const ortType = t(`oryam.residencesData.${r.slug}.type`) as string;
+              const ortSpec = t(`oryam.residencesData.${r.slug}.spec`) as string;
+              return (
+                <Reveal key={r.slug} delay={i * 0.12}>
+                  <Link to={`/residences/${r.slug}`} className="group block bg-ivory border-t border-hair">
+                    <div className="aspect-[16/10] overflow-hidden">
+                      <img
+                        src={r.cover}
+                        alt={ortName}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                      />
                     </div>
-                    <span className="text-gold-deep text-[11px] tracking-[0.24em] uppercase whitespace-nowrap inline-flex items-center gap-2 group-hover:text-ink transition-colors">
-                      View <span aria-hidden>→</span>
-                    </span>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
+                    <div className="p-7 flex items-end justify-between gap-6">
+                      <div>
+                        <p className="eyebrow mb-2">{ortType}</p>
+                        <h3 className="text-h3 text-ink mb-2">{ortName}</h3>
+                        <p className="text-[11px] tracking-[0.2em] uppercase text-ink-mute">{ortSpec}</p>
+                      </div>
+                      <span className="text-gold-deep text-[11px] tracking-[0.24em] uppercase whitespace-nowrap inline-flex items-center gap-2 group-hover:text-ink transition-colors">
+                        {t('oryam.detail.others_view')}
+                      </span>
+                    </div>
+                  </Link>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -323,11 +336,11 @@ export default function ResidenceDetail() {
           <figure className="max-w-[1280px] max-h-[90vh] flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
             <img
               src={residence.gallery[lightbox].src}
-              alt={residence.gallery[lightbox].caption}
+              alt={(Array.isArray(captions) && captions[lightbox]) || residence.gallery[lightbox].caption}
               className="max-w-full max-h-[80vh] object-contain"
             />
             <figcaption className="mt-5 text-ivory/80 text-[11px] tracking-[0.28em] uppercase text-center">
-              {residence.gallery[lightbox].caption}
+              {(Array.isArray(captions) && captions[lightbox]) || residence.gallery[lightbox].caption}
               <span className="text-ivory/50 ml-3">{lightbox + 1} / {residence.gallery.length}</span>
             </figcaption>
           </figure>
