@@ -7,7 +7,6 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { CookieConsent } from "@/components/CookieConsent";
 import "@/i18n";
 
-import Paradise from "./pages/Paradise";
 import Index from "./pages/Index";
 import Residence from "./pages/Residence";
 import Explore from "./pages/Explore";
@@ -32,8 +31,7 @@ const App = () => (
         <CookieConsent />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Paradise />} />
-            <Route path="/home" element={<Index />} />
+            <Route path="/" element={<Index />} />
             <Route path="/residence" element={<Residence />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/gallery" element={<Gallery />} />
