@@ -9,6 +9,7 @@ import "@/i18n";
 
 import Index from "./pages/Index";
 import Residence from "./pages/Residence";
+import ResidenceDetail from "./pages/ResidenceDetail";
 import Explore from "./pages/Explore";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
@@ -32,6 +33,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/residences/:slug" element={<ResidenceDetail />} />
             <Route path="/residence" element={<Residence />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/gallery" element={<Gallery />} />
