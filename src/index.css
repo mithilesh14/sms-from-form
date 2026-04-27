@@ -3,63 +3,65 @@
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   MONT CHOISY — Sensory Luxury Design System
-   Aesthetic: Editorial luxury travel magazine meets cinematic landing page.
-   References: Aman Resorts, Six Senses, Dunton Hot Springs.
+   MONT CHOISY — Real Estate Portal
+   Inspiration: 2futures.com — confident, commercial, oceanic
 ═══════════════════════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    /* ─── Sensory palette ─── */
-    --ocean-night: 209 53% 11%;     /* #0D1B2A */
-    --warm-sand:   41 47% 89%;      /* #F2E8D5 */
-    --coral:       14 64% 53%;      /* #D4603A */
-    --lagoon:      188 39% 48%;     /* #4A9BAB */
-    --gold:        44 53% 54%;      /* #C9A84C */
-    --off-white:   41 56% 95%;      /* #FAF6EF */
+    /* ─── Brand palette ─── */
+    --navy:       212 60% 14%;     /* deep ocean navy */
+    --navy-deep:  212 65% 9%;      /* even deeper */
+    --teal:       188 55% 42%;     /* lagoon */
+    --teal-soft:  185 35% 75%;
+    --cream:      40 38% 94%;      /* warm cream */
+    --cream-deep: 38 28% 88%;
+    --gold:       40 60% 52%;
+    --white-pure: 0 0% 100%;
+    --ink:        212 25% 18%;
+    --ink-muted:  212 12% 45%;
 
-    /* ─── Semantic mapping ─── */
-    --background: var(--warm-sand);
-    --foreground: var(--ocean-night);
+    /* ─── Semantic ─── */
+    --background: var(--white-pure);
+    --foreground: var(--ink);
 
-    --card: var(--off-white);
-    --card-foreground: var(--ocean-night);
+    --card: var(--white-pure);
+    --card-foreground: var(--ink);
 
-    --popover: var(--off-white);
-    --popover-foreground: var(--ocean-night);
+    --popover: var(--white-pure);
+    --popover-foreground: var(--ink);
 
-    --primary: var(--ocean-night);
-    --primary-foreground: var(--off-white);
+    --primary: var(--navy);
+    --primary-foreground: var(--white-pure);
 
-    --secondary: 41 40% 93%;
-    --secondary-foreground: var(--ocean-night);
+    --secondary: var(--cream);
+    --secondary-foreground: var(--navy);
 
-    --muted: 41 25% 82%;
-    --muted-foreground: 209 18% 38%;
+    --muted: 40 20% 95%;
+    --muted-foreground: var(--ink-muted);
 
-    --accent: var(--coral);
-    --accent-foreground: var(--off-white);
+    --accent: var(--teal);
+    --accent-foreground: var(--white-pure);
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 41 22% 80%;
-    --input: 41 22% 80%;
-    --ring: var(--gold);
+    --border: 40 15% 88%;
+    --input: 40 15% 88%;
+    --ring: var(--teal);
 
-    --radius: 0px;
+    --radius: 4px;
 
-    /* Sidebar (kept) */
-    --sidebar-background: var(--off-white);
-    --sidebar-foreground: var(--ocean-night);
-    --sidebar-primary: var(--coral);
-    --sidebar-primary-foreground: var(--off-white);
-    --sidebar-accent: var(--warm-sand);
-    --sidebar-accent-foreground: var(--ocean-night);
-    --sidebar-border: 41 22% 80%;
-    --sidebar-ring: var(--gold);
+    --sidebar-background: var(--cream);
+    --sidebar-foreground: var(--navy);
+    --sidebar-primary: var(--teal);
+    --sidebar-primary-foreground: var(--white-pure);
+    --sidebar-accent: var(--cream-deep);
+    --sidebar-accent-foreground: var(--navy);
+    --sidebar-border: 40 15% 85%;
+    --sidebar-ring: var(--teal);
   }
 }
 
@@ -68,10 +70,9 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-weight: 300;
-    line-height: 1.9;
-    letter-spacing: 0.01em;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -80,8 +81,8 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-weight: 400;
-    letter-spacing: -0.015em;
-    line-height: 1.05;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
   }
 
   html {
@@ -90,224 +91,175 @@
   }
 
   ::selection {
-    background: hsl(var(--coral) / 0.25);
-    color: hsl(var(--ocean-night));
+    background: hsl(var(--teal) / 0.25);
+    color: hsl(var(--navy));
   }
 
-  ::-webkit-scrollbar { width: 3px; height: 3px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: hsl(var(--gold) / 0.3); border-radius: 2px; }
-  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--gold) / 0.6); }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: hsl(var(--cream)); }
+  ::-webkit-scrollbar-thumb { background: hsl(var(--navy) / 0.3); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--navy) / 0.6); }
 
   .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
   .scrollbar-hide::-webkit-scrollbar { display: none; }
 }
 
 @layer components {
-  /* ─── Section backgrounds ─── */
-  .section-dark {
-    background: hsl(var(--ocean-night));
-    color: hsl(var(--off-white));
-  }
-  .section-light {
-    background: hsl(var(--warm-sand));
-    color: hsl(var(--ocean-night));
-  }
+  .container-x { @apply max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12; }
 
-  /* ─── Gold label ─── */
-  .label-gold {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.3em;
+  /* ─── Buttons ─── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2;
+    background: hsl(var(--teal));
+    color: hsl(var(--white-pure));
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: hsl(var(--gold));
-    font-weight: 400;
+    padding: 14px 32px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
   }
+  .btn-primary:hover { background: hsl(var(--navy)); }
 
-  /* ─── Hairline dividers ─── */
-  .divider-gold {
-    width: 100%;
-    height: 1px;
-    background: hsl(var(--gold) / 0.5);
-  }
-  .divider-sand {
-    width: 100%;
-    height: 1px;
-    background: hsl(var(--warm-sand) / 0.2);
-  }
-
-  /* ─── Underline-only inputs ─── */
-  .input-underline {
-    @apply w-full bg-transparent border-0 border-b py-3 px-0 text-base focus:outline-none;
-    border-color: hsl(var(--off-white) / 0.3);
-    color: hsl(var(--off-white));
-    transition: border-color 0.4s ease;
-  }
-  .input-underline::placeholder {
-    color: hsl(var(--off-white) / 0.45);
-    font-weight: 300;
-  }
-  .input-underline:focus {
-    border-color: hsl(var(--gold));
-  }
-
-  /* ─── Coral CTA ─── */
-  .btn-coral {
-    @apply inline-flex items-center justify-center gap-3;
-    background: hsl(var(--coral));
-    color: hsl(var(--off-white));
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-weight: 400;
-    font-size: 12px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    min-height: 52px;
-    padding: 0 2.5rem;
-    transition: background 0.5s ease, transform 0.5s ease;
-  }
-  .btn-coral:hover {
-    background: hsl(var(--coral) / 0.88);
-    transform: translateY(-1px);
-  }
-
-  .btn-ghost-light {
-    @apply inline-flex items-center justify-center gap-3;
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2;
     background: transparent;
-    color: hsl(var(--off-white));
-    border: 1px solid hsl(var(--off-white) / 0.4);
-    font-family: 'DM Sans', system-ui, sans-serif;
-    font-weight: 400;
+    color: hsl(var(--white-pure));
+    border: 1px solid hsl(var(--white-pure) / 0.5);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 500;
     font-size: 12px;
-    letter-spacing: 0.25em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    min-height: 52px;
-    padding: 0 2.5rem;
-    transition: all 0.5s ease;
+    padding: 12px 28px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
   }
-  .btn-ghost-light:hover {
-    background: hsl(var(--off-white));
-    color: hsl(var(--ocean-night));
+  .btn-outline:hover {
+    background: hsl(var(--white-pure));
+    color: hsl(var(--navy));
   }
+
+  .btn-ghost-dark {
+    @apply inline-flex items-center justify-center gap-2;
+    background: transparent;
+    color: hsl(var(--navy));
+    border: 1px solid hsl(var(--navy) / 0.25);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .btn-ghost-dark:hover {
+    background: hsl(var(--navy));
+    color: hsl(var(--white-pure));
+  }
+
+  /* ─── Hero glassy search bar ─── */
+  .search-pill {
+    @apply inline-flex items-center justify-center;
+    background: hsl(var(--white-pure) / 0.18);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--white-pure) / 0.4);
+    color: hsl(var(--white-pure));
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 32px;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .search-pill:hover, .search-pill[data-active="true"] {
+    background: hsl(var(--white-pure));
+    color: hsl(var(--navy));
+  }
+
+  /* ─── Project card ─── */
+  .project-card {
+    @apply bg-white overflow-hidden flex flex-col;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px hsl(var(--navy) / 0.06);
+    transition: all 0.4s ease;
+  }
+  .project-card:hover {
+    box-shadow: 0 12px 32px hsl(var(--navy) / 0.12);
+    transform: translateY(-4px);
+  }
+  .project-card .img-wrap { @apply relative overflow-hidden aspect-[4/3]; }
+  .project-card .img-wrap img {
+    @apply w-full h-full object-cover;
+    transition: transform 0.7s ease;
+  }
+  .project-card:hover .img-wrap img { transform: scale(1.05); }
 
   /* ─── Ken Burns ─── */
   @keyframes ken-burns {
     0%   { transform: scale(1); }
     100% { transform: scale(1.08); }
   }
-  .ken-burns {
-    animation: ken-burns 25s ease-out forwards;
+  .ken-burns { animation: ken-burns 30s ease-out forwards; }
+
+  /* ─── Eyebrow label ─── */
+  .eyebrow {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: hsl(var(--teal));
+  }
+  .eyebrow-light {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: hsl(var(--white-pure) / 0.75);
   }
 
-  /* ─── Draw line (animated divider) ─── */
-  @keyframes draw-line {
-    from { transform: scaleX(0); }
-    to   { transform: scaleX(1); }
-  }
-  .draw-line {
-    transform-origin: center;
-    animation: draw-line 1.2s cubic-bezier(0.4,0,0.2,1) 0.6s forwards;
-    transform: scaleX(0);
-  }
-
-  /* ─── Scroll cue (thin dropping line) ─── */
-  @keyframes scroll-cue {
-    0%   { transform: translateY(-100%); opacity: 0; }
-    40%  { opacity: 1; }
-    100% { transform: translateY(100%); opacity: 0; }
-  }
-  .scroll-cue {
-    width: 1px;
-    height: 56px;
-    background: hsl(var(--off-white) / 0.6);
-    overflow: hidden;
-    position: relative;
-  }
-  .scroll-cue::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: hsl(var(--gold));
-    animation: scroll-cue 2.4s cubic-bezier(0.4,0,0.2,1) infinite;
-  }
-
-  /* ─── Editorial card hover ─── */
-  .card-residence {
-    @apply relative overflow-hidden;
-    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .card-residence img {
-    transition: transform 1.4s cubic-bezier(0.25, 0.1, 0.25, 1);
-  }
-  .card-residence:hover img {
-    transform: scale(1.06);
-  }
-  .card-residence::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border: 1px solid transparent;
-    pointer-events: none;
-    transition: border-color 0.7s ease;
-  }
-  .card-residence:hover::after {
-    border-color: hsl(var(--coral));
-  }
-
-  /* ─── Grain ─── */
-  .grain-overlay::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: 0.04;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1;
-  }
+  /* ─── Section paddings ─── */
+  .section-pad { @apply py-20 sm:py-24 lg:py-28; }
 }
 
 @layer utilities {
-  .container-editorial { @apply max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14; }
-  .container-narrow    { @apply max-w-3xl mx-auto px-6 sm:px-10; }
-
-  .text-display {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: -0.015em;
-    line-height: 0.98;
-  }
-  .text-display-xl { @apply text-display; font-size: clamp(52px, 9vw, 104px); }
-  .text-display-lg { @apply text-display; font-size: clamp(44px, 7vw, 88px); }
-  .text-display-md { @apply text-display; font-size: clamp(34px, 5vw, 56px); }
-
-  .vignette {
-    background:
-      radial-gradient(ellipse at center, transparent 30%, hsl(var(--ocean-night) / 0.55) 100%),
-      linear-gradient(180deg, hsl(var(--ocean-night) / 0.15) 0%, transparent 30%, hsl(var(--ocean-night) / 0.55) 100%);
-  }
+  .text-h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 6.5vw, 84px); line-height: 1.05; font-weight: 400; }
+  .text-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4.5vw, 56px); line-height: 1.1;  font-weight: 400; }
+  .text-h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 3vw, 36px);   line-height: 1.15; font-weight: 500; }
 
   .touch-target { @apply min-h-[44px] min-w-[44px]; }
 
-  /* Fallback keep utilities to avoid breaking older pages */
-  .container-wide  { @apply max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-14; }
-  .section-gap     { @apply py-24 sm:py-32 md:py-40; }
-  .section-gap-sm  { @apply py-16 sm:py-24 md:py-32; }
-  .text-headline   { @apply text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.05]; }
-  .text-title      { @apply text-2xl sm:text-3xl md:text-4xl leading-[1.1]; }
-  .text-body-lg    { @apply text-base sm:text-lg md:text-xl leading-[1.75] font-light; }
-  .text-caption    { @apply text-[10.5px] tracking-[0.22em] uppercase font-normal; }
-  .aspect-cinema    { aspect-ratio: 21/9; }
-  .aspect-editorial { aspect-ratio: 3/4; }
-  .aspect-portrait  { aspect-ratio: 2/3; }
+  /* legacy keep — older pages still importing these */
+  .container-editorial { @apply max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12; }
+  .container-narrow    { @apply max-w-3xl mx-auto px-6 sm:px-8; }
+  .container-wide      { @apply max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-12; }
+  .section-gap         { @apply py-20 sm:py-24 lg:py-28; }
+  .section-gap-sm      { @apply py-14 sm:py-20; }
+  .text-headline       { @apply text-3xl sm:text-4xl md:text-5xl leading-[1.05]; }
+  .text-title          { @apply text-2xl sm:text-3xl md:text-4xl leading-[1.1]; }
+  .text-body-lg        { @apply text-base sm:text-lg leading-[1.7] font-light; }
+  .text-caption        { @apply text-[11px] tracking-[0.22em] uppercase font-medium; }
+  .text-display        { @apply text-h1; }
+  .text-display-xl     { @apply text-h1; }
+  .text-display-lg     { @apply text-h1; }
+  .text-display-md     { @apply text-h2; }
+  .label-gold          { @apply eyebrow; }
+  .section-dark        { background: hsl(var(--navy)); color: hsl(var(--white-pure)); }
+  .section-light       { background: hsl(var(--cream)); color: hsl(var(--navy)); }
+  .aspect-cinema       { aspect-ratio: 21/9; }
+  .aspect-editorial    { aspect-ratio: 3/4; }
+  .aspect-portrait     { aspect-ratio: 2/3; }
 }
 
-/* ─── Reduced motion ─── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
   .ken-burns { animation: none !important; transform: none !important; }
 }
