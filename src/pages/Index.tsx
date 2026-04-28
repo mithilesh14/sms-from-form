@@ -65,30 +65,32 @@ export default function Index() {
 
         <div className="relative z-10 h-full px-6 sm:px-10 lg:px-16 flex flex-col justify-end pb-16 sm:pb-20 lg:pb-24">
           <div className="grid lg:grid-cols-12 gap-10 items-end">
-            <div className="lg:col-span-7 xl:col-span-6 relative">
-              {/* Soft scrim behind text only — fades into image on the right */}
-              <div
-                aria-hidden
-                className="absolute -inset-x-6 -inset-y-4 lg:-inset-x-10 lg:-inset-y-6 -z-10 pointer-events-none"
-                style={{
-                  background:
-                    'linear-gradient(90deg, rgba(11,23,36,0.55) 0%, rgba(11,23,36,0.45) 55%, rgba(11,23,36,0) 100%)',
-                }}
-              />
+            <div className="lg:col-span-7 xl:col-span-6">
               <Reveal>
-                <p
-                  className="eyebrow-light mb-6"
-                  style={{ textShadow: '0 1px 18px rgba(11,23,36,0.55)' }}
-                >
-                  {t('oryam.hero.eyebrow')}
+                <p className="eyebrow-light mb-6">
+                  <span
+                    className="inline-block px-3 py-1.5"
+                    style={{ background: 'rgba(11,23,36,0.55)' }}
+                  >
+                    {t('oryam.hero.eyebrow')}
+                  </span>
                 </p>
               </Reveal>
               <Reveal delay={0.12}>
-                <h1
-                  className="text-display text-ivory mb-8"
-                  style={{ textShadow: '0 1px 24px rgba(11,23,36,0.45)' }}
-                >
-                  {t('oryam.hero.title_l1')}<br />{t('oryam.hero.title_l2')}
+                <h1 className="text-display text-ivory mb-8">
+                  <span
+                    className="box-decoration-clone inline px-4 py-1"
+                    style={{ background: 'rgba(11,23,36,0.55)', WebkitBoxDecorationBreak: 'clone', boxDecorationBreak: 'clone' }}
+                  >
+                    {t('oryam.hero.title_l1')}
+                  </span>
+                  <br />
+                  <span
+                    className="box-decoration-clone inline px-4 py-1"
+                    style={{ background: 'rgba(11,23,36,0.55)', WebkitBoxDecorationBreak: 'clone', boxDecorationBreak: 'clone' }}
+                  >
+                    {t('oryam.hero.title_l2')}
+                  </span>
                 </h1>
               </Reveal>
               <Reveal delay={0.24}>
