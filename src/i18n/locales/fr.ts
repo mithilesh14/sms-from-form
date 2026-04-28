@@ -218,8 +218,8 @@ export default {
     },
     hero: {
       eyebrow: 'ORYAM · MONT CHOISY · MAURICE',
-      title_l1: 'Une autre manière',
-      title_l2: 'de posséder Maurice.',
+      title_l1: 'Une autre façon',
+      title_l2: "de posséder à Maurice.",
       lede: 'Une adresse privée à Mont Choisy, Grand Baie. Appartements de deux et trois chambres et un penthouse — entièrement équipés, en pleine propriété, éligibles IRS, avec résidence mauricienne à partir de 500 000 €.',
       cta_view: 'Voir les Résidences',
       cta_story: "L'histoire",
