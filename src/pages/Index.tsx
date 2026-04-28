@@ -51,7 +51,7 @@ export default function Index() {
         <div className="absolute inset-0">
           <img
             src={heroPool}
-            alt="The Oryam residences and infinity pool, Mont Choisy, Mauritius"
+            alt="The Oryam residences and infinity pool, Trou aux Biches, Mauritius"
             data-slot="hero-bg"
             className="w-full h-full object-cover ken-burns"
           />

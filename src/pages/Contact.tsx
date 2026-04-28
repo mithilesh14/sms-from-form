@@ -98,7 +98,7 @@ export default function Contact() {
                   {[
                     { icon: MapPin, label: t('contact.info.city', 'Grand Baie, Mauritius'), sub: t('contact.info.address', 'Coastal Road') },
                     { icon: Phone, label: t('contact.info.phone', '+230 555 0100'), sub: t('contact.info.hours', 'By Appointment') },
-                    { icon: Mail, label: t('contact.info.email', 'residences@montchoisy.mu'), sub: '' },
+                    { icon: Mail, label: t('contact.info.email', 'residences@trouauxbiches.mu'), sub: '' },
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-5">
                       <div className="w-11 h-11 border border-border/30 flex items-center justify-center shrink-0">
@@ -202,7 +202,7 @@ export default function Contact() {
                         className="mt-1 h-4 w-4 border-border accent-accent"
                       />
                       <label htmlFor="contact-consent" className="text-xs text-muted-foreground leading-relaxed">
-                        {t('contact.form.consent', 'I consent to Mont Choisy collecting and processing my personal data for the purpose of responding to this inquiry, in accordance with the Privacy Policy and the Mauritius Data Protection Act 2017. I understand I can withdraw my consent at any time.')}
+                        {t('contact.form.consent', 'I consent to Trou aux Biches collecting and processing my personal data for the purpose of responding to this inquiry, in accordance with the Privacy Policy and the Mauritius Data Protection Act 2017. I understand I can withdraw my consent at any time.')}
                       </label>
                     </div>
 

@@ -77,7 +77,7 @@ export default function ResidenceDetail() {
             </Link>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="eyebrow-light mb-5">{type} · ORYAM · MONT CHOISY</p>
+            <p className="eyebrow-light mb-5">{type} · ORYAM · TROU AUX BICHES</p>
           </Reveal>
           <Reveal delay={0.2}>
             <h1 className="text-display text-ivory mb-6 max-w-4xl">{name}</h1>

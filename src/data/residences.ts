@@ -58,7 +58,7 @@ export const RESIDENCES: Residence[] = [
     area: 110,
     price: 'From €520,000',
     blurb:
-      'A bright two-bedroom apartment with open-plan living, oak joinery and a private terrace overlooking the gardens. Steps from the residents\' pool, moments from Mont Choisy beach.',
+      'A bright two-bedroom apartment with open-plan living, oak joinery and a private terrace overlooking the gardens. Steps from the residents\' pool, moments from Trou aux Biches beach.',
     description:
       'Apartment B-11 is the most sought-after of the two-bedroom layouts. Open-plan living and dining flow onto a private terrace facing the gardens, with the residents\' pool a short walk away. Oak joinery in the kitchen, full-height sliding doors, and an architectural simplicity that lets the light do the work. Delivered fully fitted — kitchen, bathrooms and built-in wardrobes complete — and ready for you to furnish to your own taste.',
     cover: b11_01,

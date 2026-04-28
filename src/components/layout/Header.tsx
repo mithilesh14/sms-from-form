@@ -58,7 +58,7 @@ export function Header() {
                 'font-serif text-[22px] sm:text-[26px] tracking-[0.02em] font-medium transition-colors duration-300',
                 useLight ? 'text-white' : 'text-navy'
               )}>
-                Mont Choisy
+                Trou aux Biches
               </span>
               <span className={cn(
                 'text-[9px] tracking-[0.32em] uppercase font-medium mt-0.5 transition-colors duration-300',

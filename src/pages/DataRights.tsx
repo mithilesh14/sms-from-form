@@ -160,7 +160,7 @@ export default function DataRights() {
                     className="mt-1 h-4 w-4 border-border accent-accent"
                   />
                   <label htmlFor="data-rights-consent" className="text-xs text-muted-foreground leading-relaxed">
-                    I confirm that I am the data subject or authorized representative, and I understand that Mont Choisy will need to verify my identity before processing this request, in accordance with the Mauritius Data Protection Act 2017.
+                    I confirm that I am the data subject or authorized representative, and I understand that Trou aux Biches will need to verify my identity before processing this request, in accordance with the Mauritius Data Protection Act 2017.
                   </label>
                 </div>
 

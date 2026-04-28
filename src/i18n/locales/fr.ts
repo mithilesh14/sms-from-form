@@ -1,6 +1,6 @@
 export default {
   brand: {
-    name: 'Mont Choisy',
+    name: 'Trou aux Biches',
     tagline: 'Maurice',
   },
 
@@ -34,7 +34,7 @@ export default {
 
   hero: {
     title: 'L\'Art de Vivre Face à l\'Océan',
-    subtitle: 'Des résidences de luxe où l\'architecture contemporaine rencontre l\'océan Indien. Bienvenue à Mont Choisy.',
+    subtitle: 'Des résidences de luxe où l\'architecture contemporaine rencontre l\'océan Indien. Bienvenue à Trou aux Biches.',
     explore: 'Explorer les Résidences',
     location: 'Grand Baie · Maurice',
     scrollText: 'Défiler pour Explorer',
@@ -43,7 +43,7 @@ export default {
   chapter1: {
     label: 'L\'Édifice',
     title: 'Conçu pour sublimer chaque instant',
-    description: 'Mont Choisy n\'est pas simplement un bâtiment — c\'est une déclaration. Huit étages d\'architecture contemporaine audacieuse s\'élevant depuis le littoral de Grand Baie, façonnés par la lumière, la brise océanique et un engagement sans faille envers l\'excellence.',
+    description: 'Trou aux Biches n\'est pas simplement un bâtiment — c\'est une déclaration. Huit étages d\'architecture contemporaine audacieuse s\'élevant depuis le littoral de Grand Baie, façonnés par la lumière, la brise océanique et un engagement sans faille envers l\'excellence.',
   },
 
   stats: {
@@ -81,9 +81,9 @@ export default {
   },
 
   lifestyle: {
-    label: 'Votre Vie à Mont Choisy',
+    label: 'Votre Vie à Trou aux Biches',
     title: 'Réveillez-vous à la vie que vous méritez',
-    description: 'Imaginez vos matinées sur votre terrasse privée, café en main, contemplant le soleil peindre le lagon. Les après-midis au bord de la piscine à débordement. Les soirées sur le toit-terrasse tandis que Grand Baie s\'anime en contrebas. C\'est votre quotidien à Mont Choisy.',
+    description: 'Imaginez vos matinées sur votre terrasse privée, café en main, contemplant le soleil peindre le lagon. Les après-midis au bord de la piscine à débordement. Les soirées sur le toit-terrasse tandis que Grand Baie s\'anime en contrebas. C\'est votre quotidien à Trou aux Biches.',
     cta: 'Explorer les Résidences',
   },
 
@@ -96,13 +96,13 @@ export default {
   residence: {
     title: 'La Vision Architecturale',
     subtitle: 'La Vision',
-    description: 'Chaque angle de Mont Choisy a été sculpté avec intention. La façade joue avec la lumière et l\'ombre, les matériaux font écho au littoral naturel, et chaque résidence est orientée pour capturer les vues les plus spectaculaires.',
+    description: 'Chaque angle de Trou aux Biches a été sculpté avec intention. La façade joue avec la lumière et l\'ombre, les matériaux font écho au littoral naturel, et chaque résidence est orientée pour capturer les vues les plus spectaculaires.',
   },
 
   explore: {
     title: 'Trouvez Votre Résidence',
     subtitle: 'Explorateur Interactif',
-    description: 'Naviguez dans Mont Choisy étage par étage. Cliquez sur un étage pour découvrir les résidences disponibles, puis sélectionnez une unité pour explorer son agencement, ses vues et sa luminosité.',
+    description: 'Naviguez dans Trou aux Biches étage par étage. Cliquez sur un étage pour découvrir les résidences disponibles, puis sélectionnez une unité pour explorer son agencement, ses vues et sa luminosité.',
   },
 
   units: {
@@ -125,7 +125,7 @@ export default {
   },
 
   gallery: {
-    title: 'Mont Choisy en Détail',
+    title: 'Trou aux Biches en Détail',
     subtitle: 'Exploration visuelle de l\'architecture, des intérieurs et de l\'art de vivre',
     categories: {
       all: 'Tout',
@@ -137,20 +137,20 @@ export default {
   },
 
   virtualTour: {
-    title: 'Entrez dans Mont Choisy',
+    title: 'Entrez dans Trou aux Biches',
     subtitle: 'Expérience Immersive 360°',
     description: 'Explorez notre résidence témoin comme si vous y étiez. Glissez pour regarder autour de vous, faites défiler pour zoomer. Vivez la lumière, l\'espace, les vues.',
   },
 
   own: {
-    title: 'Acquérir à Mont Choisy',
+    title: 'Acquérir à Trou aux Biches',
     subtitle: 'Propriété Internationale',
-    intro: 'L\'île Maurice offre l\'un des cadres les plus attractifs au monde pour la propriété immobilière internationale — et Mont Choisy est votre passerelle vers la pleine propriété, l\'efficacité fiscale et la résidence au paradis.',
+    intro: 'L\'île Maurice offre l\'un des cadres les plus attractifs au monde pour la propriété immobilière internationale — et Trou aux Biches est votre passerelle vers la pleine propriété, l\'efficacité fiscale et la résidence au paradis.',
     benefitsLabel: 'Avantages Clés',
     benefitsTitle: 'Conçu pour les citoyens du monde',
     investLabel: 'Aperçu Investissement',
     investTitle: 'Des chiffres qui parlent d\'eux-mêmes',
-    investDescription: 'Grand Baie est l\'adresse la plus prisée de l\'île Maurice. Mont Choisy se situe au cœur de cette croissance, offrant aux propriétaires un actif premium avec une forte demande locative et une appréciation constante du capital.',
+    investDescription: 'Grand Baie est l\'adresse la plus prisée de l\'île Maurice. Trou aux Biches se situe au cœur de cette croissance, offrant aux propriétaires un actif premium avec une forte demande locative et une appréciation constante du capital.',
     processLabel: 'Le Parcours',
     processTitle: 'De la demande à la propriété',
   },
@@ -178,7 +178,7 @@ export default {
       address: 'Route Côtière',
       city: 'Grand Baie, Maurice',
       phone: '+230 555 0100',
-      email: 'residences@montchoisy.mu',
+      email: 'residences@trouauxbiches.mu',
       hours: 'Sur Rendez-vous',
     },
     success: 'Merci. Notre équipe vous contactera dans les 24 heures.',
@@ -190,7 +190,7 @@ export default {
     terms: 'Conditions',
     copyright: 'Tous droits réservés.',
     ctaLabel: 'Votre Prochain Pas',
-    ctaTitle: 'Découvrir Mont Choisy',
+    ctaTitle: 'Découvrir Trou aux Biches',
     ctaButton: 'Réserver une Visite',
   },
 
@@ -217,10 +217,10 @@ export default {
       back_long: '← Retour à la collection',
     },
     hero: {
-      eyebrow: 'ORYAM · MONT CHOISY · MAURICE',
+      eyebrow: 'ORYAM · TROU AUX BICHES · MAURICE',
       title_l1: 'Une autre façon',
       title_l2: "de posséder à Maurice.",
-      lede: 'Une adresse privée à Mont Choisy, Grand Baie. Appartements de deux et trois chambres et un penthouse — entièrement équipés, en pleine propriété, éligibles IRS, avec résidence mauricienne à partir de 500 000 €.',
+      lede: 'Une adresse privée à Trou aux Biches, Grand Baie. Appartements de deux et trois chambres et un penthouse — entièrement équipés, en pleine propriété, éligibles IRS, avec résidence mauricienne à partir de 500 000 €.',
       cta_view: 'Voir les Résidences',
       cta_story: "L'histoire",
       facts: {
@@ -234,7 +234,7 @@ export default {
       eyebrow: 'LA PROPRIÉTÉ',
       title_l1: 'Pas un programme.',
       title_l2: 'Une adresse privée.',
-      body: "Oryam est une adresse privée à Mont Choisy — l'un des quartiers les plus prisés de la côte nord de Maurice. Trois typologies pensées avec soin : un deux-chambres lumineux, un trois-chambres généreux, et un penthouse unique en toiture. Chaque appartement est livré entièrement équipé, disponible sous le régime IRS et prêt à habiter immédiatement. La disponibilité est limitée et gérée sur rendez-vous privé.",
+      body: "Oryam est une adresse privée à Trou aux Biches — l'un des quartiers les plus prisés de la côte nord de Maurice. Trois typologies pensées avec soin : un deux-chambres lumineux, un trois-chambres généreux, et un penthouse unique en toiture. Chaque appartement est livré entièrement équipé, disponible sous le régime IRS et prêt à habiter immédiatement. La disponibilité est limitée et gérée sur rendez-vous privé.",
     },
     residences: {
       eyebrow: 'LES RÉSIDENCES',
@@ -284,13 +284,13 @@ export default {
       title_l1: 'Quatre raisons qui en font la',
       title_l2: 'résidence secondaire la plus intelligente.',
       r1: { title: 'Disponible immédiatement. Sans risque sur plan.', body: "Chaque résidence est achevée, meublée et disponible pour une occupation immédiate. Pas de retards de construction. Pas de risque promoteur. Vous signez, vous recevez les clés, vous arrivez. C'est aussi simple que cela." },
-      r2: { title: "Mont Choisy. L'adresse qui conserve sa valeur.", body: "Mont Choisy est l'une des sections les plus préservées et célèbres de la côte nord — à quinze minutes à pied de la plage, à dix minutes des restaurants de Grand Baie. Une propriété de qualité à cette adresse revient rarement sur le marché." },
+      r2: { title: "Trou aux Biches. L'adresse qui conserve sa valeur.", body: "Trou aux Biches est l'une des sections les plus préservées et célèbres de la côte nord — à quinze minutes à pied de la plage, à dix minutes des restaurants de Grand Baie. Une propriété de qualité à cette adresse revient rarement sur le marché." },
       r3: { title: 'Une propriété sans restriction.', body: "Le classement IRS donne aux acheteurs non-mauriciens des droits de propriété identiques à ceux des locaux. Pleine propriété. Aucune limite de durée. Aucune restriction à la revente. Vous la possédez aussi pleinement que tout ce que vous possédez chez vous." },
       r4: { title: "Une sortie aussi solide que l'entrée.", body: "La demande pour des résidences de qualité à Maurice dépasse constamment l'offre. Les propriétaires Oryam qui choisissent de vendre bénéficient d'un marché d'acheteurs internationaux liquide et d'un actif qui n'a jamais transigé sur la qualité." },
     },
     setting: {
       eyebrow: 'LE CADRE',
-      title_l1: 'Mont Choisy. Grand Baie.',
+      title_l1: 'Trou aux Biches. Grand Baie.',
       title_l2: 'Nord de Maurice.',
       body: "300 jours de soleil. Un lagon turquoise protégé à quelques pas. À dix minutes des restaurants et de la marina de Grand Baie. À 45 minutes de l'aéroport international, avec des liaisons directes vers Paris, Londres, Francfort et Zurich. L'emplacement est exceptionnel. La disponibilité à cette adresse est limitée — et gérée sur rendez-vous privé.",
     },
@@ -305,7 +305,7 @@ export default {
       label_conf:    'CONFIDENTIALITÉ',
       val_conf:      'Toutes les demandes sont strictement privées',
       label_loc:     'EMPLACEMENT',
-      val_loc:       'Mont Choisy, Grand Baie, Maurice',
+      val_loc:       'Trou aux Biches, Grand Baie, Maurice',
       f_name: 'Votre Nom',
       f_email: 'Adresse E-mail',
       f_message: 'Votre Message',
@@ -356,7 +356,7 @@ export default {
         tagline: 'Un deux-chambres lumineux côté jardin.',
         spec: '2 Chambres · 2 Salles de bain · 110 m²',
         price: 'À partir de 520 000 €',
-        blurb: "Un appartement deux-chambres lumineux avec séjour ouvert, menuiseries en chêne et terrasse privée donnant sur les jardins. À quelques pas de la piscine des résidents, à un instant de la plage de Mont Choisy.",
+        blurb: "Un appartement deux-chambres lumineux avec séjour ouvert, menuiseries en chêne et terrasse privée donnant sur les jardins. À quelques pas de la piscine des résidents, à un instant de la plage de Trou aux Biches.",
         description: "L'appartement B-11 est le plus convoité des plans à deux chambres. Le séjour et la salle à manger ouverts s'ouvrent sur une terrasse privée face aux jardins, avec la piscine des résidents à quelques pas. Menuiseries en chêne dans la cuisine, baies vitrées toute hauteur, et une simplicité architecturale qui laisse la lumière travailler. Livré entièrement équipé — cuisine, salles de bain et placards intégrés achevés — et prêt à être meublé selon votre goût.",
         captions: [
           'Séjour et salle à manger ouverts',

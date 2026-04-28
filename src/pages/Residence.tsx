@@ -62,7 +62,7 @@ const Residence = () => {
           </FadeIn>
           <FadeIn delay={0.1}>
             <p className="font-serif text-title text-foreground leading-relaxed">
-              {t('residence.description', 'A dialogue between land and sea. Mont Choisy rises with purpose, its architecture shaped by the rhythms of island life and the purity of natural light.')}
+              {t('residence.description', 'A dialogue between land and sea. Trou aux Biches rises with purpose, its architecture shaped by the rhythms of island life and the purity of natural light.')}
             </p>
           </FadeIn>
         </div>
