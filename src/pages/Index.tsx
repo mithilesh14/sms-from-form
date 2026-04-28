@@ -67,28 +67,18 @@ export default function Index() {
           <div className="grid lg:grid-cols-12 gap-10 items-end">
             <div className="lg:col-span-7 xl:col-span-6">
               <Reveal>
-                <div
-                  className="inline-flex flex-col items-start gap-5 border-l pl-5 pr-5 sm:pl-7 sm:pr-8 py-4 sm:py-6 mb-8"
-                  style={{
-                    borderColor: 'hsl(var(--gold) / 0.78)',
-                    background: 'linear-gradient(90deg, hsl(var(--ivory) / 0.24) 0%, hsl(var(--ivory) / 0.12) 72%, transparent 100%)',
-                    backdropFilter: 'blur(4px)',
-                    WebkitBackdropFilter: 'blur(4px)',
-                  }}
-                >
-                  <p className="eyebrow-light inline-flex items-center gap-4 mb-0">
-                    <span aria-hidden className="block w-10 h-px bg-gold" />
-                    {t('oryam.hero.eyebrow')}
-                  </p>
+                <p className="eyebrow-light inline-flex items-center gap-4 mb-7" style={{ textShadow: '0 1px 12px hsl(var(--night) / 0.55)' }}>
+                  <span aria-hidden className="block w-10 h-px bg-gold" />
+                  {t('oryam.hero.eyebrow')}
+                </p>
 
-                  <h1
-                    className="text-display text-ivory mb-0"
-                    style={{ textShadow: '0 1px 2px hsl(var(--night) / 0.18), 0 10px 30px hsl(var(--night) / 0.26)' }}
-                  >
-                    <span className="block">{t('oryam.hero.title_l1')}</span>
-                    <span className="block ml-[0.22em]">{t('oryam.hero.title_l2')}</span>
-                  </h1>
-                </div>
+                <h1
+                  className="text-display text-ivory mb-8"
+                  style={{ textShadow: '0 1px 2px hsl(var(--night) / 0.45), 0 2px 24px hsl(var(--night) / 0.55)' }}
+                >
+                  <span className="block">{t('oryam.hero.title_l1')}</span>
+                  <span className="block ml-[0.22em]">{t('oryam.hero.title_l2')}</span>
+                </h1>
               </Reveal>
               <Reveal delay={0.18}>
                 <p className="text-ivory/80 text-base sm:text-lg max-w-xl mb-10 leading-relaxed">
