@@ -186,7 +186,7 @@ function DataTable({ columns, data, onRowClick }: {
               >
                 {columns.map(col => (
                   <td key={col.key} className="px-4 py-3 text-foreground whitespace-nowrap">
-                    {col.render ? col.render(row[col.key], row) : (row[col.key] ?? '—')}
+                    {col.render ? col.render(row[col.key], row) : (row[col.key] ?? ',')}
                   </td>
                 ))}
               </tr>
@@ -240,7 +240,7 @@ function DetailDrawer({ data, onClose, title }: {
             <div key={key} className="border-b border-border/20 pb-3">
               <p className="text-caption text-muted-foreground mb-1">{key.replace(/_/g, ' ')}</p>
               <p className="text-sm text-foreground">
-                {value === null || value === '' ? '—' :
+                {value === null || value === '' ? ',' :
                  typeof value === 'boolean' ? (value ? 'Yes' : 'No') :
                  Array.isArray(value) ? value.join(', ') :
                  String(value)}
@@ -359,7 +359,7 @@ export default function Admin() {
     setAuthed(false);
   };
 
-  const formatDate = (d: string | null) => d ? format(new Date(d), 'dd MMM yyyy') : '—';
+  const formatDate = (d: string | null) => d ? format(new Date(d), 'dd MMM yyyy') : ',';
 
   const tabs: { id: Tab; label: string; icon: any; count?: number }[] = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -552,7 +552,7 @@ export default function Admin() {
                   { key: 'name', label: 'Name' },
                   { key: 'email', label: 'Email' },
                   { key: 'phone', label: 'Phone' },
-                  { key: 'offer_amount', label: 'Offer', render: (v) => v ? `€${Number(v).toLocaleString()}` : '—' },
+                  { key: 'offer_amount', label: 'Offer', render: (v) => v ? `€${Number(v).toLocaleString()}` : ',' },
                   { key: 'preferred_contact_method', label: 'Preferred Contact' },
                   { key: 'status', label: 'Status', render: (v) => <StatusBadge status={v || 'new_inquiry'} /> },
                   { key: 'created_at', label: 'Date', render: (v) => formatDate(v) },
@@ -573,7 +573,7 @@ export default function Admin() {
                   { key: 'applicant_email', label: 'Email' },
                   { key: 'occupation', label: 'Occupation' },
                   { key: 'lease_duration', label: 'Lease (mo)' },
-                  { key: 'monthly_income', label: 'Income', render: (v) => v ? `€${Number(v).toLocaleString()}` : '—' },
+                  { key: 'monthly_income', label: 'Income', render: (v) => v ? `€${Number(v).toLocaleString()}` : ',' },
                   { key: 'desired_move_in', label: 'Move-in', render: (v) => formatDate(v) },
                   { key: 'status', label: 'Status', render: (v) => <StatusBadge status={v || 'pending'} /> },
                 ]}
@@ -616,7 +616,7 @@ export default function Admin() {
                   { key: 'client_type', label: 'Type' },
                   { key: 'total_bookings', label: 'Bookings' },
                   { key: 'total_spent', label: 'Total Spent', render: (v) => v ? `€${Number(v).toLocaleString()}` : '€0' },
-                  { key: 'is_returning_customer', label: 'Returning', render: (v) => v ? '✓' : '—' },
+                  { key: 'is_returning_customer', label: 'Returning', render: (v) => v ? '✓' : ',' },
                 ]}
                 data={clients}
                 onRowClick={row => setDetailData(row)}
@@ -635,7 +635,7 @@ export default function Admin() {
                   { key: 'rating', label: 'Rating', render: (v) => '★'.repeat(v) + '☆'.repeat(5 - v) },
                   { key: 'title', label: 'Title' },
                   { key: 'is_approved', label: 'Approved', render: (v) => v ? '✓' : '✗' },
-                  { key: 'is_verified', label: 'Verified', render: (v) => v ? '✓' : '—' },
+                  { key: 'is_verified', label: 'Verified', render: (v) => v ? '✓' : ',' },
                   { key: 'created_at', label: 'Date', render: (v) => formatDate(v) },
                 ]}
                 data={reviews}
@@ -648,16 +648,16 @@ export default function Admin() {
           {activeTab === 'consent' && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <h2 className="font-serif text-2xl text-foreground mb-2">Consent Logs</h2>
-              <p className="text-sm text-muted-foreground mb-6">DPA 2017 — Record of all user consent actions</p>
+              <p className="text-sm text-muted-foreground mb-6">DPA 2017, Record of all user consent actions</p>
               <DataTable
                 columns={[
                   { key: 'consent_type', label: 'Type' },
                   { key: 'consent_given', label: 'Consent', render: (v) => v ? '✓ Given' : '✗ Denied' },
                   { key: 'visitor_email', label: 'Email' },
                   { key: 'visitor_name', label: 'Name' },
-                  { key: 'consent_details', label: 'Details', render: (v) => v ? JSON.stringify(v) : '—' },
+                  { key: 'consent_details', label: 'Details', render: (v) => v ? JSON.stringify(v) : ',' },
                   { key: 'created_at', label: 'Date', render: (v) => formatDate(v) },
-                  { key: 'withdrawn_at', label: 'Withdrawn', render: (v) => v ? formatDate(v) : '—' },
+                  { key: 'withdrawn_at', label: 'Withdrawn', render: (v) => v ? formatDate(v) : ',' },
                 ]}
                 data={consentLogs}
                 onRowClick={row => setDetailData(row)}
@@ -669,7 +669,7 @@ export default function Admin() {
           {activeTab === 'data_rights' && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <h2 className="font-serif text-2xl text-foreground mb-2">Data Rights Requests</h2>
-              <p className="text-sm text-muted-foreground mb-6">DPA 2017 — Must respond within 30 days</p>
+              <p className="text-sm text-muted-foreground mb-6">DPA 2017, Must respond within 30 days</p>
               <DataTable
                 columns={[
                   { key: 'request_type', label: 'Type' },
@@ -677,7 +677,7 @@ export default function Admin() {
                   { key: 'requester_email', label: 'Email' },
                   { key: 'status', label: 'Status', render: (v) => <StatusBadge status={v || 'pending'} /> },
                   { key: 'created_at', label: 'Submitted', render: (v) => formatDate(v) },
-                  { key: 'completed_at', label: 'Completed', render: (v) => v ? formatDate(v) : '—' },
+                  { key: 'completed_at', label: 'Completed', render: (v) => v ? formatDate(v) : ',' },
                 ]}
                 data={dataRightsRequests}
                 onRowClick={row => setDetailData(row)}
@@ -695,8 +695,8 @@ export default function Admin() {
                   { key: 'action', label: 'Action' },
                   { key: 'entity_type', label: 'Entity' },
                   { key: 'performed_by', label: 'Performed By' },
-                  { key: 'details', label: 'Details', render: (v) => v ? JSON.stringify(v) : '—' },
-                  { key: 'created_at', label: 'Timestamp', render: (v) => v ? format(new Date(v), 'dd MMM yyyy HH:mm:ss') : '—' },
+                  { key: 'details', label: 'Details', render: (v) => v ? JSON.stringify(v) : ',' },
+                  { key: 'created_at', label: 'Timestamp', render: (v) => v ? format(new Date(v), 'dd MMM yyyy HH:mm:ss') : ',' },
                 ]}
                 data={auditLogs}
                 onRowClick={row => setDetailData(row)}

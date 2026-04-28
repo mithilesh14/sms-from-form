@@ -165,7 +165,7 @@ export default function Index() {
                     <div className="overflow-hidden aspect-[4/5] relative">
                       <img
                         src={r.cover}
-                        alt={`${rt('name')} — ${rt('spec')}`}
+                        alt={`${rt('name')}, ${rt('spec')}`}
                         className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
                       />
                       <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors duration-500" />

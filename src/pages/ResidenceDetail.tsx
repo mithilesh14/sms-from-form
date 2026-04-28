@@ -56,7 +56,7 @@ export default function ResidenceDetail() {
       <section className="relative w-full h-[88dvh] min-h-[600px] overflow-hidden">
         <img
           src={residence.cover}
-          alt={`${name} — ${spec}`}
+          alt={`${name}, ${spec}`}
           className="absolute inset-0 w-full h-full object-cover ken-burns"
         />
         <div
@@ -133,7 +133,7 @@ export default function ResidenceDetail() {
         </div>
       </section>
 
-      {/* ─── 360° VIRTUAL TOUR — placeholder ─────────────────────── */}
+      {/* ─── 360° VIRTUAL TOUR, placeholder ─────────────────────── */}
       <section className="bg-bone section-pad">
         <div className="container-x">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 mb-12 lg:mb-16">

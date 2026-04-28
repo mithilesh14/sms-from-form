@@ -1,4 +1,4 @@
-// ─── Oryam — three apartment layouts (B-11, B-22, Penthouse), multiple units of each ─
+// ─── Oryam, three apartment layouts (B-11, B-22, Penthouse), multiple units of each ─
 // One source of truth for the home grid and the detail pages.
 
 
@@ -60,7 +60,7 @@ export const RESIDENCES: Residence[] = [
     blurb:
       'A bright two-bedroom apartment with open-plan living, oak joinery and a private terrace overlooking the gardens. Steps from the residents\' pool, moments from Trou aux Biches beach.',
     description:
-      'Apartment B-11 is the most sought-after of the two-bedroom layouts. Open-plan living and dining flow onto a private terrace facing the gardens, with the residents\' pool a short walk away. Oak joinery in the kitchen, full-height sliding doors, and an architectural simplicity that lets the light do the work. Delivered fully fitted — kitchen, bathrooms and built-in wardrobes complete — and ready for you to furnish to your own taste.',
+      'Apartment B-11 is the most sought-after of the two-bedroom layouts. Open-plan living and dining flow onto a private terrace facing the gardens, with the residents\' pool a short walk away. Oak joinery in the kitchen, full-height sliding doors, and an architectural simplicity that lets the light do the work. Delivered fully fitted, kitchen, bathrooms and built-in wardrobes complete, and ready for you to furnish to your own taste.',
     cover: b11_01,
     gallery: [
       { src: b11_01, caption: 'Open-plan living and dining' },
@@ -70,7 +70,7 @@ export const RESIDENCES: Residence[] = [
       { src: b11_05, caption: 'Master bathroom in stone and oak' },
       { src: b11_06, caption: 'Private terrace overlooking the gardens' },
       { src: b11_07, caption: 'Garden and tree-line view from the terrace' },
-      { src: b11_08, caption: 'Material detail — oak, stone, brushed steel' },
+      { src: b11_08, caption: 'Material detail, oak, stone, brushed steel' },
     ],
   },
   {
@@ -86,16 +86,16 @@ export const RESIDENCES: Residence[] = [
     blurb:
       'Three generous bedrooms, a full chef\'s kitchen, and a wraparound terrace catching the trade winds. The most considered family layout in the building.',
     description:
-      'Apartment B-22 is the most generous of the standard floors. Three full bedrooms — each with its own bathroom — sit either side of an open living and dining space that gives directly onto a wraparound terrace catching the prevailing trade winds. The kitchen is full-height, fully fitted, and built around a central island. The proportions feel less like an apartment and more like a single-storey home, lifted into the canopy of the flame trees.',
+      'Apartment B-22 is the most generous of the standard floors. Three full bedrooms, each with its own bathroom, sit either side of an open living and dining space that gives directly onto a wraparound terrace catching the prevailing trade winds. The kitchen is full-height, fully fitted, and built around a central island. The proportions feel less like an apartment and more like a single-storey home, lifted into the canopy of the flame trees.',
     cover: b22_01,
     gallery: [
-      { src: b22_01, caption: 'Living and dining — wide-angle view' },
+      { src: b22_01, caption: 'Living and dining, wide-angle view' },
       { src: b22_02, caption: 'Full chef\'s kitchen with central island' },
       { src: b22_03, caption: 'Dining beside the terrace doors' },
       { src: b22_04, caption: 'Master bedroom' },
       { src: b22_05, caption: 'Master en-suite' },
       { src: b22_06, caption: 'Second bedroom' },
-      { src: b22_07, caption: 'Wraparound terrace — panoramic view' },
+      { src: b22_07, caption: 'Wraparound terrace, panoramic view' },
       { src: b22_08, caption: 'Outlook over the gardens and flame trees' },
     ],
   },
@@ -113,16 +113,16 @@ export const RESIDENCES: Residence[] = [
     blurb:
       'The entire top floor. A 100 m² rooftop terrace, ocean glimpses across the rooftops, and a level of finish that has no equal in the building.',
     description:
-      'The Penthouse occupies the entire upper level of Block A. Four bedrooms, four bathrooms, a double-height living space, and a 100 m² wraparound terrace that wraps the building from north to west — catching sunrise over the gardens and sunset across the rooftops toward the lagoon. There is no second penthouse. There is no equivalent in the building. It is the residence the architect designed last and held back.',
+      'The Penthouse occupies the entire upper level of Block A. Four bedrooms, four bathrooms, a double-height living space, and a 100 m² wraparound terrace that wraps the building from north to west, catching sunrise over the gardens and sunset across the rooftops toward the lagoon. There is no second penthouse. There is no equivalent in the building. It is the residence the architect designed last and held back.',
     cover: ph_02,
     gallery: [
-      { src: ph_02, caption: 'Living room — full ceiling height' },
-      { src: ph_01, caption: 'Living and dining — sliding glass to the terrace' },
-      { src: ph_03, caption: 'Open kitchen — panoramic view' },
+      { src: ph_02, caption: 'Living room, full ceiling height' },
+      { src: ph_01, caption: 'Living and dining, sliding glass to the terrace' },
+      { src: ph_03, caption: 'Open kitchen, panoramic view' },
       { src: ph_04, caption: 'Master bedroom suite' },
       { src: ph_05, caption: 'Penthouse bathroom in travertine' },
-      { src: ph_06, caption: 'Wraparound terrace — flame tree canopy' },
-      { src: ph_07, caption: 'Upper terrace — ocean glimpses across the rooftops' },
+      { src: ph_06, caption: 'Wraparound terrace, flame tree canopy' },
+      { src: ph_07, caption: 'Upper terrace, ocean glimpses across the rooftops' },
       { src: ph_08, caption: 'Architectural detail' },
     ],
   },
