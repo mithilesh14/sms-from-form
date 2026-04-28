@@ -54,7 +54,7 @@ export default function ResidenceDetail() {
 
       {/* ─── HERO ─────────────────────────────────────────────────── */}
       <section className="relative w-full h-[88dvh] min-h-[600px] overflow-hidden">
-        <img loading="lazy" decoding="async"
+        <img fetchPriority="high" decoding="async"
           src={residence.cover}
           alt={`${name}, ${spec}`}
           className="absolute inset-0 w-full h-full object-cover ken-burns"
