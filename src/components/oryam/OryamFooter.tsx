@@ -23,20 +23,13 @@ export function OryamFooter() {
             <a href={anchor('why')}        className="hover:text-gold transition-colors">{t('oryam.nav.why')}</a>
             <span className="text-gold/40">·</span>
             <a href={anchor('contact')}    className="hover:text-gold transition-colors">{t('oryam.nav.enquireShort')}</a>
+            <span className="text-gold/40">·</span>
+            <Link to="/admin" className="text-ivory/55 hover:text-gold transition-colors">Admin</Link>
           </nav>
 
           <div className="text-[11px] leading-relaxed text-ivory/50 md:text-right max-w-sm">
             {t('oryam.footer.copy')}<br />
             {t('oryam.footer.legal')}
-
-            <div className="mt-5 pt-5 border-t border-ivory/10 flex md:justify-end">
-              <Link
-                to="/admin"
-                className="text-[10px] tracking-[0.24em] uppercase text-ivory/45 hover:text-gold transition-colors"
-              >
-                Admin
-              </Link>
-            </div>
           </div>
         </div>
       </div>
