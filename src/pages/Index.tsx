@@ -63,9 +63,9 @@ export default function Index() {
           />
         </div>
 
-        <div className="relative z-10 h-full container-x flex flex-col justify-end pb-16 sm:pb-20 lg:pb-24">
+        <div className="relative z-10 h-full px-6 sm:px-10 lg:px-16 flex flex-col justify-end pb-16 sm:pb-20 lg:pb-24">
           <div className="grid lg:grid-cols-12 gap-10 items-end">
-            <div className="lg:col-span-8">
+            <div className="lg:col-span-7 xl:col-span-6">
               <Reveal><p className="eyebrow-light mb-6">{t('oryam.hero.eyebrow')}</p></Reveal>
               <Reveal delay={0.12}>
                 <h1 className="text-display text-ivory mb-8">
