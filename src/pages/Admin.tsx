@@ -34,7 +34,7 @@ function PasswordGate({ onAuth }: { onAuth: () => void }) {
         className="w-full max-w-sm text-center"
       >
         <span className="text-[20px] tracking-[0.3em] uppercase font-sans font-semibold text-foreground block mb-2">
-          MONT CHOISY
+          TROU AUX BICHES
         </span>
         <p className="text-caption text-muted-foreground mb-10">Owner Panel</p>
 
@@ -394,7 +394,7 @@ export default function Admin() {
               <ArrowLeft className="h-4 w-4" />
             </a>
             <span className="text-[16px] tracking-[0.25em] uppercase font-sans font-semibold text-foreground">
-              MONT CHOISY
+              TROU AUX BICHES
             </span>
             <span className="text-caption text-accent">CRM</span>
           </div>

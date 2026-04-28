@@ -10,7 +10,7 @@ export default function Privacy() {
   const sections = [
     {
       title: "1. Data Controller",
-      content: "Mont Choisy Residences is the data controller responsible for your personal data. We are committed to protecting your privacy in accordance with the Mauritius Data Protection Act 2017 (DPA 2017). For any data protection inquiries, contact our Data Protection Officer at privacy@montchoisy.mu."
+      content: "Trou aux Biches Residences is the data controller responsible for your personal data. We are committed to protecting your privacy in accordance with the Mauritius Data Protection Act 2017 (DPA 2017). For any data protection inquiries, contact our Data Protection Officer at privacy@trouauxbiches.mu."
     },
     {
       title: "2. Data We Collect",
@@ -38,7 +38,7 @@ export default function Privacy() {
     },
     {
       title: "8. Your Rights Under DPA 2017",
-      content: "You have the right to: (a) Access — request a copy of your personal data; (b) Correction — request rectification of inaccurate data; (c) Deletion — request erasure of your data; (d) Portability — receive your data in a machine-readable format; (e) Objection — object to processing based on legitimate interest; (f) Restriction — request limitation of processing. Exercise these rights via our Data Rights page or by contacting privacy@montchoisy.mu. We will respond within 30 days."
+      content: "You have the right to: (a) Access — request a copy of your personal data; (b) Correction — request rectification of inaccurate data; (c) Deletion — request erasure of your data; (d) Portability — receive your data in a machine-readable format; (e) Objection — object to processing based on legitimate interest; (f) Restriction — request limitation of processing. Exercise these rights via our Data Rights page or by contacting privacy@trouauxbiches.mu. We will respond within 30 days."
     },
     {
       title: "9. Security Measures",
@@ -130,7 +130,7 @@ export default function Privacy() {
             className="border-t border-border mt-16 pt-8"
           >
             <p className="text-sm text-muted-foreground">
-              Last Updated: March 2026 · Data Protection Officer: privacy@montchoisy.mu
+              Last Updated: March 2026 · Data Protection Officer: privacy@trouauxbiches.mu
             </p>
           </motion.div>
         </div>

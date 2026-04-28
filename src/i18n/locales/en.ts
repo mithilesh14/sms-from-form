@@ -1,6 +1,6 @@
 export default {
   brand: {
-    name: 'Mont Choisy',
+    name: 'Trou aux Biches',
     tagline: 'Mauritius',
   },
 
@@ -34,7 +34,7 @@ export default {
 
   hero: {
     title: 'Oceanfront Living Redefined',
-    subtitle: 'Luxury residences where contemporary architecture meets the Indian Ocean. Welcome to Mont Choisy.',
+    subtitle: 'Luxury residences where contemporary architecture meets the Indian Ocean. Welcome to Trou aux Biches.',
     explore: 'Explore Residences',
     location: 'Grand Baie · Mauritius',
     scrollText: 'Scroll to Explore',
@@ -43,7 +43,7 @@ export default {
   chapter1: {
     label: 'The Building',
     title: 'Designed to elevate every moment',
-    description: 'Mont Choisy is not just a building — it is a statement. Eight floors of bold, contemporary architecture rising from the Grand Baie coastline, shaped by light, ocean breeze, and an unwavering commitment to craft.',
+    description: 'Trou aux Biches is not just a building — it is a statement. Eight floors of bold, contemporary architecture rising from the Grand Baie coastline, shaped by light, ocean breeze, and an unwavering commitment to craft.',
   },
 
   stats: {
@@ -81,9 +81,9 @@ export default {
   },
 
   lifestyle: {
-    label: 'Your Life at Mont Choisy',
+    label: 'Your Life at Trou aux Biches',
     title: 'Wake up to the life you deserve',
-    description: 'Imagine mornings on your private terrace, coffee in hand, watching the sun paint the lagoon. Afternoons by the infinity pool. Evenings on the rooftop as Grand Baie comes alive below. This is your everyday at Mont Choisy.',
+    description: 'Imagine mornings on your private terrace, coffee in hand, watching the sun paint the lagoon. Afternoons by the infinity pool. Evenings on the rooftop as Grand Baie comes alive below. This is your everyday at Trou aux Biches.',
     cta: 'Explore Residences',
   },
 
@@ -96,13 +96,13 @@ export default {
   residence: {
     title: 'The Architectural Vision',
     subtitle: 'The Vision',
-    description: 'Every angle of Mont Choisy has been sculpted with intention. The facade plays with light and shadow, the materials echo the natural coast, and each residence is oriented to capture the most breathtaking views.',
+    description: 'Every angle of Trou aux Biches has been sculpted with intention. The facade plays with light and shadow, the materials echo the natural coast, and each residence is oriented to capture the most breathtaking views.',
   },
 
   explore: {
     title: 'Find Your Residence',
     subtitle: 'Interactive Explorer',
-    description: 'Navigate Mont Choisy floor by floor. Click any floor to reveal available residences, then select a unit to explore its layout, views, and natural light.',
+    description: 'Navigate Trou aux Biches floor by floor. Click any floor to reveal available residences, then select a unit to explore its layout, views, and natural light.',
   },
 
   units: {
@@ -125,7 +125,7 @@ export default {
   },
 
   gallery: {
-    title: 'Mont Choisy in Detail',
+    title: 'Trou aux Biches in Detail',
     subtitle: 'Visual exploration of architecture, interiors, and lifestyle',
     categories: {
       all: 'All',
@@ -137,20 +137,20 @@ export default {
   },
 
   virtualTour: {
-    title: 'Step Inside Mont Choisy',
+    title: 'Step Inside Trou aux Biches',
     subtitle: 'Immersive 360° Experience',
     description: 'Explore our show residence as if you were there. Drag to look around, scroll to zoom. Experience the light, the space, the views.',
   },
 
   own: {
-    title: 'Own at Mont Choisy',
+    title: 'Own at Trou aux Biches',
     subtitle: 'International Ownership',
-    intro: 'Mauritius offers one of the world\'s most attractive frameworks for international property ownership — and Mont Choisy is your gateway to freehold rights, tax efficiency, and residency in paradise.',
+    intro: 'Mauritius offers one of the world\'s most attractive frameworks for international property ownership — and Trou aux Biches is your gateway to freehold rights, tax efficiency, and residency in paradise.',
     benefitsLabel: 'Key Advantages',
     benefitsTitle: 'Designed for global citizens',
     investLabel: 'Investment Snapshot',
     investTitle: 'Numbers that speak for themselves',
-    investDescription: 'Grand Baie is Mauritius\' most sought-after address. Mont Choisy sits at the heart of this growth, offering owners a premium asset with strong rental demand and consistent capital appreciation.',
+    investDescription: 'Grand Baie is Mauritius\' most sought-after address. Trou aux Biches sits at the heart of this growth, offering owners a premium asset with strong rental demand and consistent capital appreciation.',
     processLabel: 'The Journey',
     processTitle: 'From inquiry to ownership',
   },
@@ -178,7 +178,7 @@ export default {
       address: 'Coastal Road',
       city: 'Grand Baie, Mauritius',
       phone: '+230 555 0100',
-      email: 'residences@montchoisy.mu',
+      email: 'residences@trouauxbiches.mu',
       hours: 'By Appointment',
     },
     success: 'Thank you. Our team will be in touch within 24 hours.',
@@ -190,7 +190,7 @@ export default {
     terms: 'Terms',
     copyright: 'All rights reserved.',
     ctaLabel: 'Your Next Step',
-    ctaTitle: 'Experience Mont Choisy',
+    ctaTitle: 'Experience Trou aux Biches',
     ctaButton: 'Book a Viewing',
   },
 
@@ -217,10 +217,10 @@ export default {
       back_long: '← Back to the collection',
     },
     hero: {
-      eyebrow: 'ORYAM · MONT CHOISY · MAURITIUS',
+      eyebrow: 'ORYAM · TROU AUX BICHES · MAURITIUS',
       title_l1: 'A quieter way',
       title_l2: 'to own Mauritius.',
-      lede: 'A private residence at Mont Choisy, Grand Baie. Two- and three-bedroom apartments and a penthouse — fully fitted, freehold, IRS-eligible, with Mauritian residency from €500,000.',
+      lede: 'A private residence at Trou aux Biches, Grand Baie. Two- and three-bedroom apartments and a penthouse — fully fitted, freehold, IRS-eligible, with Mauritian residency from €500,000.',
       cta_view: 'View the Residences',
       cta_story: 'The story',
       facts: {
@@ -234,7 +234,7 @@ export default {
       eyebrow: 'THE PROPERTY',
       title_l1: 'Not a development.',
       title_l2: 'A private address.',
-      body: 'Oryam is a private residence at Mont Choisy — one of the most coveted neighbourhoods on the north coast of Mauritius. Three carefully considered layouts: a bright two-bedroom, a generous three-bedroom, and a single rooftop penthouse. Each apartment is delivered fully fitted, available under the IRS scheme, and ready for immediate occupation. Availability is limited and managed by private appointment.',
+      body: 'Oryam is a private residence at Trou aux Biches — one of the most coveted neighbourhoods on the north coast of Mauritius. Three carefully considered layouts: a bright two-bedroom, a generous three-bedroom, and a single rooftop penthouse. Each apartment is delivered fully fitted, available under the IRS scheme, and ready for immediate occupation. Availability is limited and managed by private appointment.',
     },
     residences: {
       eyebrow: 'THE RESIDENCES',
@@ -284,13 +284,13 @@ export default {
       title_l1: 'Four reasons this is the most',
       title_l2: 'intelligent second home you can own.',
       r1: { title: 'Ready now. No off-plan risk.', body: 'Every residence is complete, furnished, and available for immediate occupation. No construction delays. No developer risk. You sign, you receive keys, you arrive. It is that straightforward.' },
-      r2: { title: 'Mont Choisy. The address that holds value.', body: "Mont Choisy is one of the most protected and celebrated stretches of the north coast — a fifteen-minute walk to the beach, ten minutes to Grand Baie's restaurants. Quality property at this address rarely comes back to market." },
+      r2: { title: 'Trou aux Biches. The address that holds value.', body: "Trou aux Biches is one of the most protected and celebrated stretches of the north coast — a fifteen-minute walk to the beach, ten minutes to Grand Baie's restaurants. Quality property at this address rarely comes back to market." },
       r3: { title: 'Ownership without restriction.', body: 'IRS classification gives non-Mauritian buyers identical property rights to locals. Freehold title. No ownership time limits. No restrictions on resale. You own it as completely as anything you own at home.' },
       r4: { title: 'An exit as strong as the entry.', body: 'Demand for quality residences in Mauritius consistently outpaces supply. Oryam owners who choose to sell benefit from a liquid international buyer market and an asset that has never compromised on quality.' },
     },
     setting: {
       eyebrow: 'THE SETTING',
-      title_l1: 'Mont Choisy. Grand Baie.',
+      title_l1: 'Trou aux Biches. Grand Baie.',
       title_l2: 'Northern Mauritius.',
       body: "300 days of sunshine. A protected turquoise lagoon a short walk away. Ten minutes from Grand Baie's restaurants and marina. 45 minutes from the international airport, with direct connections to Paris, London, Frankfurt and Zurich. The location is exceptional. Availability at this address is limited — and managed by private appointment.",
     },
@@ -305,7 +305,7 @@ export default {
       label_conf:    'CONFIDENTIALITY',
       val_conf:      'All enquiries are strictly private',
       label_loc:     'LOCATION',
-      val_loc:       'Mont Choisy, Grand Baie, Mauritius',
+      val_loc:       'Trou aux Biches, Grand Baie, Mauritius',
       f_name: 'Your Name',
       f_email: 'Email Address',
       f_message: 'Your Message',
@@ -356,7 +356,7 @@ export default {
         tagline: 'A bright two-bedroom on the garden side.',
         spec: '2 Bedrooms · 2 Bathrooms · 110 m²',
         price: 'From €520,000',
-        blurb: "A bright two-bedroom apartment with open-plan living, oak joinery and a private terrace overlooking the gardens. Steps from the residents' pool, moments from Mont Choisy beach.",
+        blurb: "A bright two-bedroom apartment with open-plan living, oak joinery and a private terrace overlooking the gardens. Steps from the residents' pool, moments from Trou aux Biches beach.",
         description: "Apartment B-11 is the most sought-after of the two-bedroom layouts. Open-plan living and dining flow onto a private terrace facing the gardens, with the residents' pool a short walk away. Oak joinery in the kitchen, full-height sliding doors, and an architectural simplicity that lets the light do the work. Delivered fully fitted — kitchen, bathrooms and built-in wardrobes complete — and ready for you to furnish to your own taste.",
         captions: [
           'Open-plan living and dining',

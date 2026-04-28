@@ -35,7 +35,7 @@ export function Footer() {
       <div className="border-t border-primary-foreground/10 relative z-10">
         <div className="container-editorial py-8 flex flex-col md:flex-row justify-between items-center gap-6">
           <Link to="/" className="text-[18px] tracking-[0.3em] uppercase font-sans font-semibold text-primary-foreground">
-            MONT CHOISY
+            TROU AUX BICHES
           </Link>
 
           <div className="flex flex-wrap justify-center gap-8 text-caption text-primary-foreground/40">
@@ -52,7 +52,7 @@ export function Footer() {
 
           <div className="flex items-center gap-6">
             <p className="text-[10px] text-primary-foreground/20 tracking-wider">
-              © {new Date().getFullYear()} Mont Choisy. {t('footer.copyright')}
+              © {new Date().getFullYear()} Trou aux Biches. {t('footer.copyright')}
             </p>
             <Link to="/admin" className="text-[10px] text-primary-foreground/10 hover:text-primary-foreground/30 transition-colors tracking-wider">
               Admin
