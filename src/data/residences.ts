@@ -2,32 +2,32 @@
 // One source of truth for the home grid and the detail pages.
 
 
-import b11_01 from '@/assets/oryam/b11/01-living-pano.jpg';
-import b11_02 from '@/assets/oryam/b11/02-kitchen.jpg';
-import b11_03 from '@/assets/oryam/b11/03-dining.jpg';
-import b11_04 from '@/assets/oryam/b11/04-bedroom.jpg';
-import b11_05 from '@/assets/oryam/b11/05-bathroom.jpg';
-import b11_06 from '@/assets/oryam/b11/06-terrace.jpg';
-import b11_07 from '@/assets/oryam/b11/07-view-pano.jpg';
-import b11_08 from '@/assets/oryam/b11/08-detail.jpg';
+import b11_01 from '@/assets/oryam/b11/01-living-pano.webp';
+import b11_02 from '@/assets/oryam/b11/02-kitchen.webp';
+import b11_03 from '@/assets/oryam/b11/03-dining.webp';
+import b11_04 from '@/assets/oryam/b11/04-bedroom.webp';
+import b11_05 from '@/assets/oryam/b11/05-bathroom.webp';
+import b11_06 from '@/assets/oryam/b11/06-terrace.webp';
+import b11_07 from '@/assets/oryam/b11/07-view-pano.webp';
+import b11_08 from '@/assets/oryam/b11/08-detail.webp';
 
-import b22_01 from '@/assets/oryam/b22/01-living-pano.jpg';
-import b22_02 from '@/assets/oryam/b22/02-kitchen.jpg';
-import b22_03 from '@/assets/oryam/b22/03-dining.jpg';
-import b22_04 from '@/assets/oryam/b22/04-bedroom.jpg';
-import b22_05 from '@/assets/oryam/b22/05-bathroom.jpg';
-import b22_06 from '@/assets/oryam/b22/06-second-bedroom.jpg';
-import b22_07 from '@/assets/oryam/b22/07-terrace-pano.jpg';
-import b22_08 from '@/assets/oryam/b22/08-view-pano.jpg';
+import b22_01 from '@/assets/oryam/b22/01-living-pano.webp';
+import b22_02 from '@/assets/oryam/b22/02-kitchen.webp';
+import b22_03 from '@/assets/oryam/b22/03-dining.webp';
+import b22_04 from '@/assets/oryam/b22/04-bedroom.webp';
+import b22_05 from '@/assets/oryam/b22/05-bathroom.webp';
+import b22_06 from '@/assets/oryam/b22/06-second-bedroom.webp';
+import b22_07 from '@/assets/oryam/b22/07-terrace-pano.webp';
+import b22_08 from '@/assets/oryam/b22/08-view-pano.webp';
 
-import ph_01 from '@/assets/oryam/penthouse/01-living.jpg';
-import ph_02 from '@/assets/oryam/penthouse/02-living-wide.jpg';
-import ph_03 from '@/assets/oryam/penthouse/03-kitchen-pano.jpg';
-import ph_04 from '@/assets/oryam/penthouse/04-bedroom.jpg';
-import ph_05 from '@/assets/oryam/penthouse/05-bathroom.jpg';
-import ph_06 from '@/assets/oryam/penthouse/06-terrace-pano.jpg';
-import ph_07 from '@/assets/oryam/penthouse/07-rooftop.jpg';
-import ph_08 from '@/assets/oryam/penthouse/08-detail.jpg';
+import ph_01 from '@/assets/oryam/penthouse/01-living.webp';
+import ph_02 from '@/assets/oryam/penthouse/02-living-wide.webp';
+import ph_03 from '@/assets/oryam/penthouse/03-kitchen-pano.webp';
+import ph_04 from '@/assets/oryam/penthouse/04-bedroom.webp';
+import ph_05 from '@/assets/oryam/penthouse/05-bathroom.webp';
+import ph_06 from '@/assets/oryam/penthouse/06-terrace-pano.webp';
+import ph_07 from '@/assets/oryam/penthouse/07-rooftop.webp';
+import ph_08 from '@/assets/oryam/penthouse/08-detail.webp';
 
 export interface Residence {
   slug: 'b11' | 'b22' | 'penthouse';

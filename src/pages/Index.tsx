@@ -7,12 +7,12 @@ import { ScrollProgress } from '@/components/oryam/ScrollProgress';
 import { Reveal } from '@/components/oryam/Reveal';
 import { RESIDENCES } from '@/data/residences';
 
-import heroPool         from '@/assets/oryam/hero-pool.jpg';
-import poolLoungers     from '@/assets/oryam/common/02-pool-loungers.jpg';
-import buildingShot     from '@/assets/oryam/common/03-building.jpg';
-import gardenShot       from '@/assets/oryam/common/04-garden.jpg';
-import entranceShot     from '@/assets/oryam/common/05-entrance.jpg';
-import settingFlametrees from '@/assets/oryam/setting-flametrees.jpg';
+import heroPool         from '@/assets/oryam/hero-pool.webp';
+import poolLoungers     from '@/assets/oryam/common/02-pool-loungers.webp';
+import buildingShot     from '@/assets/oryam/common/03-building.webp';
+import gardenShot       from '@/assets/oryam/common/04-garden.webp';
+import entranceShot     from '@/assets/oryam/common/05-entrance.webp';
+import settingFlametrees from '@/assets/oryam/setting-flametrees.webp';
 
 
 
@@ -53,6 +53,8 @@ export default function Index() {
             src={heroPool}
             alt="The Oryam residences and infinity pool, Trou aux Biches, Mauritius"
             data-slot="hero-bg"
+            fetchPriority="high"
+            decoding="async"
             className="w-full h-full object-cover ken-burns"
           />
           <div
@@ -166,6 +168,8 @@ export default function Index() {
                       <img
                         src={r.cover}
                         alt={`${rt('name')}, ${rt('spec')}`}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
                       />
                       <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors duration-500" />
@@ -284,24 +288,28 @@ export default function Index() {
             <Reveal className="col-span-12 md:col-span-8">
               <div className="aspect-[16/10] overflow-hidden group">
                 <img src={poolLoungers} alt="Residents' pool with sun loungers and tropical garden"
+                     loading="lazy" decoding="async"
                      className="w-full h-full object-cover transition-transform duration-[900ms] group-hover:scale-[1.04]" />
               </div>
             </Reveal>
             <Reveal delay={0.1} className="col-span-12 md:col-span-4">
               <div className="aspect-[16/10] md:aspect-auto md:h-full overflow-hidden group">
                 <img src={buildingShot} alt="The Oryam building exterior"
+                     loading="lazy" decoding="async"
                      className="w-full h-full object-cover transition-transform duration-[900ms] group-hover:scale-[1.04]" />
               </div>
             </Reveal>
             <Reveal delay={0.15} className="col-span-6 md:col-span-4">
               <div className="aspect-[4/3] overflow-hidden group">
                 <img src={gardenShot} alt="Landscaped gardens at Oryam"
+                     loading="lazy" decoding="async"
                      className="w-full h-full object-cover transition-transform duration-[900ms] group-hover:scale-[1.04]" />
               </div>
             </Reveal>
             <Reveal delay={0.2} className="col-span-6 md:col-span-8">
               <div className="aspect-[4/3] md:aspect-[16/9] overflow-hidden group">
                 <img src={entranceShot} alt="Entrance and architecture"
+                     loading="lazy" decoding="async"
                      className="w-full h-full object-cover transition-transform duration-[900ms] group-hover:scale-[1.04]" />
               </div>
             </Reveal>
@@ -340,6 +348,8 @@ export default function Index() {
             src={settingFlametrees}
             alt="Flame trees in bloom at the entrance to the Oryam residences"
             data-slot="setting-bg"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(15,22,32,0.45) 0%, rgba(15,22,32,0.65) 100%)' }} />
