@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export function OryamFooter() {
   const { t } = useTranslation();
@@ -23,6 +23,8 @@ export function OryamFooter() {
             <a href={anchor('why')}        className="hover:text-gold transition-colors">{t('oryam.nav.why')}</a>
             <span className="text-gold/40">·</span>
             <a href={anchor('contact')}    className="hover:text-gold transition-colors">{t('oryam.nav.enquireShort')}</a>
+            <span className="text-gold/40">·</span>
+            <Link to="/admin" className="text-ivory/55 hover:text-gold transition-colors">Admin</Link>
           </nav>
 
           <div className="text-[11px] leading-relaxed text-ivory/50 md:text-right max-w-sm">
