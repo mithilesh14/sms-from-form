@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export function OryamFooter() {
   const { t } = useTranslation();
@@ -28,6 +28,15 @@ export function OryamFooter() {
           <div className="text-[11px] leading-relaxed text-ivory/50 md:text-right max-w-sm">
             {t('oryam.footer.copy')}<br />
             {t('oryam.footer.legal')}
+
+            <div className="mt-5 pt-5 border-t border-ivory/10 flex md:justify-end">
+              <Link
+                to="/admin"
+                className="text-[10px] tracking-[0.24em] uppercase text-ivory/45 hover:text-gold transition-colors"
+              >
+                Admin
+              </Link>
+            </div>
           </div>
         </div>
       </div>
