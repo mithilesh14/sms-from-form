@@ -70,24 +70,24 @@ export default function Index() {
                 <p className="eyebrow-light mb-6">
                   <span
                     className="inline-block px-3 py-1.5"
-                    style={{ background: 'rgba(11,23,36,0.55)' }}
+                    style={{ background: '#F8F3EC', color: '#0B1724' }}
                   >
                     {t('oryam.hero.eyebrow')}
                   </span>
                 </p>
               </Reveal>
               <Reveal delay={0.12}>
-                <h1 className="text-display text-ivory mb-8">
+                <h1 className="text-display mb-8" style={{ color: '#0B1724' }}>
                   <span
-                    className="box-decoration-clone inline px-4 py-1"
-                    style={{ background: 'rgba(11,23,36,0.55)', WebkitBoxDecorationBreak: 'clone', boxDecorationBreak: 'clone' }}
+                    className="inline px-4 py-1"
+                    style={{ background: '#F8F3EC', WebkitBoxDecorationBreak: 'clone', boxDecorationBreak: 'clone' }}
                   >
                     {t('oryam.hero.title_l1')}
                   </span>
                   <br />
                   <span
-                    className="box-decoration-clone inline px-4 py-1"
-                    style={{ background: 'rgba(11,23,36,0.55)', WebkitBoxDecorationBreak: 'clone', boxDecorationBreak: 'clone' }}
+                    className="inline px-4 py-1"
+                    style={{ background: '#F8F3EC', WebkitBoxDecorationBreak: 'clone', boxDecorationBreak: 'clone' }}
                   >
                     {t('oryam.hero.title_l2')}
                   </span>
