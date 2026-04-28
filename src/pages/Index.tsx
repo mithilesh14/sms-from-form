@@ -7,12 +7,12 @@ import { ScrollProgress } from '@/components/oryam/ScrollProgress';
 import { Reveal } from '@/components/oryam/Reveal';
 import { RESIDENCES } from '@/data/residences';
 
-import heroPool         from '@/assets/oryam/hero-pool.jpg';
-import poolLoungers     from '@/assets/oryam/common/02-pool-loungers.jpg';
-import buildingShot     from '@/assets/oryam/common/03-building.jpg';
-import gardenShot       from '@/assets/oryam/common/04-garden.jpg';
-import entranceShot     from '@/assets/oryam/common/05-entrance.jpg';
-import settingFlametrees from '@/assets/oryam/setting-flametrees.jpg';
+import heroPool         from '@/assets/oryam/hero-pool.webp';
+import poolLoungers     from '@/assets/oryam/common/02-pool-loungers.webp';
+import buildingShot     from '@/assets/oryam/common/03-building.webp';
+import gardenShot       from '@/assets/oryam/common/04-garden.webp';
+import entranceShot     from '@/assets/oryam/common/05-entrance.webp';
+import settingFlametrees from '@/assets/oryam/setting-flametrees.webp';
 
 
 
