@@ -190,13 +190,13 @@ export function PanoramaViewer({ images, className = '', showControls = true }: 
         <CameraControls />
       </Canvas>
 
-      {/* Drag hint — subtle bottom pill */}
+      {/* Drag hint, subtle bottom pill */}
       <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/80 backdrop-blur-md px-4 py-2 rounded-full shadow-sm">
         <Move className="w-3.5 h-3.5 text-foreground/40" />
         <span className="text-foreground/50 text-[11px] tracking-[0.05em] hidden sm:inline">Drag to explore</span>
       </div>
 
-      {/* Scene selector — only on dedicated pages, not hero */}
+      {/* Scene selector, only on dedicated pages, not hero */}
       {showControls && images.length > 1 && (
         <div className="absolute bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 flex gap-2 flex-wrap justify-center max-w-[90%]">
           {images.map((img, i) => (

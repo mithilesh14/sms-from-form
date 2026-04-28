@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { cn } from '@/lib/utils';
 
 interface Props {
-  /** Color context — true when sitting over a dark image hero */
+  /** Color context, true when sitting over a dark image hero */
   onDark?: boolean;
   className?: string;
 }

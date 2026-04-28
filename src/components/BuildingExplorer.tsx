@@ -22,7 +22,7 @@ interface Unit {
 }
 
 const units: Unit[] = [
-  // Floor 8 — Penthouses
+  // Floor 8, Penthouses
   { id: 'PH-A', name: 'Penthouse A', floor: 8, position: 'left', bedrooms: 4, bathrooms: 4, size: 3200, price: 4200000, monthlyRate: 28000, view: 'ocean', sunlightHours: 12, orientation: 'NW', available: true },
   { id: 'PH-B', name: 'Penthouse B', floor: 8, position: 'right', bedrooms: 4, bathrooms: 3, size: 2800, price: 3800000, monthlyRate: 25000, view: 'ocean', sunlightHours: 11, orientation: 'NE', available: true },
   // Floor 7
@@ -49,7 +49,7 @@ const units: Unit[] = [
   { id: '2A', name: 'Residence 2A', floor: 2, position: 'left', bedrooms: 2, bathrooms: 2, size: 1800, price: 1800000, monthlyRate: 12000, view: 'garden', sunlightHours: 6, orientation: 'NW', available: true },
   { id: '2B', name: 'Residence 2B', floor: 2, position: 'center', bedrooms: 1, bathrooms: 1, size: 1100, price: 1100000, monthlyRate: 7500, view: 'garden', sunlightHours: 5, orientation: 'N', available: true },
   { id: '2C', name: 'Residence 2C', floor: 2, position: 'right', bedrooms: 2, bathrooms: 1, size: 1600, price: 1600000, monthlyRate: 11000, view: 'garden', sunlightHours: 5, orientation: 'NE', available: false },
-  // Floor 1 — Ground
+  // Floor 1, Ground
   { id: '1A', name: 'Garden Suite A', floor: 1, position: 'left', bedrooms: 2, bathrooms: 2, size: 2000, price: 1900000, monthlyRate: 13000, view: 'garden', sunlightHours: 5, orientation: 'NW', available: true },
   { id: '1B', name: 'Garden Suite B', floor: 1, position: 'center', bedrooms: 1, bathrooms: 1, size: 1200, price: 1200000, monthlyRate: 8000, view: 'garden', sunlightHours: 4, orientation: 'N', available: true },
   { id: '1C', name: 'Garden Suite C', floor: 1, position: 'right', bedrooms: 2, bathrooms: 2, size: 1900, price: 1700000, monthlyRate: 11000, view: 'garden', sunlightHours: 5, orientation: 'NE', available: true },

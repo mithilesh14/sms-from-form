@@ -39,7 +39,7 @@ export function CookieConsent() {
         user_agent: navigator.userAgent,
       });
     } catch {
-      // Silent fail — don't block UX
+      // Silent fail, don't block UX
     }
   };
 
@@ -109,7 +109,7 @@ export function CookieConsent() {
                   {t('cookies.customizeTitle', 'Cookie Preferences')}
                 </h3>
                 <div className="space-y-4 mb-6">
-                  {/* Essential — always on */}
+                  {/* Essential, always on */}
                   <div className="flex items-center justify-between py-3 border-b border-border/30">
                     <div>
                       <p className="text-sm text-foreground font-medium">{t('cookies.essential', 'Essential Cookies')}</p>

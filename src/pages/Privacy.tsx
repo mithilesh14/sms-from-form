@@ -18,7 +18,7 @@ export default function Privacy() {
     },
     {
       title: "3. Purpose & Legal Basis",
-      content: "Your data is processed for: (a) Responding to property inquiries and tour requests — based on your consent; (b) Managing bookings and rental applications — necessary for contractual performance; (c) Website analytics and improvement — based on legitimate interest or consent; (d) Marketing communications — only with your explicit consent. We will never process your data for purposes incompatible with those for which it was collected."
+      content: "Your data is processed for: (a) Responding to property inquiries and tour requests, based on your consent; (b) Managing bookings and rental applications, necessary for contractual performance; (c) Website analytics and improvement, based on legitimate interest or consent; (d) Marketing communications, only with your explicit consent. We will never process your data for purposes incompatible with those for which it was collected."
     },
     {
       title: "4. Consent",
@@ -38,7 +38,7 @@ export default function Privacy() {
     },
     {
       title: "8. Your Rights Under DPA 2017",
-      content: "You have the right to: (a) Access — request a copy of your personal data; (b) Correction — request rectification of inaccurate data; (c) Deletion — request erasure of your data; (d) Portability — receive your data in a machine-readable format; (e) Objection — object to processing based on legitimate interest; (f) Restriction — request limitation of processing. Exercise these rights via our Data Rights page or by contacting privacy@trouauxbiches.mu. We will respond within 30 days."
+      content: "You have the right to: (a) Access, request a copy of your personal data; (b) Correction, request rectification of inaccurate data; (c) Deletion, request erasure of your data; (d) Portability, receive your data in a machine-readable format; (e) Objection, object to processing based on legitimate interest; (f) Restriction, request limitation of processing. Exercise these rights via our Data Rights page or by contacting privacy@trouauxbiches.mu. We will respond within 30 days."
     },
     {
       title: "9. Security Measures",
@@ -46,7 +46,7 @@ export default function Privacy() {
     },
     {
       title: "10. Cookies",
-      content: "Our website uses: (a) Essential cookies — required for site functionality, cannot be disabled; (b) Analytics cookies — help us understand usage patterns, require your consent; (c) Marketing cookies — used for relevant advertising, require your consent. You can manage your cookie preferences at any time using the cookie banner or by contacting us."
+      content: "Our website uses: (a) Essential cookies, required for site functionality, cannot be disabled; (b) Analytics cookies, help us understand usage patterns, require your consent; (c) Marketing cookies, used for relevant advertising, require your consent. You can manage your cookie preferences at any time using the cookie banner or by contacting us."
     },
     {
       title: "11. Children's Data",

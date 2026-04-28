@@ -60,7 +60,7 @@ export default function Contact() {
     <div className="min-h-screen bg-background">
       <Header />
 
-      {/* Hero — warm editorial */}
+      {/* Hero, warm editorial */}
       <section className="relative h-[50vh] sm:h-[60vh] overflow-hidden grain-overlay">
         <div
           className="absolute inset-0 bg-cover bg-center ken-burns"
@@ -85,7 +85,7 @@ export default function Contact() {
       <section className="section-gap">
         <div className="container-editorial">
           <div className="grid lg:grid-cols-5 gap-16 lg:gap-28">
-            {/* Left — Info */}
+            {/* Left, Info */}
             <div className="lg:col-span-2">
               <FadeIn>
                 <p className="text-body-lg text-muted-foreground mb-14">
@@ -118,7 +118,7 @@ export default function Contact() {
               </FadeIn>
             </div>
 
-            {/* Right — Form */}
+            {/* Right, Form */}
             <div className="lg:col-span-3">
               {submitted ? (
                 <FadeIn>
@@ -193,7 +193,7 @@ export default function Contact() {
                       className="w-full bg-transparent border-b border-border py-4 text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-accent transition-colors duration-500 resize-none"
                     />
 
-                    {/* Consent checkbox — DPA 2017 compliance */}
+                    {/* Consent checkbox, DPA 2017 compliance */}
                     <div className="flex items-start gap-3">
                       <input
                         type="checkbox"

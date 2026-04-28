@@ -26,7 +26,7 @@ const benefits = [
   {
     icon: Home,
     title: 'No Inheritance Tax',
-    description: 'Your investment is protected across generations — Mauritius has no inheritance or estate duty taxes.',
+    description: 'Your investment is protected across generations, Mauritius has no inheritance or estate duty taxes.',
   },
 ];
 
@@ -73,7 +73,7 @@ export default function OwnInMauritius() {
         <div className="container-narrow text-center">
           <FadeIn>
             <p className="font-serif text-title text-foreground leading-relaxed">
-              {t('own.intro', 'Mauritius offers one of the world\'s most attractive frameworks for international property ownership — combining freehold rights, tax efficiency, and a pathway to residency in paradise.')}
+              {t('own.intro', 'Mauritius offers one of the world\'s most attractive frameworks for international property ownership, combining freehold rights, tax efficiency, and a pathway to residency in paradise.')}
             </p>
           </FadeIn>
         </div>
