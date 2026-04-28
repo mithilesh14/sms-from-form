@@ -59,7 +59,7 @@ export default function Index() {
           />
           <div
             className="absolute inset-0"
-            style={{ background: 'linear-gradient(180deg, rgba(11,23,36,0.55) 0%, rgba(11,23,36,0.25) 30%, rgba(11,23,36,0.55) 70%, rgba(11,23,36,0.92) 100%)' }}
+            style={{ background: 'linear-gradient(180deg, rgba(11,23,36,0.65) 0%, rgba(11,23,36,0.35) 28%, rgba(11,23,36,0.20) 50%, rgba(11,23,36,0.60) 78%, rgba(11,23,36,0.92) 100%)' }}
           />
         </div>
 
@@ -67,30 +67,17 @@ export default function Index() {
           <div className="grid lg:grid-cols-12 gap-10 items-end">
             <div className="lg:col-span-7 xl:col-span-6">
               <Reveal>
-                <p className="eyebrow-light mb-6">
-                  <span
-                    className="inline-block px-3 py-1.5"
-                    style={{ background: '#F8F3EC', color: '#0B1724' }}
-                  >
-                    {t('oryam.hero.eyebrow')}
-                  </span>
+                <p className="eyebrow-light mb-6 inline-flex items-center gap-4">
+                  <span aria-hidden className="block w-10 h-px bg-gold" />
+                  {t('oryam.hero.eyebrow')}
                 </p>
               </Reveal>
               <Reveal delay={0.12}>
-                <h1 className="text-display mb-8" style={{ color: '#0B1724' }}>
-                  <span
-                    className="inline px-4 py-1"
-                    style={{ background: '#F8F3EC', WebkitBoxDecorationBreak: 'clone', boxDecorationBreak: 'clone' }}
-                  >
-                    {t('oryam.hero.title_l1')}
-                  </span>
-                  <br />
-                  <span
-                    className="inline px-4 py-1"
-                    style={{ background: '#F8F3EC', WebkitBoxDecorationBreak: 'clone', boxDecorationBreak: 'clone' }}
-                  >
-                    {t('oryam.hero.title_l2')}
-                  </span>
+                <h1
+                  className="text-display text-ivory mb-8"
+                  style={{ textShadow: '0 1px 2px rgba(11,23,36,0.35), 0 2px 30px rgba(11,23,36,0.45)' }}
+                >
+                  {t('oryam.hero.title_l1')}<br />{t('oryam.hero.title_l2')}
                 </h1>
               </Reveal>
               <Reveal delay={0.24}>
