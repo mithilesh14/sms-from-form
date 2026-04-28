@@ -74,7 +74,7 @@ const Residence = () => {
           style={{ y: imageY }}
           className="absolute inset-0"
         >
-          <img
+          <img loading="lazy" decoding="async"
             src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&auto=format&fit=crop&q=80"
             alt="Architecture detail"
             className="w-full h-[120%] object-cover"

@@ -265,7 +265,7 @@ export function BuildingExplorer() {
 
               {/* Placeholder image */}
               <div className="aspect-video bg-secondary mb-6 overflow-hidden">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&auto=format&fit=crop&q=80"
                   alt={selectedUnit.name}
                   className="w-full h-full object-cover"

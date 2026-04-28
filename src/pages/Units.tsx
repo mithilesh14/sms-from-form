@@ -172,7 +172,7 @@ const Units = () => {
                   <Link to="/contact" className="group block bg-card hover:bg-secondary active:bg-secondary transition-colors duration-500">
                     <div className="relative overflow-hidden">
                       <div className="aspect-[4/3] img-zoom">
-                        <img
+                        <img loading="lazy" decoding="async"
                           src={unit.image}
                           alt={unit.name}
                           className="w-full h-full object-cover"

@@ -54,7 +54,7 @@ export default function ResidenceDetail() {
 
       {/* ─── HERO ─────────────────────────────────────────────────── */}
       <section className="relative w-full h-[88dvh] min-h-[600px] overflow-hidden">
-        <img
+        <img loading="lazy" decoding="async"
           src={residence.cover}
           alt={`${name}, ${spec}`}
           className="absolute inset-0 w-full h-full object-cover ken-burns"
@@ -157,7 +157,7 @@ export default function ResidenceDetail() {
               className="relative w-full overflow-hidden border border-hair"
               style={{ aspectRatio: '16 / 9', background: 'hsl(var(--ink))' }}
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src={residence.gallery[0].src}
                 alt=""
                 aria-hidden
@@ -274,7 +274,7 @@ export default function ResidenceDetail() {
                 <Reveal key={r.slug} delay={i * 0.12}>
                   <Link to={`/residences/${r.slug}`} className="group block bg-ivory border-t border-hair">
                     <div className="aspect-[16/10] overflow-hidden">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={r.cover}
                         alt={ortName}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
@@ -334,7 +334,7 @@ export default function ResidenceDetail() {
           </button>
 
           <figure className="max-w-[1280px] max-h-[90vh] flex flex-col items-center" onClick={(e) => e.stopPropagation()}>
-            <img
+            <img loading="lazy" decoding="async"
               src={residence.gallery[lightbox].src}
               alt={(Array.isArray(captions) && captions[lightbox]) || residence.gallery[lightbox].caption}
               className="max-w-full max-h-[80vh] object-contain"
