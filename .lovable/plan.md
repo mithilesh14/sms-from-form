@@ -1,45 +1,60 @@
-## What's wrong
+## Goal
 
-I baked "three apartments / three residences total" into the copy in many places. The reality: **three layouts** (B-11, B-22, Penthouse), **multiple units of each**. I'll strip every false-quantity claim and reframe everything around layouts + limited availability, without quoting any unit count.
+The eyebrow ("ORYAM · TROU AUX BICHES · MAURICE") and the headline ("Une autre façon de posséder à Maurice.") sit over the brightest part of the pool image and lose contrast. Make them readable without breaking the editorial, no-box aesthetic.
 
-The B-22 copy (`Three bedrooms`, `Three full bedrooms`) is correct — that's bedrooms, not units — and stays.
+## Approach
 
-## Fixes
+Two complementary changes in `src/pages/Index.tsx`, hero section only:
 
-### 1. EN locale (`src/i18n/locales/en.ts`)
+### 1. Strengthen the global hero gradient (subtle, image-wide)
 
-- **`hero.lede`** → "A private residence at Mont Choisy, Grand Baie. Two- and three-bedroom apartments and a penthouse — fully fitted, freehold, IRS-eligible — with Mauritian residency from €500,000."
-- **`hero.facts.residences`** label → "Apartment Layouts" (so the `3` tile reads as "3 · Apartment Layouts", which is true).
-- **`intro.body`** → "Oryam is a private residence at Mont Choisy — one of the most coveted neighbourhoods on the north coast of Mauritius. Three carefully considered layouts: a bright two-bedroom, a generous three-bedroom, and a single rooftop penthouse. Each apartment is delivered fully fitted, available under the IRS scheme, and ready for immediate occupation. Availability is limited and managed by appointment."
-- **`residences.title_l1`** → "Three layouts." **`title_l2`** → "One quiet address." **`body`** → "Each Oryam apartment is delivered fully fitted — kitchen, bathrooms and built-in joinery complete — and available under Mauritius's IRS scheme, granting full freehold ownership and a Resident Permit for you and your family upon purchase. Several units of each layout are currently offered."
-- **`keyNumbers.n1`** → "Apartment layouts in the residence" (keeps the `3` honest).
-- **`setting.body`** → drop "the last three available". Replace ending with: "The location is exceptional. Availability at this address is limited — and managed by private appointment."
-- **`contact.title_l1` / `_l2` / `_l3`** → "By appointment only." / "No open days." / "Strictly private." (removes the literal "Three residences." line).
-- **`detail.others_title`** → "The other layouts." (was "Two other residences.")
+Current overlay is too light at the top (0.30 → 0.10 → 0.55 → 0.85). Adjust to keep the image visible but ground the text:
 
-### 2. FR locale (`src/i18n/locales/fr.ts`) — same fixes, mirrored
+```text
+linear-gradient(180deg,
+  rgba(11,23,36,0.55) 0%,
+  rgba(11,23,36,0.25) 30%,
+  rgba(11,23,36,0.55) 70%,
+  rgba(11,23,36,0.92) 100%)
+```
 
-- `hero.lede` → "Une adresse privée à Mont Choisy, Grand Baie. Appartements de deux et trois chambres et un penthouse — entièrement équipés, en pleine propriété, éligibles IRS — avec résidence mauricienne à partir de 500 000 €."
-- `hero.facts.residences` → "Typologies d'appartements"
-- `intro.body` → "Oryam est une adresse privée à Mont Choisy — l'un des quartiers les plus prisés de la côte nord de Maurice. Trois typologies pensées avec soin : un deux-chambres lumineux, un trois-chambres généreux, et un penthouse unique en toiture. Chaque appartement est livré entièrement équipé, disponible sous le régime IRS et prêt à habiter. La disponibilité est limitée et gérée sur rendez-vous."
-- `residences.title_l1` → "Trois typologies." `title_l2` → "Une adresse discrète." `body` → "Chaque appartement Oryam est livré entièrement équipé… Plusieurs unités de chaque typologie sont actuellement proposées."
-- `keyNumbers.n1` → "Typologies d'appartements dans la résidence"
-- `setting.body` → ending becomes "L'emplacement est exceptionnel. La disponibilité à cette adresse est limitée — et gérée sur rendez-vous privé."
-- `contact.title_l1` / `_l2` / `_l3` → "Sur rendez-vous uniquement." / "Pas de portes ouvertes." / "Strictement privé."
-- `detail.others_title` → "Les autres typologies."
+Uses the brand `ocean` (#0B1724) instead of #0F1620 for color consistency.
 
-### 3. Memory
+### 2. Add a soft localized scrim behind the text column only
 
-Update `mem://index.md` Core to make the rule unmissable: "THREE LAYOUTS, MULTIPLE UNITS each. Never claim a total apartment count. Don't say 'only three' / 'just three'." (I tried to write this in plan mode and it was rejected, so I'll do it on approval.)
+Rather than a hard "background color box" (which would feel like a UI card and break the editorial tone), wrap the left text column in a radial/linear vignette that fades into the image. Implemented as a `::before` pseudo-via inline `style` on the text wrapper, or a sibling absolutely-positioned div:
 
-### Out of scope
+```tsx
+<div className="lg:col-span-7 xl:col-span-6 relative">
+  {/* soft scrim — only behind the text, fades to transparent on the right */}
+  <div
+    aria-hidden
+    className="absolute -inset-x-6 -inset-y-4 lg:-inset-x-10 -z-10 pointer-events-none"
+    style={{
+      background:
+        'linear-gradient(90deg, rgba(11,23,36,0.55) 0%, rgba(11,23,36,0.45) 55%, rgba(11,23,36,0) 100%)',
+    }}
+  />
+  <Reveal>...eyebrow / h1 / lede / CTAs...</Reveal>
+</div>
+```
 
-- No layout, design, image, or routing changes.
-- No edits to `src/pages/Index.tsx` or `ResidenceDetail.tsx` — they already pull every affected string through `t()`. Only the dictionaries change (plus the two `num: '3'` tile labels are corrected via the locale label change).
-- B-22 copy that mentions "three bedrooms" stays (correct).
+Notes:
+- No border, no rounded corners, no visible edge — pure tonal wash, consistent with the "no cards, no shadows" memory rule.
+- Fades to fully transparent on the right so the pool image still reads.
+- Sits behind the text (`-z-10` within the relative wrapper) but above the image (parent `z-10`).
+- Does not touch the right-side facts card.
 
-### Files touched
+### 3. Slight text shadow on h1 + eyebrow (defensive)
 
-- `src/i18n/locales/en.ts`
-- `src/i18n/locales/fr.ts`
-- `mem://index.md`
+Add `text-shadow: 0 1px 24px rgba(11,23,36,0.45)` via inline style on the `<h1>` and the eyebrow `<p>` so any pixel that escapes the scrim still has separation. Very soft, no visible glow.
+
+## Files
+
+- `src/pages/Index.tsx` — hero `<section>` only (overlay gradient + text wrapper + h1/eyebrow style). No other sections, no CSS file changes, no new components.
+
+## Out of scope
+
+- Other pages' heroes (OwnInMauritius, ResidenceDetail) — only fix the homepage as requested.
+- Replacing the hero image.
+- Changing typography sizes or the facts card.
