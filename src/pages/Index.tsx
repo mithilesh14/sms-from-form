@@ -168,6 +168,8 @@ export default function Index() {
                       <img
                         src={r.cover}
                         alt={`${rt('name')}, ${rt('spec')}`}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
                       />
                       <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/10 transition-colors duration-500" />
@@ -346,6 +348,8 @@ export default function Index() {
             src={settingFlametrees}
             alt="Flame trees in bloom at the entrance to the Oryam residences"
             data-slot="setting-bg"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(15,22,32,0.45) 0%, rgba(15,22,32,0.65) 100%)' }} />
