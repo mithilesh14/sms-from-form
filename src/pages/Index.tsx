@@ -87,7 +87,7 @@ export default function Index() {
               </Reveal>
             </div>
 
-            <div className="hidden lg:block lg:col-span-4">
+            <div className="hidden lg:block lg:col-span-4 lg:col-start-9">
               <Reveal delay={0.5}>
                 <div className="bg-ivory/8 backdrop-blur-md border border-ivory/20 px-7 py-6">
                   {HERO_FACTS.map((f, i) => (
